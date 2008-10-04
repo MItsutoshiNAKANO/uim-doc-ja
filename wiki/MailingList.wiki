@@ -1,0 +1,52 @@
+= メーリングリスト =
+
+メーリングリストに参加するには[https://www.google.com/accounts/ Googleアカウント]が必要です。
+
+== [http://groups.google.com/group/uim-en uim-en]==
+
+uimの開発とその他諸々の話題を英語で議論するためのグループです。
+
+ * [http://www.mail-archive.com/uim-en@googlegroups.com/ 過去ログ]
+
+== [http://groups.google.com/group/uim-ja uim-ja] ==
+
+uimの開発とその他諸々の話題を日本語で議論するためのグループです。
+
+  * [http://www.mail-archive.com/uim-ja@googlegroups.com/ 過去ログ]
+
+== [http://groups.google.com/group/uim-bugs uim-bugs] ==
+
+BTSからの自動生成メッセージを流します。
+通知のみで投稿はできません。
+
+ * [http://www.mail-archive.com/uim-bugs@googlegroups.com/ 過去ログ]
+
+== [http://groups.google.com/group/uim-commit uim-commit] ==
+
+svn commitのメッセージを流します。
+通知のみで投稿はできません。
+
+  * [http://www.mail-archive.com/uim-commit@googlegroups.com/ 過去ログ]
+
+= 旧メーリングリスト =
+
+現在は旧メーリングリストでの議論は行われておりませんが、過去ログを参照することが可能です。
+
+== 日本語 ==
+
+[http://anthy.sourceforge.jp/ Anthy]に関する日本語によるメーリングリストです。
+
+  * [http://lists.sourceforge.jp/mailman/archives/anthy-dev/ 過去ログ]
+
+== 英語 ==
+
+英語メーリングリスト。開発に関する議論をするMLです。
+  * [http://lists.freedesktop.org/archives/uim/ 過去ログ]
+
+以下のMLはリポジトリにコミットが行われると変更差分が流れます。(停止中)
+
+  * [過去ログ|http://lists.freedesktop.org/archives/uim-commit/]
+
+以下のMLはBugzillaにポストが行なわれるとそのレポートが流れます。
+
+  * [http://lists.freedesktop.org/archives/uim-bugs/ 過去ログ]
