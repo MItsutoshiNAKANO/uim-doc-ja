@@ -1,0 +1,435 @@
+= uimの入手 =
+
+== リリース版 ==
+
+ソースコードをhttp://code.google.com/p/uim/downloads/listからダウンロードしてきます。
+これにはコアライブラリ、各種モジュール、ブリッジ、ツール群、アイコンやドキュメントなど一式が同梱されています。
+
+ソースコードをダウンロードしてきたら展開しましょう。
+
+{{{
+$ tar xvzf uim-x.x.x.tar.gz
+}}}
+
+展開したら、uimのソースツリーのトップレベルに移動して、configureスクリプトを実行します。
+
+{{{
+$ cd uim-x.x.x
+$ ./configure
+}}}
+
+以下は標準で無効になっているので、必要であれば明示的に指定してください。
+
+  * --enable-debug (デバッグ情報を埋め込む)
+  * --enable-backtrace (Backtraceを出力する)
+  * --enable-dict (UimDictGtkのビルド)
+  * --enable-anthy-static (UimAnthyのスタティックビルド)
+  * --enable-anthy-utf8-static (UTF-8版UimAnthyのスタティックビルド) (trunkのみ)
+  * --with-anthy-utf8 (UTF-8版UimAnthyをビルド) (trunkのみ)
+  * --with-canna (UimCannaのビルド)
+  * --with-scim (uim-scimのビルド)
+  * --with-qt (各種Qt版ツールのビルド)
+  * --with-qt-immodule (UimQtのビルド)
+
+各ブリッジ、モジュール、ツール群をビルドするために、以下が要求されます。
+
+  * iconv
+  * [http://www.gnu.org/software/gettext/ gettext] (>= 0.12)
+  * [http://pkgconfig.freedesktop.org/ pkg-config]
+  * [http://anthy.sourceforge.jp/ Anthy] (>= 7802 推奨)
+  * [http://canna.sourceforge.jp/ Canna]
+  * [http://sourceforge.jp/projects/shinji/ Mana] (>= 0.2.0 推奨)
+  * [http://taiyaki.org/prime/ PRIME] >= 0.8.5.2
+  * [http://www.m17n.org/m17n-lib-ja/ m17n] >= 1.3.1
+  * curses
+  * X11
+  * [http://www.gtk.org/ GTK+] >= 2.4
+  * [http://www.gnome.org/ gnome-panel]
+  * [ftp://ftp.gnome.org/pub/GNOME/sources/intltool/ intltool] >= 0.35.2
+  * [http://www.trolltech.com/products/qt Qt] >= 3.3.2, << 4.0
+  * [[immodule for qtのパッチ|http://www.kde.gr.jp/~daisuke/immodule_for_qt/pukiwiki/]]を当てたQt
+  * [http://www.kde.org/ kdelibs]
+  * [http://www.thrysoee.dk/editline/ libedit]
+  * [http://www.sra.co.jp/people/m-kasahr/eb/ EB]
+
+configureスクリプトを正常に実行できたら、makeでコンパイルを行います。
+
+{{{
+$ make
+}}}
+
+makeが終わったら、suコマンドでrootになってからmake installしましょう。
+
+{{{
+$ su
+# make install
+}}}
+
+標準では/usr/local以下にインストールされますが、このディレクトリにあるライブラリは標準では検索されません。
+/etc/ld.so.confに_/usr/local/lib_という行を追加して、ldconfigを実行する必要があります。
+
+更にGTK+ immoduleを利用するには、GTK+2のimmoduleファイルを生成する必要があります。
+
+{{{
+# gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
+}}}
+
+もしGTK+2と異なるディレクトリにuimをインストールした場合は、明示的にim-uim.soファイルを指定してください。
+
+{{{
+# gtk-query-immodules-2.0 /usr/local/lib/gtk-2.0/immodules/im-uim.so > /etc/gtk-2.0/gtk.immodules
+}}}
+
+== 開発途中版 ==
+
+リリース版では生ぬるい、もっと新しいuimが使いたい、というチャレンジャー
+な方は、開発途中版のuimを入手できます。
+たまにコンパイルが通らなかったりすることがあるかもしれませんけれど。
+
+[[Subversion|http://subversion.tigris.org/]]がインストールされているなら
+
+{{{
+$ svn co http://uim.googlecode.com/svn/trunk uim-trunk
+}}}
+
+で完了です。
+同期させるなら、uimのソースツリーのトップレベルディレクトリで
+
+{{{
+$ svn up
+}}}
+
+とするだけでOKです。
+
+uimのソースツリーを取得したら、ソースツリーのトップレベルディレクトリに移動して、make-wc.shスクリプトを実行してください。
+
+{{{
+$ cd uim-trunk
+$ LC_MESSAGES=C ./make-wc.sh
+}}}
+
+実行するには以下が必要です。
+
+  * [http://www.gnu.org/software/autoconf/ Autoconf] >= 2.60b (2.61推奨)
+  * [http://sources.redhat.com/automake/ Automake] >= 1.10
+  * [http://www.gnu.org/software/libtool/ Libtool] >= 1.5.22
+  * [ftp://ftp.gnome.org/pub/GNOME/sources/intltool/]] >= 0.35.2
+  * [http://www.gnu.org/software/make/ GNU make]
+  * [http://www.perl.org/ Perl]
+  * [http://www.ruby-lang.org/ Ruby]
+  * [http://librsvg.sourceforge.net/] librsvg]
+  * [http://www.methods.co.nz/asciidoc/ AsciiDoc]
+  * ed
+
+ビルドオプションも同時に指定できます。
+
+{{{
+$ LC_MESSAGES=C ./make-wc.sh --enable-debug --enable-backtrace
+}}}
+
+後の作業はリリース版と同じです。
+makeでコンパイルしてください。
+
+= uimの設定 =
+
+== Xの起動スクリプトへの追加 ==
+
+環境に合わせて~/.xsessionや~/.xinitrc、~/.gnomerc、~/.xprofileあたりに
+
+{{{
+GTK_IM_MODULE=uim ; export GTK_IM_MODULE
+QT_IM_MODULE=uim ; export QT_IM_MODULE
+uim-xim &
+XMODIFIERS=@im=uim ; export XMODIFIERS
+}}}
+
+を追加してください。
+
+== Emacs/XEmacsの設定ファイルへの追加 ==
+
+環境に合わせて~/.emacsや~/.xemacs/init.elあたりに
+
+{{{
+(require 'uim)
+(global-set-key "\C-o" 'uim-mode)
+}}}
+
+を追加してください。
+この例ではCtrl+oでUimElブリッジが起動します。
+
+== 標準の入力方式を指定 ==
+
+uim-pref-gtkまたはuim-pref-qtで設定できます。
+
+{{{
+$ uim-pref-gtk (もしくはuim-pref-qt)
+}}}
+
+  # 起動したら、「全体設定」→「入力方式の利用準備」→「標準の入力方式を指定」のチェックボックスにチェックを入れます。
+  # そのすぐ下の「標準の入力方式」に、希望の入力方式をセットしてください。
+  # もし「標準の入力方式」の中に、希望の入力方式が見つからなければ、更にその下の「使用可能にする入力方式」の「編集...」ボタンを押して、左の有効アイテムに希望の入力方式を追加してください。
+  # そこにも希望する入力方式が見つからない場合、その入力方式はインストールされていないのかもしれません。確認してみてください。
+
+標準の入力方式を指定していない場合、システムのロケールに従った入力方式を選択されます。
+例えば日本語ロケール (ja_JP) であれば、日本語関係の入力方式が自動で選択されます。
+
+= OS別のインストール例 =
+
+== CentOS ==
+
+http://centos.karan.org/ にて提供中。
+
+!! Debian
+
+[http://packages.qa.debian.org/u/uim.html 公式パッケージ]が提供されています。
+アーカイブが細かく分割されているので、インストールし忘れには注意しましょう。
+
+  * libuim6、uim-common、uim-utils、libuim-dataすべて
+  * uim-gtk2.0、uim-xim、uim-fep、uim-elの内のどれか
+  * 好みでuim-anthy、uim-canna、uim-m17nlib、uim-prime、uim-skk、uim-applet-gnomeなどを
+
+とりあえずはuimダミーパッケージを利用するとよいでしょう。
+
+インストールするには
+
+{{{
+# aptitude install uim uim-anthy
+}}}
+
+を実行してください。
+
+設定はim-switchが自動で行いますが、標準ではすべてXIM経由で入力されます。
+GTK+ immoduleやimmodule for Qt経由で入力したい場合は/etc/X11/xinit/xinput.d/uim*の中身を
+
+{{{
+GTK_IM_MODULE=uim
+QT_IM_MODULE=uim
+}}}
+
+に書き換えてください。
+
+  * [http://debian.fam.cx/index.php?Japanese Debian GNU/Linux スレッドテンプレ 日本語関係]
+  * [http://wiki.debian.org/JapaneseEnvironment JapaneseEnvironment - Debian Wiki]
+
+== Fedora Core ==
+
+Fedora Coreでは[http://fedoraproject.org/wiki/Extras Fedora Extras]に含まれています。
+
+  * uim
+  * uim-anthy
+  * uim-canna
+  * uim-devel
+  * uim-el
+  * uim-el-common
+
+インストールするには
+
+{{{
+# yum install 'uim*'
+}}}
+
+を実行してください。
+
+FC6の場合、im-chooserを利用してuimに切り替えます。
+
+FC5以前でuimに切り替えるには、system-switch-imもインストールしてください。
+
+{{{
+# yum install system-switch-im
+}}}
+
+そしてsystem-switch-imで入力メソッドをuimへ切り替えます。
+
+{{{
+# system-switch-im
+}}}
+
+「高度な設定」→「Japanese - 日本語」と進み、入力メソッドに「uim」を選びます。
+後は再ログインすれば使えるようになります。
+
+  * [http://www.atmarkit.co.jp/flinux/rensai/linuxtips/768useanthy.html ＠IT：連文節変換エンジンAnthyを使うには]
+
+== FreeBSD ==
+
+FreeBSDでは[http://www.freebsd.org/ja/ports/ports/textproc/uim Ports]に入っています。
+
+portsupgradeを導入しているなら
+
+{{{
+# portinstall textproc/uim
+}}}
+
+とするとインストールされます。
+
+依存関係でm17n-libがインストールされます。
+Options for m17n-libでAnthy supportとIspell supportが選択できます。
+
+uim-skkを利用したい場合，skk-jisyoをインストールします。
+
+{{{
+# portinstall japanese/skk-jisyo
+}}}
+
+== Gentoo ==
+
+Portageで[http://www.gentoo-portage.com/app-i18n/uim ebuild]が提供されています。
+
+{{{
+# emerge anthy uim
+}}}
+
+とするとインストールされます。
+
+注意点は、Anthy等を使う時は先にAnthy等を先にemergeしてください。
+後からemergeしても使えません。
+
+またインストール前には、各USEフラグを確認してください。
+例えばAnthyを使うならanthy USEフラグを設定しておく必要があります。
+
+XIMをアンチエイリアスなしで使う場合、jis-fixed-*-jisx0208.1983-0のフォントをインストールしてください。
+Xを普通にインストールしただけでは入らないようです。 ([http://lists.sourceforge.jp/mailman/archives/anthy-dev/2007-March/003439.html Anthy-dev 3440])
+
+後は環境に合わせて~/.xsessionや~/.xinitrc、~/.gnomerc、~/.xprofileあたりに
+
+{{{
+GTK_IM_MODULE=uim ; export GTK_IM_MODULE
+QT_IM_MODULE=uim ; export QT_IM_MODULE
+uim-xim &
+XMODIFIERS=@im=uim ; export XMODIFIERS
+}}}
+
+を追加してください。
+
+  * [http://wiki.gentoo.gr.jp/index.php?%5B%5B%C6%FC%CB%DC%B8%EC%C6%FE%CE%CF%C0%DF%C4%EA%BB%F6%CE%E3%BD%B8%2Fuim%2Banthy%5D%5D GentooJP Wiki 日本語入力設定事例集/uim+anthy]
+  * [http://gentoo-wiki.com/Input_Methods Input Methods - Gentoo Linux Wiki]
+
+== Mac OS X ==
+
+  * [http://pdb.finkproject.org/pdb/package.php/uim Fink]
+  * [http://lapangan.net/darwinports/index.php?PrivatePortfile%2Fuim MacPorts]
+  * [http://www.d1.dion.ne.jp/~irino/osx/uim.htm uim一本で全ての入力]
+
+== Maemo ==
+
+  * [http://maemocjk.garage.maemo.org/ Maemo CJK Support]
+
+== Mandriva ==
+
+Mandriva 2007.0にはオフィシャルパッケージがあります。
+アーカイブが分割されているので、インストールし忘れには注意しましょう。
+
+  * uim、libuim1すべて
+  * uim-gtk、uim-qtimmoduleのどちらか
+  * 好みでuim-qtなど
+
+インストールするには
+
+{{{
+# urpmi uim libuim1 uim-qtimmodule uim-qt
+}}}
+
+を実行してください。
+
+== Momonga ==
+
+Momonga 3/4にはオフィシャルパッケージがあります。
+アーカイブが細かく分割されているので、インストールし忘れには注意しましょう。
+
+  * uim
+  * uim-xim, uim-fep, uim-emacs, uim-gtk, uim-qtimmoduleの内のどれか
+  * 好みでuim-anthy, uim-canna, uim-prime, uim-skk, uim-applet, uim-qtなどを
+
+インストールするには
+
+{{{
+# yum install uim uim-gtimmodule uim-anthy uim-qt
+}}}
+
+を実行してください。
+
+== NetBSD ==
+
+pkgsrcに入っています。
+
+{{{
+# cd pkgsrc/inputmethod/uim
+# make install clean
+}}}
+
+とすると、インストールされます。
+
+インストールオプションはPKG_OPTIONS.uim変数を設定することで変更します。/etc/mk.confに設定するか、
+
+{{{
+# env PKG_OPTIONS.uim='anthy eb qt' make install clean
+}}}
+
+などとして下さい。
+{{{
+# make show-options
+}}}
+で設定できる項目を確認することができます。デフォルトはanthy cannaです。
+
+== OpenSolaris ==
+
+  * http://www.opensolaris.org/os/project/input-method/files/
+
+== PC-BSD ==
+
+  * http://www.ofug.net/~yamajun/files/
+  * http://forums.pcbsd.org/viewtopic.php?p=39190
+
+== Plamo ==
+
+Plamo 4.2では[ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/ contrib]にあるようです。
+設定方法などは[ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/uim-memo.txt uim-memo.txt]に書かれていますし、便利なパッチが適用されています。
+
+== Slackware ==
+
+Slackware 10.2では[http://sourceforge.jp/projects/sap/ Slackware Add-on package Project]でuimのパッケージが配布されています。
+
+== SUSE ==
+
+openSUSE 10.2にはオフィシャルパッケージがあります。
+アーカイブが細かく分割されているので、インストールし忘れには注意しましょう。
+
+  * uim
+  * uim-devel
+  * uim-gtk2
+  * uim-qt
+
+== Vine ==
+
+*4.0にupgradeしたらuimが動かなくなった*という方を多数見かけますので、注意してください。
+
+Vine 4.0ではVine Plusに含まれています。
+アーカイブが細かく分割されているので、インストールし忘れには注意しましょう。
+
+  * uim
+  * uim-gtk、uim-xim、uim-fep、uim-el、uim-qt-immoduleの内のどれか
+  * 好みでuim-anthy、uim-canna、uim-mana、uim-skk、uim-qt、uim-appletなどを
+
+インストールするには
+
+{{{
+# apt-get install uim uim-gtk uim-anthy
+}}}
+
+を実行してください。
+
+次に setime を実行してください。
+
+{{{
+$ setime uim
+}}}
+
+後は再ログインすれば使えるようになります。
+
+== Windows (Cygwin) ==
+
+  * [Cygwinでuim|http://www.d1.dion.ne.jp/~irino/windows/cygwin-uim.html]
+
+== Zaurus ==
+
+  * http://sourceforge.jp/projects/openzaurus-ja
+  * http://pdaxrom.sourceforge.jp/feed/
