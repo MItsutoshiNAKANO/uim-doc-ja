@@ -4,7 +4,7 @@
 
 == カスタマイズ方法 ==
 
-カスタマイズは[UimPref UimPref]というGUI設定ツール、もしくは~/.uimファイルに自分で記述して行います。 ~/.uimファイルがない場合は/usr/local/share/uim/default.scmが読まれます。
+カスタマイズは[UimPref UimPref]というGUI設定ツール、もしくは~/.uimファイルに自分で記述して行います。 ~/.uimファイルがない場合は$prefix/share/uim/default.scmが読まれます。
 
 [UimPref UimPref]による設定は~/.uim.d/customs以下のファイルに書き込まれますが、'''~/.uimに記述した設定はそれを上書きします。''' [UimPref UimPref]の設定を使う場合、~/.uimから[UimPref UimPref]の設定と矛盾する記述を取り除いてください。
 
@@ -26,7 +26,7 @@ $ LIBUIM_USER_SCM_FILE=~/.uim-firefox firefox &
   * enabled-im-list
   * installed-im-module-list
 
-上記の変数に関する設定は、~/.uimに記述しても変更する事ができません。 変更するには[UimPref UimPref]で設定するか、/usr/local/share/uim/installed-modules.scmを直接編集してください。
+上記の変数に関する設定は、~/.uimに記述しても変更する事ができません。 変更するには[UimPref UimPref]で設定するか、$prefix/share/uim/installed-modules.scmを直接編集してください。
 
 === 文字コード ===
 
@@ -384,7 +384,7 @@ http://pc10.2ch.net/test/read.cgi/linux/1135968795/581
 
 ==== キャンセルした後に動的補完を表示しない ====
 
-/usr/local/share/uim/skk.scmに2箇所ある
+$prefix/share/uim/skk.scmに2箇所ある
 
 {{{
 ;; don't clear dcomp (not compatible with ddskk's behavior)
@@ -883,7 +883,7 @@ http://d.hatena.ne.jp/higepon/20061002/1159797987
 
 http://groups.google.com/group/uim-en/t/b64641ed041ea9a6
 
-/usr/local/share/uim/im.scmを
+$prefix/share/uim/im.scmを
 
 {{{
 Index: im.scm
