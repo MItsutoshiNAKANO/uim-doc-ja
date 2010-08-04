@@ -1,4 +1,4 @@
-= メーリングリスト =
+﻿= メーリングリスト =
 
 メーリングリストに参加するには[https://www.google.com/accounts/ Googleアカウント]が必要です。
 
@@ -45,7 +45,7 @@ svn commitのメッセージを流します。
 
 以下のMLはリポジトリにコミットが行われると変更差分が流れます。(停止中)
 
-  * [過去ログ|http://lists.freedesktop.org/archives/uim-commit/]
+  * [http://lists.freedesktop.org/archives/uim-commit/ 過去ログ]
 
 以下のMLはBugzillaにポストが行なわれるとそのレポートが流れます。
 
