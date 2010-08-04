@@ -1,4 +1,4 @@
-= CustomizeUim =
+﻿= CustomizeUim =
 
 <wiki:toc max_depth="1" />
 
@@ -154,7 +154,7 @@ uim> installed-im-module-list
 || "delete" || "Delete" ||
 || "end" || "End" ||
 || "insert" || "Insert" ||
-|| "backspace" || "BackSpace[c=edit;p=BackSpace|?]" ||
+|| "backspace" || "BackSpace" ||
 || "return" || "Return" ||
 || "tab" || "Tab" ||
 || "F1" || "F1" ||
@@ -213,47 +213,6 @@ uim> installed-im-module-list
 
 ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
 
-{{{
---- /usr/local/share/uim/anthy.scm.orig
-+++ /usr/local/share/uim/anthy.scm
-@@ -636,10 +636,7 @@
-                                     (list (ja-wide key-str) (ja-wide key-str)
-                                           (ja-wide key-str))))
-              (ustr-insert-elem! (anthy-context-raw-ustr ac) key-str))
--           (let* ((key-str (charcode->string
--                            (if (= rule anthy-input-rule-kana)
--                                key
--                                (to-lower-char key))))
-+           (let* ((key-str (charcode->string key))
-                   (res (rk-push-key! rkc key-str)))
-              (if res
-                  (begin
-@@ -1105,10 +1102,7 @@
-                 (not (alphabet-char? key))
-                 (not (string-find
-                       (rk-expect rkc)
--                      (charcode->string
--                       (if (= rule anthy-input-rule-kana)
--                           key
--                           (to-lower-char key))))))
-+                      (charcode->string key))))
-            (let ((pend (rk-pending rkc))
-                  (residual-kana (rk-push-key-last! rkc)))
-              (if residual-kana
-@@ -1132,10 +1126,7 @@
-                                     (list (ja-wide key-str) (ja-wide key-str)
-                                           (ja-wide key-str))))
-              (ustr-insert-elem! raw-str key-str))
--           (let* ((key-str (charcode->string
--                            (if (= rule anthy-input-rule-kana)
--                                key
--                                (to-lower-char key))))
-+           (let* ((key-str (charcode->string key))
-                   (pend (rk-pending rkc))
-                   (res (rk-push-key! rkc key-str)))
-              (if (and res
-}}}
-
 ==== 確定前入力文字がある状態でスペースを入力 ====
 
 http://pc10.2ch.net/test/read.cgi/linux/1135968795/581
@@ -279,8 +238,9 @@ http://pc10.2ch.net/test/read.cgi/linux/1135968795/581
 ~/.uimに
 
 {{{
-(require-module "anthy")
-(define ja-rk-rule (append '((((" ") . ())(" " " " " "))) ja-rk-rule))
+(require "japanese.scm")
+(define ja-rk-rule-basic (append '((((" ") . ())(" " " " " "))) ja-rk-rule-basic))
+(ja-rk-rule-update)
 }}}
 
 で、修飾キー+SPC。
@@ -421,10 +381,6 @@ http://pc10.2ch.net/test/read.cgi/linux/1135968795/581
   '("を" "、" "。" "．" "，" "？" "」" "！" "；" "：" ")" ";" ":" "）" "”"
     "】" "』" "》" "〉" "｝" "］" "〕" "}" "]" "?" "." "," "!"))
 }}}
-
-==== KZIK（Kanji Zutto Ii Kanji） ====
-
-http://ohac.pun.jp/old_pages/kzik.html
 
 ==== キャンセルした後に動的補完を表示しない ====
 
@@ -990,23 +946,25 @@ uimアーカイブには含まれていないモジュールが色々と公開�
 
 === [RomaKanaTable ローマ字入力方式] ===
 
-基本的な書式
+基本的な書式 (for uim >= 1.6)
 
 {{{
 (require "japanese.scm")
-(set! ja-rk-rule (cons '(
+(set! ja-rk-rule-basic (cons '(
   (("キー名") . ()) ("ひらがな入力モード" "カタカナ入力モード" "半角カタカナ入力モード")
  )
-ja-rk-rule))
+ja-rk-rule-basic))
+(ja-rk-rule-update)
 }}}
 
 {{{
 (require "japanese.scm")
-(define ja-rk-rule (append '(
+(define ja-rk-rule-basic (append '(
   ((("キー名") . ()) ("ひらがな入力モード" "カタカナ入力モード" "半角カタカナ入力モード"))
 ...
    ((("キー名") . ()) ("ひらがな入力モード" "カタカナ入力モード" "半角カタカナ入力モード")))
-  ja-rk-rule))
+  ja-rk-rule-basic))
+(ja-rk-rule-update)
 }}}
 
 スペースには''ja-space''と''ja-alnum-space''という専用の変数が用意されている。
@@ -1035,31 +993,39 @@ ja-direct-rule))
 
 {{{
 (require "japanese.scm")
-(define ja-rk-rule ja-rk-rule-basic)
+(define ja-rk-rule-update
+  (lambda ()
+    (if ja-rk-rule-keep-consonant?
+      (set! ja-rk-rule (append ja-rk-rule-consonant-to-keep
+                               ja-rk-rule-basic))
+      (set! ja-rk-rule ja-rk-rule-basic))))
+(ja-rk-rule-update)
 }}}
 
 ==== 「。」を「．」、「、」を「，」としたい ====
 
 {{{
 (require "japanese.scm")
-(define ja-rk-rule
+(define ja-rk-rule-basic
   (append '(
             (((",") . ()) ("，" "，" "，"))
             (((".") . ()) ("．" "．" "．"))
             )
-          ja-rk-rule))
+          ja-rk-rule-basic))
+(ja-rk-rule-update)
 }}}
 
 ==== 「／」を「・」、「＼」を「￥」としたい ====
 
 {{{
 (require "japanese.scm")
-(define ja-rk-rule
+(define ja-rk-rule-basic
   (append '(
             ((("/") . ()) ("・" "・" "・"))
             ((("\\") . ()) ("￥" "￥" "￥"))
             )
-          ja-rk-rule))
+          ja-rk-rule-basic))
+(ja-rk-rule-update)
 }}}
 
 ==== "z SPC"で全角スペースを入力する ====
@@ -1068,71 +1034,52 @@ ja-direct-rule))
 
 {{{
 (require-module "skk")
-(define ja-rk-rule
+(define skk-ja-rk-rule
   (append '(
     ((("z" " "). ())("　" "　" "　"))
     )
-  ja-rk-rule))
+  skk-ja-rk-rule))
 }}}
 
 ==== MS-IME風ローマ字配列 ====
 
 {{{
 (require "japanese.scm")
-(define ja-rk-rule
+(define ja-rk-rule-basic
   (append '(
             ((("c" "a"). ())("か" "カ" "ｶ"))
             ((("c" "i"). ())("し" "シ" "ｼ"))
             ((("c" "u"). ())("く" "ク" "ｸ"))
             ((("c" "e"). ())("せ" "セ" "ｾ"))
             ((("c" "o"). ())("そ" "ソ" "ｿ"))
-            ((("l" "y" "a"). ())("ゃ" "ャ" "ｬ"))
-            ((("l" "y" "i"). ())("ぃ" "ィ" "ｨ"))
-            ((("l" "y" "u"). ())("ゅ" "ュ" "ｭ"))
-            ((("l" "y" "e"). ())("ぇ" "ェ" "ｪ"))
-            ((("l" "y" "o"). ())("ょ" "ョ" "ｮ"))
-            ((("n" "'"). ())("ん" "ン" "ﾝ"))
-            ((("q" "a"). ())(("く" "ク" "ｸ") ("ぁ" "ァ" "ｧ")))
-            ((("q" "i"). ())(("く" "ク" "ｸ") ("ぃ" "ィ" "ｨ")))
-            ((("q" "u"). ())("く" "ク" "ｸ"))
-            ((("q" "e"). ())(("く" "ク" "ｸ") ("ぇ" "ェ" "ｪ")))
-            ((("q" "o"). ())(("く" "ク" "ｸ") ("ぉ" "ォ" "ｫ")))
             ((("q" "q"). ("q"))("っ" "ッ" "ｯ"))
             ((("v" "y" "i"). ())(("う゛" "ヴ" "ｳﾞ") ("ぃ" "ィ" "ｨ")))
-            ((("w" "y" "i"). ())("ゐ" "ヰ" "ｨ"))
-            ((("w" "y" "e"). ())("ゑ" "ヱ" "ｪ"))
             ((("x" "n"). ())("ん" "ン" "ﾝ"))
             ((("x" "x"). ("x"))("っ" "ッ" "ｯ"))
             )
-          ja-rk-rule))
+          ja-rk-rule-basic))
+(ja-rk-rule-update)
 }}}
 
 ==== ATOK風ローマ字配列 ====
 
 {{{
 (require "japanese.scm")
-(define ja-rk-rule
+(define ja-rk-rule-basic
   (append '(
-            ((("l" "y" "a"). ())("ゃ" "ャ" "ｬ"))
-            ((("l" "y" "i"). ())("ぃ" "ィ" "ｨ"))
-            ((("l" "y" "u"). ())("ゅ" "ュ" "ｭ"))
-            ((("l" "y" "e"). ())("ぇ" "ェ" "ｪ"))
-            ((("l" "y" "o"). ())("ょ" "ョ" "ｮ"))
             ((("l" "k" "a"). ())("ヵ" "ヵ" "ｶ"))
             ((("l" "k" "e"). ())("ヶ" "ヶ" "ｹ"))
             ((("l" "w" "a"). ())("ゎ" "ヮ" "ﾜ"))
-            ((("n" "'"). ())("ん" "ン" "ﾝ"))
-            ((("w" "y" "i"). ())("ゐ" "ヰ" "ｨ"))
-            ((("w" "y" "e"). ())("ゑ" "ヱ" "ｪ"))
             )
-          ja-rk-rule))
+          ja-rk-rule-basic))
+(ja-rk-rule-update)
 }}}
 
 ==== Wnn風ローマ字配列 ====
 
 {{{
 (require "japanese.scm")
-(define ja-rk-rule
+(define ja-rk-rule-basic
   (append '(
             ((("\\" "a"). ())("ぁ" "ァ" "ｧ"))
             ((("\\" "i"). ())("ぃ" "ィ" "ｨ"))
@@ -1183,14 +1130,15 @@ ja-direct-rule))
             ((("x" "w" "e"). ())(("う" "ウ" "ｳ") ("ぇ" "ェ" "ｪ")))
             ((("x" "w" "o"). ())(("う" "ウ" "ｳ") ("ぉ" "ォ" "ｫ")))
             )
-          ja-rk-rule))
+          ja-rk-rule-basic))
+(ja-rk-rule-update)
 }}}
 
 ==== Canna風ローマ字配列 ====
 
 {{{
 (require "japanese.scm")
-(define ja-rk-rule
+(define ja-rk-rule-basic
   (append '(
             ((("\\"). ())("￥" "￥" "\\"))
             ((("{"). ())("『" "『" "["))
@@ -1226,14 +1174,15 @@ ja-direct-rule))
             ((("w" "i"). ())("ゐ" "ヰ" "ｨ"))
             ((("w" "e"). ())("ゑ" "ヱ" "ｪ"))
             )
-          ja-rk-rule))
+          ja-rk-rule-basic))
+(ja-rk-rule-update)
 }}}
 
 ==== VJE風ローマ字配列 ====
 
 {{{
 (require "japanese.scm")
-(define ja-rk-rule
+(define ja-rk-rule-basic
   (append '(
             ((("c" "a"). ())("か" "カ" "ｶ"))
             ((("c" "i"). ())("し" "シ" "ｼ"))
@@ -1249,7 +1198,6 @@ ja-direct-rule))
             ((("l" "u"). ())("る" "ル" "ﾙ"))
             ((("l" "e"). ())("れ" "レ" "ﾚ"))
             ((("l" "o"). ())("ろ" "ロ" "ﾛ"))
-            ((("n" "'"). ())("ん" "ン" "ﾝ"))
             ((("q" "a"). ())(("く" "ク" "ｸ") ("ぁ" "ァ" "ｧ")))
             ((("q" "i"). ())(("く" "ク" "ｸ") ("ぃ" "ィ" "ｨ")))
             ((("q" "u"). ())("く" "ク" "ｸ"))
@@ -1257,7 +1205,8 @@ ja-direct-rule))
             ((("q" "o"). ())(("く" "ク" "ｸ") ("ぉ" "ォ" "ｫ")))
             ((("x" "x"). ("x"))("っ" "ッ" "ｯ"))
             )
-          ja-rk-rule))
+          ja-rk-rule-basic))
+(ja-rk-rule-update)
 }}}
 
 ==== Egg風ローマ字配列 ====
@@ -1266,7 +1215,7 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
 
 {{{
 (require "japanese.scm")
-(define ja-rk-rule
+(define ja-rk-rule-basic
   (append '(
             ((("g" "s" "e"). ())(("つ" "ツ" "ﾂ") ("ぇ" "ェ" "ｪ")))
             ((("g" "w" "u"). ())("ぐ" "グ" "ｸﾞ"))
@@ -1378,20 +1327,22 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
             ((("Z" "y"). ())("ｙ" "ｙ" ""))
             ((("Z" "z"). ())("ｚ" "ｚ" ""))
             )
-          ja-rk-rule))
+          ja-rk-rule-basic))
+(ja-rk-rule-update)
 }}}
 
 ==== SKK風ローマ字配列 ====
 
 {{{
 (require "japanese.scm")
-(define ja-rk-rule
+(define ja-rk-rule-basic
   (append '(
             ((("t" "h" "a"). ())(("て" "テ" "ﾃ") ("ぁ" "ァ" "ｧ")))
             ((("n" "'"). ())("ん" "ン" "ﾝ"))
             ((("x" "x"). ("x"))("っ" "ッ" "ｯ"))
             )
-          ja-rk-rule))
+          ja-rk-rule-basic))
+(ja-rk-rule-update)
 }}}
 
 ==== T-Code風配列 ====
@@ -1402,24 +1353,3 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
 (set! ja-rk-rule tcode-rule)
 }}}
 
-==== 無駄な子音を捨てない ====
-
-ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
-
-{{{
-(require "japanese.scm")
-(define ja-rk-rule-hoge
-  (map
-   (lambda (c)
-     (list (cons (list c) ()) (list c c c)))
-   '("b" "c" "d" "f" "g" "h" "j" "k" "l" "m"
-     "p" "q" "r" "s" "t" "v" "w" "x" "y" "z"
-     "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M"
-     "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z")))
-(if (symbol-bound? 'ja-rk-rule-hoge)
-    (set! ja-rk-rule (append ja-rk-rule-hoge ja-rk-rule)))
-}}}
-
-いんてrねt
-
-1.4より前のバージョンではmapの替わりにmapcarで代替してください。

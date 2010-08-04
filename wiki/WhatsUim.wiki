@@ -1,4 +1,4 @@
-= WhatsUim =
+﻿= WhatsUim =
 
 == uimとは ==
 
@@ -12,7 +12,8 @@ uimの目標は、デスクトップと組み込みプラットホームのユ�
 
 uimは多くの環境で動きます。 もちろん一般的なデスクトップシステム（例えばGNOMEまたはKDE）を含みます。 LinuxザウルスやMac OS Xもサポートします。
 
-http://zaurus-ja.sourceforge.jp/images/imkit/imkit-0.4.0-pre6-candidates.png http://people.freedesktop.org/~ekato/img/mactsm-0.2.jpg
+http://zaurus-ja.sourceforge.jp/images/imkit/imkit-0.4.0-pre6-candidates.png
+http://ekato.files.wordpress.com/2009/04/annotation.png?w=450&h=344
 
 === ライブラリである ===
 
