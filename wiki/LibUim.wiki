@@ -38,12 +38,12 @@ LIBUIM_VERBOSE:: メッセージの冗長レベルを'''0'''から'''10'''まで
    '(IM名 IM名)   
   < 2> ホットキーによる入力方式の一時切り換えを有効にする   < 2> enable-im-switch    #t   < 2> #f   
    #f   
-   一時切り換えキー    switch-im-key    '("キー")    '("&lt;Control&gt;Shift_key" "&lt;Shift&gt;Control_key")   
+   一時切り換えキー    switch-im-key    '("キー")    '("<Control>Shift_key" "<Shift>Control_key")   
   < 2> 直接入力方式を飛ばして切り換える   < 2> switch-im-skip-direct-im?    #t   < 2> #f   
    #f   
   < 2> 入力方式の正副一時切り換え   < 2> enable-im-toggle?    #t   < 2> #t   
    #f   
-   一時切り換えキー    toggle-im-key    '("キー")    '("&lt;Meta&gt; ")   
+   一時切り換えキー    toggle-im-key    '("キー")    '("<Meta> ")   
    副入力方式    toggle-im-alt-im    'IM名    'direct   
   < 2> 編集領域の配色   < 2> uim-color    'uim-color-uim   < 2> 'uim-color-uim   
    'uim-color-atok   

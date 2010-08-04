@@ -24,7 +24,7 @@ http://uim.freedesktop.org/img/uim-toolbars.pnghttp://uim.freedesktop.org/img/to
 スタンドアローンタイプはターミナルエミュレータなどからuim-toolbar-gtk、uim-toolbar-qtもしくはuim-toolbar-qt4を起動します。
 
 {{{
-$ uim-toolbar-gtk &amp;
+$ uim-toolbar-gtk &
 }}}
 
 起動中のツールバー左端をダブルクリックすると畳めます（1.3.0以降）。
@@ -32,13 +32,13 @@ $ uim-toolbar-gtk &amp;
 起動位置を指定したい場合は以下のようにする。
 
 {{{
-$ uim-toolbar-gtk +20+20 &amp;
+$ uim-toolbar-gtk +20+20 &
 }}}
 
 システムトレイタイプはシステムトレイが存在する状態でuim-toolbar-gtk-systrayを起動します。
 
 {{{
-$ uim-toolbar-gtk-systray &amp;
+$ uim-toolbar-gtk-systray &
 }}}
 
 パネルアプレットタイプは、GNOME/KDEパネルなどにアプレットの1つとして追加して使います。 アプレットはパネルの右クリックメニューなどから追加できます。
@@ -90,7 +90,7 @@ $ uim-toolbar-gtk-systray &amp;
 多くのシステムトレイは、アイテム1つに対してアイコン1つという仕様になっていますが、uimではアイテム1つに対して複数のアイコンを詰め込んでいるためです。
 
   * http://lists.sourceforge.jp/mailman/archives/anthy-dev/2005-January/001640.html
-  * [http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2006&m=8&d=29&n=1#29-1 http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2006&amp;m=8&amp;d=29&amp;n=1#29-1]
+  * [http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2006&m=8&d=29&n=1#29-1 http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2006&m=8&d=29&n=1#29-1]
   * http://bugs.debian.org/400880
 
 === 起動するアプリを変更できない ===

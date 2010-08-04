@@ -19,9 +19,9 @@ uim app3 ----- +-----------------+ ----- uim configuration tool
 Although uim-helper-server is named as 'server', it only means 'listen to the connections'. The server is currently implemented as simple message reflector, so the network always behaves as broadcasting.
 
 {{{
-          msg  +-----------------+ ----&gt; uim-toolbar-gtk
-uim app1 ----&gt; |uim-helper-server| ----&gt; uim app2
-uim app3 &lt;---- +-----------------+ ----&gt; uim configuration tool
+          msg  +-----------------+ ----> uim-toolbar-gtk
+uim app1 ----> |uim-helper-server| ----> uim app2
+uim app3 <---- +-----------------+ ----> uim configuration tool
 }}}
 
 All participants receives the message from uim app1
@@ -33,9 +33,9 @@ Although the message layer does not specifies neither response message nor unica
 In another situation, the helper system can simulate unicast message by following way.
 
 {{{
-               +-----------------+ ----&gt; uim-toolbar-gtk
-uim app1 &lt;---- |uim-helper-server| ----&gt; uim app2
-uim app3 ----&gt; +-----------------+ ----&gt; uim configuration tool
+               +-----------------+ ----> uim-toolbar-gtk
+uim app1 <---- |uim-helper-server| ----> uim app2
+uim app3 ----> +-----------------+ ----> uim configuration tool
         focus_in
 }}}
 
@@ -43,18 +43,18 @@ uim app3 ----&gt; +-----------------+ ----&gt; uim configuration tool
 
 {{{
                                 prop_activate
-               +-----------------+ &lt;---- uim-toolbar-gtk
-uim app1 &lt;---- |uim-helper-server| ----&gt; uim app2
-uim app3 &lt;---- +-----------------+ ----&gt; uim configuration tool
+               +-----------------+ <---- uim-toolbar-gtk
+uim app1 <---- |uim-helper-server| ----> uim app2
+uim app3 <---- +-----------------+ ----> uim configuration tool
 }}}
 
 (2) uim-toolbar-gtk send prop_activate
 
 {{{
                                   prop_activate
-                 +-----------------+ &lt;---- uim-toolbar-gtk
+                 +-----------------+ <---- uim-toolbar-gtk
   uim app1 x---- |uim-helper-server| ----x uim app2
-  uim app3 &lt;---- +-----------------+ ----x uim configuration tool
+  uim app3 <---- +-----------------+ ----x uim configuration tool
 }}}
 
 (3) inactive processes ignore the message
@@ -84,8 +84,8 @@ message  = (focus_in            |
 
 charset_specifier = "charset=" charset "\n"
 charset = "UTF-8" | "EUC-JP" | "GB18030" |
-          &lt;or any name that can be specified as iconv_open(3) argument&gt;
-str = str &lt;any characters except for '\0', '\t' or '\n'&gt; | ""
+          <or any name that can be specified as iconv_open(3) argument>
+str = str <any characters except for '\0', '\t' or '\n'> | ""
 identifier = [_a-zA-Z][_a-zA-Z0-9]*
 }}}
 
@@ -145,7 +145,7 @@ prop_list_get = "prop_list_get\n"
 
 This message notifies that a set of menu items typically for toolbar applets. A message is consist of branches which contains arbitrary number of leaves. A branch represents a property which is shown as (popup) menu for user, and a leaf represents a menu item of the branch.
 
-indication_id is an identifier that specifies visual appearance of the item. The ID roughly considerable as "icon name", and so the message receiver can use it to form filename for the corresponding icon (e.g. "anthy" -&gt; "/path/to/somewhere/32x32/anthy.png"). There is a special ID. If the ID is "separator", message receivers should display the leaf as toolkit-native separator. But it is not necessary since the "separator" appears as dummy item with no action if the receiver is not aware of it.
+indication_id is an identifier that specifies visual appearance of the item. The ID roughly considerable as "icon name", and so the message receiver can use it to form filename for the corresponding icon (e.g. "anthy" -> "/path/to/somewhere/32x32/anthy.png"). There is a special ID. If the ID is "separator", message receivers should display the leaf as toolkit-native separator. But it is not necessary since the "separator" appears as dummy item with no action if the receiver is not aware of it.
 
 iconic_label is a very short string typically 1 character to be used as icon. For example, "a" means 'direct input'. This field should be translated with gettext(3) or equivalent. See safe_gettext() of toolbar-common-gtk.c.
 
@@ -258,7 +258,7 @@ The command name 'prop_update_custom' is wrongly named by misunderstanding about
 {{{
 prop_update_custom = "prop_update_custom\n" custom_sym "\n" custom_value "\n"
 custom_sym = /^[-\?a-zA-Z0-9]+$/
-custom_value = &lt;valid S-expression&gt;
+custom_value = <valid S-expression>
 }}}
 
 === custom_reload_notify ===

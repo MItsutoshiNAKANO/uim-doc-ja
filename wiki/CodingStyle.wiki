@@ -3,7 +3,7 @@
 [http://lists.sourceforge.jp/pipermail/anthy-dev/2005-October/002506.html A coding style proposal for uim (was Re: コミットポリシーに関して)]より転載
 
 {{{
-/* derived from: http://cvsweb.netbsd.org/bsdweb.cgi/src/share/misc/style?rev=HEAD&amp;content-type=text/x-cvsweb-markup */
+/* derived from: http://cvsweb.netbsd.org/bsdweb.cgi/src/share/misc/style?rev=HEAD&content-type=text/x-cvsweb-markup */
 
 /*
  * Macros are capitalized.
@@ -108,8 +108,8 @@ select(int argc, char *argv[])
     exit(1);
 
   /* Unary operators don't require spaces, BINARY OPERATORS DO. */
-  a = ((b-&gt;c[0] + ~d == (e || f)) || (g &amp;&amp; h)) ? i : (j &gt;&gt; 1);
-  k = !(l &amp; FLAGS);
+  a = ((b->c[0] + ~d == (e || f)) || (g && h)) ? i : (j >> 1);
+  k = !(l & FLAGS);
 
   /*
    * DO SPACE AFTER KEYWORDS (while, for, return, switch).  No braces are
@@ -145,17 +145,17 @@ select(int argc, char *argv[])
     }
     /*
      * An inequality expression should always be written as
-     * (lesser &lt; greater) order regardless of which side is the
+     * (lesser < greater) order regardless of which side is the
      * subject. It helps visualizing the numeric positions as a number
      * line in an intuitive interpretation, especially in a range
      * comparison as follows.
      *
      * Ruby: (worst..best) === n
-     * C:    (worst &lt;= n &amp;&amp; n &lt;= best)
+     * C:    (worst <= n && n <= best)
      */
-    if (0 &lt;= score)
+    if (0 <= score)
       score = (*evaluate)(candidate);
-    if (best_score &lt;= score)
+    if (best_score <= score)
       selected = candidate;
   }
 
@@ -226,7 +226,7 @@ select(int argc, char *argv[])
       break;
     case 'n':
       errno = 0;
-      num = strtol(optarg, &amp;ep, 10);
+      num = strtol(optarg, &ep, 10);
       break;
     case '?':
     default:
@@ -239,13 +239,13 @@ select(int argc, char *argv[])
    * Parts of a for loop may be left empty.  Don't put declarations
    * inside blocks unless the routine is unusually complicated.
    */
-  for (; cnt &lt; 15; cnt++) {
+  for (; cnt < 15; cnt++) {
     stmt1;
     stmt2;
   }
 
   /* Second level indents are also two spaces. */
-  while (cnt &lt; 20)
+  while (cnt < 20)
     z = a + really + long + statement + that + needs + two lines +
       gets + indented + four + spaces + on + the + second +
       and + subsequent + lines;
@@ -262,11 +262,11 @@ select(int argc, char *argv[])
 http://lists.sourceforge.jp/mailman/archives/anthy-dev/2005-October/002580.html
 
 {{{
-&gt; /* Enum types are capitalized.  No comma on the last element. */
-&gt; enum EnumType {
-&gt;   ONE,
-&gt;   TWO
-&gt; } et;
+> /* Enum types are capitalized.  No comma on the last element. */
+> enum EnumType {
+>   ONE,
+>   TWO
+> } et;
 
 型名を capitalize するのは統一性に欠ける。列挙型であることを明示したいな
 ら typedef しなければいい。
@@ -276,27 +276,27 @@ enum enum_type {
 } et;
 とするべき。
 
-&gt;   /*
-&gt;    * Separate variable declaration block and subsequent codes by a blank
-&gt;    * line, and DO NOT initialize variables in the declarations. This makes
-&gt;    * an abstract about what this function does, in combination with the
-&gt;    * function name, at a glance.
+>   /*
+>    * Separate variable declaration block and subsequent codes by a blank
+>    * line, and DO NOT initialize variables in the declarations. This makes
+>    * an abstract about what this function does, in combination with the
+>    * function name, at a glance.
 
 大賛成。
 
-&gt;   /*
-&gt;    * Use `!' for tests even if it's not a boolean.
-&gt;    * E.g. use "if (!*p)", not "if (*p == '\0')".
-&gt;    *      use "if (!p)",  not "if (p == NULL)".
-&gt;    *
-&gt;    * Developers should aware of type of the variable without such explicit
-&gt;    * type-specific comparison.
-&gt;    *
-&gt;    * The heart of the C language is that all primitive types define zero
-&gt;    * as the false value, and it can directly be a boolean conition. Making
-&gt;    * it obsolete is an excessive anti-incorrectness movement of C++-ism, I
-&gt;    * think.
-&gt;    */
+>   /*
+>    * Use `!' for tests even if it's not a boolean.
+>    * E.g. use "if (!*p)", not "if (*p == '\0')".
+>    *      use "if (!p)",  not "if (p == NULL)".
+>    *
+>    * Developers should aware of type of the variable without such explicit
+>    * type-specific comparison.
+>    *
+>    * The heart of the C language is that all primitive types define zero
+>    * as the false value, and it can directly be a boolean conition. Making
+>    * it obsolete is an excessive anti-incorrectness movement of C++-ism, I
+>    * think.
+>    */
 
 ダウト。数値の大小比較の special case に 0 が登場するときは == 0 とした
 方が意味的にも、視覚的にも正確。例: strcmp(), memcmp()
@@ -311,33 +311,33 @@ for (p = a[0]; p != NULL; p++) みたいに条件を目立たせたいときも�
 ただしはっきりと boolean test なものは比較無しがいい。
 if (isdigit(c) != 0) は無意味。
 
-&gt;   best_score = 0;
-&gt;   for (candidate = *candidates; candidate; candidates++) {
-&gt;     score = 0;
-&gt;     for (cp = candidate; *cp; cp++) {
-&gt;       if (*cp == ' ')
-&gt;         score = -1;
-&gt;     }
-&gt;     /*
-&gt;      * An inequality expression should always be written as
-&gt;      * (lesser &lt; greater) order regardless of which side is the
-&gt;      * subject. It helps visualizing the numeric positions as a number
-&gt;      * line in an intuitive interpretation, especially in a range
-&gt;      * comparison as follows.
-&gt;      *
-&gt;      * Ruby: (worst..best) === n
-&gt;      * C:    (worst &lt;= n &amp;&amp; n &lt;= best)
-&gt;      */
-&gt;     if (0 &lt;= score)
-&gt;       score = (*evaluate)(candidate);
-&gt;     if (best_score &lt;= score)
-&gt;       selected = candidate;
-&gt;   }
+>   best_score = 0;
+>   for (candidate = *candidates; candidate; candidates++) {
+>     score = 0;
+>     for (cp = candidate; *cp; cp++) {
+>       if (*cp == ' ')
+>         score = -1;
+>     }
+>     /*
+>      * An inequality expression should always be written as
+>      * (lesser < greater) order regardless of which side is the
+>      * subject. It helps visualizing the numeric positions as a number
+>      * line in an intuitive interpretation, especially in a range
+>      * comparison as follows.
+>      *
+>      * Ruby: (worst..best) === n
+>      * C:    (worst <= n && n <= best)
+>      */
+>     if (0 <= score)
+>       score = (*evaluate)(candidate);
+>     if (best_score <= score)
+>       selected = candidate;
+>   }
 
 反対。
-if (a &gt; 0)
+if (a > 0)
   positive;
-if (a &lt; 0)
+if (a < 0)
   negative;
 else
   perror(NULL);
@@ -345,36 +345,36 @@ else
 い。こともある。主体がころころ場所を変わらない方が機械的に条件式を認識で
 きる。一方で、単純な一変数の判定でない場合は数直線的に並べた方がいいこと
 もある。どっちか一方に固定するのは良くない。
-ところで C0 &lt;= x &amp;&amp; x &lt;= C1 は云わずもがなかと。
+ところで C0 <= x && x <= C1 は云わずもがなかと。
 
-&gt;    * Use `!' for tests even if it's not a boolean.
-&gt;    * E.g. use "if (!*p)", not "if (*p == '\0')".
-&gt;    *      use "if (!p)",  not "if (p == NULL)".
+>    * Use `!' for tests even if it's not a boolean.
+>    * E.g. use "if (!*p)", not "if (*p == '\0')".
+>    *      use "if (!p)",  not "if (p == NULL)".
 
 Duplicate.
 
-&gt;    * DO NOT cast a pointer in C++-style.
-&gt;    * E.g. use "(int *)p", not "(int*)p"
+>    * DO NOT cast a pointer in C++-style.
+>    * E.g. use "(int *)p", not "(int*)p"
 
 やりすぎ。どっちの表記も意味を正確にあらわしてるし、どっちで書いても間違
 いにもつながらないし、どうせ () の方が視覚的にも優先度が高い。
 
-&gt;    * Do not use C++ style '0' for a NULL pointer.
+>    * Do not use C++ style '0' for a NULL pointer.
 
 何故? if (fp) 式の記述を許してるんだから当然 NULL == 0 は意識するでしょ
 う。
 
-&gt;   /* Second level indents are also two spaces. */
-&gt;   while (cnt &lt; 20)
-&gt;     z = a + really + long + statement + that + needs + two lines +
-&gt;       gets + indented + four + spaces + on + the + second +
-&gt;       and + subsequent + lines;
+>   /* Second level indents are also two spaces. */
+>   while (cnt < 20)
+>     z = a + really + long + statement + that + needs + two lines +
+>       gets + indented + four + spaces + on + the + second +
+>       and + subsequent + lines;
 
 s/two lines/two + lines/   s/four/two/   :p
 
-&gt;   /*
-&gt;    * a return statement at end of a function should be separated by a
-&gt;    * blank line.
+>   /*
+>    * a return statement at end of a function should be separated by a
+>    * blank line.
 
 意味ないと思います。特に反対でもありませんが。
 }}}

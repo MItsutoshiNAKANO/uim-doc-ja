@@ -12,15 +12,15 @@
 
 {{{
 $ uim-sh
-uim&gt; (begin(display"Hello, uim!")(newline))
+uim> (begin(display"Hello, uim!")(newline))
 Hello, uim!
-#&lt;undef&gt;
+#<undef>
 }}}
 
 終了は
 
 {{{
-uim&gt; (exit)
+uim> (exit)
 }}}
 
 ファイルを直接読み込むこともできます。 パス指定は、絶対パスか/usr/local/share/uim/libディレクトリからの相対パスで。

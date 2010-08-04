@@ -11,7 +11,7 @@
 ターミナルエミュレータなどからuim-dict-gtkを起動して使います。
 
 {{{
-$ uim-dict-gtk &amp;
+$ uim-dict-gtk &
 }}}
 
 また[UimToolbar UimToolbar]から起動する事もできます。

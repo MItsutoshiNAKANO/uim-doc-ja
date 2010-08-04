@@ -42,8 +42,8 @@ static uim_lisp bar;
 
 void
 uim_plugin_instance_init(void) {
-  uim_scm_gc_protect(&amp;foo);
-  uim_scm_gc_protect(&amp;bar);
+  uim_scm_gc_protect(&foo);
+  uim_scm_gc_protect(&bar);
 }
 }}}
 
@@ -57,8 +57,8 @@ static uim_lisp bar;
 
 void
 uim_plugin_instance_init(void) {
-  uim_scm_gc_protect(&amp;foo);
-  uim_scm_gc_protect(&amp;bar);
+  uim_scm_gc_protect(&foo);
+  uim_scm_gc_protect(&bar);
 }
 }}}
 

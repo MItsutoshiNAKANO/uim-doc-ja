@@ -11,7 +11,7 @@
 ターミナルエミュレータなどからuim-im-switcher-gtk、uim-im-switcher-qtもしくはuim-im-switcher-qt4を起動して使います。
 
 {{{
-$ uim-im-switcher-gtk &amp;
+$ uim-im-switcher-gtk &
 }}}
 
 また[UimToolbar UimToolbar]から起動する事もできます。

@@ -53,7 +53,7 @@ SIODに依存したコードが残っているので、以下の機能が有効�
 <tr><td>'(IM名 IM名)</td></tr>
 <tr><td rowspan="2">ホットキーによる入力方式の正副一時切り換えを有効にする</td><td rowspan="2">enable-im-toggle?</td><td>#t</td><td rowspan="2">#t</td></tr>
 <tr><td>#f</td></tr>
-<tr><td>一時切り換えキー</td><td>toggle-im-key</td><td>'("キー")</td><td>'("&lt;Meta&gt; ")</td></tr>
+<tr><td>一時切り換えキー</td><td>toggle-im-key</td><td>'("キー")</td><td>'("<Meta> ")</td></tr>
 <tr><td>副入力方式</td><td rowspan="2">toggle-im-alt-im</td><td rowspan="2">'IM名</td><td>'direct以外</td></tr>
 <tr><td>副入力方式 (trunk)</td><td>'direct</td></tr>
 <tr><td rowspan="2">編集領域の配色</td><td rowspan="2">uim-color</td><td>'uim-color-uim</td><td rowspan="2">'uim-color-uim</td></tr>

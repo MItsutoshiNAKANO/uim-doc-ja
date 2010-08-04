@@ -83,7 +83,7 @@ Emacsでuim.elを使う方法には、uim-modeを直接呼び出して利用す�
 LEIMを利用した場合、uimの提供するIMは、LEIMの形式の名前でEmacsに登録されます。LEIMの形式の命名規則は以下の通りです。
 
 {{{
-"&lt;Emacsでの言語名&gt;-&lt;uimの返してくるIM名&gt;-uim"
+"<Emacsでの言語名>-<uimの返してくるIM名>-uim"
 }}}
 
 例えば、uim-anthyであれば、uimの返してくるIM名は"anthy"で、日本語を示すEmacsの言語名は"japanese"なので、LEIMに登録される名称は"japanese-anthy-uim"となります。
@@ -420,8 +420,8 @@ http://garakuta.homelinux.org/~nosuke/diary/200601.html#4-2
 
 === vi協調モードをオンにしているとESCを押したときに直接入力に戻ってしまう ===
 
-  * [http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2008&m=5&d=15&n=1#15-1 http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2008&amp;m=5&amp;d=15&amp;n=1#15-1]
-  * [http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2009&m=1&d=2&n=1#2-1 http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2009&amp;m=1&amp;d=2&amp;n=1#2-1]
+  * [http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2008&m=5&d=15&n=1#15-1 http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2008&m=5&d=15&n=1#15-1]
+  * [http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2009&m=1&d=2&n=1#2-1 http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2009&m=1&d=2&n=1#2-1]
 
 ~/.emacsに以下を追記。
 

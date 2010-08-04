@@ -32,8 +32,8 @@ composerフレームワークとは私によって完全に再構築された次
 
   * 不十分な責任の分離と再利用性
     * あるコードは、他のコード修正の際の意図しない責任侵害によって容易に壊れます
-    * コピー&amp;ペーストされたあふれるコード群が進歩を阻害しています
-    * コピー&amp;ペーストされたコードの膨張は、それが黒魔術の物体になってしまう前に阻止して健康を回復するべきです
+    * コピー&ペーストされたあふれるコード群が進歩を阻害しています
+    * コピー&ペーストされたコードの膨張は、それが黒魔術の物体になってしまう前に阻止して健康を回復するべきです
 
 これらの問題への解はコードで語られます。
 
@@ -98,7 +98,7 @@ composerフレームワークとは私によって完全に再構築された次
                           |
                      vi-adapter (viコマンドを監視しactionを発行)
                           |
-                   event-translator (key -&gt; action mapperとして)
+                   event-translator (key -> action mapperとして)
                           |
                      mru-chooser (IM switcherの一部として)
                           |
@@ -112,7 +112,7 @@ composerフレームワークとは私によって完全に再構築された次
                           |
                   lazy-instantiator
                           |
-                   event-translator (key -&gt; action mapperとして)
+                   event-translator (key -> action mapperとして)
                           |
                        chooser (候補セレクタ制御)
                           |

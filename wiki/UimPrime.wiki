@@ -90,7 +90,7 @@ vi（クローン）でコマンドモードに戻る時、uimを直接入力モ
 || #f ||
 ||<|2> 空白文字 ||<|2> prime-custom-japanese-space || 'wide ||<|2> 'wide ||
 || 'half ||
-|| 全角半角を反転した空白文字キー || prime-altspace-key || '("キー) || '("&lt;Control&gt; " "&lt;Alt&gt; ") ||
+|| 全角半角を反転した空白文字キー || prime-altspace-key || '("キー) || '("<Control> " "<Alt> ") ||
 ||<|2> PRIMEとの通信にUNIXドメインソケットを使用する ||<|2> prime-use-unixdomain? || #t ||<|2> #t ||
 || #f ||
 || 候補ウィンドウに一度に表示する候補数 || prime-nr-candidate-max || 数字 || 10 ||

@@ -10,9 +10,9 @@ uim 0.4.6では共有ライブラリとSchemeプログラムをロードする�
 
 {{{
  ___________    (load-plugin "foo")
-|           | ------------------+---&gt;  libuim-foo.so
+|           | ------------------+--->  libuim-foo.so
 |  libuim   |                   |
-|___________|                   +---&gt;  foo.scm
+|___________|                   +--->  foo.scm
 }}}
 
 Schemeエンジンから(load-plugin "foo")が呼び出されると、libuim-foo.soがメモリにロードされると同時に'uim_plugin_instance_init'を実行する。libuim-foo.soの呼び出しに成功した後、'foo.scm'がロードされる。
@@ -23,9 +23,9 @@ From 0.4.6, uim supports plugin system which loads library and scheme definition
 
 {{{
  ___________    (load-plugin "foo")
-|           | ------------------+---&gt;  libuim-foo.so
+|           | ------------------+--->  libuim-foo.so
 |  libuim   |                   |
-|___________|                   +---&gt;  foo.scm
+|___________|                   +--->  foo.scm
 }}}
 
 When called (load-plugin "foo") from libuim scheme engine, libuim-foo.so is loaded and call 'plugin_instance_init' in libuim-foo.so first. After loading libuim-foo.so is succeeded, 'foo.scm' is loaded.
@@ -71,13 +71,13 @@ If you want to install 3rd party plugin, you have to place the shared object to 
 1. Plugin loading
 
 {{{
-dlopen(libuim-foo.so) -&gt; call uim_plugin_instance_init -&gt; call "foo.scm"
+dlopen(libuim-foo.so) -> call uim_plugin_instance_init -> call "foo.scm"
 }}}
 
 2. Plugin unloading
 
 {{{
-call uim_plugin_instance_quit -&gt; dlclose(libuim-foo.so)
+call uim_plugin_instance_quit -> dlclose(libuim-foo.so)
 }}}
 
 ----
@@ -91,11 +91,11 @@ Plugin's loading scheme:
 1. Plugin loading
 
 {{{
-dlopen(libuim-foo.so) -&gt; call plugin_instance_init -&gt; call "foo.scm"
+dlopen(libuim-foo.so) -> call plugin_instance_init -> call "foo.scm"
 }}}
 
 2. Plugin unloading
 
 {{{
-call plugin_instance_quit -&gt; dlclose(libuim-foo.so)
+call plugin_instance_quit -> dlclose(libuim-foo.so)
 }}}

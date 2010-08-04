@@ -13,7 +13,7 @@ uimのカスタマイズツール。 uim-pref-gtk、uim-pref-qtとuim-pref-qt4�
 ターミナルエミュレータなどからuim-pref-gtkもしくはuim-pref-qtを起動して使います。
 
 {{{
-$ uim-pref-gtk &amp;
+$ uim-pref-gtk &
 }}}
 
 また[UimToolbar UimToolbar]から起動する事もできます。
@@ -28,5 +28,5 @@ uim-prefで提供されているカスタマイズの項目以上のカスタマ
 
 uim-prefがuim-custom APIを完全にサポートしていないためです。
 
-[http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2006&m=7&d=12&n=1#12-1 http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2006&amp;m=7&amp;d=12&amp;n=1#12-1]
+[http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2006&m=7&d=12&n=1#12-1 http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2006&m=7&d=12&n=1#12-1]
 

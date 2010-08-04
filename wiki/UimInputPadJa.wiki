@@ -9,7 +9,7 @@
 ターミナルエミュレータなどからuim-input-pad-jaを起動して使います。
 
 {{{
-$ uim-input-pad-ja &amp;
+$ uim-input-pad-ja &
 }}}
 
 また[UimToolbar UimToolbar]から起動する事もできます。

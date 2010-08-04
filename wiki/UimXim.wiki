@@ -12,7 +12,7 @@ uimとXIMのブリッジ。 XIM経由で入力を行う場合に使う。
 
 {{{
 XMODIFIERS="@im=uim" ; export XMODIFIERS
-uim-xim &amp;
+uim-xim &
 }}}
 
 を追記しておくだけでよいでしょう。
@@ -29,7 +29,7 @@ GTK+ツールキットを用いたuim-candwin-gtkと、Qtツールキットを�
 環境変数'''UIM_CANDWIN_PROG'''を指定する事で、使用する候補ウィンドウを選択できます。
 
 {{{
-$ UIM_CANDWIN_PROG=uim-candwin-qt uim-xim &amp;
+$ UIM_CANDWIN_PROG=uim-candwin-qt uim-xim &
 }}}
 
 === オプション ===

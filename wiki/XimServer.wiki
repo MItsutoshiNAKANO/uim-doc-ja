@@ -202,7 +202,7 @@ uim-xim (XmbTextListToTextProperty)
 XIM client
 }}}
 
-このような場合、実装において文字列を処理するために、[UimXim UimXim]はUTF-8を通してさらなる変換を行います。しかし、'native-&gt;UTF-8'と'UTF-8-&gt;native'両変換が同じiconv(3)コンバータによって行なわれるので、キャラクタコード変更が生じないことは保証されます。この結果、以下の通りにja_JP.eucJPエンコーディングで動く古い実装と同等の正確な文字列が生じます。
+このような場合、実装において文字列を処理するために、[UimXim UimXim]はUTF-8を通してさらなる変換を行います。しかし、'native->UTF-8'と'UTF-8->native'両変換が同じiconv(3)コンバータによって行なわれるので、キャラクタコード変更が生じないことは保証されます。この結果、以下の通りにja_JP.eucJPエンコーディングで動く古い実装と同等の正確な文字列が生じます。
 
 {{{
 uim-anthy (only for example)
@@ -284,7 +284,7 @@ uim-xim (XmbTextListToTextProperty)
 XIM client
 }}}
 
-In such case, uim-xim performs an additional conversion via UTF-8 to process the strings in the implementation. But it is ensured that no character code alteration will occur since the both 'native-&gt;UTF-8" and 'UTF-8-&gt;native' conversions are performed by same converter iconv(3). This results the string as accurate as the old implementation which is dedicated to ja_JP.eucJP encoding as follows.
+In such case, uim-xim performs an additional conversion via UTF-8 to process the strings in the implementation. But it is ensured that no character code alteration will occur since the both 'native->UTF-8" and 'UTF-8->native' conversions are performed by same converter iconv(3). This results the string as accurate as the old implementation which is dedicated to ja_JP.eucJP encoding as follows.
 
 {{{
 uim-anthy (only for example)

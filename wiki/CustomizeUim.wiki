@@ -14,8 +14,8 @@ LIBUIM_USER_SCM_FILE環境変数を利用することで、一時的にカスタ
 
 {{{
 Firefoxでuim-anthyの候補ウィンドウを出さない例:
-$ echo '(define anthy-use-candidate-window? #f)' &gt; ~/.uim-firefox
-$ LIBUIM_USER_SCM_FILE=~/.uim-firefox firefox &amp;
+$ echo '(define anthy-use-candidate-window? #f)' > ~/.uim-firefox
+$ LIBUIM_USER_SCM_FILE=~/.uim-firefox firefox &
 }}}
 
 == カスタマイズの注意点 ==
@@ -73,7 +73,7 @@ $ uim-sh ~/.uim
 指定可能なモジュール名を取得するには、[UimSh UimSh]で以下を実行してください。
 
 {{{
-uim&gt; installed-im-module-list
+uim> installed-im-module-list
 }}}
 
 有効無効を指定する変数では、'''#t'''は有効、'''#f'''は無効を表します。
@@ -124,16 +124,16 @@ uim&gt; installed-im-module-list
 (define-key anthy-on-key? '(generic-on-key? "c"))
 }}}
 
-修飾キーは&lt;&gt;で囲みます。
+修飾キーは<>で囲みます。
 
 {{{
-(define-key generic-on-key? '("&lt;Shift&gt;a"))
+(define-key generic-on-key? '("<Shift>a"))
 }}}
 
 また修飾キーを一般のキーとして使う時は_keyをつけます
 
 {{{
-(define-key generic-on-key? '("&lt;Control&gt;Alt_key"))
+(define-key generic-on-key? '("<Control>Alt_key"))
 }}}
 
 キー名の表記方法は[UimFep UimFep]の'''-K'''オプションが役に立ちます。
@@ -163,12 +163,12 @@ uim&gt; installed-im-module-list
 ==== 修飾キー ====
 
 || uim || Xmodmap ||
-|| "&lt;Control&gt;" || "Control_L" "Control_R" ||
-|| "&lt;Alt&gt;" || "Alt_L" "Alt_R" ||
-|| "&lt;Shift&gt;" || "Shift_L" "Shift_R" ||
-|| "&lt;Meta&gt;" || "Meta_L" "Meta_R" ||
-|| "&lt;Super&gt;" || "Super_L" "Super_R" ||
-|| "&lt;Hyper&gt;" || "Hyper_L" "Hyper_R" ||
+|| "<Control>" || "Control_L" "Control_R" ||
+|| "<Alt>" || "Alt_L" "Alt_R" ||
+|| "<Shift>" || "Shift_L" "Shift_R" ||
+|| "<Meta>" || "Meta_L" "Meta_R" ||
+|| "<Super>" || "Super_L" "Super_R" ||
+|| "<Hyper>" || "Hyper_L" "Hyper_R" ||
 
 ==== スペシャルキー ====
 
@@ -220,11 +220,11 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
                                      (list (ja-wide key-str) (ja-wide key-str)
                                            (ja-wide key-str))))
               (ustr-insert-elem! (anthy-context-raw-ustr ac) key-str))
--           (let* ((key-str (charcode-&gt;string
+-           (let* ((key-str (charcode->string
 -                            (if (= rule anthy-input-rule-kana)
 -                                key
 -                                (to-lower-char key))))
-+           (let* ((key-str (charcode-&gt;string key))
++           (let* ((key-str (charcode->string key))
                    (res (rk-push-key! rkc key-str)))
               (if res
                   (begin
@@ -232,11 +232,11 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
                  (not (alphabet-char? key))
                  (not (string-find
                        (rk-expect rkc)
--                      (charcode-&gt;string
+-                      (charcode->string
 -                       (if (= rule anthy-input-rule-kana)
 -                           key
 -                           (to-lower-char key))))))
-+                      (charcode-&gt;string key))))
++                      (charcode->string key))))
             (let ((pend (rk-pending rkc))
                   (residual-kana (rk-push-key-last! rkc)))
               (if residual-kana
@@ -244,11 +244,11 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
                                      (list (ja-wide key-str) (ja-wide key-str)
                                            (ja-wide key-str))))
               (ustr-insert-elem! raw-str key-str))
--           (let* ((key-str (charcode-&gt;string
+-           (let* ((key-str (charcode->string
 -                            (if (= rule anthy-input-rule-kana)
 -                                key
 -                                (to-lower-char key))))
-+           (let* ((key-str (charcode-&gt;string key))
++           (let* ((key-str (charcode->string key))
                    (pend (rk-pending rkc))
                    (res (rk-push-key! rkc key-str)))
               (if (and res
@@ -264,7 +264,7 @@ http://pc10.2ch.net/test/read.cgi/linux/1135968795/581
 @@ -1092,9 +1092,9 @@
 　　　　(ustr-cursor-move-end! raw-str))
 
-　　　　;; modifiers (except shift) =&gt; ignore
+　　　　;; modifiers (except shift) => ignore
 -　　　 ((and (modifier-key-mask key-state)
 -　　　　　　(not (shift-key-mask key-state)))
 -　　　 #f)
@@ -462,14 +462,14 @@ ktermを使っている場合、~/.Xresource（~/.Xdefaults）に次のように
 
 {{{
 kterm.VT100.Translations: #override \
-  &lt;Key&gt;Zenkaku_Hankaku: string("\033[21~")
+  <Key>Zenkaku_Hankaku: string("\033[21~")
 }}}
 
 xtermを使っている場合、~/.Xresource（~/.Xdefaults）に次のように書きます。
 
 {{{
 xterm.VT100.Translations: #override \
-  &lt;Key&gt;Zenkaku_Hankaku: string("\033[21~")
+  <Key>Zenkaku_Hankaku: string("\033[21~")
 }}}
 
 rxvtを使っている場合、~/.Xresource（~/.Xdefaults）に次のように書きます。
@@ -501,7 +501,7 @@ Zenkaku_Hankaku="^[21~"
 Etermを使っている場合、~/.Eterm/user.cfgに次のように書きます。
 
 {{{
-&lt;Eterm-0.9&gt;
+<Eterm-0.9>
 begin actions
   bind Zenkaku_Hankaku to echo "\e[21~"
 end actions
@@ -531,8 +531,8 @@ User1=41,0,$1b[21~
 Linuxコンソールではloadkeysを使ってキーシーケンスを変えることができます。 まずキーマップの定義ファイルを編集します。 キーマップの定義ファイルはLinuxディストリビューションによってはパスが違うかもしれません。
 
 {{{
-$ zcat /lib/kbd/keymaps/i386/qwerty/jp106.map.gz &gt; jp.map
-$ echo 'keycode  41 = F10' &gt;&gt; jp.map
+$ zcat /lib/kbd/keymaps/i386/qwerty/jp106.map.gz > jp.map
+$ echo 'keycode  41 = F10' >> jp.map
 }}}
 
 keycodeの41は全角/半角キーに対応しています。 showkeyコマンドで確かめてください。 showkeyは10秒間入力しないと終了します。
@@ -546,7 +546,7 @@ $ loadkeys jp
 Debianではキーマップの定義ファイルを編集する必要はありません。
 
 {{{
-# echo 's/keycode  41 = Escape/Keycode  41 = F10/;' &gt;&gt; /etc/console-tools/remap
+# echo 's/keycode  41 = Escape/Keycode  41 = F10/;' >> /etc/console-tools/remap
 # /etc/init.d/console-screen.sh（その場で有効化）
 }}}
 
@@ -595,8 +595,8 @@ http://pc5.2ch.net/test/read.cgi/linux/1084073229/13-14
 全角/半角キーをF10にマッピングできたら、~/.uimにこのように書けば全角/半角キーでオン/オフができるようになります。
 
 {{{
-(define-key generic-on-key? '("zenkaku-hankaku" "&lt;Shift&gt; " "F10"))
-(define-key generic-off-key? '("zenkaku-hankaku" "&lt;Shift&gt; " "F10"))
+(define-key generic-on-key? '("zenkaku-hankaku" "<Shift> " "F10"))
+(define-key generic-off-key? '("zenkaku-hankaku" "<Shift> " "F10"))
 }}}
 
 ==== w3mで使う ====
@@ -648,7 +648,7 @@ w3mでの日本語入力は一行入力だけです。 そこでw3mでの日本�
 ***************
 *** 255,260 ****
 --- 261,267 ----
-  	if (CLen &amp;&amp; (flag &amp; IN_CHAR))
+  	if (CLen && (flag & IN_CHAR))
   	    break;
       } while (i_cont);
 +     im_off();
@@ -694,7 +694,7 @@ w3mのソースにパッチを当ててコンパイル、インストールし�
 {{{
 $ tar xvf w3m-0.5.1.tar.gz
 $ cd w3m-0.5.1
-$ patch &lt;../w3m-uim-fep.diff
+$ patch <../w3m-uim-fep.diff
 $ ./configure
 $ make
 # make install
@@ -784,7 +784,7 @@ $ gunzip -c vim-6.4-lang.tar.gz|tar xvf -
 
 {{{
 $ cd vim64
-$ patch -p0 &lt;../vim-6.4-difj/diffs/kaoriya.diff
+$ patch -p0 <../vim-6.4-difj/diffs/kaoriya.diff
 $ ./configure --with-features=big --enable-multibyte
 }}}
 
@@ -807,11 +807,11 @@ $ su
 キーバインドの変更 IMをオンにするキーを変更する方法です。 例えばCtrl+jにするには~/.vimrcで以下のように設定します。
 
 {{{
-:inoremap &lt;C-j&gt; &lt;C-^&gt;
-:cnoremap &lt;C-j&gt; &lt;C-^&gt;
+:inoremap <C-j> <C-^>
+:cnoremap <C-j> <C-^>
 }}}
 
-ただし、cnoremapで&lt;C-j&gt;にマップすると、@:を押すとIMがオンになってしまい、前回のexコマンドを繰り返せなくなります。
+ただし、cnoremapで<C-j>にマップすると、@:を押すとIMがオンになってしまい、前回のexコマンドを繰り返せなくなります。
 
 uimの方は以下のように設定します。 skkのF10は全角英数モードになったときにひらがなモードに戻すためです。
 
@@ -824,7 +824,7 @@ uimの方は以下のように設定します。 skkのF10は全角英数モー�
 IMの状態を保存しない インサートモードになったときに常にIMがオフになるようにする方法です。 ただし、インサートモードで矢印キーなどが効かなくなります。
 
 {{{
-:inoremap &lt;silent&gt; &lt;esc&gt; &lt;esc&gt;:se imi=0&lt;cr&gt;
+:inoremap <silent> <esc> <esc>:se imi=0<cr>
 }}}
 
 デフォルトでIMをオフにする vimを起動して最初にインサートモードになったときにIMをオフにする方法です。
@@ -838,20 +838,20 @@ IMの状態を保存しない インサートモードになったときに常�
 
 f, F, t, T, rでIMをオンにしない IMをオンにした状態でノーマルモードになってfなどを押すとIMがオンになっ てしまいます。これを回避するためのパッチです。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-fFtTr-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-fFtTr-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-fFtTr-6.4.diff 6.4用]
 
-&lt;C-^&gt;でIMをオフにしない &lt;C-^&gt;はIMをトグルするキーですが、&lt;C-^&gt;でIMをオフにしないようにするため のパッチです。IMをオフにするときはuimのキーバインドで行います。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hat-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hat-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hat-6.4.diff 6.4用]
+<C-^>でIMをオフにしない <C-^>はIMをトグルするキーですが、<C-^>でIMをオフにしないようにするため のパッチです。IMをオフにするときはuimのキーバインドで行います。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hat-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hat-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hat-6.4.diff 6.4用]
 
 /(検索)のときにIMをオンにしない /や?で検索するときにIMをオフにするパッチです。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-search-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-search-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-search-6.4.diff 6.4用]
 
-&lt;C-^&gt;で常にひらがなモードにする skkでは全角英数からIMをオフにして再度オンにすると全角英数になってしまいます。 IMがオンになったときは常にひらがなモードにするためのパッチです。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hiragana-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hiragana-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hiragana-6.4.diff 6.4用]
+<C-^>で常にひらがなモードにする skkでは全角英数からIMをオフにして再度オンにすると全角英数になってしまいます。 IMがオンになったときは常にひらがなモードにするためのパッチです。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hiragana-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hiragana-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hiragana-6.4.diff 6.4用]
 
-@:でIMがオンにならないようにする cnoremapで&lt;C-j&gt;にマップしていると、@:が効かなくなるのを回避するためのパッチです。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-nlmap-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-nlmap-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-nlmap-6.4.diff 6.4用]
+@:でIMがオンにならないようにする cnoremapで<C-j>にマップしていると、@:が効かなくなるのを回避するためのパッチです。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-nlmap-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-nlmap-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-nlmap-6.4.diff 6.4用]
 
 パッチの当て方 KaoriYaパッチを当てたあとにvim64ディレクトリで、このように当てます。
 
 {{{
 $for i in uim-fep-vim-*.diff
  do
-   patch -p0 &lt; $i
+   patch -p0 < $i
  done
 }}}
 
@@ -955,15 +955,15 @@ Index: im.scm
 ~/.uimに
 
 {{{
-(define switch-to-im1-key '("&lt;Alt&gt;1"))
+(define switch-to-im1-key '("<Alt>1"))
 (define switch-to-im1-key? (make-key-predicate switch-to-im1-key))
 (define switch-im1 'direct)
 
-(define switch-to-im2-key '("&lt;Alt&gt;2"))
+(define switch-to-im2-key '("<Alt>2"))
 (define switch-to-im2-key? (make-key-predicate switch-to-im2-key))
 (define switch-im2 'm17n-ru-kbd)
 
-(define switch-to-im3-key '("&lt;Alt&gt;3"))
+(define switch-to-im3-key '("<Alt>3"))
 (define switch-to-im3-key? (make-key-predicate switch-to-im3-key))
 (define switch-im3 'anthy)
 }}}
@@ -1291,7 +1291,7 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
             ((("z" "\""). ())("“" "“" ""))
             ((("z" "#"). ())("▲" "▲" ""))
             ((("z" "$"). ())("■" "■" ""))
-            ((("z" "&amp;"). ())("£" "£" ""))
+            ((("z" "&"). ())("£" "£" ""))
             ((("z" "'"). ())("‘" "‘" ""))
             ((("z" "("). ())("【" "【" ""))
             ((("z" ")"). ())("】" "】" ""))
@@ -1308,8 +1308,8 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
             ((("z" "*"). ())("×" "×" ""))
             ((("z" ":"). ())("゜" "゜" ""))
             ((("z" "}"). ())("〕" "〕" ""))
-            ((("z" "&lt;"). ())("≦" "≦" ""))
-            ((("z" "&gt;"). ())("≧" "≧" ""))
+            ((("z" "<"). ())("≦" "≦" ""))
+            ((("z" ">"). ())("≧" "≧" ""))
             ((("z" "?"). ())("∞" "∞" ""))
             ((("z" "_"). ())("∴" "∴" ""))
             ((("z" "1"). ())("○" "○" ""))

@@ -86,12 +86,12 @@ documentationを追加しましょう。 あと"bug fix"は複合語として"bu
 あと外部からパッチをもらった場合に[http://en.wikipedia.org/wiki/Changelog ChangeLog]に本人の名前を残せるように定型文で言及するようにしましょう。
 
 {{{
-[new feature] Patch by HOGE Fugao &lt;hoge at example.com&gt; posted in
+[new feature] Patch by HOGE Fugao <hoge at example.com> posted in
 [Anthy-dev 65535]. These functions ...
 
     ↓
 
-2005-10-08 HOGE Fugao &lt;hoge at example.com&gt;
+2005-10-08 HOGE Fugao <hoge at example.com>
 
         [new feature] by the patch posted in [Anthy-dev
         65535]. These functions ...
@@ -190,5 +190,5 @@ quick hackでuimやximの下に分散していたのをreplaceの下にまとめ
 
 http://slashdot.jp/~YamaKenZ/journal/389088
 
-ところで、このopenbsd-compatにはuimでも使ってるBSD由来の代替関数がいい具合に揃っていて更新を追うのが楽になりそうなんで、サクっとuimのvendorブランチに取り込んでおきました。ポータビリティの低い関数を使いたい場合は、まずここから代替実装を探すようにお願いします &gt;committer各位
+ところで、このopenbsd-compatにはuimでも使ってるBSD由来の代替関数がいい具合に揃っていて更新を追うのが楽になりそうなんで、サクっとuimのvendorブランチに取り込んでおきました。ポータビリティの低い関数を使いたい場合は、まずここから代替実装を探すようにお願いします >committer各位
 

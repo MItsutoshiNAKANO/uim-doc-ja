@@ -228,15 +228,15 @@ uimでの入力も正常にできます。(anthyもSKKもOKでした)
 http://pc11.2ch.net/test/read.cgi/unix/1151423973/943
 
 {{{
-&gt;&gt;935
+>>935
 それたぶん q と . が使えなくなるのでこのコードも追加したほうがいいかもしんないです。
 あと完成度はかなり低いんでそのつもりで。ほとんど問題ないとは思いますが。
 diff -r b78008b446f1 -r 84cf8763794e src/getchar.c
 --- a/src/getchar.c Wed Feb 28 12:47:30 2007 +0900
 +++ b/src/getchar.c Sun Mar 04 07:54:34 2007 +0900
 @@ -1606,6 +1606,8 @@ vgetc()
-     curbuf-&gt;b_p_fo = "";
-     curbuf-&gt;b_p_fex = "";
+     curbuf->b_p_fo = "";
+     curbuf->b_p_fex = "";
      ++no_mapping;
 +    ++allow_keys;
 +    block_redo = TRUE;
@@ -244,8 +244,8 @@ diff -r b78008b446f1 -r 84cf8763794e src/getchar.c
   }
   else if (c == K_IM_SEQUENCE_END)
 @@ -1613,6 +1615,8 @@ vgetc()
-     curbuf-&gt;b_p_fo = p_fo_save;
-     curbuf-&gt;b_p_fex = p_fex_save;
+     curbuf->b_p_fo = p_fo_save;
+     curbuf->b_p_fex = p_fex_save;
      --no_mapping;
 +    --allow_keys;
 +    block_redo = FALSE;
@@ -260,11 +260,11 @@ diff -r b78008b446f1 -r 84cf8763794e src/getchar.c
 
 == Flash上での入力問題色々 ==
 
-  * Flash Player（&lt;&lt; 9.0.115）では入力に[UimXim]が必要です。
-  * Flash Player（&gt;= 9.0.64）とuim（&lt;&lt; 1.3.0）の組み合わせでは、以下のような不具合が発生します。
+  * Flash Player（<< 9.0.115）では入力に[UimXim]が必要です。
+  * Flash Player（>= 9.0.64）とuim（<< 1.3.0）の組み合わせでは、以下のような不具合が発生します。
     1. 編集領域が表示されない
     1. 候補ウィンドウがおかしな位置に出る
-  * Flash Player（&gt;= 9.0.115）では、以下のような不具合が発生します。
+  * Flash Player（>= 9.0.115）では、以下のような不具合が発生します。
     1. 編集領域がおかしな位置に出る
     1. 候補ウィンドウがおかしな位置に出る
     1. 特定のロケールで変換確定すると違う文字が入力される
@@ -272,4 +272,4 @@ diff -r b78008b446f1 -r 84cf8763794e src/getchar.c
 
 == [UimQt]を使うとQt4アプリが起動できなくなる ==
 
-uim（&gt;= 1.5.3）を使ってください。
+uim（>= 1.5.3）を使ってください。

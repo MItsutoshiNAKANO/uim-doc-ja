@@ -11,11 +11,11 @@
 ターミナルエミュレータなどからuim-chardict-qtまたはuim-chardict-qt4を起動して使います。
 
 {{{
-$ uim-chardict-qt &amp;
+$ uim-chardict-qt &
 }}}
 
 {{{
-$ uim-chardict-qt4 &amp;
+$ uim-chardict-qt4 &
 }}}
 
 また[UimToolbar UimToolbar]から起動する事もできます。

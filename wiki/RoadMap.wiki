@@ -185,7 +185,7 @@ uim 1.5:
 +-------------------------+
 |         bridges         |
 +-------------------------+
-|  libuim  :  uim-helper  | &lt;--&gt; uim-helper-server
+|  libuim  :  uim-helper  | <--> uim-helper-server
 +----------+--------------+
 }}}
 
@@ -194,7 +194,7 @@ uim 2.0:
 +------------------------+
 |       new bridges      |
 +-----------+--+---------+----------------------+
-|  libuim2  |  |  bridge-dependent IPC (D-Bus)  | &lt;--&gt; a msg bus for uim
+|  libuim2  |  |  bridge-dependent IPC (D-Bus)  | <--> a msg bus for uim
 +-----------+  +--------------------------------+
 }}}
 
@@ -203,7 +203,7 @@ uim 2.0 (legacy interface):
 +----------------------------------+
 |  legacy bridges with uim-helper  |
 +----------------------------------+
-|   libuim (compatibility layer)   | &lt;--&gt; uim-helper-server
+|   libuim (compatibility layer)   | <--> uim-helper-server
 +----------------------------------+
 |             libuim2              |
 +----------------------------------+
