@@ -1,4 +1,4 @@
-= uimの入手 =
+﻿= uimの入手 =
 
 == リリース版 ==
 
@@ -47,7 +47,7 @@ $ ./configure
   * [http://www.gnome.org/ gnome-panel]
   * [ftp://ftp.gnome.org/pub/GNOME/sources/intltool/ intltool] >= 0.35.2
   * [http://www.trolltech.com/products/qt Qt] >= 3.3.2, << 4.0
-  * [[immodule for qtのパッチ|http://www.kde.gr.jp/~daisuke/immodule_for_qt/pukiwiki/]]を当てたQt
+  * [http://www.kde.gr.jp/~daisuke/immodule_for_qt/pukiwiki/ immodule for qtのパッチ]を当てたQt
   * [http://www.kde.org/ kdelibs]
   * [http://www.thrysoee.dk/editline/ libedit]
   * [http://www.sra.co.jp/people/m-kasahr/eb/ EB]
@@ -86,7 +86,7 @@ $ su
 な方は、開発途中版のuimを入手できます。
 たまにコンパイルが通らなかったりすることがあるかもしれませんけれど。
 
-[[Subversion|http://subversion.tigris.org/]]がインストールされているなら
+[http://subversion.tigris.org/ Subversion]がインストールされているなら
 
 {{{
 $ svn co http://uim.googlecode.com/svn/trunk uim-trunk
@@ -113,7 +113,7 @@ $ LC_MESSAGES=C ./make-wc.sh
   * [http://www.gnu.org/software/autoconf/ Autoconf] >= 2.60b (2.61推奨)
   * [http://sources.redhat.com/automake/ Automake] >= 1.10
   * [http://www.gnu.org/software/libtool/ Libtool] >= 1.5.22
-  * [ftp://ftp.gnome.org/pub/GNOME/sources/intltool/]] >= 0.35.2
+  * [ftp://ftp.gnome.org/pub/GNOME/sources/intltool/] >= 0.35.2
   * [http://www.gnu.org/software/make/ GNU make]
   * [http://www.perl.org/ Perl]
   * [http://www.ruby-lang.org/ Ruby]
@@ -427,7 +427,7 @@ $ setime uim
 
 == Windows (Cygwin) ==
 
-  * [Cygwinでuim|http://www.d1.dion.ne.jp/~irino/windows/cygwin-uim.html]
+  * [http://www.d1.dion.ne.jp/~irino/windows/cygwin-uim.html Cygwinでuim]
 
 == Zaurus ==
 

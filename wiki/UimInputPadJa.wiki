@@ -1,0 +1,16 @@
+= UimInputPadJa =
+
+== これは何？ ==
+
+入力パッド。 マウスで文字や記号を入力できます。
+
+== 使い方 ==
+
+ターミナルエミュレータなどからuim-input-pad-jaを起動して使います。
+
+{{{
+$ uim-input-pad-ja &amp;
+}}}
+
+また[UimToolbar UimToolbar]から起動する事もできます。
+

@@ -1,0 +1,4 @@
+= UimAnthyUtf8 =
+
+[UimAnthy]を参照ください。
+

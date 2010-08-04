@@ -1,0 +1,123 @@
+= UimTutcode =
+
+== これは何？ ==
+
+[http://plone.crew.sfc.keio.ac.jp/groups/tut-code/|TUT-Code]入力方式のuim版。
+
+== 使い方 ==
+
+  1. あらかじめ[http://openlab.ring.gr.jp/tcode/soft.html|tc2などに含まれている交ぜ書き辞書]などを入手しておいてください。交ぜ書き変換に必要ですが、これはuimに含まれていません。
+  1. [?UimPref|UimPref]を起動してください。
+    * [?UimToolbar|UimToolbar]の設定アイコンをクリック
+    * ターミナルエミュレータなどでuim-pref-gtk（もしくはuim-pref-qt）を実行
+  1. 「TUT-Code」→「TUT-Code 辞書」→「交ぜ書き変換辞書ファイル」の「選択...」ボタンを押して、辞書ファイルを指定します。
+  1. [?UimImSwitcher|UimImSwitcher]や[?UimToolbar|UimToolbar]からTUT-Codeに切り換えてください。
+    1. TUT-Codeが見つからない場合は[?UimPref|UimPref]を起動してください。
+    1. 起動したら、「全体設定」→「入力方式の利用準備」→「使用可能にする入力方式」の「編集...」ボタンを押して、左の有効アイテムにTUT-Codeを追加してください。
+      * そこにもTUT-Codeが見つからない場合、uim-tutcodeはインストールされていないのかもしれません。確認してみてください。
+    1. 追加が完了したら、TUT-Codeで入力したいアプリケーションを再起動してください。
+  1. [?UimImSwitcher|UimImSwitcher]や[?UimToolbar|UimToolbar]による切り換えは一時的なものです。永続的な変更を望むなら[?UimPref|UimPref]で設定する必要があります。
+  1. [?UimPref|UimPref]を起動したら、「全体設定」→「入力方式の利用準備」→「標準の入力方式を指定」のチェックボックスにチェックを入れます。
+  1. そのすぐ下の「標準の入力方式」に、TUT-Codeをセットしてください。
+
+=== サポートしている入力モード ===
+
+  * 直接入力モード
+  * ひらがなモード
+  * カタカナモード
+  * 記号入力モード
+
+=== 標準で指定されているキー設定 ===
+
+|| 動作 || キー ||
+|| オン/オフ || 全角/半角、Shift+Space、Ctrl+\ ||
+|| ひらがな/カタカナ入力モードを反転移行 || ' ||
+|| 記号入力モードを反転 || Ctrl+_ ||
+|| 交ぜ書き変換 || alj ||
+|| 部首合成変換 || ala ||
+|| 変換開始 || Space ||
+|| 次の変換候補へ移動 || Space、↓、Ctrl+n ||
+|| 前の変換候補へ移動 || ↑、Ctrl+p ||
+|| 候補ウィンドウを次のページへ移動 || PgDn[?c=edit;p=PgDn|?] ||
+|| 候補ウィンドウを次のページへ移動 || PgUp[?c=edit;p=PgUp|?] ||
+|| 変換確定 || Return、Ctrl+m、Ctrl+j ||
+|| キャンセル || Esc、Ctrl+[、Ctrl+g ||
+|| カーソルの左の一字を削除 || BS、Ctrl+h ||
+
+=== T-CodeやTry-Codeとして使う ===
+
+コード表ファイルを変更することで、T-CodeやTry-Codeとして使えます。
+
+[?UimPref|UimPref]で「TUT-Code」→「コード表ファイル」に/usr/local/share/uim/tcode.scm（T-Code）や/usr/local/share/uim/trycode.scm（Try-Code）を指定してください。
+
+=== vi協調モード ===
+
+vi（クローン）でコマンドモードに戻る時、uimを直接入力モードに戻すことができます。
+
+[?UimPref|UimPref]で「TUT-Code」→「vi協調モードを有効にする」のチェックボックスにチェックを入れてください。
+
+標準のキー設定は以下のようになっています。
+
+|| 動作 || キー ||
+|| vi協調モードでESCとして扱うキー || ESC、Ctrl+[ ||
+
+=== Dvorakキーボード ===
+
+Dvorak配列のキーボード用にコード表を補正します。
+
+[?UimPref|UimPref]で「TUT-Code」→「Dvorakキーボードを使用する」のチェックボックスにチェックを入れてください。
+
+=== ファイル ===
+
+~/.uim.d/customs/custom-tutcode.scm:: [?UimPref|UimPref]の「TUT-Code」ファイル。~/.uim.d/customs/custom-tutcode-keys{1,2}.scm:: [?UimPref|UimPref]の「TUT-Code キー設定{1,2}」ファイル。~/.mazegaki.dic:: 交ぜ書き変換個人用辞書ファイル。
+
+== カスタマイズ可能な項目 ==
+
+=== TUT-Codeの変数 ===
+
+|| 動作 || 変数名 || 指定できる値 || 標準値 ||
+|| 交ぜ書き変換辞書ファイル || tutcode-dic-filename ||<|3> "文字列" || "/usr/local/share/tc/mazegaki.dic" ||
+|| 交ぜ書き変換個人用辞書ファイル || tutcode-personal-dic-filename || "$HOME/.mazegaki.dic" ||
+|| コード表ファイル || tutcode-rule-filename || "/usr/local/share/uim/tutcode-rule.scm" ||
+||<|2> 交ぜ書き変換の学習を有効にする ||<|2> tutcode-enable-mazegaki-learning? || #t ||<|2> #t ||
+|| #f ||
+||<|2> vi協調モードを有効にする ||<|2> tutcode-use-with-vi? || #t ||<|2> #f ||
+|| #f ||
+||<|2> Dvorakキーボードを使用する ||<|2> tutcode-use-dvorak? || #t ||<|2> #f ||
+|| #f ||
+||<|2> 候補ウィンドウを使用する ||<|2> tutcode-use-candidate-window? || #t ||<|2> #t ||
+|| #f ||
+||<|2> 見出し表示のキーで候補を確定する ||<|2> tutcode-commit-candidate-by-label-key? || #t ||<|2> #t ||
+|| #f ||
+|| 候補ウィンドウを表示するために変換キーを押す回数 || tutcode-candidate-op-count ||<|2> 数字 || 5 ||
+|| 候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max || 10 ||
+
+==== TUT-Codeの変数の依存関係 ====
+
+  * tutcode-use-candidate-window? #f
+    * tutcode-candidate-op-count
+    * tutcode-nr-candidate-max
+
+=== TUT-Codeキー設定の変数 ===
+
+|| 動作 || キー変数名 ||
+|| オン || tutcode-on-key? ||
+|| オフ || tutcode-off-key? ||
+|| ひらがな/カタカナ入力モードを反転 || tutcode-kana-toggle-key? ||
+|| 記号入力モードを反転 || tutcode-kigou-toggle-key? ||
+|| 交ぜ書き変換モード || tutcode-mazegaki-start-sequence? ||
+|| 部首合成変換モード || tutcode-bushu-start-sequence? ||
+|| 変換開始 || tutcode-begin-conv-key? ||
+|| 確定 || tutcode-commit-key? ||
+|| キャンセル || tutcode-cancel-key? ||
+|| 次候補 || tutcode-next-candidate-key? ||
+|| 前候補 || tutcode-prev-candidate-key? ||
+|| 候補ウィンドウの次ページ || tutcode-next-page-key? ||
+|| 候補ウィンドウの前ページ || tutcode-prev-page-key? ||
+|| バックスペース || tutcode-backspace-key? ||
+|| リターン || tutcode-return-key? ||
+|| vi協調モードでESCとして扱うキー || tutcode-vi-escape-key? ||
+
+== trycode-rule生成用スクリプト ==
+
+  * http://groups.google.com/group/uim-ja/t/e9568f3e06c3f482

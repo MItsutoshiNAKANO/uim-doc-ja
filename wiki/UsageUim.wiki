@@ -1,0 +1,50 @@
+= UsageUim =
+
+== コア ==
+
+  * [LibUim LibUim]
+
+== ブリッジ ==
+
+  * [UimFep UimFep]
+  * [UimXim UimXim]
+  * [UimEl UimEl]
+  * [UimGtk UimGtk]
+  * [UimQt UimQt]
+
+== モジュール ==
+
+  * [UimAjaxIme UimAjaxIme]
+  * [UimAnthy UimAnthy]
+  * [UimByeoru UimByeoru]
+  * [UimCanna UimCanna]
+  * uim-editline
+  * [UimElatin UimElatin]
+  * uim-hangul
+  * uim-ipa-x-sampa
+  * uim-latin
+  * [UimLook UimLook]
+  * [UimMana UimMana]
+  * [UimPrime UimPrime]
+  * uim-pyload
+  * [UimSj3 UimSj3]
+  * [UimSkk UimSkk]
+  * [UimSocialIme UimSocialIme]
+  * uim-tcode
+  * uim-trycode
+  * [UimTutcode UimTutcode]
+  * uim-viqr
+  * [UimWnn UimWnn]
+  * [UimYahooJp UimYahooJp]
+
+== ツール ==
+
+  * [UimSh UimSh]
+  * [UimModuleManager UimModuleManager]
+  * [UimToolbar UimToolbar]
+  * [UimImSwitcher UimImSwitcher]
+  * [UimPref UimPref]
+  * [UimInputPadJa UimInputPadJa]
+  * [UimChardictQt UimChardictQt]
+  * [UimDictGtk UimDictGtk]
+

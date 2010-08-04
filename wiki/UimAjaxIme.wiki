@@ -1,0 +1,175 @@
+= UimAjaxIme =
+
+<wiki:toc max_depth="1" />
+
+== これは何？ ==
+
+uimのAjax IMEモジュール。 かな漢字変換エンジン[http://ajaxime.chasen.org/ Ajax IME]や[http://cl.naist.jp/~mamoru-k/chaime/ ChaIME]で入力/変換などを行なう場合に使う。
+
+'''このモジュールはリリース版には含まれていません。'''
+
+== 使い方 ==
+
+  1. あらかじめネットワークに接続しておいてください。
+  1. [UimImSwitcher UimImSwitcher]や[UimToolbar UimToolbar]からAjax-IMEに切り換えてください。
+    1. Ajax-IMEが見つからない場合は[UimPref UimPref]を起動してください。
+      * [UimToolbar UimToolbar]の設定アイコンをクリック。
+      * ターミナルエミュレータなどでuim-pref-gtk（もしくはuim-pref-qt）を実行。
+    1. 起動したら、「全体設定」→「入力方式の利用準備」→「使用可能にする入力方式」の「編集...」ボタンを押して、左の有効アイテムにAjax-IMEを追加してください。
+      * そこにもAjax-IMEが見つからない場合、uim-ajax-imeはインストールされていないのかもしれません。確認してみてください。
+    1. 追加が完了したら、Ajax-IMEで入力したいアプリケーションを再起動してください。
+  1. [UimImSwitcher UimImSwitcher]や[UimToolbar UimToolbar]による切り換えは一時的なものです。永続的な変更を望むなら[UimPref UimPref]で設定する必要があります。
+  1. [UimPref UimPref]を起動したら、「全体設定」→「入力方式の利用準備」→「標準の入力方式を指定」のチェックボックスにチェックを入れます。
+  1. そのすぐ下の「標準の入力方式」に、Ajax-IMEをセットしてください。
+
+=== サポートしている入力モード ===
+
+  * 直接(無変換)入力モード
+  * ひらがな入力モード
+  * カタカナ入力モード
+  * 半角カタカナ入力モード
+  * 半角英数入力モード
+  * 全角英数入力モード
+
+=== サポートしているかな入力方式 ===
+
+  * [RomaKanaTable ローマ字入力方式]
+  * [AZIKTable AZIK拡張ローマ字入力方式]
+  * かな入力方式
+
+=== 標準で指定されているキー設定 ===
+
+|| 動作 || キー ||
+|| オン/オフ || 全角/半角、Shift+Space、Ctrl+\ ||
+|| ひらがな入力モードへ || Shift+F6 ||
+|| カタカナ入力モードへ || Shift+F7 ||
+|| 半角カタカナ入力モードへ || Shift+F8 ||
+|| 全角英数入力モードへ || Shift+F9 ||
+|| 半角英数入力モードへ || Shift+F10 ||
+|| カーソルを右へ移動 || →、Ctrl+f ||
+|| カーソルを左へ移動 || ←、Ctrl+b ||
+|| 編集領域の先頭へ移動 || Ctrl+a、Ctrl+← ||
+|| 編集領域の末尾へ移動 || Ctrl+e、Ctrl+→ ||
+|| カーソルより右の文字をすべて削除 || Ctrl+k ||
+|| カーソルより左の文字をすべて削除 || Ctrl+u ||
+|| カーソルの右の一字を削除 || Delete、Ctrl+d ||
+|| カーソルの左の一字を削除 || BS、Ctrl+h ||
+|| 変換開始 || Space ||
+|| 次の変換候補へ移動 || Space、↓、Ctrl+n ||
+|| 前の変換候補へ移動 || ↑、Ctrl+p ||
+|| 次の変換候補ページへ移動 || PgDn[c=edit;p=PgDn|?] ||
+|| 前の変換候補ページへ移動 || PgUp[c=edit;p=PgUp|?] ||
+|| 変換確定 || Return、Ctrl+m、Ctrl+j ||
+|| キャンセル || Esc、Ctrl+[、Ctrl+g ||
+|| ひらがな/カタカナを反転変換し確定 || Q ||
+|| ひらがな変換 || F6 ||
+|| カタカナ変換 || F7 ||
+|| 半角カタカナ変換 || F8 ||
+|| 全角英数字へ変換、大文字小文字を反転 || F9 ||
+|| 半角英数字へ変換、大文字小文字を反転 || F10 ||
+|| ひらがな、カタカナ、半角カタカナへの変換を循環 || 無変換 ||
+
+=== 日本語と英語の交ぜ書き変換をする ===
+
+入力中（編集領域が表示されている状態）で設定したキーを押すと、入力中の文字列を確定せず、ひらがな入力モードと半角英数入力モード、半角カタカナモードと全角英数モードを反転できます。
+
+[UimPref UimPref]で「Ajax-IME キー設定4」→「高度な設定」→「[Ajax-IME] かな/英数入力モードを反転」にキーを設定してください。
+
+=== vi協調モード ===
+
+vi（クローン）でコマンドモードに戻る時、uimを直接入力モードに戻すことができます。
+
+[UimPref UimPref]で「Ajax-IME (高度)」→「特殊操作」→「vi協調モードを有効にする」のチェックボックスにチェックを入れてください。
+
+標準のキー設定は以下のようになっています。
+
+|| 動作 || キー ||
+|| vi協調モードでESCとして扱うキー || ESC、Ctrl+[ ||
+
+=== ファイル ===
+
+~/.uim.d/customs/custom-ajax-ime.scm:: [UimPref UimPref]の「Ajax-IME」ファイル。~/.uim.d/customs/custom-ajax-ime-advanced.scm:: [UimPref UimPref]の「Ajax-IME (高度)」ファイル。~/.uim.d/customs/custom-ajax-ime-keys{1,2,3,4}.scm:: [UimPref UimPref]の「Ajax-IME キー設定{1,2,3,4}」ファイル。
+
+== カスタマイズ可能な項目 ==
+
+=== Ajax-IMEの変数 ===
+
+|| 動作 || 変数名 || 指定できる値 || 標準値 ||
+||<|2> 文節区切りを表示 ||<|2> ajax-ime-show-segment-separator? || #t ||<|2> #f ||
+|| #f ||
+|| 文節区切り || ajax-ime-segment-separator || "文字列" || "|" ||
+||<|2> 候補ウィンドウを使用する ||<|2> ajax-ime-use-candidate-window? || #t ||<|2> #t ||
+|| #f ||
+|| 候補ウィンドウを表示するために変換キーを押す回数 || ajax-ime-candidate-op-count ||<|2> 数字 || 1 ||
+|| 候補ウィンドウに一度に表示する候補数 || ajax-ime-nr-candidate-max || 10 ||
+||<|2> 数字キーで候補を選択する ||<|2> ajax-ime-select-candidate-by-numeral-key? || #t ||<|2> #f ||
+|| #f ||
+||<|6> 標準の入力モード ||<|6> default-widget_ajax-ime_input_mode || 'action_ajax-ime_direct ||<|6> 'action_ajax-ime_direct ||
+|| 'action_ajax-ime_hiragana ||
+|| 'action_ajax-ime_katakana ||
+|| 'action_ajax-ime_halfkana ||
+|| 'action_ajax-ime_halfwidth_alnum ||
+|| 'action_ajax-ime_fullwidth_alnum ||
+||<|3> 標準のかな入力方式 ||<|3> default-widget_ajax-ime_kana_input_method || 'action_ajax-ime_roma ||<|3> 'action_ajax-ime_roma ||
+|| 'action_ajax-ime_kana ||
+|| 'action_ajax-ime_azik ||
+||<|2> Ajax IMEサーバを指定する ||<|2> ajax-ime-url || 'ajax-ime ||<|2> 'ajax-ime ||
+|| 'cha-ime ||
+||<|2> vi協調モードを有効にする ||<|2> ajax-ime-use-with-vi? || #t ||<|2> #f ||
+|| #f ||
+||<|2> 直接入力モード(off状態)時も入力モード切り換えキーを有効にする ||<|2> ajax-ime-use-mode-transition-keys-in-off-mode? || #t ||<|2> #f ||
+|| #f ||
+
+==== Ajax-IMEの変数の依存関係 ====
+
+  * ajax-ime-show-segment-separator? #f
+    * ajax-ime-segment-separator
+
+  * ajax-ime-use-candidate-window? #f
+    * ajax-ime-candidate-op-count
+    * ajax-ime-nr-candidate-max
+    * ajax-ime-select-candidate-by-numeral-key?
+
+=== Ajax-IMEキー設定の変数 ===
+
+|| 動作 || キー変数名 ||
+|| 次の文節 || ajax-ime-next-segment-key? ||
+|| 前の文節 || ajax-ime-prev-segment-key? ||
+|| 文節を伸ばす || ajax-ime-extend-segment-key? ||
+|| 文節を縮める || ajax-ime-shrink-segment-key? ||
+|| ひらがなに変換 || ajax-ime-transpose-as-hiragana-key? ||
+|| カタカナに変換 || ajax-ime-transpose-as-katakana-key? ||
+|| 半角カタカナに変換 || ajax-ime-transpose-as-halfkana-key? ||
+|| 半角英数字に変換 || ajax-ime-transpose-as-halfwidth-alnum-key? ||
+|| 全角英数字に変換 || ajax-ime-transpose-as-fullwidth-alnum-key? ||
+|| かな/カナ反転確定 || ajax-ime-commit-as-opposite-kana-key? ||
+|| オン || ajax-ime-on-key? ||
+|| オフ || ajax-ime-off-key? ||
+|| 変換開始 || ajax-ime-begin-conv-key? ||
+|| 確定 || ajax-ime-commit-key? ||
+|| キャンセル || ajax-ime-cancel-key? ||
+|| 次候補 || ajax-ime-next-candidate-key? ||
+|| 前候補 || ajax-ime-prev-candidate-key? ||
+|| 候補ウィンドウの次ページ || ajax-ime-next-page-key? ||
+|| 候補ウィンドウの前ページ || ajax-ime-prev-page-key? ||
+|| 編集領域の先頭 || ajax-ime-beginning-of-preedit-key? ||
+|| 編集領域の末尾 || ajax-ime-end-of-preedit-key? ||
+|| カーソル以降を消去 || ajax-ime-kill-key? ||
+|| カーソル以前を消去 || ajax-ime-kill-backward-key? ||
+|| バックスペース || ajax-ime-backspace-key? ||
+|| デリート || ajax-ime-delete-key? ||
+|| 左に移動 || ajax-ime-go-left-key? ||
+|| 右に移動 || ajax-ime-go-right-key? ||
+|| vi協調モードでESCとして扱うキー || ajax-ime-vi-escape-key? ||
+|| ひらがな入力モード || ajax-ime-hiragana-key? ||
+|| カタカナ入力モード || ajax-ime-katakana-key? ||
+|| 半角カタカナ入力モード || ajax-ime-halfkana-key? ||
+|| 半角英数字入力モード || ajax-ime-halfwidth-alnum-key? ||
+|| 全角英数字入力モード || ajax-ime-fullwidth-alnum-key? ||
+|| ひらがな/カタカナ入力モードを反転 || ajax-ime-kana-toggle-key? ||
+|| かな/英数入力モードを反転 || ajax-ime-alkana-toggle-key? ||
+
+== 注意 ==
+
+学習機能と文節の伸縮機能はありません。
+

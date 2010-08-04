@@ -1,0 +1,209 @@
+= UimAnthy =
+
+
+== これは何？ ==
+
+uimの[http://anthy.sourceforge.jp/|Anthy]モジュール。 連文節かな漢字変換エンジンAnthyで入力/変換などを行なう場合に使う。
+
+uim-anthyのUTF-8版は標準では含まれません。 UTF-8に対応したAnthy（8622以降）をインストールし、'''--with-anthy-utf8'''をつけてuimをコンパイルする必要があります。
+
+== 使い方 ==
+
+  1. [UimImSwitcher UimImSwitcher]や[UimToolbar UimToolbar]からAnthyに切り換えてください。
+    1. Anthyが見つからない場合は[UimPref UimPref]を起動してください。
+      * [UimToolbar UimToolbar]の設定アイコンをクリック
+      * ターミナルエミュレータなどでuim-pref-gtk（もしくはuim-pref-qt）を実行
+    1. 起動したら、「全体設定」→「入力方式の利用準備」→「使用可能にする入力方式」の「編集...」ボタンを押して、左の有効アイテムにAnthyを追加してください。
+      * そこにもAnthyが見つからない場合、uim-anthyはインストールされていないのかもしれません。確認してみてください。
+    1. 追加が完了したら、Anthyで入力したいアプリケーションを再起動してください。
+  1. [UimImSwitcher UimImSwitcher]や[UimToolbar UimToolbar]による切り換えは一時的なものです。永続的な変更を望むなら[UimPref UimPref]で設定する必要があります。
+  1. [UimPref UimPref]を起動したら、「全体設定」→「入力方式の利用準備」→「標準の入力方式を指定」のチェックボックスにチェックを入れます。
+  1. そのすぐ下の「標準の入力方式」に、Anthyをセットしてください。
+
+=== サポートしている入力モード ===
+
+  * 直接(無変換)入力モード
+  * ひらがな入力モード
+  * カタカナ入力モード
+  * 半角カタカナ入力モード
+  * 半角英数入力モード
+  * 全角英数入力モード
+
+=== サポートしているかな入力方式 ===
+
+  * [RomaKanaTable ローマ字入力方式]
+  * [AZIKTable AZIK拡張ローマ字入力方式]
+  * かな入力方式
+
+=== 標準で指定されているキー設定 ===
+
+|| 動作 || キー ||
+|| オン/オフ || 全角/半角、Shift+Space ||
+|| ひらがな入力モードへ || Shift+F6 ||
+|| カタカナ入力モードへ || Shift+F7 ||
+|| 半角カタカナ入力モードへ || Shift+F8 ||
+|| 全角英数入力モードへ || Shift+F9 ||
+|| 半角英数入力モードへ || Shift+F10 ||
+|| カーソルを右へ移動 || →、Ctrl+f ||
+|| カーソルを左へ移動 || ←、Ctrl+b ||
+|| 編集領域の先頭へ移動 || Home、Ctrl+a ||
+|| 編集領域の末尾へ移動 || End、Ctrl+e ||
+|| カーソルより右の文字をすべて削除 || Ctrl+k ||
+|| カーソルより左の文字をすべて削除 || Ctrl+u ||
+|| カーソルの右の一字を削除 || Delete、Ctrl+d ||
+|| カーソルの左の一字を削除 || BS、Ctrl+h ||
+|| 変換開始 || Space ||
+|| 文節を伸ばす || Shift+→、Ctrl+o ||
+|| 文節を縮める || Shift+←、Ctrl+i ||
+|| 次の変換候補へ移動 || Space、↓、Ctrl+n ||
+|| 前の変換候補へ移動 || ↑、Ctrl+p ||
+|| 候補ウィンドウを次のページへ移動 || PgDn[c=edit;p=PgDn|?] ||
+|| 候補ウィンドウを次のページへ移動 || PgUp[c=edit;p=PgUp|?] ||
+|| 次の文節へ移動 || →、Ctrl+f ||
+|| 前の文節へ移動 || ←、Ctrl+b ||
+|| 変換確定 || Return、Ctrl+m、Ctrl+j ||
+|| キャンセル || Esc、Ctrl+[、Ctrl+g ||
+|| ひらがなへ変換 || F6 ||
+|| カタカナへ変換 || F7 ||
+|| 半角カタカナへ変換 || F8 ||
+|| 全角英数字へ変換、大文字小文字を反転 || F9 ||
+|| 半角英数字へ変換、大文字小文字を反転 || F10 ||
+|| ひらがな、カタカナ、半角カタカナへの変換を循環 || 無変換 ||
+
+=== 日本語と英語の交ぜ書き変換をする ===
+
+入力中（編集領域が表示されている状態）で設定したキーを押すと、入力中の文字列を確定せず、ひらがな入力モードと半角英数入力モード、半角カタカナモードと全角英数モードを反転できます。
+
+[UimPref UimPref]で「Anthy キー設定4」→「高度な設定」→「[Anthy] かな/英数入力モードを反転」にキーを設定してください。
+
+=== 予測入力をする ===
+
+[UimPref UimPref]で「Anthy (高度)」→「予測入力」→「予測入力を有効にする」のチェックボックスにチェックを入れてください。
+
+標準のキー設定は以下のようになっています。
+
+|| 動作 || キー ||
+|| 次の予測候補へ || Tab、↓、Ctrl+n、Ctrl+i ||
+|| 前の予測候補へ || ↑、Ctrl+p ||
+
+=== vi協調モード ===
+
+vi（クローン）でコマンドモードに戻る時、uimを直接入力モードに戻すことができます。
+
+[UimPref UimPref]で「Anthy (高度)」→「特殊操作」→「vi協調モードを有効にする」のチェックボックスにチェックを入れてください。
+
+標準のキー設定は以下のようになっています。
+
+|| 動作 || キー ||
+|| vi協調モードでESCとして扱うキー || ESC、Ctrl+[ ||
+
+=== ファイル ===
+
+~/.uim.d/customs/custom-anthy.scm:: [UimPref UimPref]の「Antny」ファイル。~/.uim.d/customs/custom-anthy-advanced.scm:: [UimPref UimPref]の「Anthy (高度)」ファイル。~/.uim.d/customs/custom-anthy-keys{1,2,3,4}.scm:: [UimPref UimPref]の「Anthy キー設定{1,2,3,4}」ファイル。~/.uim.d/customs/custom-anthy-utf8.scm:: [UimPref UimPref]の「Anthy (UTF-8)」ファイル。
+
+=== 環境変数 ===
+
+ANTHY_HISTORY_FILE:: 絶対パスでファイル名を指定すると、そのファイルに変換履歴が保存される。ANTHY_ENABLE_DEBUG_PRINT:: デバッグプリントを有効にする。ANTHY_DISABLE_DEBUG_PRINTが指定されていると無視されます。ANTHY_SPLITTER_PRINT:: デバッグプリントの構造体を指定する。'''w'''はwordlist、'''m'''はmetaword、'''l'''はlatticeのnode、'''i'''は自立語のマッチした品詞、'''c'''は?を表示。ANTHY_DISABLE_DEBUG_PRINT:: デバッグプリントを無効にする。
+
+== カスタマイズ可能な項目 ==
+
+=== Anthyの変数 ===
+
+|| 動作 || 変数名 || 指定できる値 || 標準値 ||
+||<|2> 文節区切りを表示 ||<|2> anthy-show-segment-separator? || #t ||<|2> #f ||
+|| #f ||
+|| 文節区切り || anthy-segment-separator || "文字列" || "|" ||
+||<|2> 候補ウィンドウを使用する ||<|2> anthy-use-candidate-window? || #t ||<|2> #t ||
+|| #f ||
+|| 候補ウィンドウを表示するために変換キーを押す回数 || anthy-candidate-op-count ||<|2> 数字 || 1 ||
+|| 候補ウィンドウに一度に表示する候補数 || anthy-nr-candidate-max || 10 ||
+||<|2> 数字キーで候補を選択する ||<|2> anthy-select-candidate-by-numeral-key? || #t ||<|2> #f ||
+|| #f ||
+||<|6> 標準の入力モード ||<|6> default-widget_anthy_input_mode || 'action_anthy_direct ||<|6> 'action_anthy_direct ||
+|| 'action_anthy_hiragana ||
+|| 'action_anthy_katakana ||
+|| 'action_anthy_halfkana ||
+|| 'action_anthy_halfwidth_alnum ||
+|| 'action_anthy_fullwidth_alnum ||
+||<|3> 標準のかな入力方式 ||<|3> default-widget_anthy_kana_input_method || 'action_anthy_roma ||<|3> 'action_anthy_roma ||
+|| 'action_anthy_kana ||
+|| 'action_anthy_azik ||
+||<|2> 予測入力を有効にする ||<|2> anthy-use-prediction? || #t ||<|2> #f ||
+|| #f ||
+||<|2> 数字キーで予測候補を選択する ||<|2> anthy-select-prediction-by-numeral-key? || #t ||<|2> #f ||
+|| #f ||
+||<|2> 編集領域内に選んだ予測候補を表示する ||<|2> anthy-use-implicit-commit-prediction? || #t ||<|2> #t ||
+|| #f ||
+||<|2> vi協調モードを有効にする ||<|2> anthy-use-with-vi? || #t ||<|2> #f ||
+|| #f ||
+||<|2> 直接入力モード(off状態)時も入力モード切り換えキーを有効にする ||<|2> anthy-use-mode-transition-keys-in-off-mode? || #t ||<|2> #f ||
+|| #f ||
+
+==== Anthyの変数の依存関係 ====
+
+  * anthy-show-segment-separator? #f
+    * anthy-segment-separator
+
+  * anthy-use-candidate-window? #f
+    * anthy-candidate-op-count
+    * anthy-nr-candidate-max
+    * anthy-select-candidate-by-numeral-key?
+
+  * anthy-use-prediction? #f
+    * anthy-select-prediction-by-numeral-key?
+    * anthy-use-implicit-commit-prediction?
+
+=== Anthy (UTF-8)の変数 ===
+
+|| 動作 || 変数名 || 指定できる値 || 標準値 ||
+||<|6> 標準の入力モード ||<|6> default-widget_anthy_utf8_input_mode || 'action_anthy_utf8_direct ||<|6> 'action_anthy_utf8_direct ||
+|| 'action_anthy_utf8_hiragana ||
+|| 'action_anthy_utf8_katakana ||
+|| 'action_anthy_utf8_halfkana ||
+|| 'action_anthy_utf8_halfwidth_alnum ||
+|| 'action_anthy_utf8_fullwidth_alnum ||
+||<|3> 標準のかな入力方式 ||<|3> default-widget_anthy_utf8_kana_input_method || 'action_anthy_utf8_roma ||<|3> 'action_anthy_utf8_roma ||
+|| 'action_anthy_utf8_kana ||
+|| 'action_anthy_utf8_azik ||
+
+=== Anthyキー設定の変数 ===
+
+|| 動作 || キー変数名 ||
+|| 次文節 || anthy-next-segment-key? ||
+|| 前文節 || anthy-prev-segment-key? ||
+|| 文節を伸ばす || anthy-extend-segment-key? ||
+|| 文節を縮める || anthy-shrink-segment-key? ||
+|| ひらがなに変換 || anthy-transpose-as-hiragana-key? ||
+|| カタカナに変換 || anthy-transpose-as-katakana-key? ||
+|| 半角カタカナに変換 || anthy-transpose-as-halfkana-key? ||
+|| 半角英数字に変換 || anthy-transpose-as-halfwidth-alnum-key? ||
+|| 全角英数字に変換 || anthy-transpose-as-fullwidth-alnum-key? ||
+|| かな/カナ反転確定 || anthy-commit-as-opposite-kana-key? ||
+|| オン || anthy-on-key? ||
+|| オフ || anthy-off-key? ||
+|| 変換開始 || anthy-begin-conv-key? ||
+|| 確定 || anthy-commit-key ||
+|| キャンセル || anthy-cancel-key? ||
+|| 次候補 || anthy-next-candidate-key? ||
+|| 前候補 || anthy-prev-candidate-key? ||
+|| 候補ウィンドウの次ページ || anthy-next-page-key? ||
+|| 候補ウィンドウの前ページ || anthy-prev-page-key? ||
+|| 編集領域の先頭 || anthy-beginning-of-preedit-key? ||
+|| 編集領域の末尾 || anthy-end-of-preedit-key? ||
+|| カーソル以降を消去 || anthy-kill-key? ||
+|| カーソル以前を消去 || anthy-kill-backward-key? ||
+|| バックスペース || anthy-backspace-key? ||
+|| デリート || anthy-delete-key? ||
+|| 左に移動 || anthy-go-left-key? ||
+|| 右に移動 || anthy-go-right-key? ||
+|| vi協調モードでESCとして扱うキー || anthy-vi-escape-key? ||
+|| ひらがな入力モード || anthy-hiragana-key? ||
+|| カタカナ入力モード || anthy-katakana-key? ||
+|| 半角カタカナ入力モード || anthy-halfkana-key? ||
+|| 半角英数入力モード || anthy-halfwidth-alnum-key? ||
+|| 全角英数入力モード || anthy-fullwidth-alnum-key? ||
+|| ひらがな/カタカナ入力モードを反転 || anthy-kana-toggle-key? ||
+|| かな/英数入力モードを反転 || anthy-alkana-toggle-key? ||
+|| 次予測候補 || anthy-next-prediction-key? ||
+|| 前予測候補 || anthy-prev-prediction-key? ||
+

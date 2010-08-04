@@ -1,0 +1,13 @@
+= UserDocument =
+
+ユーザ文書一覧
+
+  * [InstallUim InstallUim]
+  * [UsageUim UsageUim]
+  * [CustomizeUim CustomizeUim]
+  * [GlossaryUim GlossaryUim]
+  * [FaqUim FaqUim]
+
+  * [http://code.google.com/p/uim/wiki/OfficialUserDocument Official user document]
+  * [http://code.google.com/p/uim-doc-ja/ uim-doc-ja]
+  * [http://en.wikibooks.org/wiki/Uim Uim - Wikibooks]

@@ -1,0 +1,118 @@
+= UimElatin =
+
+<wiki:toc max_depth="1" />
+
+== これは何？ ==
+
+Emacsスタイルのラテン文字入力方式。
+
+== 使い方 ==
+
+  1. [UimImSwitcher UimImSwitcher]や[UimToolbar UimToolbar]からELatinに切り換えてください。
+    1. ELatinが見つからない場合は[UimPref UimPref]を起動してください。
+      * [UimToolbar UimToolbar]の設定アイコンをクリック
+      * ターミナルエミュレータなどでuim-pref-gtk（もしくはuim-pref-qt）を実行
+    1. 起動したら、「全体設定」→「入力方式の利用準備」→「使用可能にする入力方式」の「編集...」ボタンを押して、左の有効アイテムにELatinを追加してください。
+      * そこにもELatinが見つからない場合、uim-elatinはインストールされていないのかもしれません。確認してみてください。
+    1. 追加が完了したら、ELatinで入力したいアプリケーションを再起動してください。
+  1. [UimImSwitcher UimImSwitcher]や[UimToolbar UimToolbar]による切り換えは一時的なものです。永続的な変更を望むなら[UimPref UimPref]で設定する必要があります。
+  1. [UimPref UimPref]を起動したら、「全体設定」→「入力方式の利用準備」→「標準の入力方式を指定」のチェックボックスにチェックを入れます。
+  1. そのすぐ下の「標準の入力方式」に、ELatinをセットしてください。
+
+=== 標準で指定されているキー設定 ===
+
+|| 動作 || キー ||
+|| オン/オフ || Ctrl+\ ||
+|| カーソルの左の一字を削除 || BS、Ctrl+h ||
+
+=== ファイル ===
+
+~/.uim.d/custom/custom-elatin.scm:: [UimPref|UimPref]の「ELatin」ファイル。
+
+== カスタマイズ可能な項目 ==
+
+=== Elatinの変数 ===
+
+|| 動作 || 変数名 || 指定できる値 || 標準値 ||
+||<|72> ラテン文字のキーボード配列 ||<|72> elatin-rules || 'elatin-rules-latin-prefix ||<|72> 'elatin-rules-latin-prefix ||
+|| 'elatin-rules-british ||
+|| 'elatin-rules-catalan-prefix ||
+|| 'elatin-rules-danish-postfix ||
+|| 'elatin-rules-danish-alt-postfix ||
+|| 'elatin-rules-danish-keyboard ||
+|| 'elatin-rules-dutch ||
+|| 'elatin-rules-english-dvorak ||
+|| 'elatin-rules-esperanto-prefix ||
+|| 'elatin-rules-esperanto-postfix ||
+|| 'elatin-rules-esperanto-alt-postfix ||
+|| 'elatin-rules-finnish-postfix ||
+|| 'elatin-rules-finnish-alt-postfix ||
+|| 'elatin-rules-finnish-keyboard ||
+|| 'elatin-rules-french-prefix ||
+|| 'elatin-rules-french-postfix ||
+|| 'elatin-rules-french-alt-postfix ||
+|| 'elatin-rules-french-keyboard ||
+|| 'elatin-rules-french-azerty ||
+|| 'elatin-rules-german-prefix ||
+|| 'elatin-rules-german-postfix ||
+|| 'elatin-rules-german-alt-postfix ||
+|| 'elatin-rules-german ||
+|| 'elatin-rules-icelandic-postfix ||
+|| 'elatin-rules-icelandic-alt-postfix ||
+|| 'elatin-rules-icelandic-keyboard ||
+|| 'elatin-rules-irish-prefix ||
+|| 'elatin-rules-italian-postfix ||
+|| 'elatin-rules-italian-alt-postfix ||
+|| 'elatin-rules-italian-keyboard ||
+|| 'elatin-rules-latin-prefix ||
+|| 'elatin-rules-latin-postfix ||
+|| 'elatin-rules-latin-alt-postfix ||
+|| 'elatin-rules-latin-1-prefix ||
+|| 'elatin-rules-latin-1-postfix ||
+|| 'elatin-rules-latin-1-alt-postfix ||
+|| 'elatin-rules-latin-2-prefix ||
+|| 'elatin-rules-latin-2-postfix ||
+|| 'elatin-rules-latin-2-alt-postfix ||
+|| 'elatin-rules-latin-3-prefix ||
+|| 'elatin-rules-latin-3-postfix ||
+|| 'elatin-rules-latin-3-alt-postfix ||
+|| 'elatin-rules-latin-4-postfix ||
+|| 'elatin-rules-latin-4-alt-postfix ||
+|| 'elatin-rules-latin-5-postfix ||
+|| 'elatin-rules-latin-5-alt-postfix ||
+|| 'elatin-rules-latin-8-prefix ||
+|| 'elatin-rules-latin-9-prefix ||
+|| 'elatin-rules-latvian-keyboard ||
+|| 'elatin-rules-lithuanian-keyboard ||
+|| 'elatin-rules-lithuanian-numeric ||
+|| 'elatin-rules-norwegian-postfix ||
+|| 'elatin-rules-norwegian-alt-postfix ||
+|| 'elatin-rules-norwegian-keyboard ||
+|| 'elatin-rules-polish-slash ||
+|| 'elatin-rules-portuguese-prefix ||
+|| 'elatin-rules-romanian-prefix ||
+|| 'elatin-rules-romanian-alt-prefix ||
+|| 'elatin-rules-scandinavian-postfix ||
+|| 'elatin-rules-scandinavian-alt-postfix ||
+|| 'elatin-rules-slovenian ||
+|| 'elatin-rules-spanish-prefix ||
+|| 'elatin-rules-spanish-postfix ||
+|| 'elatin-rules-spanish-alt-postfix ||
+|| 'elatin-rules-spanish-keyboard ||
+|| 'elatin-rules-swedish-postfix ||
+|| 'elatin-rules-swedish-alt-postfix ||
+|| 'elatin-rules-swedish-keyboard ||
+|| 'elatin-rules-turkish-postfix ||
+|| 'elatin-rules-turkish-alt-postfix ||
+|| 'elatin-rules-turkish-latin-3-postfix ||
+|| 'elatin-rules-turkish-latin-3-alt-postfix ||
+||<|2> ESCキーでラテン文字入力モードをオフにする (viユーザ向け) ||<|2> elatin-esc-turns-off? || #t ||<|2> #f ||
+|| #f ||
+
+=== ELatinキー設定の変数 ===
+
+|| 動作 || キー変数名 ||
+|| オン || elatin-on-key? ||
+|| オフ || elatin-off-key? ||
+|| バックスペース || elatin-backspace-key? ||
+

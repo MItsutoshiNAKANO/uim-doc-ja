@@ -1,0 +1,234 @@
+= UimSkk =
+
+== これは何？ ==
+
+[http://openlab.jp/skk/index-j.html SKK]入力方式のuim版。
+
+== 使い方 ==
+
+  1. あらかじめ[http://openlab.ring.gr.jp/skk/dic/ SKK辞書]などを入手しておいてください。漢字変換に必要ですが、これはuimに含まれていません。
+  1. [UimPref UimPref]を起動してください。
+    * [UimToolbar UimToolbar]の設定アイコンをクリック
+    * ターミナルエミュレータなどでuim-pref-gtk（もしくはuim-pref-qt）を実行
+  1. 「SKK 辞書」→「辞書ファイル」→「システム辞書ファイル」の「選択...」ボタンを押して、辞書ファイルを指定します。
+  1. [UimImSwitcher UimImSwitcher]や[UimToolbar UimToolbar]からSKKに切り換えてください。
+    1. SKKが見つからない場合は[UimPref UimPref]を起動してください。
+    1. 起動したら、「全体設定」→「入力方式の利用準備」→「使用可能にする入力方式」の「編集...」ボタンを押して、左の有効アイテムにSKKを追加してください。
+      * そこにもSKKが見つからない場合、uim-skkはインストールされていないのかもしれません。確認してみてください。
+    1. 追加が完了したら、SKKで入力したいアプリケーションを再起動してください。
+  1. [UimImSwitcher UimImSwitcher]や[UimToolbar UimToolbar]による切り換えは一時的なものです。永続的な変更を望むなら[UimPref UimPref]で設定する必要があります。
+  1. [UimPref UimPref]を起動したら、「全体設定」→「入力方式の利用準備」→「標準の入力方式を指定」のチェックボックスにチェックを入れます。
+  1. そのすぐ下の「標準の入力方式」に、SKKをセットしてください。
+
+=== サポートしている入力モード ===
+
+  * 直接入力モード
+  * ひらがな入力モード
+  * カタカナ入力モード
+  * 半角カタカナ入力モード
+  * 全角英数字入力モード
+
+=== サポートしているかな入力方式 ===
+
+  * [RomaKanaTable ローマ字入力方式]
+  * [AZIKTable AZIK拡張ローマ字入力方式]
+
+=== 標準で指定されているキー設定 ===
+
+|| 動作 || キー ||
+|| 直接/全角英数字入力モードからひらがな入力モードへ移行 || 全角/半角、Shift+Space、Ctrl+j ||
+|| ひらがな/カタカナ/半角カタカナ入力モードから直接入力モードへ移行 || 全角/半角、Shift+Space、l ||
+|| ひらがな/カタカナ入力モードを反転移行 || q ||
+|| ひらがな/カタカナ入力モードから半角カタカナ入力モードへ移行 || Ctrl+q ||
+|| 半角カタカナ入力モードからひらがな入力モードへ移行 || q ||
+|| ひらがな/カタカナ/半角カタカナ入力モードから全角英数字入力モードへ移行 || L ||
+|| ひらがな/カタカナ/半角カタカナ入力モードから漢字入力モードへ移行 || Q ||
+|| カーソルを右へ移動 || →、Ctrl+f ||
+|| カーソルを左へ移動 || ←、Ctrl+b ||
+|| カーソルの左の一字を削除 || BS、Ctrl+h ||
+|| 変換開始 || Space ||
+|| 次の候補へ移動 || Space、↓、Ctrl+n ||
+|| 前の候補へ移動 || ↑、Ctrl+p、x ||
+|| 次の変換候補ページへ移動 || Space、↓、Ctrl+n、PgDn[c=edit;p=PgDn|?] ||
+|| 前の変換候補ページへ移動 || ↑、Ctrl+p、x、PgUp[c=edit;p=PgUp|?] ||
+|| 変換確定 || Ctrl+m、Ctrl+j ||
+|| 変換確定+改行 || Return ||
+|| 候補ウィンドウから変換候補を選択し確定 || a、s、d、f、g、h、j、k、l ||
+|| キャンセル || Esc、Ctrl+[、Ctrl+g ||
+|| ひらがな/カタカナを反転変換し確定 || q ||
+|| ひらがな/カタカナを半角カタカナとして確定 || Ctrl+q ||
+|| ひらがな/カタカナ/半角カタカナ入力モードでアルファベット変換開始 || / ||
+|| アルファベット変換中に全角英数字として確定 || Ctrl+q ||
+|| アルファベット変換中に大文字/小文字を反転変換し確定 || Ctrl+u ||
+|| 編集領域を補完 || Tab、Ctrl+i、Alt+Tab、Ctrl+Alt+i ||
+|| 次の補完候補へ移動 || .、Tab、Ctrl+i、Alt+Tab、Ctrl+Alt+i ||
+|| 前の補完候補へ移動 || , ||
+|| 補完候補から新規に補完 || Alt+Tab、Ctrl+Alt+i ||
+|| 接頭辞/接尾辞入力 || &gt;、&lt;、? ||
+|| 個人辞書中の単語を削除 || X ||
+
+=== SKKサーバを利用する ===
+
+localhost以外のSKKサーバを利用するには、環境変数'''SKKSERVER'''にホスト名かIPアドレスを指定してください。
+
+[UimPref UimPref]で「SKK辞書」→「辞書ファイルの代わりにSKKサーバを使用」のチェックボックスにチェックを入れてください。
+
+=== 自動ダイナミックコンプリーションを使う ===
+
+補完の第一候補をインクリメンタルに表示します。
+
+[UimPref UimPref]で「SKK (高度)」→「動的補完を有効にする」のチェックボックスにチェックを入れてください。
+
+標準のキー設定は以下のようになっています。
+
+|| 動作 || キー ||
+|| 動的補完された語を変換開始 || Alt+Space ||
+|| 動的補完された語を変換し確定 || Ctrl+Alt+j ||
+
+=== vi協調モード ===
+
+vi（クローン）でコマンドモードに戻る時、uimを直接入力モードに戻すことができます。
+
+[UimPref|UimPref]で「SKK (高度)」→「特殊操作」→「vi協調モードを有効にする」のチェックボックスにチェックを入れてください。
+
+標準のキー設定は以下のようになっています。
+
+|| 動作 || キー ||
+|| vi協調モードでESCとして扱うキー || ESC、Ctrl+[ ||
+
+=== 改行をネイティブキーイベントの代わりにASCII文字列として確定する ===
+
+詳しくは[http://lists.sourceforge.jp/mailman/archives/anthy-dev/2004-March/000690.html|Anthy-dev 691]を。
+
+=== ファイル ===
+
+~/.uim.d/customs/custom-skk.scm:: [UimPref|UimPref]の「SKK」ファイル。~/.uim.d/customs/custom-skk-dict.scm:: [UimPref|UimPref]の「SKK 辞書」ファイル。~/.uim.d/customs/custom-skk-advanced.scm:: [UimPref|UimPref]の「SKK (高度)」ファイル。~/.uim.d/customs/custom-skk-keys{1,2,3}.scm:: [UimPref|UimPref]の「SKK キー設定{1,2,3}」ファイル。~/.skk-uim-jisyo:: 個人辞書(uim専用)ファイル。~/.skk-uim-jisyo.lock:: 個人辞書(uim専用)のロックファイル。
+
+=== 環境変数 ===
+
+SKKSERVER
+
+== カスタマイズ可能な項目 ==
+
+=== SKKの変数 ===
+
+|| 動作 || 変数名 || 指定できる値 || 標準値 ||
+||<|2> 候補ウィンドウを使用する ||<|2> skk-use-candidate-window? || #t ||<|2> #t ||
+|| #f ||
+||<|2> 見出し表示のキーで候補を確定する ||<|2> skk-commit-candidate-by-label-key? || #t ||<|2> #t ||
+|| #f ||
+||<|2> 候補選択のスタイル ||<|2> skk-candidate-selection-style || 'ddskk-like ||<|2> 'ddskk-like ||
+|| 'uim ||
+||<|2> 候補ウィンドウの挙動を手動で設定する ||<|2> skk-use-manual-candwin-setting? || #t ||<|2> #f ||
+|| #f ||
+|| 候補ウィンドウを表示するために変換キーを押す回数 || skk-candidate-op-count ||<|2> 数字 || 5 ||
+|| 候補ウィンドウに一度に表示する候補数 || skk-nr-candidate-max || 7 ||
+||<|5> 標準の入力モード ||<|5> default-widget_skk_input_mode || 'action_skk_latin ||<|5> 'action_skk_latin ||
+|| 'action_skk_hiragana ||
+|| 'action_skk_katakana ||
+|| 'action_skk_hankana ||
+|| 'action_skk_wide_latin ||
+||<|2> 標準のかな入力方式 ||<|2> default-widget_skk_kana_input_method || 'action_skk_roma ||<|2> 'action_skk_roma ||
+|| 'action_skk_azik ||
+||<|2> 辞書ファイルの代わりにSKKサーバを使用 ||<|2> skk-use-skkserv? || #t ||<|2> #f ||
+|| #f ||
+||<|2> 環境変数SKKSERVERを使用 ||<|2> skk-skkserv-use-env? || #t ||<|2> #t ||
+|| #f ||
+|| SKKサーバのホスト名 || skk-skkserv-hostname || "文字列" || "localhost" ||
+|| SKKサーバのポート番号 || skk-skkserv-portnum || 数字 || 1178 ||
+||<|3> SKKサーバのアドレスファミリ ||<|3> skk-skkserv-address-family || 'unspecified ||<|3> 'unspecified ||
+|| 'inet ||
+|| 'inet6 ||
+|| システム辞書ファイル || skk-dic-file-name ||<|3> "文字列" || /usr/local/share/skk/SKK-JISYO.L" ||
+|| 個人辞書ファイル || skk-personal-dic-filename || "$HOME/.skk-jisyo" ||
+|| 個人辞書ファイル (uim専用) || skk-uim-personal-dic-filename || "$HOME/.skk-uim-jisyo" ||
+||<|2> ビジュアルスタイル ||<|2> skk-style || 'skk-style-ddskk-like ||<|2> 'skk-style-ddskk-like ||
+|| 'skk-style-uim ||
+||<|2> 再帰学習を使用する ||<|2> skk-use-recursive-learning? || #t ||<|2> #t ||
+|| #f ||
+||<|2> 数値変換を使用する ||<|2> skk-use-numeric-conversion? || #t ||<|2> #t ||
+|| #f ||
+||<|2> 句読点での自動変換を有効にする ||<|2> skk-auto-start-henkan? || #t ||<|2> #t ||
+|| #f ||
+||<|2> 動的補完を有効にする ||<|2> skk-dcomp-activate? || #t ||<|2> #f ||
+|| #f ||
+||<|2> アルファベット変換時の補完にlookコマンドを使用 ||<|2> skk-use-look? || #t ||<|2> #f ||
+|| #f ||
+|| UNIX look辞書ファイル || skk-look-dict || "文字列" || "/usr/share/dict/words" ||
+||<|2> 候補の注釈を表示する ||<|2> skk-show-annotation? || #t ||<|2> #t ||
+|| #f ||
+||<|2> 編集領域内にも注釈を表示する ||<|2> skk-show-annotation-in-preedit? || #t ||<|2> #f ||
+|| #f ||
+||<|2> vi協調モードを有効にする ||<|2> skk-use-with-vi? || #t ||<|2> #f ||
+|| #f ||
+||<|2> Enterキーを単に確定のために使う (egg風の操作) ||<|2> skk-egg-like-newline? || #t ||<|2> #f ||
+|| #f ||
+||<|2> 改行をネイティブキーイベントの代わりにASCII文字列として確定する ||<|2> skk-commit-newline-explicitly? || #t ||<|2> #f ||
+|| #f ||
+
+==== SKKの変数の依存関係 ====
+
+  * skk-use-candidate-window? #f
+    * skk-commit-candidate-by-label-key?
+    * skk-candidate-selection-style
+    * skk-use-manual-candwin-setting?
+
+  * skk-candidate-selection-style 'uim 'ddskk
+    * skk-candidate-op-count
+    * skk-nr-candidate-max
+
+  * skk-use-manual-candwin-setting? #f
+    * skk-candidate-op-count
+    * skk-nr-candidate-max
+
+  * skk-use-skkserv? #f
+    * skk-skkserv-use-env?
+    * skk-skkserv-portnum
+    * skk-skkserv-address-family
+
+  * skk-use-skkserv? #t
+    * skk-dic-file-name
+
+  * skk-skkserv-use-env? #t
+    * skk-skkserv-hostname
+
+  * skk-use-look? #f
+    * skk-look-dict
+
+  * skk-show-annotation? #f
+    * skk-show-annotation-in-preedit?
+
+=== SKKキー設定の変数 ===
+
+|| 動作 || キー変数名 ||
+|| オン || skk-on-key? ||
+|| 半角英数入力モード || skk-latin-key? ||
+|| 全角英数入力モード || skk-wide-latin-key? ||
+|| 漢字入力モード || skk-kanji-mode-key? ||
+|| 半角カタカナ入力モード || skk-hankaku-kana-key? ||
+|| ひらがな/カタカナ入力モードを反転 || skk-kana-toggle-key? ||
+|| 変換開始 || skk-begin-conv-key? ||
+|| 確定 || skk-commit-key? ||
+|| キャンセル || skk-cancel-key? ||
+|| リターン || skk-return-key? ||
+|| 接頭辞、接尾辞の入力 || skk-special-midashi-key? ||
+|| vi協調モードでESCとして扱うキー || skk-vi-escape-key? ||
+|| 編集領域がない時に何もせずに消費するキー || skk-state-direct-no-preedit-nop-key? ||
+|| 個人辞書中の単語を削除 || skk-purge-candidate-key? ||
+|| アルファベット変換開始 || skk-latin-conv-key? ||
+|| 全角英数字として確定 || skk-conv-wide-latin-key? ||
+|| 大文字/小文字を反転して確定 || skk-conv-opposite-case-key? ||
+|| 補完開始 || skk-begin-completion-key? ||
+|| 次の補完候補 || skk-next-completion-key? ||
+|| 前の補完候補 || skk-prev-completion-key? ||
+|| 現在の補完候補から新規に補完 || skk-new-completion-from-current-comp-key? ||
+|| 動的補完された語を変換開始 || skk-begin-conv-with-completion-key? ||
+|| 動的補完された語を変換、確定 || skk-commit-with-conv-completion-key? ||
+|| 次候補 || skk-next-candidate-key? ||
+|| 前候補 || skk-prev-candidate-key? ||
+|| 候補ウィンドウの次のページ || skk-next-page-key? ||
+|| 候補ウィンドウの前のページ || skk-prev-page-key? ||
+|| バックスペース || skk-backspace-key? ||
+|| 左に移動 || skk-go-left-key? ||
+|| 右に移動 || skk-go-right-key? ||
+

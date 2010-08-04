@@ -1,0 +1,111 @@
+= UimToolbar =
+
+== これは何？ ==
+
+http://uim.freedesktop.org/img/uim-toolbars.pnghttp://uim.freedesktop.org/img/toolbar-applet.png
+
+使用中の入力方式のモード表示/切り換えや各種ツールを起動するバー。 右クリックメニューから、各種ツールを起動する事ができます。
+
+  * スタンドアローンタイプ
+    * uim-toolbar-gtk
+    * uim-toolbar-qt
+    * uim-toolbar-qt4（1.5.7以降）
+  * システムトレイタイプ
+    * uim-toolbar-gtk-systray
+  * パネルアプレットタイプ
+    * uim-applet-gnome
+    * uim-applet-kde（1.3.0以降）
+    * uim-applet-kde4（1.5.7以降）
+
+なおuim-toolbar-qt、uim-applet-kde、uim-toolbar-qt4とuim-applet-kde4は標準では含まれません。uim-toolbar-qtとuim-applet-kdeは'''--with-qt'''、uim-toolbar-qt4とuim-applet-kde4は'''--with-qt4'''をつけてuimをコンパイルする必要があります。
+
+== 使い方 ==
+
+スタンドアローンタイプはターミナルエミュレータなどからuim-toolbar-gtk、uim-toolbar-qtもしくはuim-toolbar-qt4を起動します。
+
+{{{
+$ uim-toolbar-gtk &amp;
+}}}
+
+起動中のツールバー左端をダブルクリックすると畳めます（1.3.0以降）。
+
+起動位置を指定したい場合は以下のようにする。
+
+{{{
+$ uim-toolbar-gtk +20+20 &amp;
+}}}
+
+システムトレイタイプはシステムトレイが存在する状態でuim-toolbar-gtk-systrayを起動します。
+
+{{{
+$ uim-toolbar-gtk-systray &amp;
+}}}
+
+パネルアプレットタイプは、GNOME/KDEパネルなどにアプレットの1つとして追加して使います。 アプレットはパネルの右クリックメニューなどから追加できます。
+
+=== 手書き入力パッドボタン ===
+
+[http://sourceforge.net/projects/tomoe/ uim-tomoe-gtk]を別途インストールする必要があります。
+
+=== ヘルプボタン ===
+
+このボタンに該当するような機能は存在しません。 それについての話は全く出ていませんし、今後提供される予定なのかも不明。
+
+=== ファイル ===
+
+~/.uim.d/customs/custom-toolbar.scm:: [UimPref UimPref]の「ツールバー」ファイル。
+
+== カスタマイズ可能な項目 ==
+
+=== ツールバーの変数 ===
+
+|| 動作 || 変数名 || 指定できる値 || 標準値 ||
+||<|2> 入力方式切り換えメニューを有効にする ||<|2> toolbar-show-action-based-switcher-button? || #t ||<|2> #t ||
+|| #f ||
+||<|3> 変更の適用範囲 ||<|3> imsw-coverage || 'focused-context ||<|3> 'system-global ||
+|| 'app-global ||
+|| 'system-global ||
+||<|2> フル機能の入力方式切り換えツール ||<|2> toolbar-show-switcher-button? || #t ||<|2> #f ||
+|| #f ||
+||<|2> 設定 ||<|2> toolbar-show-pref-button? || #t ||<|2> #t ||
+|| #f ||
+||<|2> 日本語辞書ツール ||<|2> toolbar-show-dict-button? || #t ||<|2> #f ||
+|| #f ||
+||<|2> 入力パッド ||<|2> toolbar-show-input-pad-button? || #t ||<|2> #f ||
+|| #f ||
+||<|2> 手書き入力パッド ||<|2> toolbar-show-handwriting-input-pad-button? || #t ||<|2> #f ||
+|| #f ||
+||<|2> ヘルプ ||<|2> toolbar-show-help-button? || #t ||<|2> #f ||
+|| #f ||
+
+==== ツールバーの変数の依存関係 ====
+
+  * toolbar-show-action-based-switcher-button? #f
+    * imsw-coverage
+
+== 既知のバグ ==
+
+=== システムトレイ版で各ボタンの幅が狭くなる ===
+
+多くのシステムトレイは、アイテム1つに対してアイコン1つという仕様になっていますが、uimではアイテム1つに対して複数のアイコンを詰め込んでいるためです。
+
+  * http://lists.sourceforge.jp/mailman/archives/anthy-dev/2005-January/001640.html
+  * [http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2006&m=8&d=29&n=1#29-1 http://garakuta.homelinux.org/~nosuke/diary/diary.html?y=2006&amp;m=8&amp;d=29&amp;n=1#29-1]
+  * http://bugs.debian.org/400880
+
+=== 起動するアプリを変更できない ===
+
+現在のところハードコードされているので、変更するにはソースコードを直接編集する必要があります。
+
+  * [http://uim.googlecode.com/svn/trunk/helper/toolbar-common-gtk.c uim:helper/toolbar-common-gtk.c]
+  * [http://uim.googlecode.com/svn/trunk/qt/toolbar-common-quimhelpertoolbar.cpp uim:qt/toolbar-common-quimhelpertoolbar.cpp]
+  * [http://uim.googlecode.com/svn/trunk/qt4/toolbar/common-quimhelpertoolbar.cpp uim:qt4/toolbar/common-quimhelpertoolbar.cpp]
+
+=== トレイの高さが32px以下だとアイコンが全部表示されない ===
+
+仕様?
+
+=== 背景色が黒系のテーマだとアイコンが識別不能になる ===
+
+アイコンを編集して、補色で文字部分を縁取るなり、背景色を固定するなりしてください。 アイコンファイルはデフォルトでは/usr/local/share/uim/pixmaps以下にあります。
+

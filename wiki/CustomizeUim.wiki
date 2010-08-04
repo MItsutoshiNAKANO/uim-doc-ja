@@ -1,0 +1,1425 @@
+= CustomizeUim =
+
+<wiki:toc max_depth="1" />
+
+== カスタマイズ方法 ==
+
+カスタマイズは[UimPref UimPref]というGUI設定ツール、もしくは~/.uimファイルに自分で記述して行います。 ~/.uimファイルがない場合は/usr/local/share/uim/default.scmが読まれます。
+
+[UimPref UimPref]による設定は~/.uim.d/customs以下のファイルに書き込まれますが、'''~/.uimに記述した設定はそれを上書きします。''' [UimPref UimPref]の設定を使う場合、~/.uimから[UimPref UimPref]の設定と矛盾する記述を取り除いてください。
+
+=== カスタマイズの適用先を限定 ===
+
+LIBUIM_USER_SCM_FILE環境変数を利用することで、一時的にカスタマイズを適用したり、異なるアプリに別々のカスタマイズを適用することができます。
+
+{{{
+Firefoxでuim-anthyの候補ウィンドウを出さない例:
+$ echo '(define anthy-use-candidate-window? #f)' &gt; ~/.uim-firefox
+$ LIBUIM_USER_SCM_FILE=~/.uim-firefox firefox &amp;
+}}}
+
+== カスタマイズの注意点 ==
+
+=== ~/.uimから変更できない特別な設定 ===
+
+  * enable-lazy-loading?
+  * enabled-im-list
+  * installed-im-module-list
+
+上記の変数に関する設定は、~/.uimに記述しても変更する事ができません。 変更するには[UimPref UimPref]で設定するか、/usr/local/share/uim/installed-modules.scmを直接編集してください。
+
+=== 文字コード ===
+
+ファイル中の日本語はすべて'''EUC-JP'''で記述してください。 例えばvimを使っているなら、ファイルの末尾あたりに
+
+{{{
+;; vim:ft=scheme:fenc=euc-jp
+}}}
+
+Emacsであれば
+
+{{{
+;; Local Variables:
+;; mode: scheme
+;; coding: euc-jp
+;; End:
+}}}
+
+などと書いておくと便利かもしれません。
+
+=== 記述ミス ===
+
+記述に致命的な不備があっても、エラーメッセージなどを出さず、ただ無視されます。それらは
+
+{{{
+$ uim-sh ~/.uim
+}}}
+
+を実行すれば発見できるかもしれません。
+
+== 入力方式のカスタマイズ ==
+
+=== 一般 ===
+
+基本的な書式
+
+{{{
+(require-module "モジュール名")
+(define 変数名 値)
+(define 変数名 値)
+...
+}}}
+
+指定可能なモジュール名を取得するには、[UimSh UimSh]で以下を実行してください。
+
+{{{
+uim&gt; installed-im-module-list
+}}}
+
+有効無効を指定する変数では、'''#t'''は有効、'''#f'''は無効を表します。
+
+{{{
+(define generic-use-candidate-window? #t)
+}}}
+
+任意の文字を指定できる変数では文字を'''""'''で囲む必要があります。
+
+{{{
+(define canna-segment-separator "|")
+}}}
+
+数字を指定する変数ではそのまま。
+
+{{{
+(define generic-candidate-op-count 1)
+}}}
+
+決められた文字列を指定する変数では文字列の先頭に'''''''がつきます。
+
+{{{
+(define default-im-name 'anthy)
+}}}
+
+=== ホットキー ===
+
+基本的な書式
+
+{{{
+(require-module "モジュール名")
+(define-key キー変数名 '("キー名"))
+(define-key キー変数名 '("キー名"))
+...
+}}}
+
+キー名を複数指定する場合はスペースで区切ります。
+
+{{{
+(define-key generic-on-key? '("a" "b"))
+}}}
+
+また別のキー変数名を指定する事でキー指定を同期させる事ができます。
+
+{{{
+(define-key generic-on-key? '("a" "b"))
+(define-key anthy-on-key? '(generic-on-key? "c"))
+}}}
+
+修飾キーは&lt;&gt;で囲みます。
+
+{{{
+(define-key generic-on-key? '("&lt;Shift&gt;a"))
+}}}
+
+また修飾キーを一般のキーとして使う時は_keyをつけます
+
+{{{
+(define-key generic-on-key? '("&lt;Control&gt;Alt_key"))
+}}}
+
+キー名の表記方法は[UimFep UimFep]の'''-K'''オプションが役に立ちます。
+
+=== キー名（抜粋） ===
+
+==== 一般キー ====
+
+|| uim || Xmodmap ||
+|| " " || "space" ||
+|| "up" || "Up" ||
+|| "down" || "Down" ||
+|| "left" || "Left" ||
+|| "right" || "Right" ||
+|| "home" || "Home" ||
+|| "next" || "Next" ||
+|| "prior" || "Prior" ||
+|| "delete" || "Delete" ||
+|| "end" || "End" ||
+|| "insert" || "Insert" ||
+|| "backspace" || "BackSpace[c=edit;p=BackSpace|?]" ||
+|| "return" || "Return" ||
+|| "tab" || "Tab" ||
+|| "F1" || "F1" ||
+|| "F35" || "F35" ||
+
+==== 修飾キー ====
+
+|| uim || Xmodmap ||
+|| "&lt;Control&gt;" || "Control_L" "Control_R" ||
+|| "&lt;Alt&gt;" || "Alt_L" "Alt_R" ||
+|| "&lt;Shift&gt;" || "Shift_L" "Shift_R" ||
+|| "&lt;Meta&gt;" || "Meta_L" "Meta_R" ||
+|| "&lt;Super&gt;" || "Super_L" "Super_R" ||
+|| "&lt;Hyper&gt;" || "Hyper_L" "Hyper_R" ||
+
+==== スペシャルキー ====
+
+|| uim || Xmodmap ||
+|| "Multi_key" || "Multi_key" ||
+|| "codeinput" || "Codeinput" ||
+|| "single-candidate" || "SingleCandidate" ||
+|| "multiple-candidate" || "MultipleCandidate" ||
+|| "previous-candidate" || "PreviousCandidate" ||
+|| "Mode_switch" || "Mode_switch" ||
+|| "Kanji" || "Kanji" ||
+|| "Muhenkan" || "Muhenkan" ||
+|| "Henkan_Mode" || "Henkan_Mode" ||
+|| "romaji" || "Romaji" ||
+|| "hiragana" || "Hiragana" ||
+|| "katakana" || "Katakana" ||
+|| "hiragana-katakana" || "Hiragana_Katakana" ||
+|| "zenkaku" || "Zenkaku" ||
+|| "hankaku" || "Hankaku" ||
+|| "zenkaku-hankaku" || "Zenkaku_Hankaku" ||
+|| "touroku" || "Touroku" ||
+|| "massyo" || "Massyo" ||
+|| "kana-lock" || "Kana_Lock" ||
+|| "kana-shift" || "Kana_Shift" ||
+|| "eisu-shift" || "Eisu_Shift" ||
+|| "eisu-toggle || "Eisu_toggle" ||
+|| "Private1" ||
+|| "Private30" ||
+
+=== [UimAnthy UimAnthy] ===
+
+基本的な書式
+
+{{{
+(require-module "anthy")
+(define 変数名 値)
+(define 変数名 値)
+...
+}}}
+
+==== Shift+アルファベットキーで大文字アルファベットを直接入力 ====
+
+ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
+
+{{{
+--- /usr/local/share/uim/anthy.scm.orig
++++ /usr/local/share/uim/anthy.scm
+@@ -636,10 +636,7 @@
+                                     (list (ja-wide key-str) (ja-wide key-str)
+                                           (ja-wide key-str))))
+              (ustr-insert-elem! (anthy-context-raw-ustr ac) key-str))
+-           (let* ((key-str (charcode-&gt;string
+-                            (if (= rule anthy-input-rule-kana)
+-                                key
+-                                (to-lower-char key))))
++           (let* ((key-str (charcode-&gt;string key))
+                   (res (rk-push-key! rkc key-str)))
+              (if res
+                  (begin
+@@ -1105,10 +1102,7 @@
+                 (not (alphabet-char? key))
+                 (not (string-find
+                       (rk-expect rkc)
+-                      (charcode-&gt;string
+-                       (if (= rule anthy-input-rule-kana)
+-                           key
+-                           (to-lower-char key))))))
++                      (charcode-&gt;string key))))
+            (let ((pend (rk-pending rkc))
+                  (residual-kana (rk-push-key-last! rkc)))
+              (if residual-kana
+@@ -1132,10 +1126,7 @@
+                                     (list (ja-wide key-str) (ja-wide key-str)
+                                           (ja-wide key-str))))
+              (ustr-insert-elem! raw-str key-str))
+-           (let* ((key-str (charcode-&gt;string
+-                            (if (= rule anthy-input-rule-kana)
+-                                key
+-                                (to-lower-char key))))
++           (let* ((key-str (charcode-&gt;string key))
+                   (pend (rk-pending rkc))
+                   (res (rk-push-key! rkc key-str)))
+              (if (and res
+}}}
+
+==== 確定前入力文字がある状態でスペースを入力 ====
+
+http://pc10.2ch.net/test/read.cgi/linux/1135968795/581
+
+{{{
+--- /usr/local/share/uim/anthy.scm.orig
++++ /usr/local/share/uim/anthy.scm
+@@ -1092,9 +1092,9 @@
+　　　　(ustr-cursor-move-end! raw-str))
+
+　　　　;; modifiers (except shift) =&gt; ignore
+-　　　 ((and (modifier-key-mask key-state)
+-　　　　　　(not (shift-key-mask key-state)))
+-　　　 #f)
++;;　　　 ((and (modifier-key-mask key-state)
++;;　　　　　(not (shift-key-mask key-state)))
++;;　　 #f)
+
+　　　　((symbol? key)
+　　　　 #f)
+}}}
+
+~/.uimに
+
+{{{
+(require-module "anthy")
+(define ja-rk-rule (append '((((" ") . ())(" " " " " "))) ja-rk-rule))
+}}}
+
+で、修飾キー+SPC。
+
+=== [UimSkk UimSkk] ===
+
+基本的な書式
+
+{{{
+(require-module "skk")
+(define 変数名 値)
+(define 変数名 値)
+...
+}}}
+
+==== 編集領域のビジュアルスタイルを独自のスタイルに ====
+
+基本的な書式
+
+{{{
+(require-module "skk")
+(define skk-style-スタイル名
+  '((変数名 . 値)
+...
+    (変数名 . 値)))
+(define skk-style 'skk-style-スタイル名)
+}}}
+
+{{{
+; 例
+(require-module "skk")
+(define skk-style-simple
+  '((skk-preedit-attr-mode-mark            . preedit-none)
+    (skk-preedit-attr-head                 . preedit-none)
+    (skk-preedit-attr-okuri                . preedit-none)
+    (skk-preedit-attr-pending-rk           . preedit-none)
+    (skk-preedit-attr-conv-body            . preedit-none)
+    (skk-preedit-attr-conv-okuri           . preedit-none)
+    (skk-preedit-attr-conv-appendix        . preedit-none)
+    (skk-preedit-attr-direct-pending-rk    . preedit-none)
+    (skk-preedit-attr-child-beginning-mark . preedit-none)
+    (skk-preedit-attr-child-end-mark       . preedit-none)
+    (skk-preedit-attr-child-committed      . preedit-none)
+    (skk-preedit-attr-child-dialog         . preedit-none)
+    (skk-preedit-attr-dcomp                . preedit-none)
+    (skk-child-context-beginning-mark      . "[")
+    (skk-child-context-end-mark            . "]")
+    (skk-show-cursor-on-preedit?           . #t)
+    (skk-show-candidates-with-okuri?       . #f)))
+(define skk-style 'skk-style-simple)
+}}}
+
+|| 動作 || 変数名 || 指定できる値 ||
+||<|5> モードマーク ||<|5> skk-preedit-attr-mode-mark || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+||<|5> ▽モードの見出し語 ||<|5> skk-preedit-attr-head || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+||<|5> 再帰学習モードの送り仮名 ||<|5> skk-preedit-attr-okuri || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+||<|5> ▽モードのローマ字プレフィックス ||<|5> skk-preedit-attr-pending-rk || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+||<|5> ▼モードの見出し語 ||<|5> skk-preedit-attr-conv-body || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+||<|5> ▼モードの送り仮名 ||<|5> skk-preedit-attr-conv-okuri || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+||<|5>  ||<|5> skk-preedit-attr-conv-appendix || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+||<|5> ローマ字プレフィックス ||<|5> skk-preedit-attr-direct-pending-rk || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+||<|5> 再帰学習エリアの先頭 ||<|5> skk-preedit-attr-child-beginning-mark || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+||<|5> 再帰学習エリアの終わり ||<|5> skk-preedit-attr-child-end-mark || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+||<|5> 再帰学習エリア ||<|5> skk-preedit-attr-child-committed || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+||<|5> 単語削除エリア ||<|5> skk-preedit-attr-child-dialog || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+||<|5> 動的補完エリア ||<|5> skk-preedit-attr-dcomp || preedit-none ||
+|| preedit-reverse ||
+|| preedit-underline ||
+|| preedit-cursor ||
+|| preedit-separator ||
+|| 再帰学習エリアの先頭を示す文字 || skk-child-context-beginning-mark ||<|2> "文字" ||
+|| 再帰学習エリアの終わりを示す文字 || skk-child-context-end-mark ||
+||<|2> ▽モードで文字を入力している時にカーソルを表示するか ||<|2> skk-show-cursor-on-preedit? || #t ||
+|| #f ||
+||<|2> 候補選択ウィンドウ中に表示される候補に送り仮名を付加するか ||<|2> skk-show-candidates-with-okuri? || #t ||
+|| #f ||
+
+==== 変換候補の見出しキーを変更する ====
+
+{{{
+(require-module "skk")
+(define skk-ddskk-like-heading-label-char-list '("a" "s" "d" "f" "j" "k" "l"))
+}}}
+
+==== 自動変換を始める文字を変更する ====
+
+{{{
+(require-module "skk")
+(define skk-auto-start-henkan-keyword-list
+  '("を" "、" "。" "．" "，" "？" "」" "！" "；" "：" ")" ";" ":" "）" "”"
+    "】" "』" "》" "〉" "｝" "］" "〕" "}" "]" "?" "." "," "!"))
+}}}
+
+==== KZIK（Kanji Zutto Ii Kanji） ====
+
+http://ohac.pun.jp/old_pages/kzik.html
+
+==== キャンセルした後に動的補完を表示しない ====
+
+/usr/local/share/uim/skk.scmに2箇所ある
+
+{{{
+;; don't clear dcomp (not compatible with ddskk's behavior)
+;;(skk-reset-dcomp-word sc)
+}}}
+
+のコメントを外してください。
+
+=== [UimPrime UimPrime] ===
+
+基本的な書式
+
+{{{
+(require-module "prime")
+(define キー変数名 '("キー名")
+(define キー変数名 '("キー名")
+...
+}}}
+
+|| 動作 || キー変数名 ||
+|| 全角スペース || prime-space-key? ||
+|| 半角スペース || prime-altspace-key? ||
+
+=== [UimFep|UimFep] ===
+
+==== 全角/半角キーでオン/オフ ====
+
+全角/半角キーは端末では認識できないので、端末で認識できるキーシーケンスを割り当てます。 ここでは全角/半角キーをF10にしますが、この場合、端末以外のアプリケーションでも全角/半角キーがF10になるので注意してください。
+
+ktermを使っている場合、~/.Xresource（~/.Xdefaults）に次のように書きます。
+
+{{{
+kterm.VT100.Translations: #override \
+  &lt;Key&gt;Zenkaku_Hankaku: string("\033[21~")
+}}}
+
+xtermを使っている場合、~/.Xresource（~/.Xdefaults）に次のように書きます。
+
+{{{
+xterm.VT100.Translations: #override \
+  &lt;Key&gt;Zenkaku_Hankaku: string("\033[21~")
+}}}
+
+rxvtを使っている場合、~/.Xresource（~/.Xdefaults）に次のように書きます。
+
+{{{
+rxvt.keysym.Zenkaku_Hankaku: "\033[21~"
+}}}
+
+atermを使っている場合、~/.Xresource（~/.Xdefaults）に次のように書きます。
+
+{{{
+aterm.keysym.Zenkaku_Hankaku: "\033[21~"
+}}}
+
+そしてログインしなおすか、次のコマンドを入力します。
+
+{{{
+$ xrdb -m ~/.Xresources
+}}}
+
+mltermを使っている場合、~/.mlterm/keyに次のように書きます。
+
+{{{
+Zenkaku_Hankaku="^[21~"
+}}}
+
+^[21~の部分はF10のキーシーケンスです。 vimではCtrl+v F10、emacsではCtrl+q F10で入力できます。
+
+Etermを使っている場合、~/.Eterm/user.cfgに次のように書きます。
+
+{{{
+&lt;Eterm-0.9&gt;
+begin actions
+  bind Zenkaku_Hankaku to echo "\e[21~"
+end actions
+}}}
+
+その他のXの端末を使っている場合 ~/.Xmodmapに次のように書きます。
+
+{{{
+keysym Zenkaku_Hankaku = F10
+}}}
+
+ログインしなおすか、次のコマンドを入力します。
+
+{{{
+$ xmodmap ~/.Xmodmap
+}}}
+
+teratermを使っている場合、TTERMPRO\keycode.exeを起動して全角/半角キーのキーコードを調べます。 全角/半角キーのキーコードは41であることが分かります。 TTERMPRO\KEYBOARDに次のように書きます。
+
+{{{
+[User Keys]
+User1=41,0,$1b[21~
+}}}
+
+しかし全角/半角キーを押してもWindowsのIMEに取られるので使えません。
+
+Linuxコンソールではloadkeysを使ってキーシーケンスを変えることができます。 まずキーマップの定義ファイルを編集します。 キーマップの定義ファイルはLinuxディストリビューションによってはパスが違うかもしれません。
+
+{{{
+$ zcat /lib/kbd/keymaps/i386/qwerty/jp106.map.gz &gt; jp.map
+$ echo 'keycode  41 = F10' &gt;&gt; jp.map
+}}}
+
+keycodeの41は全角/半角キーに対応しています。 showkeyコマンドで確かめてください。 showkeyは10秒間入力しないと終了します。
+
+loadkeysでこのキーマップを読み込めば全角/半角キーがF10になります。
+
+{{{
+$ loadkeys jp
+}}}
+
+Debianではキーマップの定義ファイルを編集する必要はありません。
+
+{{{
+# echo 's/keycode  41 = Escape/Keycode  41 = F10/;' &gt;&gt; /etc/console-tools/remap
+# /etc/init.d/console-screen.sh（その場で有効化）
+}}}
+
+FreeBSDでキーマップというとkeymap(5)やkbdcontrol(1)、そして/usr/share/syscons/*ファイルが関連するようです。 jp.106x.kbdを参考にしてjp.106.kbdをjp.106z.kbdにコピーして作業開始。
+
+jp.106.kbd:: 普通のキーマップjp.106x.kbd:: Caps LockをCtrlと入れ換えたもの
+
+なので
+
+jp.106z.kbd:: 全角半角をF10にするもの
+
+としました。
+
+以下jp.106.kbdとjp.106z.kbdの差分
+
+{{{
+--- jp.106.kbd  Mon Jun  9 08:55:15 2003
++++ jp.106z.kbd Sun May  9 16:23:41 2004
+@@ -1,5 +1,7 @@
+ # $FreeBSD: src/share/syscons/keymaps/jp.106.kbd,v 1.9 2001/03/11 23:41:18 ache Exp $
+ #                                                         alt
++# (this one has zenkakuhankaku switch to F10)
++#
+ # scan                       cntrl          alt    alt   cntrl lock
+ # code  base   shift  cntrl  shift  alt    shift  cntrl  shift state
+ # ------------------------------------------------------------------
+@@ -44,7 +46,7 @@
+   038   'l'    'L'    ff     ff     'l'    'L'    ff     ff      C
+   039   ';'    '+'    nop    nop    ';'    '+'    nop    nop     O
+   040   ':'    '*'    nop    nop    ':'    '*'    nop    nop     O
+-  041   esc    esc    esc    esc    esc    esc    debug  esc     O
++  041   fkey10 fkey22 fkey34 fkey46 scr10  scr10  scr10  scr10   O
+   042   lshift lshift lshift lshift lshift lshift lshift lshift  O
+   043   ']'    '}'    gs     gs     ']'    '}'    gs     gs      O
+   044   'z'    'Z'    sub    sub    'z'    'Z'    sub    sub     C
+}}}
+
+068がF10のようだったのでこれを半角全角の041エントリにしました。
+
+{{{
+ 068   fkey10 fkey22 fkey34 fkey46 scr10  scr10  scr10  scr10   O
+}}}
+
+http://pc5.2ch.net/test/read.cgi/linux/1084073229/13-14
+
+全角/半角キーをF10にマッピングできたら、~/.uimにこのように書けば全角/半角キーでオン/オフができるようになります。
+
+{{{
+(define-key generic-on-key? '("zenkaku-hankaku" "&lt;Shift&gt; " "F10"))
+(define-key generic-off-key? '("zenkaku-hankaku" "&lt;Shift&gt; " "F10"))
+}}}
+
+==== w3mで使う ====
+
+w3mでの日本語入力は一行入力だけです。 そこでw3mでの日本語入力は以下のようになってほしいと思います。 ここではIMの起動キーはCtrl+jとしていますが、好きなキーに変えることができます。
+
+  1. 一行入力のときにCtrl+jを押すとIMオン
+  1. 一行入力が終わるとIMオフ
+  1. 一行入力以外ではCtrl+jは他の機能
+
+一行入力のときにCtrl+jでIMをオンにして、一行入力が終わったときにIMをオフにするにはw3mを改造する必要があります。
+
+[http://sourceforge.net/projects/w3m/ w3mのホームページ]からw3m-0.5.1.tar.gzをダウンロードします。 次に[http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/w3m-uim-fep.diff w3m-uim-fep.diff]をダウンロードします。
+
+{{{
+*** linein.c.orig	2003-09-27 02:59:51.000000000 +0900
+--- linein.c	2004-05-20 18:32:36.000000000 +0900
+***************
+*** 49,60 ****
+  static void next_dcompl(int next);
+  static Str doComplete(Str ifn, int *status, int next);
+
+  /* *INDENT-OFF* */
+  void (*InputKeymap[32]) () = {
+  /*  C-@     C-a     C-b     C-c     C-d     C-e     C-f     C-g     */
+      _compl, _mvB,   _mvL,   _inbrk, delC,   _mvE,   _mvR,   _inbrk,
+  /*  C-h     C-i     C-j     C-k     C-l     C-m     C-n     C-o     */
+!     _bs,    iself,  _enter, killn,  iself,  _enter, _next,  _editor,
+  /*  C-p     C-q     C-r     C-s     C-t     C-u     C-v     C-w     */
+      _prev,  _quo,   _bsw,   iself,  _mvLw,  killb,  _quo,   _bsw,
+  /*  C-x     C-y     C-z     C-[     C-\     C-]     C-^     C-_     */
+--- 49,64 ----
+  static void next_dcompl(int next);
+  static Str doComplete(Str ifn, int *status, int next);
+
++ static void im_set_mode(int mode);
++ static void im_on();
++ static void im_off();
++
+  /* *INDENT-OFF* */
+  void (*InputKeymap[32]) () = {
+  /*  C-@     C-a     C-b     C-c     C-d     C-e     C-f     C-g     */
+      _compl, _mvB,   _mvL,   _inbrk, delC,   _mvE,   _mvR,   _inbrk,
+  /*  C-h     C-i     C-j     C-k     C-l     C-m     C-n     C-o     */
+!     _bs,    iself,  im_on, killn,  iself,  _enter, _next,  _editor,
+  /*  C-p     C-q     C-r     C-s     C-t     C-u     C-v     C-w     */
+      _prev,  _quo,   _bsw,   iself,  _mvLw,  killb,  _quo,   _bsw,
+  /*  C-x     C-y     C-z     C-[     C-\     C-]     C-^     C-_     */
+***************
+*** 255,260 ****
+--- 261,267 ----
+  	if (CLen &amp;&amp; (flag &amp; IN_CHAR))
+  	    break;
+      } while (i_cont);
++     im_off();
+
+      if (CurrentTab) {
+  	if (need_redraw)
+***************
+*** 1133,1135 ****
+--- 1140,1168 ----
+      if (CurrentTab)
+  	displayBuffer(Currentbuf, B_FORCE_REDRAW);
+  }
++
++ static void
++ im_set_mode(int mode)
++ {
++   char *setmode = getenv("UIM_FEP_SETMODE");
++   if (setmode != NULL) {
++     FILE *fp = fopen(setmode, "w");
++     if (fp) {
++       fprintf(fp, "%d\n", mode);
++       fflush(fp);
++       fclose(fp);
++     }
++   }
++ }
++
++ static void
++ im_on()
++ {
++   im_set_mode(1);
++ }
++
++ static void
++ im_off()
++ {
++   im_set_mode(0);
++ }
+}}}
+
+w3mのソースにパッチを当ててコンパイル、インストールします。
+
+{{{
+$ tar xvf w3m-0.5.1.tar.gz
+$ cd w3m-0.5.1
+$ patch &lt;../w3m-uim-fep.diff
+$ ./configure
+$ make
+# make install
+}}}
+
+一行入力以外のときのCtrl+jに機能を割り当てます。 例えばNEXT_DOWNを割り当てる場合は~/.w3m/keymapに次のように書きます。
+
+{{{
+keymap C-j NEXT_DOWN
+}}}
+
+次に~/.uim-w3mを用意します。 ~/.uimに書いてしまうと、w3m以外でもCtrl+jでIMが起動しなくなってしまうので注意。
+
+{{{
+;; uim-anthyの場合
+(define-key anthy-on-key? '())
+;; uim-skkの場合
+(define-key skk-on-key? '())
+;; uim-primeの場合
+(define-key prime-on-key? '())
+...
+}}}
+
+そして以下のような起動用スクリプトからw3mを起動します。
+
+{{{
+#!/bin/sh
+# Ctrl+jとCtrl+mが区別させる
+stty -icrnl
+trap "stty icrnl" 0 1 2 3 15
+# w3mのパスは手元の環境に合わせてください
+LIBUIM_USER_SCM_FILE=~/.uim-w3m uim-fep -e /usr/local/bin/w3m "$@"
+}}}
+
+==== vimで使う ====
+
+以下の方法より、[http://yukihiro.nakadaira.googlepages.com/#uim-ctl uim-ctl]を使うほうがいいかもしれません。
+
+vim 6.4に[http://www.kaoriya.net KaoriYaさん]のパッチを当てると、vimからuim-fepを制御できるようになります。 その他にもmigemoなどの便利な機能が使えるようになります。 ここではKaoriYaさんのパッチが6.4用のものであるとしてインストールの説明をします。
+
+cmigemoのインストール migemoを使わない場合はインストールする必要はありません。
+
+{{{
+$ cvs -d :pserver:anonymous@cvs.kaoriya.net:/anonycvs login
+$ cvs -d :pserver:anonymous@cvs.kaoriya.net:/anonycvs checkout -r dev-1_3
+}}}
+
+migemo
+
+{{{
+$ cd migemo
+$ ./configure
+$ make gcc
+$ make gcc-dict
+$ su
+# make gcc-install
+}}}
+
+ダウンロード [http://www.vim.org vim.org]の[http://www.vim.org/download.php ダウンロードのページ]から [ftp://ftp.vim.org/pub/vim/unix/vim-6.4.tar.bz2 vim-6.4.tar.bz2]、 [ftp://ftp.vim.org/pub/vim/extra/vim-6.4-extra.tar.gz vim-6.4-extra.tar.gz]、 [ftp://ftp.vim.org/pub/vim/extra/vim-6.4-lang.tar.gz vim-6.4-lang.tar.gz]、 [http://www.kaoriya.net/#VIM64 KaoriYaさん]からVim 6.4 差分パッケージをダウンロードします。
+
+{{{
+$ wget ftp://ftp.vim.org/pub/vim/unix/vim-6.4.tar.bz2
+$ wget ftp://ftp.vim.org/pub/vim/extra/vim-6.4-extra.tar.gz
+$ wget ftp://ftp.vim.org/pub/vim/extra/vim-6.4-lang.tar.gz
+$ wget http://www.kaoriya.net/dist/vim-6.4-difj.tar.bz2
+}}}
+
+コンパイル 展開します。
+
+{{{
+$ tar jxvf vim-6.4-difj.tar.bz2
+$ tar jxvf vim-6.4.tar.bz2
+$ tar zxvf vim-6.4-extra.tar.gz
+$ tar zxvf vim-6.4-lang.tar.gz
+}}}
+
+gnu tarがない場合は
+
+{{{
+$ bunzip2 -c vim-6.4-difj.tar.bz2|tar xvf -
+$ bunzip2 -c vim-6.4.tar.bz2|tar xvf -
+$ gunzip -c vim-6.4-extra.tar.gz|tar xvf -
+$ gunzip -c vim-6.4-lang.tar.gz|tar xvf -
+}}}
+
+パッチを当ててconfigureします。
+
+{{{
+$ cd vim64
+$ patch -p0 &lt;../vim-6.4-difj/diffs/kaoriya.diff
+$ ./configure --with-features=big --enable-multibyte
+}}}
+
+あとはmakeするだけです。
+
+{{{
+$ make
+$ su
+# make install
+}}}
+
+必要な設定
+
+{{{
+:set ttimeoutlen=10
+}}}
+
+操作方法 インサートモードでCtrl+^を押すとIMがオンになります。 IMがオンの状態で、Ctrl+^を押すとIMがオフになります。 Escを押してノーマルモードになるとIMは自動的にオフになります。 再度インサートモードにすると、以前のインサートモードのIMの状態に戻ります。
+
+キーバインドの変更 IMをオンにするキーを変更する方法です。 例えばCtrl+jにするには~/.vimrcで以下のように設定します。
+
+{{{
+:inoremap &lt;C-j&gt; &lt;C-^&gt;
+:cnoremap &lt;C-j&gt; &lt;C-^&gt;
+}}}
+
+ただし、cnoremapで&lt;C-j&gt;にマップすると、@:を押すとIMがオンになってしまい、前回のexコマンドを繰り返せなくなります。
+
+uimの方は以下のように設定します。 skkのF10は全角英数モードになったときにひらがなモードに戻すためです。
+
+{{{
+(define-key skk-on-key? '("F10"))
+(define-key anthy-on-key? '())
+(define-key prime-on-key? '())
+}}}
+
+IMの状態を保存しない インサートモードになったときに常にIMがオフになるようにする方法です。 ただし、インサートモードで矢印キーなどが効かなくなります。
+
+{{{
+:inoremap &lt;silent&gt; &lt;esc&gt; &lt;esc&gt;:se imi=0&lt;cr&gt;
+}}}
+
+デフォルトでIMをオフにする vimを起動して最初にインサートモードになったときにIMをオフにする方法です。
+
+{{{
+:se imi=0
+:se ims=0
+}}}
+
+パッチを当てる ノーマルモードのfコマンドでIMがオンになったりするなど使いにくいところがあっ たのでパッチを作りました。
+
+f, F, t, T, rでIMをオンにしない IMをオンにした状態でノーマルモードになってfなどを押すとIMがオンになっ てしまいます。これを回避するためのパッチです。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-fFtTr-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-fFtTr-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-fFtTr-6.4.diff 6.4用]
+
+&lt;C-^&gt;でIMをオフにしない &lt;C-^&gt;はIMをトグルするキーですが、&lt;C-^&gt;でIMをオフにしないようにするため のパッチです。IMをオフにするときはuimのキーバインドで行います。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hat-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hat-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hat-6.4.diff 6.4用]
+
+/(検索)のときにIMをオンにしない /や?で検索するときにIMをオフにするパッチです。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-search-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-search-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-search-6.4.diff 6.4用]
+
+&lt;C-^&gt;で常にひらがなモードにする skkでは全角英数からIMをオフにして再度オンにすると全角英数になってしまいます。 IMがオンになったときは常にひらがなモードにするためのパッチです。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hiragana-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hiragana-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-hiragana-6.4.diff 6.4用]
+
+@:でIMがオンにならないようにする cnoremapで&lt;C-j&gt;にマップしていると、@:が効かなくなるのを回避するためのパッチです。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-nlmap-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-nlmap-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-nlmap-6.4.diff 6.4用]
+
+パッチの当て方 KaoriYaパッチを当てたあとにvim64ディレクトリで、このように当てます。
+
+{{{
+$for i in uim-fep-vim-*.diff
+ do
+   patch -p0 &lt; $i
+ done
+}}}
+
+上の5つのパッチを全部当てる場合は5つのパッチをまとめたこのパッチを使ってください。 [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-all-6.3.054.diff 6.3.054用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-all-6.3.085.diff 6.3.085用] [http://www.ice.nuie.nagoya-u.ac.jp/~h013177b/uim-fep/uim-fep-vim-all-6.4.diff 6.4用]
+
+起動スクリプト
+
+{{{
+#!/bin/sh
+LIBUIM_USER_SCM_FILE=~/.uim-vim exec uim-fep -e /usr/local/bin/vim "$@"
+}}}
+
+この起動スクリプトをvimという名前にする場合は最後の行の-eの後のvimを本物の vimのフルパスにしてください。
+
+=== [UimEl UimEl] ===
+
+==== IMのON/OFFでカーソルの色を変化させる ====
+
+http://d.hatena.ne.jp/higepon/20061002/1159797987
+
+{{{
+;; uim-mode by higepon
+;; ON/OFFでカーソルの色を変更。
+;; ON時に必ず日本語入力モードにする
+(defadvice uim-this-command-keys (around uim-send-zenkaku-hankaku)
+  (setq ad-return-value `[zenkaku-hankaku]))
+(defadvice uim-mode (around my-uim-mode)
+  ad-do-it
+  (set-face-background 'cursor (if ad-return-value "blue" "indian red"))
+  (ad-activate-regexp "uim-send-zenkaku-hankaku")
+  (uim-process-input)
+  (ad-deactivate-regexp "uim-send-zenkaku-hankaku"))
+(ad-activate-regexp "my-uim-mode")
+}}}
+
+=== その他 ===
+
+==== 編集領域の配色を独自配色に ====
+
+基本的な書式
+
+{{{
+(require "util.scm")
+(define uim-color-配色名
+  '((変数 . 値)
+...
+    (変数 . 値)))
+(define uim-color 'uim-color-配色名)
+}}}
+
+{{{
+; 例
+(require "util.scm")
+(define uim-color-mono
+  '((reversed-preedit-foreground   . "white")
+    (reversed-preedit-background   . "black")
+    (separator-foreground          . "white")
+    (separator-background          . "black")
+    (reversed-separator-foreground . "white")
+    (reversed-separator-background . "black")))
+(define uim-color 'uim-color-mono)
+}}}
+
+|| 動作 || 変数名 || 指定できる値 ||
+||  || reversed-preedit-foreground ||<|6> "色名" ||
+||  || reversed-preedit-background ||
+||  || separator-foreground ||
+||  || separator-background ||
+||  || reversed-separator-foreground ||
+||  || reversed-separator-background ||
+
+==== IMそれぞれにIM切り換えキーを割り当てる ====
+
+http://groups.google.com/group/uim-en/t/b64641ed041ea9a6
+
+/usr/local/share/uim/im.scmを
+
+{{{
+Index: im.scm
+===================================================================
+--- im.scm      (revision 5780)
++++ im.scm      (working copy)
+@@ -456,6 +456,15 @@
+        ((and enable-im-switch?
+             (switch-im-key? key state))
+        (switch-im uc (im-name im)))
++
++       ;; im switch hack
++       ((switch-to-im1-key? key state)
++       (im-switch-im uc switch-im1))
++       ((switch-to-im2-key? key state)
++       (im-switch-im uc switch-im2))
++       ((switch-to-im3-key? key state)
++       (im-switch-im uc switch-im3))
++
+        ((modifier-key? key state)
+        ;; don't discard modifier press/release edge for apps
+        (im-commit-raw c))
+}}}
+
+~/.uimに
+
+{{{
+(define switch-to-im1-key '("&lt;Alt&gt;1"))
+(define switch-to-im1-key? (make-key-predicate switch-to-im1-key))
+(define switch-im1 'direct)
+
+(define switch-to-im2-key '("&lt;Alt&gt;2"))
+(define switch-to-im2-key? (make-key-predicate switch-to-im2-key))
+(define switch-im2 'm17n-ru-kbd)
+
+(define switch-to-im3-key '("&lt;Alt&gt;3"))
+(define switch-to-im3-key? (make-key-predicate switch-to-im3-key))
+(define switch-im3 'anthy)
+}}}
+
+この例では、Alt+1で直接入力、Alt+2でm17n-ru-kbd、Alt+3でAnthyに切り換わります。
+
+==== uimに新しいモジュールを追加する ====
+
+uimアーカイブには含まれていないモジュールが色々と公開されています。 どんなモジュールがあるかは、[UimLinks UimLinks]ページの「関係ソフトウェア」の項をどうぞ。
+
+幾つか注意点あります。
+
+インストール先に注意してください。 uimが/usr/lib下にインストールされているなら、モジュールも/usr/lib下にインストールする必要があります。
+
+インストールが完了したら、[UimModuleManager UimModuleManager]でuimのモジュールリストへ追加してください。 例えばuim-festivalモジュールを追加するには
+
+{{{
+# uim-module-manager --register festival
+}}}
+
+後は[UimPref UimPref]で「使用可能にする入力方式」の有効リストに入れましょう。
+
+== 変換用テーブルのカスタマイズ ==
+
+=== [RomaKanaTable ローマ字入力方式] ===
+
+基本的な書式
+
+{{{
+(require "japanese.scm")
+(set! ja-rk-rule (cons '(
+  (("キー名") . ()) ("ひらがな入力モード" "カタカナ入力モード" "半角カタカナ入力モード")
+ )
+ja-rk-rule))
+}}}
+
+{{{
+(require "japanese.scm")
+(define ja-rk-rule (append '(
+  ((("キー名") . ()) ("ひらがな入力モード" "カタカナ入力モード" "半角カタカナ入力モード"))
+...
+   ((("キー名") . ()) ("ひらがな入力モード" "カタカナ入力モード" "半角カタカナ入力モード")))
+  ja-rk-rule))
+}}}
+
+スペースには''ja-space''と''ja-alnum-space''という専用の変数が用意されている。
+
+{{{
+(require "japanese.scm")
+(define ja-space '("ひらがな入力モード "カタカナ入力モード" "半角カタカナ入力モード"))
+(define ja-alnum-space '("半角英数入力モード" "全角英数入力モード"))
+}}}
+
+入力後、即座に確定するキーは''ja-direct-rule''という変数を使う。
+
+{{{
+(require "japanese.scm")
+(set! ja-direct-rule (cons '(
+ ("キー名" "文字")
+ )
+ja-direct-rule))
+}}}
+
+としてください。
+
+==== 余分な変換ルールを無効にしたい ====
+
+変換用テーブルは、基礎的なテーブルの'''ja-rk-rule-basic'''と、付加的なテーブルの'''ja-rk-rule-additional'''に分かれています。 ja-rk-rule-additionalを使わないように設定することで、一風変わった変換ルールをまとめて無効にできます。
+
+{{{
+(require "japanese.scm")
+(define ja-rk-rule ja-rk-rule-basic)
+}}}
+
+==== 「。」を「．」、「、」を「，」としたい ====
+
+{{{
+(require "japanese.scm")
+(define ja-rk-rule
+  (append '(
+            (((",") . ()) ("，" "，" "，"))
+            (((".") . ()) ("．" "．" "．"))
+            )
+          ja-rk-rule))
+}}}
+
+==== 「／」を「・」、「＼」を「￥」としたい ====
+
+{{{
+(require "japanese.scm")
+(define ja-rk-rule
+  (append '(
+            ((("/") . ()) ("・" "・" "・"))
+            ((("\\") . ()) ("￥" "￥" "￥"))
+            )
+          ja-rk-rule))
+}}}
+
+==== "z SPC"で全角スペースを入力する ====
+
+'''これは[UimSkk UimSkk]でのみ有効です。'''
+
+{{{
+(require-module "skk")
+(define ja-rk-rule
+  (append '(
+    ((("z" " "). ())("　" "　" "　"))
+    )
+  ja-rk-rule))
+}}}
+
+==== MS-IME風ローマ字配列 ====
+
+{{{
+(require "japanese.scm")
+(define ja-rk-rule
+  (append '(
+            ((("c" "a"). ())("か" "カ" "ｶ"))
+            ((("c" "i"). ())("し" "シ" "ｼ"))
+            ((("c" "u"). ())("く" "ク" "ｸ"))
+            ((("c" "e"). ())("せ" "セ" "ｾ"))
+            ((("c" "o"). ())("そ" "ソ" "ｿ"))
+            ((("l" "y" "a"). ())("ゃ" "ャ" "ｬ"))
+            ((("l" "y" "i"). ())("ぃ" "ィ" "ｨ"))
+            ((("l" "y" "u"). ())("ゅ" "ュ" "ｭ"))
+            ((("l" "y" "e"). ())("ぇ" "ェ" "ｪ"))
+            ((("l" "y" "o"). ())("ょ" "ョ" "ｮ"))
+            ((("n" "'"). ())("ん" "ン" "ﾝ"))
+            ((("q" "a"). ())(("く" "ク" "ｸ") ("ぁ" "ァ" "ｧ")))
+            ((("q" "i"). ())(("く" "ク" "ｸ") ("ぃ" "ィ" "ｨ")))
+            ((("q" "u"). ())("く" "ク" "ｸ"))
+            ((("q" "e"). ())(("く" "ク" "ｸ") ("ぇ" "ェ" "ｪ")))
+            ((("q" "o"). ())(("く" "ク" "ｸ") ("ぉ" "ォ" "ｫ")))
+            ((("q" "q"). ("q"))("っ" "ッ" "ｯ"))
+            ((("v" "y" "i"). ())(("う゛" "ヴ" "ｳﾞ") ("ぃ" "ィ" "ｨ")))
+            ((("w" "y" "i"). ())("ゐ" "ヰ" "ｨ"))
+            ((("w" "y" "e"). ())("ゑ" "ヱ" "ｪ"))
+            ((("x" "n"). ())("ん" "ン" "ﾝ"))
+            ((("x" "x"). ("x"))("っ" "ッ" "ｯ"))
+            )
+          ja-rk-rule))
+}}}
+
+==== ATOK風ローマ字配列 ====
+
+{{{
+(require "japanese.scm")
+(define ja-rk-rule
+  (append '(
+            ((("l" "y" "a"). ())("ゃ" "ャ" "ｬ"))
+            ((("l" "y" "i"). ())("ぃ" "ィ" "ｨ"))
+            ((("l" "y" "u"). ())("ゅ" "ュ" "ｭ"))
+            ((("l" "y" "e"). ())("ぇ" "ェ" "ｪ"))
+            ((("l" "y" "o"). ())("ょ" "ョ" "ｮ"))
+            ((("l" "k" "a"). ())("ヵ" "ヵ" "ｶ"))
+            ((("l" "k" "e"). ())("ヶ" "ヶ" "ｹ"))
+            ((("l" "w" "a"). ())("ゎ" "ヮ" "ﾜ"))
+            ((("n" "'"). ())("ん" "ン" "ﾝ"))
+            ((("w" "y" "i"). ())("ゐ" "ヰ" "ｨ"))
+            ((("w" "y" "e"). ())("ゑ" "ヱ" "ｪ"))
+            )
+          ja-rk-rule))
+}}}
+
+==== Wnn風ローマ字配列 ====
+
+{{{
+(require "japanese.scm")
+(define ja-rk-rule
+  (append '(
+            ((("\\" "a"). ())("ぁ" "ァ" "ｧ"))
+            ((("\\" "i"). ())("ぃ" "ィ" "ｨ"))
+            ((("\\" "u"). ())("ぅ" "ゥ" "ｩ"))
+            ((("\\" "e"). ())("ぇ" "ェ" "ｪ"))
+            ((("\\" "o"). ())("ぉ" "ォ" "ｫ"))
+            ((("\\" "k" "a"). ())("ヵ" "ヵ" "ｶ"))
+            ((("\\" "k" "e"). ())("ヶ" "ヶ" "ｹ"))
+            ((("\\" "y" "a"). ())("ゃ" "ャ" "ｬ"))
+            ((("\\" "y" "u"). ())("ゅ" "ュ" "ｭ"))
+            ((("\\" "y" "o"). ())("ょ" "ョ" "ｮ"))
+            ((("g" "w" "a"). ())(("ぐ" "グ" "ｸﾞ") ("ゎ" "ヮ" "ﾜ")))
+            ((("g" "w" "u"). ())("ぐ" "グ" "ｸﾞ"))
+            ((("k" "w" "a"). ())(("く" "ク" "ｸ") ("ゎ" "ヮ" "ﾜ")))
+            ((("k" "w" "u"). ())("く" "ク" "ｸ"))
+            ((("l" "a"). ())("ら" "ラ" "ﾗ"))
+            ((("l" "i"). ())("り" "リ" "ﾘ"))
+            ((("l" "u"). ())("る" "ル" "ﾙ"))
+            ((("l" "e"). ())("れ" "レ" "ﾚ"))
+            ((("l" "o"). ())("ろ" "ロ" "ﾛ"))
+            ((("m" "m"). ("m"))("ん" "ン" "ﾝ"))
+            ((("n" "'"). ())("ん" "ン" "ﾝ"))
+            ((("t" "c" "h"). ("h" "c"))("っ" "ッ" "ｯ"))
+            ((("t" "s" "a"). ())(("つ" "ツ" "ﾂ") ("ぁ" "ァ" "ｧ")))
+            ((("t" "s" "i"). ())(("つ" "ツ" "ﾂ") ("ぃ" "ィ" "ｨ")))
+            ((("t" "s" "e"). ())(("つ" "ツ" "ﾂ") ("ぇ" "ェ" "ｪ")))
+            ((("t" "s" "o"). ())(("つ" "ツ" "ﾂ") ("ぉ" "ォ" "ｫ")))
+            ((("w" "i"). ())("ゐ" "ヰ" "ｨ"))
+            ((("w" "e"). ())("ゑ" "ヱ" "ｪ"))
+            ((("x" "/"). ())("/" "/" "/"))
+            ((("x" "-"). ())("-" "-" "-"))
+            ((("x" ","). ())("," "," ","))
+            ((("x" "."). ())("." "." "."))
+            ((("x" "~"). ())("~" "~" "~"))
+            ((("x" "^"). ())("^" "^" "^"))
+            ((("x" "\\"). ())("＼" "＼" "\\"))
+            ((("x" "["). ())("[" "[" "["))
+            ((("x" ";"). ())(";" ";" ";"))
+            ((("x" ":"). ())(":" ":" ":"))
+            ((("x" "]"). ())("]" "]" "]"))
+            ((("x" "/"). ())("/" "/" "/"))
+            ((("x" "d" "i"). ())(("で" "デ" "ﾃﾞ") ("ぃ" "ィ" "ｨ")))
+            ((("x" "d" "u"). ())(("ど" "ド" "ﾄﾞ") ("ぅ" "ゥ" "ｩ")))
+            ((("x" "d" "e"). ())(("で" "デ" "ﾃﾞ") ("ぇ" "ェ" "ｪ")))
+            ((("x" "d" "o"). ())(("ど" "ド" "ﾄﾞ") ("ぉ" "ォ" "ｫ")))
+            ((("x" "t" "i"). ())(("て" "テ" "ﾃ") ("ぃ" "ィ" "ｨ")))
+            ((("x" "w" "i"). ())(("う" "ウ" "ｳ") ("ぃ" "ィ" "ｨ")))
+            ((("x" "w" "e"). ())(("う" "ウ" "ｳ") ("ぇ" "ェ" "ｪ")))
+            ((("x" "w" "o"). ())(("う" "ウ" "ｳ") ("ぉ" "ォ" "ｫ")))
+            )
+          ja-rk-rule))
+}}}
+
+==== Canna風ローマ字配列 ====
+
+{{{
+(require "japanese.scm")
+(define ja-rk-rule
+  (append '(
+            ((("\\"). ())("￥" "￥" "\\"))
+            ((("{"). ())("『" "『" "["))
+            ((("}"). ())("』" "』" "]"))
+            ((("@" "-"). ("/"))("-" "-" "-"))
+            ((("@" "/"). ())("・" "・" "･"))
+            ((("@" "\\"). ())("＼" "＼" "\\"))
+            ((("@" ","). ())("，" "，" ","))
+            ((("@" "."). ())("．" "．" "."))
+            ((("@" "~"). ())("〜" "〜" "~"))
+            ((("@" "|" "|"). ())("‖" "‖" ""))
+            ((("@" "|"). ())("｜" "｜" "|"))
+            ((("@" "3"). ())("…" "…" ""))
+            ((("@" "2"). ())("‥" "‥" ""))
+            ((("@" "("). ())("（" "（" "("))
+            ((("@" ")"). ())("）" "）" ")"))
+            ((("@" "["). ())("［" "［" "["))
+            ((("@" "]"). ())("］" "］" "]"))
+            ((("@" "{"). ())("｛" "｛" "{"))
+            ((("@" "}"). ())("｝" "｝" "}"))
+            ((("c" "a"). ())("か" "カ" "ｶ"))
+            ((("c" "u"). ())("く" "ク" "ｸ"))
+            ((("c" "o"). ())("こ" "コ" "ｺ"))
+            ((("l" "a"). ())("ら" "ラ" "ﾗ"))
+            ((("l" "i"). ())("り" "リ" "ﾘ"))
+            ((("l" "u"). ())("る" "ル" "ﾙ"))
+            ((("l" "e"). ())("れ" "レ" "ﾚ"))
+            ((("l" "o"). ())("ろ" "ロ" "ﾛ"))
+            ((("m" "n"). ())("ん" "ン" "ﾝ"))
+            ((("n" "'"). ())("ん" "ン" "ﾝ"))
+            ((("q" "q"). ("q"))("っ" "ッ" "ｯ"))
+            ((("t" "c" "h"). ("h" "c"))("っ" "ッ" "ｯ"))
+            ((("w" "i"). ())("ゐ" "ヰ" "ｨ"))
+            ((("w" "e"). ())("ゑ" "ヱ" "ｪ"))
+            )
+          ja-rk-rule))
+}}}
+
+==== VJE風ローマ字配列 ====
+
+{{{
+(require "japanese.scm")
+(define ja-rk-rule
+  (append '(
+            ((("c" "a"). ())("か" "カ" "ｶ"))
+            ((("c" "i"). ())("し" "シ" "ｼ"))
+            ((("c" "u"). ())(("き" "キ" "ｷ") ("ゅ" "ュ" "ｭ")))
+            ((("c" "e"). ())("せ" "セ" "ｾ"))
+            ((("c" "o"). ())("そ" "ソ" "ｿ"))
+            ((("g" "w" "a"). ())(("ぐ" "グ" "ｸﾞ") ("ゎ" "ヮ" "ﾜ")))
+            ((("g" "w" "u"). ())("ぐ" "グ" "ｸﾞ"))
+            ((("k" "w" "a"). ())(("く" "ク" "ｸ") ("ゎ" "ヮ" "ﾜ")))
+            ((("k" "w" "u"). ())("く" "ク" "ｸ"))
+            ((("l" "a"). ())("ら" "ラ" "ﾗ"))
+            ((("l" "i"). ())("り" "リ" "ﾘ"))
+            ((("l" "u"). ())("る" "ル" "ﾙ"))
+            ((("l" "e"). ())("れ" "レ" "ﾚ"))
+            ((("l" "o"). ())("ろ" "ロ" "ﾛ"))
+            ((("n" "'"). ())("ん" "ン" "ﾝ"))
+            ((("q" "a"). ())(("く" "ク" "ｸ") ("ぁ" "ァ" "ｧ")))
+            ((("q" "i"). ())(("く" "ク" "ｸ") ("ぃ" "ィ" "ｨ")))
+            ((("q" "u"). ())("く" "ク" "ｸ"))
+            ((("q" "e"). ())(("く" "ク" "ｸ") ("ぇ" "ェ" "ｪ")))
+            ((("q" "o"). ())(("く" "ク" "ｸ") ("ぉ" "ォ" "ｫ")))
+            ((("x" "x"). ("x"))("っ" "ッ" "ｯ"))
+            )
+          ja-rk-rule))
+}}}
+
+==== Egg風ローマ字配列 ====
+
+ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
+
+{{{
+(require "japanese.scm")
+(define ja-rk-rule
+  (append '(
+            ((("g" "s" "e"). ())(("つ" "ツ" "ﾂ") ("ぇ" "ェ" "ｪ")))
+            ((("g" "w" "u"). ())("ぐ" "グ" "ｸﾞ"))
+            ((("k" "w" "u"). ())("く" "ク" "ｸ"))
+            ((("l" "a"). ())("ら" "ラ" "ﾗ"))
+            ((("l" "i"). ())("り" "リ" "ﾘ"))
+            ((("l" "u"). ())("る" "ル" "ﾙ"))
+            ((("l" "e"). ())("れ" "レ" "ﾚ"))
+            ((("l" "o"). ())("ろ" "ロ" "ﾛ"))
+            ((("n" "'"). ())("ん" "ン" "ﾝ"))
+            ((("w" "i"). ())("ゐ" "ヰ" "ｨ"))
+            ((("w" "e"). ())("ゑ" "ヱ" "ｪ"))
+            ((("x" "d" "i"). ())(("で" "デ" "ﾃﾞ") ("ぃ" "ィ" "ｨ")))
+            ((("x" "d" "u"). ())(("ど" "ド" "ﾄﾞ") ("ぅ" "ゥ" "ｩ")))
+            ((("x" "d" "e"). ())(("で" "デ" "ﾃﾞ") ("ぇ" "ェ" "ｪ")))
+            ((("x" "d" "o"). ())(("ど" "ド" "ﾄﾞ") ("ぉ" "ォ" "ｫ")))
+            ((("x" "t" "i"). ())(("て" "テ" "ﾃ") ("ぃ" "ィ" "ｨ")))
+            ((("x" "w" "i"). ())(("う" "ウ" "ｳ") ("ぃ" "ィ" "ｨ")))
+            ((("x" "w" "e"). ())(("う" "ウ" "ｳ") ("ぇ" "ェ" "ｪ")))
+            ((("x" "w" "o"). ())(("う" "ウ" "ｳ") ("ぉ" "ォ" "ｫ")))
+            ((("z" "!"). ())("●" "●" ""))
+            ((("z" "\""). ())("“" "“" ""))
+            ((("z" "#"). ())("▲" "▲" ""))
+            ((("z" "$"). ())("■" "■" ""))
+            ((("z" "&amp;"). ())("£" "£" ""))
+            ((("z" "'"). ())("‘" "‘" ""))
+            ((("z" "("). ())("【" "【" ""))
+            ((("z" ")"). ())("】" "】" ""))
+            ((("z" "~"). ())("¨" "¨" ""))
+            ((("z" "="). ())("≠" "≠" ""))
+            ((("z" "^"). ())("★" "★" ""))
+            ((("z" "\\"). ())("＼" "＼" ""))
+            ((("z" "|"). ())("‖" "‖" ""))
+            ((("z" "`"). ())("´" "´" ""))
+            ((("z" "@"). ())("▼" "▼" ""))
+            ((("z" "{"). ())("〔" "〔" ""))
+            ((("z" "+"). ())("±" "±" ""))
+            ((("z" ";"). ())("゛" "゛" ""))
+            ((("z" "*"). ())("×" "×" ""))
+            ((("z" ":"). ())("゜" "゜" ""))
+            ((("z" "}"). ())("〕" "〕" ""))
+            ((("z" "&lt;"). ())("≦" "≦" ""))
+            ((("z" "&gt;"). ())("≧" "≧" ""))
+            ((("z" "?"). ())("∞" "∞" ""))
+            ((("z" "_"). ())("∴" "∴" ""))
+            ((("z" "1"). ())("○" "○" ""))
+            ((("z" "2"). ())("▽" "▽" ""))
+            ((("z" "3"). ())("△" "△" ""))
+            ((("z" "4"). ())("□" "□" ""))
+            ((("z" "5"). ())("◇" "◇" ""))
+            ((("z" "6"). ())("☆" "☆" ""))
+            ((("z" "7"). ())("◎" "◎" ""))
+            ((("z" "8"). ())("¢" "¢" ""))
+            ((("z" "9"). ())("♂" "♂" ""))
+            ((("z" "0"). ())("♀" "♀" ""))
+            ((("z" "b"). ())("°" "°" ""))
+            ((("z" "c"). ())("〇" "〇" ""))
+            ((("z" "d"). ())("ゝ" "ゝ" ""))
+            ((("z" "f"). ())("〃" "〃" ""))
+            ((("z" "g"). ())("‐" "‐" ""))
+            ((("z" "m"). ())("″" "″" ""))
+            ((("z" "n"). ())("′" "′" ""))
+            ((("z" "p"). ())("〒" "〒" ""))
+            ((("z" "q"). ())("《" "《" ""))
+            ((("z" "r"). ())("々" "々" ""))
+            ((("z" "s"). ())("ヽ" "ヽ" ""))
+            ((("z" "t"). ())("〆" "〆" ""))
+            ((("z" "v"). ())("※" "※" ""))
+            ((("z" "w"). ())("》" "》" ""))
+            ((("z" "x"). ())((":" ":" "") ("-" "-" "")))
+            ((("z" "B"). ())("←" "←" ""))
+            ((("z" "C"). ())("℃" "℃" ""))
+            ((("z" "D"). ())("ゞ" "ゞ" ""))
+            ((("z" "F"). ())("→" "→" ""))
+            ((("z" "G"). ())("―" "―" ""))
+            ((("z" "M"). ())("〓" "〓" ""))
+            ((("z" "N"). ())("↓" "↓" ""))
+            ((("z" "P"). ())("↑" "↑" ""))
+            ((("z" "Q"). ())("〈" "〈" ""))
+            ((("z" "R"). ())("仝" "仝" ""))
+            ((("z" "S"). ())("ヾ" "ヾ" ""))
+            ((("z" "T"). ())("§" "§" ""))
+            ((("z" "V"). ())("÷" "÷" ""))
+            ((("z" "W"). ())("〉" "〉" ""))
+            ((("Z" "a"). ())("ａ" "ａ" ""))
+            ((("Z" "b"). ())("ｂ" "ｂ" ""))
+            ((("Z" "c"). ())("ｃ" "ｃ" ""))
+            ((("Z" "d"). ())("ｄ" "ｄ" ""))
+            ((("Z" "e"). ())("ｅ" "ｅ" ""))
+            ((("Z" "f"). ())("ｆ" "ｆ" ""))
+            ((("Z" "g"). ())("ｇ" "ｇ" ""))
+            ((("Z" "h"). ())("ｈ" "ｈ" ""))
+            ((("Z" "i"). ())("ｉ" "ｉ" ""))
+            ((("Z" "j"). ())("ｊ" "ｊ" ""))
+            ((("Z" "k"). ())("ｋ" "ｋ" ""))
+            ((("Z" "l"). ())("ｌ" "ｌ" ""))
+            ((("Z" "m"). ())("ｍ" "ｍ" ""))
+            ((("Z" "n"). ())("ｎ" "ｎ" ""))
+            ((("Z" "o"). ())("ｏ" "ｏ" ""))
+            ((("Z" "p"). ())("ｐ" "ｐ" ""))
+            ((("Z" "q"). ())("ｑ" "ｑ" ""))
+            ((("Z" "r"). ())("ｒ" "ｒ" ""))
+            ((("Z" "s"). ())("ｓ" "ｓ" ""))
+            ((("Z" "t"). ())("ｔ" "ｔ" ""))
+            ((("Z" "u"). ())("ｕ" "ｕ" ""))
+            ((("Z" "v"). ())("ｖ" "ｖ" ""))
+            ((("Z" "w"). ())("ｗ" "ｗ" ""))
+            ((("Z" "x"). ())("ｘ" "ｘ" ""))
+            ((("Z" "y"). ())("ｙ" "ｙ" ""))
+            ((("Z" "z"). ())("ｚ" "ｚ" ""))
+            )
+          ja-rk-rule))
+}}}
+
+==== SKK風ローマ字配列 ====
+
+{{{
+(require "japanese.scm")
+(define ja-rk-rule
+  (append '(
+            ((("t" "h" "a"). ())(("て" "テ" "ﾃ") ("ぁ" "ァ" "ｧ")))
+            ((("n" "'"). ())("ん" "ン" "ﾝ"))
+            ((("x" "x"). ("x"))("っ" "ッ" "ｯ"))
+            )
+          ja-rk-rule))
+}}}
+
+==== T-Code風配列 ====
+
+{{{
+(require "japanese.scm")
+(require "tcode.scm")
+(set! ja-rk-rule tcode-rule)
+}}}
+
+==== 無駄な子音を捨てない ====
+
+ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
+
+{{{
+(require "japanese.scm")
+(define ja-rk-rule-hoge
+  (map
+   (lambda (c)
+     (list (cons (list c) ()) (list c c c)))
+   '("b" "c" "d" "f" "g" "h" "j" "k" "l" "m"
+     "p" "q" "r" "s" "t" "v" "w" "x" "y" "z"
+     "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M"
+     "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z")))
+(if (symbol-bound? 'ja-rk-rule-hoge)
+    (set! ja-rk-rule (append ja-rk-rule-hoge ja-rk-rule)))
+}}}
+
+いんてrねt
+
+1.4より前のバージョンではmapの替わりにmapcarで代替してください。

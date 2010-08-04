@@ -1,0 +1,21 @@
+= DevelopmentDocument =
+
+開発文書一覧
+
+== 構造 ==
+
+  * [UimScm uim-scm]
+  * [CUSTOM]
+  * [XimServer XIM-SERVER]
+  * [HelperCandwin HELPER-CANDWIN]
+  * [HelperProtocol HELPER-PROTOCOL]
+  * [PLUGIN]
+  * [ComposerFramework]
+  * [CodingStyle]
+  * [CommitPolicy]
+  * [UimL10n]
+
+== リリース管理 ==
+
+  * [RoadMap 開発スケジュール]
+  * [RELEASING リリース前テスト]

@@ -1,0 +1,117 @@
+= UimByeoru =
+
+== これは何？ ==
+
+uimのByeoruモジュール。 ハングル入力スイートByeoruで入力/変換などを行なう場合に使う。
+
+== 使い方 ==
+
+  1. [UimImSwitcher UimImSwitcher]や[UimToolbar UimToolbar]からByeoruに切り換えてください。
+    1. Byeoruが見つからない場合は[UimPref UimPref]を起動してください。
+      * [UimToolbar UimToolbar]の設定アイコンをクリック
+      * ターミナルエミュレータなどでuim-pref-gtk（もしくはuim-pref-qt）を実行
+    1. 起動したら、「全体設定」→「入力方式の利用準備」→「使用可能にする入力方式」の「編集...」ボタンを押して、左の有効アイテムにByeoruを追加してください。
+      * そこにもByeoruが見つからない場合、uim-byeoruはインストールされていないのかもしれません。確認してみてください。
+    1. 追加が完了したら、Byeoruで入力したいアプリケーションを再起動してください。
+  1. [UimImSwitcher UimImSwitcher]や[UimToolbar UimToolbar]による切り換えは一時的なものです。永続的な変更を望むなら[UimPref UimPref]で設定する必要があります。
+  1. [UimPref UimPref]を起動したら、「全体設定」→「入力方式の利用準備」→「標準の入力方式を指定」のチェックボックスにチェックを入れます。
+  1. そのすぐ下の「標準の入力方式」に、Byeoruをセットしてください。
+
+=== サポートしている入力モード ===
+
+このページはEUC-JPなので書けませんが、直訳で以下のようなモードをサポートしています。
+
+  * 英文入力モード
+  * ハングル字単位入力モード
+  * ハングル単語単位入力モード
+
+=== サポートしているハングルキーボードのレイアウト ===
+
+  * ハングル2ボル式 (Windows互換)
+  * ハングル2ボル式 (Hanterm互換)
+  * ハングル3ボル式最終版 (厳密)
+  * ハングル3ボル式最終版 (寛容)
+  * ハングル390式 (厳密)
+  * ハングル390式 (寛容)
+  * ハングル3ボル式 (シフトなし)
+  * ハングルローマ字式
+
+=== 標準で指定されているキー設定 ===
+
+|| 動作 || キー ||
+|| オン/オフ || Shift+Space ||
+|| 右へ移動 || →、Ctrl+b ||
+|| 左へ移動 || ←、Ctrl+f ||
+|| 単語の先頭へ移動 || Home、Ctrl+a ||
+|| 単語の末尾へ移動 || End、Ctrl+e ||
+|| カーソルの右の一字を削除 || Delete、Ctrl+d ||
+|| カーソルの左の一字を削除 || BS、Ctrl+h ||
+|| 次の変換候補へ移動 || Space、↓、Ctrl+n ||
+|| 前の変換候補へ移動 || ↑、Ctrl+p ||
+|| 次の変換候補ページへ移動 || PgDn[c=edit;p=PgDn|?] ||
+|| 前の変換候補ページへ移動 || PgUp[c=edit;p=PgUp|?] ||
+|| 変換確定 || Ctrl+j、Enter、Ctrl+m ||
+|| キャンセル || ESC、Ctrl+[、Ctrl+g ||
+|| ハングルから漢字へ変換 || F9 ||
+
+=== ファイル ===
+
+~/.uim.d/customs/custom-byeoru.scm:: [UimPref UimPref]の「Byeoru」ファイル。~/.uim.d/customs/custom-byeoru-keys(1,2).scm:: [UimPref UimPref]の「Byeoru キー設定」ファイル。
+
+== カスタマイズ可能な項目 ==
+
+=== Byeoruの変数 ===
+
+|| 動作 || 変数名 || 指定できる値 || 標準値 ||
+||<|8> ハングルキーボードのレイアウト ||<|8> byeoru-layout || 'byeoru-layout-hangul2 ||<|8> 'byeoru-layout-hangul2 ||
+|| 'byeoru-layout-hangul2hanterm ||
+|| 'byeoru-layout-strict3final ||
+|| 'byeoru-layout-generous3final ||
+|| 'byeoru-layout-strict390 ||
+|| 'byeoru-layout-generous390 ||
+|| 'byeoru-layout-no-shift ||
+|| 'byeoru-layout-romaja ||
+||<|3> 字母入力 ||<|3> byeoru-jamo-orderedness || 'ordered ||<|3> 'ordered ||
+|| 'orderless ||
+|| 'more-orderless ||
+||<|2> ESCキーでハングルモードをオフにする (viユーザ向け) ||<|2> byeoru-esc-turns-off? || #t ||<|2> #t ||
+|| #f ||
+||<|2> 標準の確定単位を単語にする ||<|2> byeoru-commit-by-word? || #t ||<|2> #f ||
+|| #f ||
+||<|2> シフト+ローマ字母音で単母音を入力する ||<|2> byeoru-shifted-romaja-isolates-vowel? || #t ||<|2> #f ||
+|| #f ||
+|| 候補ウィンドウのサイズ || byeoru-nr-candidate-max ||<|2> 数字 || 10 ||
+|| 記号のキャッシュサイズ || define byeoru-symbol-cache-size || 5 ||
+||<|2> 互換字母を使用して構成中の音節を表す ||<|2> byeoru-compatibility-jamos-for-incomplete-syllables? || #t ||<|2> #t ||
+|| #f ||
+
+==== Byeoruの変数の依存関係 ====
+
+  * byeoru-layout 'byeoru-layout-hangul2 'byeoru-layout-hangul2hanterm 'byeoru-layout-strict3final 'byeoru-layout-strict390
+    * byeoru-jamo-orderedness
+    * byeoru-shifted-romaja-isolates-vowel?
+
+  * byeoru-layout 'byeoru-layout-romaja
+    * byeoru-shifted-romaja-isolates-vowel?
+
+  * byeoru-layout 'byeoru-layout-generous3final 'byeoru-layout-generous390 'byeoru-layout-no-shift
+    * byeoru-shifted-romaja-isolates-vowel?
+
+=== Byeoruキー設定の変数 ===
+
+|| 動作 || キー変数名 ||
+|| オン || byeoru-on-key? ||
+|| オフ || byeoru-latin-key? ||
+|| ハングルから漢字へ変換 || byeoru-conversion-key? ||
+|| 変換確定 || byeoru-commit-key? ||
+|| 変換キャンセル || byeoru-cancel-key? ||
+|| 次候補 || byeoru-next-candidate-key? ||
+|| 前候補 || byeoru-prev-candidate-key? ||
+|| 候補ウィンドウの次ページ || byeoru-next-page-key? ||
+|| 候補ウィンドウの前ページ || byeoru-prev-page-key? ||
+|| バックスペース || byeoru-backspace-key? ||
+|| デリート || byeoru-delete-key? ||
+|| 左に移動 || byeoru-go-left-key? ||
+|| 右に移動 || byeoru-go-right-key? ||
+|| 単語の先頭 || byeoru-beginning-of-preedit-key? ||
+|| 単語の末尾 || byeoru-end-of-preedit-key? ||
