@@ -1,101 +1,95 @@
-= PLUGIN =
+﻿= PLUGIN =
 
 [http://uim.googlecode.com/svn/trunk/doc/PLUGIN uim:doc/PLUGIN]より転載
 
 <wiki:toc max_depth="1" />
 
-Plugin for uim
+Plugin for uim 
 
-uim 0.4.6では共有ライブラリとSchemeプログラムをロードするプラグインシステムが実装された。uimのプラグインはSchemeとライブラリの2つから構成される。
 
-{{{
- ___________    (load-plugin "foo")
-|           | ------------------+--->  libuim-foo.so
-|  libuim   |                   |
-|___________|                   +--->  foo.scm
-}}}
+== 伝統的な方式 ==
 
-Schemeエンジンから(load-plugin "foo")が呼び出されると、libuim-foo.soがメモリにロードされると同時に'uim_plugin_instance_init'を実行する。libuim-foo.soの呼び出しに成功した後、'foo.scm'がロードされる。
+uim supports plugin system which loads dynamic library and scheme definition
+as a input method module.
 
-----
-
-From 0.4.6, uim supports plugin system which loads library and scheme definition. uim's plugin consist of both scheme and library.
+uim's plugin may consist of scheme file and/or dynamic library.
 
 {{{
- ___________    (load-plugin "foo")
-|           | ------------------+--->  libuim-foo.so
-|  libuim   |                   |
-|___________|                   +--->  foo.scm
+    ___________    (require-module "foo")
+   |           | ------------------+--->  libuim-foo.so
+   |  libuim   |                   |
+   |___________|                   +--->  foo.scm
+
+ When called (require-module "foo") from libuim scheme engine, libuim-foo.so
+ is loaded if existed and call 'plugin_instance_init' in libuim-foo.so first.
+ After that 'foo.scm' is loaded if existed.
 }}}
 
-When called (load-plugin "foo") from libuim scheme engine, libuim-foo.so is loaded and call 'plugin_instance_init' in libuim-foo.so first. After loading libuim-foo.so is succeeded, 'foo.scm' is loaded.
+=== ユーザが使用する場合 ===
 
-== ユーザが使用する場合 ==
-
-サードパーティのプラグインをインストールしたい場合は、共有ライブラリファイルとSchemeファイルの両方を~/uim.d/plugin/以下に置く必要がある。例えば、"foo"というプラグインをインストールする場合には~/uim.d/plugin/以下にlibuim-foo.soと foo.scmの2つのファイルを置かなければならない。その後、~/.uimに以下のように記述する。
+If you want to install 3rd party plugin, you have to place both the dynamic
+shared object and scheme file to ~/.uim.d/plugin/.
+For example, if you want to install "foo", you have to put both
+libuim-foo.so and foo.scm to ~/.uim.d/plugin. And you need to invoke
+following command to enable the plugin.
 
 {{{
-(load-plugin "foo")
+   $ uim-module-manager --register foo --path=~/.uim.d/plugin
 }}}
 
-----
+=== 管理者が全ユーザに使用させたい場合 ===
 
-If you want to install 3rd party plugin, you have to place both the shared object and scheme file to ~/.uim.d/plugin/. For example, if you want to install "foo", you have to locate both libuim-foo.so and foo.scm to ~/.uim.d/plugin. And you have to add to ~/.uim as follows,
+If you want to install 3rd party plugin, you have to place the dynamic shared
+object to ${pkglibdir}/plugin/ and place the scheme library to ${pkgdatadir}/.
+
+For example, if you want to install "foo", you have to install libuim-foo.so
+to ${pkglibdir}/plugin and foo.scm to ${pkgdatadir}/. If you want to enable
+this for all users, invoke following command.
 
 {{{
-(load-plugin "foo")
+$ sudo uim-module-manager --register foo
 }}}
 
-== 管理者が全ユーザに使用させたい場合 ==
 
-サードパーティのプラグインをインストールする場合は、共有ライブラリファイルを${libdatadir}/plugin/に置き、Scheme ファイルを${datadir}/pluginに置く必要がある。例えば、"foo"というプラグインをインストールする場合にはlibuim- foo.soを${libdatadir}/pluginに、foo.scmを${datadir}/pluginに置かなければならない。さらに、このプラグインを全ユーザに対して有効にする場合には、${datadir}/loader.scmに以下のように記述する。
+=== プラグイン開発をする場合 ===
 
-{{{
-(load-plugin "foo")
-}}}
-
-----
-
-If you want to install 3rd party plugin, you have to place the shared object to ${libdatadir}/plugin/ and place the scheme library to ${datadir}/plugin. For example, if you want to install "foo", you have to install libuim-foo.so to ${libdatadir}/plugin and foo.scm to ${datadir}/plugin. If you want to enable this for all users put it as follows in ${datadir}/loader.scm,
-
-{{{
-(load-plugin "foo")
-}}}
-
-== プラグイン開発をする場合 ==
-
-プラグインがメモリにロードされた後で呼ばれる関数。ほとんどの場合、内部変数の初期化とCで書かれた関数とSchemeシンボルとのバインディングが行われる。 プラグインがアンロードされるときに呼び出される。
-
-プラグインのロード形態は以下のとおり:
-
-1. Plugin loading
-
-{{{
-dlopen(libuim-foo.so) -> call uim_plugin_instance_init -> call "foo.scm"
-}}}
-
-2. Plugin unloading
-
-{{{
-call uim_plugin_instance_quit -> dlclose(libuim-foo.so)
-}}}
-
-----
-
-plugin_instance_init(void): Called when plugin is being loaded. In most case, initialize variables and bind scheme symbol and C functions.
+plugin_instance_init(void): Called when plugin is being loaded. In most case,
+                            initialize variables and bind scheme symbol and C
+                            functions.
 
 plugin_instance_quit(void): Called when plugin is being unloaded.
 
+Plugin's loading scheme
+
+ 1. Plugin loading: dlopen(libuim-foo.so) -> call plugin_instance_init -> call "foo.scm"
+
+ 2. Plugin unloading: call plugin_instance_quit -> dlclose(libuim-foo.so)
+
+
+== Dynamic library loading ==
+
+From 1.6.0, uim supports plugin system which loads dynamic library explicitly
+from scheme file.  Use this system if you want to use external C code or
+library from scheme side.
+
+{{{
+    ___________  (require "foo") --> (require-dynlib "bar")
+   |           |
+   |  libuim   | ---------->  foo.scm --------> libuim-bar.so
+   |___________|
+}}}
+
+When called (require-dynlib "bar") from the top of foo.scm, libuim-bar.so is
+loaded and 'plugin_instance_init' in libuim-bar.so is called.
+
+=== For developers ===
+
+ * plugin_instance_init(void): Called when plugin is being loaded. In most case, initialize variables and bind scheme symbol and C functions.
+
+ * plugin_instance_quit(void): Called when plugin is being unloaded.
+
 Plugin's loading scheme:
 
-1. Plugin loading
+  1. Plugin loading: (require-dynlib "foo") -> dlopen(libuim-foo.so) -> call plugin_instance_init -> (provide "foo")
 
-{{{
-dlopen(libuim-foo.so) -> call plugin_instance_init -> call "foo.scm"
-}}}
-
-2. Plugin unloading
-
-{{{
-call plugin_instance_quit -> dlclose(libuim-foo.so)
-}}}
+  2. Plugin unloading: (dynlib-unload "foo") -> call plugin_instance_quit -> dlclose(libuim-foo.so)
