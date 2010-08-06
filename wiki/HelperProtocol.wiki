@@ -1,4 +1,4 @@
-= HELPER-PROTOCOL =
+﻿= HELPER-PROTOCOL =
 
 [http://uim.googlecode.com/svn/trunk/doc/HELPER-PROTOCOL uim:doc/HELPER-PROTOCOL]より転載
 
@@ -80,7 +80,9 @@ message  = (focus_in            |
             im_change_this_application_only |
             prop_update_custom  |
             custom_reload_notify |
-            commit_string) "\n"
+            commit_string |
+			im_switcher_start
+			im_switcher_quit) "\n"
 
 charset_specifier = "charset=" charset "\n"
 charset = "UTF-8" | "EUC-JP" | "GB18030" |
@@ -278,3 +280,26 @@ commit_string = "commit_string\n" charset_specifier str_to_commit "\n"
 str_to_commit = /^[^\n]+$/
 }}}
 
+=== im_switcher_start ===
+
+This message notifies that a new uim-im-switcher is started.
+When an existing old uim-im-switcher receives im_switcher_start,
+the existing uim-im-switcher must send im_switcher_quit
+to quit newly started uim-im-switcher.
+
+See also im_switcher_quit.
+
+{{{
+im_switcher_start = "im_switcher_start\n"
+}}}
+
+=== im_switcher_quit ===
+
+This message requests newly started uim-im-switcher to quit.
+All uim-im-switcher must quit immediately after received this message.
+
+See also im_switcher_start.
+
+{{{
+im_switcher_quit = "im_switcher_quit\n"
+}}}
