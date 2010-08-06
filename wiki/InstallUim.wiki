@@ -28,21 +28,26 @@ $ ./configure
   * --enable-dict（[UimDictGtk UimDictGtk]のビルド）
   * --enable-anthy-static（[UimAnthy UimAnthy]のスタティックビルド）
   * --enable-anthy-utf8-static（UTF-8版[UimAnthy UimAnthy]のスタティックビルド）
+  * --enable-kde4-applet (KDE4 向けアプレットのビルド)
   * --with-anthy-utf8（UTF-8版[UimAnthy UimAnthy]をビルド）
   * --with-canna（[UimCanna UimCanna]のビルド）
   * --with-sj3（[UimSj3 UimSj3]のビルド）
   * --with-wnn（[UimWnn UimWnn]のビルド）
-  * --with-scim（uim-scimのビルド）
+  * --with-scim（uim-scimのビルド, broken）
   * --with-qt（各種Qt3.x版ツールのビルド）
   * --with-qt-immodule（Qt 3.x版[UimQt UimQt]のビルド）
   * --with-qt4（各種Qt4.x版ツールのビルド）
   * --with-qt4-immodule（Qt 4.x版[UimQt UimQt]のビルド）
   * --with-eb（電子辞書を利用した注釈表示）
+  * --with-curl (CUrlプラグインのビルド)
+  * --with-expat (expatプラグインのビルド, uim-yahoo-jp に必要)
+  * --with-sqlite3 (SQLite3プラグインのビルド)
+  * --with-ffi (libffiプラグインのビルド)
 
 各ブリッジ、モジュール、ツール群をビルドするために、以下が要求されます。
 
   * iconv
-  * [http://www.gnu.org/software/gettext/ gettext]（>= 0.12）
+  * [http://www.gnu.org/software/gettext/ gettext]（>= 0.17）
   * [http://pkgconfig.freedesktop.org/ pkg-config]
   * [http://anthy.sourceforge.jp/ Anthy]（>= 7802 推奨）
     * [UimAnthy UimAnthy]
@@ -69,14 +74,14 @@ $ ./configure
     * [UimInputPadJa UimInputPadJa]
     * [UimDictGtk UimDictGtk]
     * uim-candwin-gtk（[UimXim UimXim]）
-  * [http://www.gnome.org/ gnome-panel]、[ftp://ftp.gnome.org/pub/GNOME/sources/intltool/ intltool]（>= 0.35.2）
+  * [http://www.gnome.org/ gnome-panel]、[ftp://ftp.gnome.org/pub/GNOME/sources/intltool/ intltool]（>= 0.36.3）
     * uim-applet-gnome（[UimToolbar UimToolbar]）
   * [http://www.trolltech.com/products/qt Qt]（>= 3.3.2, << 4.0）
     * uim-toolbar-qt（[UimToolbar UimToolbar]）
     * uim-pref-qt（[UimPref UimPref]）
     * [UimChardictQt UimChardictQt]
     * uim-candwin-qt（[UimXim UimXim]）
-  * [http://people.freedesktop.org/~daisuke/ immodule for Qtのパッチ]を当てたQt
+  * immodule for Qtのパッチ]を当てたQt
     * Qt 3.x版[UimQt UimQt]
   * [http://www.trolltech.com/products/qt Qt]（>= 4.0）
     * uim-toolbar-qt4（[UimToolbar UimToolbar]）
@@ -113,16 +118,14 @@ $ su
 
 標準では/usr/local以下にインストールされますが、このディレクトリにあるライブラリは標準では検索されません。 /etc/ld.so.confに''/usr/local/lib''という行を追加して、ldconfigを実行する必要があります。
 
-更に[UimGtk UimGtk]を利用するには、GTK+2のimmoduleファイルを生成する必要があります。
+[UimGtk UimGtk]を利用するには、GTK+2 の gtk.immodules
+ファイルが正しく生成されている必要があります。
+
+もし GTK+2 と異なるディレクトリにuimをインストールした場合は、明示的に
+gtk.immodules ファイルを指定してください。
 
 {{{
-# gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
-}}}
-
-もしGTK+2と異なるディレクトリにuimをインストールした場合は、明示的にim-uim.soファイルを指定してください。
-
-{{{
-# gtk-query-immodules-2.0 /usr/local/lib/gtk-2.0/immodules/im-uim.so > /etc/gtk-2.0/gtk.immodules
+$ export GTK_IM_MODULE_FILE=$(DESTDIR)$(sysconfdir)/gtk-2.0/gtk.immodules
 }}}
 
 === 開発途中版 ===
@@ -155,7 +158,7 @@ $ LC_MESSAGES=C ./make-wc.sh
   * [http://www.gnu.org/software/autoconf/ Autoconf]（>= 2.60b（2.61推奨））
   * [http://www.gnu.org/software/automake/ Automake]（>= 1.10）
   * [http://www.gnu.org/software/libtool/ Libtool]（>= 1.5.22）
-  * [http://ftp.gnome.org/pub/GNOME/sources/intltool/ intltool]（>= 0.35.2）
+  * [http://ftp.gnome.org/pub/GNOME/sources/intltool/ intltool]（>= 0.36.3）
   * [http://www.gnu.org/software/make/ GNU make]
   * [http://www.perl.org/ Perl]
   * [http://www.ruby-lang.org/ Ruby]
@@ -213,7 +216,7 @@ XMODIFIERS=@im=uim ; export XMODIFIERS
 [UimPref UimPref]で設定できます。
 
 {{{
-$ uim-pref-gtk（もしくはuim-pref-qt）
+$ uim-pref-gtk（もしくはuim-pref-{qt,qt4}）
 }}}
 
   1. 起動したら、「全体設定」→「入力方式の利用準備」→「標準の入力方式を指定」のチェックボックスにチェックを入れます。
@@ -279,20 +282,11 @@ Okabeさんにより[http://packages.qa.debian.org/u/uim.html 公式パッケー
 
 設定はim-switchが自動で行います。
 
-uim-byeoruパッケージは壊れていますが、手動で
-
-{{{
-$ mkdir -p ~/.uim.d/plugin
-$ uim-module-manager --register byeoru --path ~/.uim.d/plugin
-}}}
-
-を実行すれば利用できるようになります。
-
   * [http://debian.fam.cx/index.php?Japanese Debian GNU/Linux スレッドテンプレ 日本語関係]
 
 === Fedora ===
 
-[https://admin.fedoraproject.org/pkgdb/packages/name/uim 公式パッケージ]が提供されています。 アーカイブがが細かく分割されているので、インストールし忘れには注意しましょう。
+[https://admin.fedoraproject.org/pkgdb/acls/name/uim 公式パッケージ]が提供されています。 アーカイブがが細かく分割されているので、インストールし忘れには注意しましょう。
 
   * uim
   * uim-devel
@@ -317,23 +311,7 @@ $ uim-module-manager --register byeoru --path ~/.uim.d/plugin
 
 を実行してください。
 
-FC6の場合、im-chooserを利用してuimに切り替えます。
-
-FC5以前でuimに切り替えるには、system-switch-imもインストールしてください。
-
-{{{
-# yum install system-switch-im
-}}}
-
-そしてsystem-switch-imで入力メソッドをuimへ切り替えます。
-
-{{{
-# system-switch-im
-}}}
-
-「高度な設定」→「Japanese - 日本語」と進み、入力メソッドに「uim」を選びます。 後は再ログインすれば使えるようになります。
-
-  * [http://www.atmarkit.co.jp/flinux/rensai/linuxtips/768useanthy.html ＠IT：連文節変換エンジンAnthyを使うには]
+im-chooserを利用してuimに切り替えます。
 
 === FreeBSD ===
 
@@ -386,7 +364,9 @@ XMODIFIERS=@im=uim ; export XMODIFIERS
 
 === Mac OS X ===
 
-Fink:: http://pdb.finkproject.org/pdb/package.php/uim[http://www.macports.org/ MacPorts]:: http://lapangan.net/darwinports/index.php?PrivatePortfile%2Fuimuim一本で全ての入力:: http://www.d1.dion.ne.jp/~irino/osx/uim.html
+ * Fink:: http://pdb.finkproject.org/pdb/package.php/uim
+ * [http://www.macports.org/ MacPorts]:: http://lapangan.net/darwinports/index.php?PrivatePortfile%2Fuim
+ * uim一本で全ての入力:: http://www.d1.dion.ne.jp/~irino/osx/uim.html
 
 === Maemo ===
 
