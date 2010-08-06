@@ -1,8 +1,8 @@
-﻿= RequestUim =
+﻿= RequestUimSolved =
 
 <wiki:toc max_depth="3" />
 
-欲しい機能をどんどんと書いていくページ。要望が多い機能は優先的に実装されるかも。
+== 解決された機能 ==
 
 
 === 記号一覧入力 ===
