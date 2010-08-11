@@ -1,4 +1,4 @@
-= UimAnthy =
+﻿= UimAnthy =
 
 
 == これは何？ ==
@@ -33,6 +33,8 @@ uim-anthyのUTF-8版は標準では含まれません。 UTF-8に対応したAnt
 
   * [RomaKanaTable ローマ字入力方式]
   * [AZIKTable AZIK拡張ローマ字入力方式]
+  * ACT拡張ローマ字入力方式
+  * KZIK拡張ローマ字入力方式
   * かな入力方式
 
 === 標準で指定されているキー設定 ===

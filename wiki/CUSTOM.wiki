@@ -1,8 +1,8 @@
-= CUSTOM =
+﻿= CUSTOM =
 
 [http://uim.googlecode.com/svn/trunk/doc/CUSTOM uim:doc/CUSTOM]より転載
 
-<wiki:toc max_depth="1" />
+<wiki:toc max_depth="3" />
 
 ここではuim-custom APIの使用法と開発者向けの仕組みを説明する。
 

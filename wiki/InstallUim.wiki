@@ -1,6 +1,6 @@
 ﻿= InstallUim =
 
-<wiki:toc max_depth="1" />
+<wiki:toc max_depth="3" />
 
 == uimの入手 ==
 
@@ -367,6 +367,7 @@ XMODIFIERS=@im=uim ; export XMODIFIERS
  * Fink:: http://pdb.finkproject.org/pdb/package.php/uim
  * [http://www.macports.org/ MacPorts]:: http://lapangan.net/darwinports/index.php?PrivatePortfile%2Fuim
  * uim一本で全ての入力:: http://www.d1.dion.ne.jp/~irino/osx/uim.html
+ * [http://macuim.googlecode.com/ MacUIM]
 
 === Maemo ===
 

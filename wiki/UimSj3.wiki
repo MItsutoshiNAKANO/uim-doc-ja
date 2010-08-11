@@ -1,6 +1,6 @@
-= UimSj3 =
+﻿= UimSj3 =
 
-<wiki:toc max_depth="1" />
+<wiki:toc max_depth="3" />
 
 == これは何？ ==
 
@@ -35,6 +35,8 @@ uimの[http://code.google.com/p/sj3/ SJ3]モジュール。 連文節かな漢�
 
   * [RomaKanaTable ローマ字入力方式]
   * [AZIKTable AZIK拡張ローマ字入力方式]
+  * ACT拡張ローマ字入力方式
+  * KZIK拡張ローマ字入力方式
   * かな入力方式
 
 === 標準で指定されているキー設定 ===

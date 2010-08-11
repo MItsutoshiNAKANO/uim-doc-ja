@@ -1,4 +1,4 @@
-= CommitPolicy =
+﻿= CommitPolicy =
 
 http://lists.sourceforge.jp/mailman/archives/anthy-dev/2005-September/002377.html
 
@@ -6,7 +6,7 @@ http://lists.sourceforge.jp/mailman/archives/anthy-dev/2005-October/002503.html
 
 http://groups.google.com/group/uim-ja/t/e0616ddc710efbea
 
-<wiki:toc max_depth="1" />
+<wiki:toc max_depth="2" />
 
 == コミットする単位に関して ==
 

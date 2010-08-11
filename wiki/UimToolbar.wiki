@@ -1,21 +1,19 @@
-= UimToolbar =
+﻿= UimToolbar =
 
 == これは何？ ==
-
-http://uim.freedesktop.org/img/uim-toolbars.pnghttp://uim.freedesktop.org/img/toolbar-applet.png
 
 使用中の入力方式のモード表示/切り換えや各種ツールを起動するバー。 右クリックメニューから、各種ツールを起動する事ができます。
 
   * スタンドアローンタイプ
     * uim-toolbar-gtk
     * uim-toolbar-qt
-    * uim-toolbar-qt4（1.5.7以降）
+    * uim-toolbar-qt4
   * システムトレイタイプ
     * uim-toolbar-gtk-systray
   * パネルアプレットタイプ
     * uim-applet-gnome
-    * uim-applet-kde（1.3.0以降）
-    * uim-applet-kde4（1.5.7以降）
+    * uim-applet-kde
+    * uim-applet-kde4
 
 なおuim-toolbar-qt、uim-applet-kde、uim-toolbar-qt4とuim-applet-kde4は標準では含まれません。uim-toolbar-qtとuim-applet-kdeは'''--with-qt'''、uim-toolbar-qt4とuim-applet-kde4は'''--with-qt4'''をつけてuimをコンパイルする必要があります。
 
@@ -49,7 +47,7 @@ $ uim-toolbar-gtk-systray &
 
 === ヘルプボタン ===
 
-このボタンに該当するような機能は存在しません。 それについての話は全く出ていませんし、今後提供される予定なのかも不明。
+wikiページを参照します。
 
 === ファイル ===
 
@@ -104,8 +102,3 @@ $ uim-toolbar-gtk-systray &
 === トレイの高さが32px以下だとアイコンが全部表示されない ===
 
 仕様?
-
-=== 背景色が黒系のテーマだとアイコンが識別不能になる ===
-
-アイコンを編集して、補色で文字部分を縁取るなり、背景色を固定するなりしてください。 アイコンファイルはデフォルトでは/usr/local/share/uim/pixmaps以下にあります。
-

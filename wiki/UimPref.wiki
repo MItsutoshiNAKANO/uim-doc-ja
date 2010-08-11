@@ -1,4 +1,4 @@
-= UimPref =
+﻿= UimPref =
 
 == これは何？ ==
 
@@ -6,7 +6,7 @@ http://pdx.freedesktop.org/~kzk/uim/uim-prefs.png
 
 uimのカスタマイズツール。 uim-pref-gtk、uim-pref-qtとuim-pref-qt4が用意されています。
 
-なおuim-pref-qtとuim-pref-qt4は標準では含まれません。uim-pref-qtは'''--with-qt'''、uim-pref-qt4（1.5.7以降）は'''--with-qt4'''をつけてuimをコンパイルする必要があります。
+なおuim-pref-qtとuim-pref-qt4は標準では含まれません。uim-pref-qtは'''--with-qt'''、uim-pref-qt4は'''--with-qt4'''をつけてuimをコンパイルする必要があります。
 
 == 使い方 ==
 

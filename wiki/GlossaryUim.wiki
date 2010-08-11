@@ -1,10 +1,10 @@
-= GlossaryUim =
+﻿= GlossaryUim =
 
 uimで使われる用語
 
 tkng氏が書いた[http://lists.freedesktop.org/archives/uim/2005-August/001314.html Glossary]に続くスレッドから転載。
 
-<wiki:toc max_depth="1" />
+<wiki:toc max_depth="2" />
 
 == preedit（編集領域） ==
 

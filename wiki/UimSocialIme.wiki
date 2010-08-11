@@ -1,4 +1,4 @@
-= UimSocialIme =
+﻿= UimSocialIme =
 
 == これは何？ ==
 
@@ -33,6 +33,8 @@ uimの[http://www.social-ime.com/ Social IME]モジュール。 連文節かな�
 
   * [RomaKanaTable ローマ字入力方式]
   * [AZIKTable AZIK拡張ローマ字入力方式]
+  * ACT拡張ローマ字入力方式
+  * KZIK拡張ローマ字入力方式
   * かな入力方式
 
 === 標準で指定されているキー設定 ===

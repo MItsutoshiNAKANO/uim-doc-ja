@@ -1,6 +1,6 @@
-= HistoryUim =
+﻿= HistoryUim =
 
-<wiki:toc max_depth="1" />
+<wiki:toc max_depth="3" />
 
 == 2009年 ==
 

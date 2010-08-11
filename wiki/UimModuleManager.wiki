@@ -1,4 +1,4 @@
-= UimModuleManager =
+﻿= UimModuleManager =
 
 == これは何？ ==
 
@@ -20,4 +20,4 @@ $ uim-module-manager --register ruby --path ~/.uim.d/plugin
 
 === オプション ===
 
---register ''モジュール名'':: モジュールを登録します。--unregister ''モジュール名'':: モジュールをUnregisterします。--unregister-all:: すべてのモジュールをUnregisterします。--path ''パス'':: installed-modules.scm、loader.scmファイルの生成先を指定します。デフォルトは''/usr/local/share/uim''です。
+--register ''モジュール名'':: モジュールを登録します。--unregister ''モジュール名'':: モジュールをUnregisterします。--unregister-all:: すべてのモジュールをUnregisterします。--path ''パス'':: installed-modules.scm、loader.scmファイルの生成先を指定します。デフォルトは''${prefix}/share/uim''です。

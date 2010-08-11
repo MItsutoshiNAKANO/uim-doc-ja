@@ -1,6 +1,6 @@
-= UimAjaxIme =
+﻿= UimAjaxIme =
 
-<wiki:toc max_depth="1" />
+<wiki:toc max_depth="3" />
 
 == これは何？ ==
 
@@ -35,6 +35,8 @@ uimのAjax IMEモジュール。 かな漢字変換エンジン[http://ajaxime.c
 
   * [RomaKanaTable ローマ字入力方式]
   * [AZIKTable AZIK拡張ローマ字入力方式]
+  * ACT拡張ローマ字入力方式
+  * KZIK拡張ローマ字入力方式
   * かな入力方式
 
 === 標準で指定されているキー設定 ===

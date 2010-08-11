@@ -1,6 +1,6 @@
-= 開発スケジュール =
+﻿= 開発スケジュール =
 
-<wiki:toc max_depth="1" />
+<wiki:toc max_depth="2" />
 
 == [http://lists.freedesktop.org/archives/uim/2005-November/001385.html Development reformation: Project priorities] ==
 
@@ -213,6 +213,7 @@ uim 2.0 (legacy interface):
 
 uim 1.6.0では広範囲にわたる再編成を行う。ユーザに見える形での変更点も多くなるだろう。
 
+uim 1.7.0では広範囲にわたる再編成を行う。ユーザに見える形での変更点も多くなるだろう。
 IMの開発を広範囲に行うために[ComposerFramework ComposerFramework]が導入される予定となっている。
 
   * http://groups.google.com/group/uim-en/t/127a17dbaf4da9af

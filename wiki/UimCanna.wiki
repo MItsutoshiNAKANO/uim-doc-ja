@@ -1,4 +1,4 @@
-= UimCanna =
+﻿= UimCanna =
 
 == これは何？ ==
 
@@ -33,6 +33,8 @@ uimの[http://sourceforge.jp/projects/canna/ Canna]モジュール。 連文節�
 
   * [RomaKanaTable ローマ字入力方式]
   * [AZIKTable AZIK拡張ローマ字入力方式]
+  * ACT拡張ローマ字入力方式
+  * KZIK拡張ローマ字入力方式
   * かな入力方式
 
 === 標準で指定されているキー設定 ===

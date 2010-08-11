@@ -1,4 +1,4 @@
-= UimL10n =
+﻿= UimL10n =
 
 [http://uim.googlecode.com/svn/trunk/po/ja.po uim:po/ja.po]より転載
 
@@ -23,4 +23,50 @@
 
 == 日本語訳に使用する用語 (適宜追加お願いします) ==
 
-advanced:: 高度(な)annotation:: 註釈beol:: ボルbeol-sik:: ボル式binding(s):: 設定 (状況に応じて他の訳も可)cancel:: キャンセル (「取消」はeraseの意を含むので避ける)candidate:: 候補Chinese:: 中国語 (「中文」は一般に知られていない外国語なので避ける)commit:: 確定compose, composition:: 構成 (文脈により「合成」)'''cursor, caret''':: カーソルdefault:: 標準deploy:: 状況に応じて適切に意訳。「配備」はものものしいので使わないEmacs:: Emacs (固有名詞として)emacs:: emacs (コマンドとして)enable:: 有効 (状況に応じて他の訳も可。availableとの誤認を避けるよう留意)Enter:: EnterESC, escape:: ESCfullwidth alphanumeric:: 全角英数(字) (label中では「字」を入れず、short-descには入れる)global:: 全体 (状況に応じて他の訳も可。「全般」はgenericの意を含むので避ける)hot key:: ホットキー (shortcutとショートカットの方がいいかもしれない。要議論)International Phonetic Alphabet (IPA):: 国際音声記号input method:: 入力方式 (ただし、デスクトップ環境を構築する機構としてのinput methodを指す場合等は「入力メソッド」も用いる)item:: 項目 (状況に応じて他の訳も可)key bindings:: キー設定mode:: モード'''modifier key''':: 修飾キーoff:: オフon:: オンpinyin:: ピンイン (「拼音」等は認知度が低いので外来語としてカタカナ表記)preference:: 設定preedit:: 編集領域quit:: 終了Return, return:: リターンsave:: 保存separator:: 区切りsimplified Chinese:: 簡体字(中国語)status:: 状態switch:: 切り換え(る)traditional Chinese:: 繁体字(中国語)transition:: 遷移 (ただし、わかりにくいという意見が多ければ「移行」等に)transposed:: (置き換えて、反転して)toggle:: 反転 (状況に応じて他の訳も可。「トグル」は携帯電話の入力方式等で誤用が広まっているので避ける)Uim, UIM:: uimUnicode:: ユニコードUnix, unix:: UNIXuse:: 使用Vi, vi:: vi (固有名詞、コマンド共)
+ * advanced:: 高度(な)
+ * annotation:: 註釈
+ * beol:: ボル
+ * beol-sik:: ボル式
+ * binding(s):: 設定 (状況に応じて他の訳も可)
+ * cancel:: キャンセル (「取消」はeraseの意を含むので避ける)
+ * candidate:: 候補
+ * Chinese:: 中国語 (「中文」は一般に知られていない外国語なので避ける)
+ * commit:: 確定
+ * compose, composition:: 構成 (文脈により「合成」)
+ * cursor, caret:: カーソル
+ * default:: 標準
+ * deploy:: 状況に応じて適切に意訳。「配備」はものものしいので使わない
+ * Emacs:: Emacs (固有名詞として)
+ * emacs:: emacs (コマンドとして)
+ * enable:: 有効 (状況に応じて他の訳も可。availableとの誤認を避けるよう留意)
+ * Enter:: Enter
+ * ESC, escape:: ESC
+ * fullwidth alphanumeric:: 全角英数(字) (label中では「字」を入れず、short-descには入れる)
+ * global:: 全体 (状況に応じて他の訳も可。「全般」はgenericの意を含むので避ける)
+ * hot key:: ホットキー (shortcutとショートカットの方がいいかもしれない。要議論)
+ * International Phonetic Alphabet (IPA):: 国際音声記号
+ * input method:: 入力方式 (ただし、デスクトップ環境を構築する機構としてのinput methodを指す場合等は「入力メソッド」も用いる)
+ * item:: 項目 (状況に応じて他の訳も可)
+ * key bindings:: キー設定
+ * mode:: モード
+ * '''modifier key''':: 修飾キー
+ * off:: オフ
+ * on:: オン
+ * pinyin:: ピンイン (「拼音」等は認知度が低いので外来語としてカタカナ表記)
+ * preference:: 設定
+ * preedit:: 編集領域
+ * quit:: 終了
+ * Return, return:: リターン
+ * save:: 保存
+ * separator:: 区切り
+ * simplified Chinese:: 簡体字(中国語)
+ * status:: 状態switch:: 切り換え(る)
+ * traditional Chinese:: 繁体字(中国語)
+ * transition:: 遷移 (ただし、わかりにくいという意見が多ければ「移行」等に)
+ * transposed:: (置き換えて、反転して)
+ * toggle:: 反転 (状況に応じて他の訳も可。「トグル」は携帯電話の入力方式等で誤用が広まっているので避ける)
+ * Uim, UIM:: uim
+ * Unicode:: ユニコード
+ * Unix, unix:: UNIX
+ * use:: 使用
+ * Vi, vi:: vi (固有名詞、コマンド共)

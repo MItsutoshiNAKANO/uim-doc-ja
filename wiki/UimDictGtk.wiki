@@ -1,4 +1,4 @@
-= UimDictGtk =
+﻿= UimDictGtk =
 
 == これは何？ ==
 
@@ -75,6 +75,3 @@ $ uim-dict-gtk &
 http://lists.sourceforge.jp/pipermail/anthy-dev/2006-May/002945.html
 
 バージョンが7100b以降、7716より前のAnthyでは単語の登録しかできません。
-
-またUTF-8版Anthyの辞書には対応していません。 [http://groups.google.com/group/uim-commit/t/83ac690f8f4b1527|r5781]で対応コードが入りましたので、次のリリースでは対応していると思われます。
-
