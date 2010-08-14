@@ -54,6 +54,9 @@
 
 [UimPref UimPref]で「TUT-Code」→「コード表ファイル」に/usr/local/share/uim/tcode.scm（T-Code）や/usr/local/share/uim/trycode.scm（Try-Code）を指定してください。
 
+「TUT-Code キー設定1」→「交ぜ書き変換モード」に「fj」を、
+「部首合成変換モード」に「jf」を指定してください。
+
 「TUT-Code キー設定1」→「ひらがな/カタカナ入力モードを反転」を空にしてください。
 
 === vi協調モード ===
