@@ -55,12 +55,10 @@ XCOMPOSEFILE
 === EBライブラリ設定の変数 ===
 
 || 動作 || 変数名 || 指定できる値 || デフォルト値 ||
-||<|2> 注釈の検索にEBライブラリを使用する ||<|2> eb-enable-for-annotation? || #t ||<|2> #f ||
-|| #f ||
+|| 注釈の検索にEBライブラリを使用する || eb-enable-for-annotation? || #t #f || #f ||
 || EB辞書ファイルを収納しているディレクトリ || eb-dic-path || "文字列" || "/usr/local/share/dict" ||
 
 ==== EBライブラリの変数の依存関係 ====
 
   * eb-enable-for-annotation? #f
     * eb-dic-path
-
