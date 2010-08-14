@@ -47,12 +47,12 @@
 === Lookの変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-|| [Look] lookで使用される辞書ファイル名 || look-dict ||<|2> "文字列" || "/usr/share/dict/words" ||
-|| [Look] 個人辞書ファイル || look-personal-dict-filename || "$HOME/.look-uim-dict" ||
-|| [Look] 予測入力が有効になる文字数 || look-beginning-character-length ||<|2> 数字 || 1 ||
-|| [Look] 予測入力の学習に必要とする連接単語数 || look-prepered-words || 0 ||
-|| [Look] 候補の左側のフェンス文字 || look-fence-left ||<|2> "文字列" || "{" ||
-|| [Look] 候補の右側のフェンス文字 || look-fence-right || "}" ||
+|| [Look] lookで使用される辞書ファイル名 || look-dict || "文字列" || "/usr/share/dict/words" ||
+|| [Look] 個人辞書ファイル || look-personal-dict-filename || "文字列" || "$HOME/.look-uim-dict" ||
+|| [Look] 予測入力が有効になる文字数 || look-beginning-character-length || 数字 || 1 ||
+|| [Look] 予測入力の学習に必要とする連接単語数 || look-prepered-words || 数字 || 0 ||
+|| [Look] 候補の左側のフェンス文字 || look-fence-left || "文字列" || "{" ||
+|| [Look] 候補の右側のフェンス文字 || look-fence-right || "文字列" ||  "}" ||
 
 === Lookキー設定の変数 ===
 
@@ -66,4 +66,3 @@
 || 前候補 || look-prev-candidate-key? ||
 || 辞書の保存 || look-save-dict-key? ||
 || 辞書の読み出し || look-load-dict-key? ||
-
