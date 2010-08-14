@@ -144,3 +144,8 @@ Dvorak配列のキーボード用にコード表を補正します。
 == trycode-rule生成用スクリプト ==
 
   * http://groups.google.com/group/uim-ja/t/e9568f3e06c3f482
+
+== スクリーンショット ==
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeAutoHelp.png
+
+交ぜ書き変換で「憂鬱」を確定した時に表示される自動ヘルプウィンドウ。
