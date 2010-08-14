@@ -83,31 +83,20 @@ vi（クローン）でコマンドモードに戻る時、uimを直接入力モ
 === PRIMEの変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-||<|2> 標準の言語 ||<|2> prime-custom-default-language || 'Japanese ||<|2> "Japanese ||
-|| 'English ||
-|| 言語切り換えキー || prime-language-toggle-key || '("キー") || '("F11) ||
-||<|2> 自動登録モードを有効にする ||<|2> prime-auto-register-mode? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 空白文字 ||<|2> prime-custom-japanese-space || 'wide ||<|2> 'wide ||
-|| 'half ||
-|| 全角半角を反転した空白文字キー || prime-altspace-key || '("キー) || '("<Control> " "<Alt> ") ||
-||<|2> PRIMEとの通信にUNIXドメインソケットを使用する ||<|2> prime-use-unixdomain? || #t ||<|2> #t ||
-|| #f ||
+|| 標準の言語 || prime-custom-default-language || 'Japanese<br> 'English || 'Japanese ||
+|| 言語切り換えキー || prime-language-toggle-key || '("キー") || '("F11") ||
+|| 自動登録モードを有効にする || prime-auto-register-mode? || #t #f || #t ||
+|| 空白文字 || prime-custom-japanese-space || 'wide<br> 'half || 'wide ||
+|| 全角半角を反転した空白文字キー || prime-altspace-key || '("キー") || '("<Control> " "<Alt> ") ||
+|| PRIMEとの通信にUNIXドメインソケットを使用する || prime-use-unixdomain? || #t #f || #t ||
 || 候補ウィンドウに一度に表示する候補数 || prime-nr-candidate-max || 数字 || 10 ||
-||<|2> 常に候補ウィンドウを表示する ||<|2> prime-always-show-window? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 候補単語の用例を表示 ||<|2> prime-custom-display-usage? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 候補単語の註釈を表示 ||<|2> prime-custom-display-comment? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 候補単語の活用形を表示 ||<|2> prime-custom-display-form? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 数字キーで候補を選択する ||<|2> prime-custom-number-selection? || #t ||<|2> #f ||
-|| #f ||
-||<|2> vi協調モードを有効にする ||<|2> prime-custom-app-mode-vi? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 擬似モードカーソルを有効にする ||<|2> prime-pseudo-mode-cursor? || #t ||<|2> #f ||
-|| #f ||
+|| 常に候補ウィンドウを表示する || prime-always-show-window? || #t #f || #t ||
+|| 候補単語の用例を表示 || prime-custom-display-usage? || #t #f || #t ||
+|| 候補単語の註釈を表示 || prime-custom-display-comment? || #t #f || #t ||
+|| 候補単語の活用形を表示 || prime-custom-display-form? || #t #f || #t ||
+|| 数字キーで候補を選択する || prime-custom-number-selection? || #t #f || #f ||
+|| vi協調モードを有効にする || prime-custom-app-mode-vi? || #t #f || #f ||
+|| 擬似モードカーソルを有効にする || prime-pseudo-mode-cursor? || #t #f || #f ||
 
 === PRIMEキー設定の変数 ===
 
@@ -136,4 +125,3 @@ vi（クローン）でコマンドモードに戻る時、uimを直接入力モ
 || 右に移動 || prime-go-right-key? ||
 || 英語モードでの次候補 || prime-english-next-candidate-key? ||
 || 英語モードでの直接入力キー || prime-english-direct-key? ||
-
