@@ -112,34 +112,19 @@ ANTHY_HISTORY_FILE:: 絶対パスでファイル名を指定すると、その�
 === Anthyの変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-||<|2> 文節区切りを表示 ||<|2> anthy-show-segment-separator? || #t ||<|2> #f ||
-|| #f ||
+|| 文節区切りを表示 || anthy-show-segment-separator? || #t #f || #f ||
 || 文節区切り || anthy-segment-separator || "文字列" || "|" ||
-||<|2> 候補ウィンドウを使用する ||<|2> anthy-use-candidate-window? || #t ||<|2> #t ||
-|| #f ||
-|| 候補ウィンドウを表示するために変換キーを押す回数 || anthy-candidate-op-count ||<|2> 数字 || 1 ||
-|| 候補ウィンドウに一度に表示する候補数 || anthy-nr-candidate-max || 10 ||
-||<|2> 数字キーで候補を選択する ||<|2> anthy-select-candidate-by-numeral-key? || #t ||<|2> #f ||
-|| #f ||
-||<|6> 標準の入力モード ||<|6> default-widget_anthy_input_mode || 'action_anthy_direct ||<|6> 'action_anthy_direct ||
-|| 'action_anthy_hiragana ||
-|| 'action_anthy_katakana ||
-|| 'action_anthy_halfkana ||
-|| 'action_anthy_halfwidth_alnum ||
-|| 'action_anthy_fullwidth_alnum ||
-||<|3> 標準のかな入力方式 ||<|3> default-widget_anthy_kana_input_method || 'action_anthy_roma ||<|3> 'action_anthy_roma ||
-|| 'action_anthy_kana ||
-|| 'action_anthy_azik ||
-||<|2> 予測入力を有効にする ||<|2> anthy-use-prediction? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 数字キーで予測候補を選択する ||<|2> anthy-select-prediction-by-numeral-key? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 編集領域内に選んだ予測候補を表示する ||<|2> anthy-use-implicit-commit-prediction? || #t ||<|2> #t ||
-|| #f ||
-||<|2> vi協調モードを有効にする ||<|2> anthy-use-with-vi? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 直接入力モード(off状態)時も入力モード切り換えキーを有効にする ||<|2> anthy-use-mode-transition-keys-in-off-mode? || #t ||<|2> #f ||
-|| #f ||
+|| 候補ウィンドウを使用する || anthy-use-candidate-window? || #t #f || #t ||
+|| 候補ウィンドウを表示するために変換キーを押す回数 || anthy-candidate-op-count || 数字 || 1 ||
+|| 候補ウィンドウに一度に表示する候補数 || anthy-nr-candidate-max || 数字 || 10 ||
+|| 数字キーで候補を選択する || anthy-select-candidate-by-numeral-key? || #t #f || #f ||
+|| 標準の入力モード || default-widget_anthy_input_mode || 'action_anthy_direct<br> 'action_anthy_hiragana<br> 'action_anthy_katakana<br> 'action_anthy_halfkana<br> 'action_anthy_halfwidth_alnum<br> 'action_anthy_fullwidth_alnum || 'action_anthy_direct ||
+|| 標準のかな入力方式 || default-widget_anthy_kana_input_method || 'action_anthy_roma<br> 'action_anthy_kana<br> 'action_anthy_azik || 'action_anthy_roma ||
+|| 予測入力を有効にする || anthy-use-prediction? || #t #f || #f ||
+|| 数字キーで予測候補を選択する || anthy-select-prediction-by-numeral-key? || #t #f || #f ||
+|| 編集領域内に選んだ予測候補を表示する || anthy-use-implicit-commit-prediction? || #t #f || #t ||
+|| vi協調モードを有効にする || anthy-use-with-vi? || #t #f || #f ||
+|| 直接入力モード(off状態)時も入力モード切り換えキーを有効にする || anthy-use-mode-transition-keys-in-off-mode? || #t #f || #f ||
 
 ==== Anthyの変数の依存関係 ====
 
@@ -158,15 +143,8 @@ ANTHY_HISTORY_FILE:: 絶対パスでファイル名を指定すると、その�
 === Anthy (UTF-8)の変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-||<|6> 標準の入力モード ||<|6> default-widget_anthy_utf8_input_mode || 'action_anthy_utf8_direct ||<|6> 'action_anthy_utf8_direct ||
-|| 'action_anthy_utf8_hiragana ||
-|| 'action_anthy_utf8_katakana ||
-|| 'action_anthy_utf8_halfkana ||
-|| 'action_anthy_utf8_halfwidth_alnum ||
-|| 'action_anthy_utf8_fullwidth_alnum ||
-||<|3> 標準のかな入力方式 ||<|3> default-widget_anthy_utf8_kana_input_method || 'action_anthy_utf8_roma ||<|3> 'action_anthy_utf8_roma ||
-|| 'action_anthy_utf8_kana ||
-|| 'action_anthy_utf8_azik ||
+|| 標準の入力モード || default-widget_anthy_utf8_input_mode || 'action_anthy_utf8_direct<br> 'action_anthy_utf8_hiragana<br> 'action_anthy_utf8_katakana<br> 'action_anthy_utf8_halfkana<br> 'action_anthy_utf8_halfwidth_alnum<br> 'action_anthy_utf8_fullwidth_alnum || 'action_anthy_utf8_direct ||
+|| 標準のかな入力方式 || default-widget_anthy_utf8_kana_input_method || 'action_anthy_utf8_roma<br> 'action_anthy_utf8_kana<br> 'action_anthy_utf8_azik || 'action_anthy_utf8_roma ||
 
 === Anthyキー設定の変数 ===
 
@@ -208,4 +186,3 @@ ANTHY_HISTORY_FILE:: 絶対パスでファイル名を指定すると、その�
 || かな/英数入力モードを反転 || anthy-alkana-toggle-key? ||
 || 次予測候補 || anthy-next-prediction-key? ||
 || 前予測候補 || anthy-prev-prediction-key? ||
-
