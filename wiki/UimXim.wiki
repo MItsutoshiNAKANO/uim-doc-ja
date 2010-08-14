@@ -53,8 +53,7 @@ XCOMPOSEFILE
 === XIM設定の変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-||<|2> 編集領域のフォントにアンチエイリアスをかける ||<|2> uim-xim-use-xft-font? || #t ||<|2> #f ||
-|| #f ||
+|| 編集領域のフォントにアンチエイリアスをかける || uim-xim-use-xft-font? || #t #f || #f ||
 || 編集領域に使用されるフォント名 (アンチエイリアス時) || uim-xim-xft-font-name || "文字列" || "Sans" ||
 
 == FAQ ==
@@ -70,4 +69,3 @@ On-The-Spotスタイルで入力した場合、候補ウィンドウの位置は
 === [http://uim.googlecode.com/svn/trunk/xim/uim-xim.1 uim:xim/uim-xim.1]のオリジナルはどこにある? ===
 
 http://bugs.debian.org/300487
-
