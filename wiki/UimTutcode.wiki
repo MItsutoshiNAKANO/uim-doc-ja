@@ -35,6 +35,8 @@
 || 記号入力モードを反転 || Ctrl+_ ||
 || 交ぜ書き変換 || alj ||
 || 部首合成変換 || ala ||
+|| 英字変換(SKK abbrev) || al/ ||
+|| 仮想鍵盤ウィンドウの表示を反転 || Ctrl+/ ||
 || 変換開始 || Space ||
 || 次の変換候補へ移動 || Space、↓、Ctrl+n ||
 || 前の変換候補へ移動 || ↑、Ctrl+p ||
@@ -43,6 +45,8 @@
 || 変換確定 || Return、Ctrl+m、Ctrl+j ||
 || キャンセル || Esc、Ctrl+[、Ctrl+g ||
 || カーソルの左の一字を削除 || BS、Ctrl+h ||
+|| 交ぜ書き変換個人辞書への単語登録 || | ||
+|| 交ぜ書き変換個人辞書からの単語削除 || ! ||
 
 === T-CodeやTry-Codeとして使う ===
 
@@ -69,6 +73,8 @@ Dvorak配列のキーボード用にコード表を補正します。
 
 [UimPref UimPref]で「TUT-Code」→「Dvorakキーボードを使用する」のチェックボックスにチェックを入れてください。
 
+「表形式の候補ウィンドウのキー配列」として「dvorak」を選んでください。
+
 === ファイル ===
 
  * ~/.uim.d/customs/custom-tutcode.scm:: [UimPref UimPref]の「TUT-Code」ファイル。
@@ -84,18 +90,32 @@ Dvorak配列のキーボード用にコード表を補正します。
 || 交ぜ書き変換個人用辞書ファイル || tutcode-personal-dic-filename || "文字列" || "$HOME/.mazegaki.dic" ||
 || コード表ファイル || tutcode-rule-filename || "文字列" || "/usr/local/share/uim/tutcode-rule.scm" ||
 || 交ぜ書き変換の学習を有効にする || tutcode-enable-mazegaki-learning? || #t #f || #t ||
+|| 再帰学習を有効にする || tutcode-use-recursive-learning? || #t #f || #t ||
 || vi協調モードを有効にする || tutcode-use-with-vi? || #t #f || #f ||
 || Dvorakキーボードを使用する || tutcode-use-dvorak? || #t #f || #f ||
 || 候補ウィンドウを使用する || tutcode-use-candidate-window? || #t #f || #t ||
+|| 表形式の候補ウィンドウを使用する || tutcode-use-table-style-candidate-window? || #t #f || #f ||
+|| 表形式の候補ウィンドウのキー配列 || tutcode-candidate-window-table-layout || 'qwerty-jis 'qwerty-us 'dvorak || 'qwerty-jis ||
 || 見出し表示のキーで候補を確定する || tutcode-commit-candidate-by-label-key? || #t #f || #t ||
 || 候補ウィンドウを表示するために変換キーを押す回数 || tutcode-candidate-op-count || 数字 || 5 ||
 || 候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max || 数字 || 10 ||
+|| 記号モードにおいて候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max-for-kigou-mode || 数字 || 10 ||
+|| 仮想鍵盤ウィンドウを使用する || tutcode-use-stroke-help-window? || #t #f || #f ||
+|| 自動ヘルプウィンドウを使用する || tutcode-use-auto-help-window? || #t #f || #f ||
+|| 自動ヘルプウィンドウにキーストロークを表示する || tutcode-auto-help-with-real-keys? || #t #f || #f ||
 
 ==== TUT-Codeの変数の依存関係 ====
 
   * tutcode-use-candidate-window? #f
     * tutcode-candidate-op-count
     * tutcode-nr-candidate-max
+    * tutcode-nr-candidate-max-for-kigou-mode
+
+  * tutcode-use-auto-help-window? #f
+    * tutcode-auto-help-with-real-keys?
+
+  * tutcode-use-table-style-candidate-window?
+    * tutcode-candidate-window-table-layout
 
 === TUT-Codeキー設定の変数 ===
 
@@ -106,6 +126,8 @@ Dvorak配列のキーボード用にコード表を補正します。
 || 記号入力モードを反転 || tutcode-kigou-toggle-key? ||
 || 交ぜ書き変換モード || tutcode-mazegaki-start-sequence? ||
 || 部首合成変換モード || tutcode-bushu-start-sequence? ||
+|| 英字変換(SKK abbrev)モード || tutcode-latin-conv-start-sequence? ||
+|| 仮想鍵盤ウィンドウの表示を反転 || tutcode-stroke-help-toggle-key? ||
 || 変換開始 || tutcode-begin-conv-key? ||
 || 確定 || tutcode-commit-key? ||
 || キャンセル || tutcode-cancel-key? ||
@@ -116,6 +138,8 @@ Dvorak配列のキーボード用にコード表を補正します。
 || バックスペース || tutcode-backspace-key? ||
 || リターン || tutcode-return-key? ||
 || vi協調モードでESCとして扱うキー || tutcode-vi-escape-key? ||
+|| 交ぜ書き変換個人辞書への単語登録 || tutcode-register-candidate-key? ||
+|| 交ぜ書き変換個人辞書からの単語削除 || tutcode-purge-candidate-key? ||
 
 == trycode-rule生成用スクリプト ==
 
