@@ -59,8 +59,8 @@ uimのAjax IMEモジュール。 かな漢字変換エンジン[http://ajaxime.c
 || 変換開始 || Space ||
 || 次の変換候補へ移動 || Space、↓、Ctrl+n ||
 || 前の変換候補へ移動 || ↑、Ctrl+p ||
-|| 次の変換候補ページへ移動 || PgDn[c=edit;p=PgDn|?] ||
-|| 前の変換候補ページへ移動 || PgUp[c=edit;p=PgUp|?] ||
+|| 次の変換候補ページへ移動 || PgDn ||
+|| 前の変換候補ページへ移動 || PgUp ||
 || 変換確定 || Return、Ctrl+m、Ctrl+j ||
 || キャンセル || Esc、Ctrl+[、Ctrl+g ||
 || ひらがな/カタカナを反転変換し確定 || Q ||

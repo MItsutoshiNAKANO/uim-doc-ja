@@ -51,8 +51,8 @@
 || 変換開始 || Space ||
 || 次の候補へ移動 || Space、↓、Ctrl+n ||
 || 前の候補へ移動 || ↑、Ctrl+p、x ||
-|| 次の変換候補ページへ移動 || Space、↓、Ctrl+n、PgDn[c=edit;p=PgDn|?] ||
-|| 前の変換候補ページへ移動 || ↑、Ctrl+p、x、PgUp[c=edit;p=PgUp|?] ||
+|| 次の変換候補ページへ移動 || Space、↓、Ctrl+n、PgDn ||
+|| 前の変換候補ページへ移動 || ↑、Ctrl+p、x、PgUp ||
 || 変換確定 || Ctrl+m、Ctrl+j ||
 || 変換確定+改行 || Return ||
 || 候補ウィンドウから変換候補を選択し確定 || a、s、d、f、g、h、j、k、l ||

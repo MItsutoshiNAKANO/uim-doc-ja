@@ -360,7 +360,7 @@ XMODIFIERS=@im=uim ; export XMODIFIERS
 
 を追加してください。
 
-  * GentooJP Wiki 日本語入力設定事例集/uim+anthy[c=edit;p=http%3A%2F%2Fwiki.gentoo.gr.jp%2Findex.php%3F%255B%255B%25C6%25FC%25CB+%25DC%25B8%25EC%25C6%25FE%25CE%25CF%25C0%25DF%25C4%25EA%25BB%25F6%25CE%25E3%25BD%25B8%252Fuim%252Banthy%255D%255D ?]
+  * GentooJP Wiki 日本語入力設定事例集/uim+anthy
 
 === Mac OS X ===
 

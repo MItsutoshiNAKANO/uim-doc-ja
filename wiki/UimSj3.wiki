@@ -61,8 +61,8 @@ uimの[http://code.google.com/p/sj3/ SJ3]モジュール。 連文節かな漢�
 || 文節を縮める || Shift+←、Ctrl+i ||
 || 次の変換候補へ移動 || Space、↓、Ctrl+n ||
 || 前の変換候補へ移動 || ↑、Ctrl+p ||
-|| 候補ウィンドウを次のページへ移動 || PgDn[c=edit;p=PgDn|?] ||
-|| 候補ウィンドウを次のページへ移動 || PgUp[c=edit;p=PgUp|?] ||
+|| 候補ウィンドウを次のページへ移動 || PgDn ||
+|| 候補ウィンドウを次のページへ移動 || PgUp ||
 || 次の文節へ移動 || →、Ctrl+f ||
 || 前の文節へ移動 || ←、Ctrl+b ||
 || 変換確定 || Return、Ctrl+m、Ctrl+j ||

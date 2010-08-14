@@ -48,8 +48,8 @@ uimのByeoruモジュール。 ハングル入力スイートByeoruで入力/変
 || カーソルの左の一字を削除 || BS、Ctrl+h ||
 || 次の変換候補へ移動 || Space、↓、Ctrl+n ||
 || 前の変換候補へ移動 || ↑、Ctrl+p ||
-|| 次の変換候補ページへ移動 || PgDn[c=edit;p=PgDn|?] ||
-|| 前の変換候補ページへ移動 || PgUp[c=edit;p=PgUp|?] ||
+|| 次の変換候補ページへ移動 || PgDn ||
+|| 前の変換候補ページへ移動 || PgUp ||
 || 変換確定 || Ctrl+j、Enter、Ctrl+m ||
 || キャンセル || ESC、Ctrl+[、Ctrl+g ||
 || ハングルから漢字へ変換 || F9 ||
