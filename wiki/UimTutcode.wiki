@@ -148,4 +148,24 @@ Dvorak配列のキーボード用にコード表を補正します。
 == スクリーンショット ==
 http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeAutoHelp.png
 
-交ぜ書き変換で「憂鬱」を確定した時に表示される自動ヘルプウィンドウ。
+自動ヘルプウィンドウ(交ぜ書き変換で「憂鬱」を確定)。
+
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeVirtualKeyboardHelp.png
+
+仮想鍵盤(ホームポジションで左手人差し指打鍵時)。
+
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwin.png
+
+候補ウィンドウ。
+
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
+
+表形式の候補ウィンドウ。
+
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblKigou1.png
+
+表形式の候補ウィンドウ(記号入力モード)。
+
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblKigou2.png
+
+表形式の候補ウィンドウ(記号入力モードの2ページ目)。
