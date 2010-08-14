@@ -115,58 +115,34 @@ SKKSERVER
 === SKKの変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-||<|2> 候補ウィンドウを使用する ||<|2> skk-use-candidate-window? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 見出し表示のキーで候補を確定する ||<|2> skk-commit-candidate-by-label-key? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 候補選択のスタイル ||<|2> skk-candidate-selection-style || 'ddskk-like ||<|2> 'ddskk-like ||
-|| 'uim ||
-||<|2> 候補ウィンドウの挙動を手動で設定する ||<|2> skk-use-manual-candwin-setting? || #t ||<|2> #f ||
-|| #f ||
-|| 候補ウィンドウを表示するために変換キーを押す回数 || skk-candidate-op-count ||<|2> 数字 || 5 ||
-|| 候補ウィンドウに一度に表示する候補数 || skk-nr-candidate-max || 7 ||
-||<|5> 標準の入力モード ||<|5> default-widget_skk_input_mode || 'action_skk_latin ||<|5> 'action_skk_latin ||
-|| 'action_skk_hiragana ||
-|| 'action_skk_katakana ||
-|| 'action_skk_hankana ||
-|| 'action_skk_wide_latin ||
-||<|2> 標準のかな入力方式 ||<|2> default-widget_skk_kana_input_method || 'action_skk_roma ||<|2> 'action_skk_roma ||
-|| 'action_skk_azik ||
-||<|2> 辞書ファイルの代わりにSKKサーバを使用 ||<|2> skk-use-skkserv? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 環境変数SKKSERVERを使用 ||<|2> skk-skkserv-use-env? || #t ||<|2> #t ||
-|| #f ||
+|| 候補ウィンドウを使用する || skk-use-candidate-window? || #t #f || #t ||
+|| 見出し表示のキーで候補を確定する || skk-commit-candidate-by-label-key? || #t #f || #t ||
+|| 候補選択のスタイル || skk-candidate-selection-style || 'ddskk-like<br> 'uim || 'ddskk-like ||
+|| 候補ウィンドウの挙動を手動で設定する || skk-use-manual-candwin-setting? || #t #f || #f ||
+|| 候補ウィンドウを表示するために変換キーを押す回数 || skk-candidate-op-count || 数字 || 5 ||
+|| 候補ウィンドウに一度に表示する候補数 || skk-nr-candidate-max || 数字 || 7 ||
+|| 標準の入力モード || default-widget_skk_input_mode || 'action_skk_latin<br> 'action_skk_hiragana<br> 'action_skk_katakana<br> 'action_skk_hankana<br> 'action_skk_wide_latin || 'action_skk_latin ||
+|| 標準のかな入力方式 || default-widget_skk_kana_input_method || 'action_skk_roma<br> 'action_skk_azik || 'action_skk_roma ||
+|| 辞書ファイルの代わりにSKKサーバを使用 || skk-use-skkserv? || #t #f || #f ||
+|| 環境変数SKKSERVERを使用 || skk-skkserv-use-env? || #t #f || #t ||
 || SKKサーバのホスト名 || skk-skkserv-hostname || "文字列" || "localhost" ||
 || SKKサーバのポート番号 || skk-skkserv-portnum || 数字 || 1178 ||
-||<|3> SKKサーバのアドレスファミリ ||<|3> skk-skkserv-address-family || 'unspecified ||<|3> 'unspecified ||
-|| 'inet ||
-|| 'inet6 ||
-|| システム辞書ファイル || skk-dic-file-name ||<|3> "文字列" || /usr/local/share/skk/SKK-JISYO.L" ||
-|| 個人辞書ファイル || skk-personal-dic-filename || "$HOME/.skk-jisyo" ||
-|| 個人辞書ファイル (uim専用) || skk-uim-personal-dic-filename || "$HOME/.skk-uim-jisyo" ||
-||<|2> ビジュアルスタイル ||<|2> skk-style || 'skk-style-ddskk-like ||<|2> 'skk-style-ddskk-like ||
-|| 'skk-style-uim ||
-||<|2> 再帰学習を使用する ||<|2> skk-use-recursive-learning? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 数値変換を使用する ||<|2> skk-use-numeric-conversion? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 句読点での自動変換を有効にする ||<|2> skk-auto-start-henkan? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 動的補完を有効にする ||<|2> skk-dcomp-activate? || #t ||<|2> #f ||
-|| #f ||
-||<|2> アルファベット変換時の補完にlookコマンドを使用 ||<|2> skk-use-look? || #t ||<|2> #f ||
-|| #f ||
+|| SKKサーバのアドレスファミリ || skk-skkserv-address-family || 'unspecified<br> 'inet<br> 'inet6 || 'unspecified ||
+|| システム辞書ファイル || skk-dic-file-name || "文字列" || /usr/local/share/skk/SKK-JISYO.L" ||
+|| 個人辞書ファイル || skk-personal-dic-filename || "文字列" || "$HOME/.skk-jisyo" ||
+|| 個人辞書ファイル (uim専用) || skk-uim-personal-dic-filename || "文字列" || "$HOME/.skk-uim-jisyo" ||
+|| ビジュアルスタイル || skk-style || 'skk-style-ddskk-like<br> 'skk-style-uim || 'skk-style-ddskk-like ||
+|| 再帰学習を使用する || skk-use-recursive-learning? || #t #f || #t ||
+|| 数値変換を使用する || skk-use-numeric-conversion? || #t #f || #t ||
+|| 句読点での自動変換を有効にする || skk-auto-start-henkan? || #t #f || #t ||
+|| 動的補完を有効にする || skk-dcomp-activate? || #t #f || #f ||
+|| アルファベット変換時の補完にlookコマンドを使用 || skk-use-look? || #t #f || #f ||
 || UNIX look辞書ファイル || skk-look-dict || "文字列" || "/usr/share/dict/words" ||
-||<|2> 候補の注釈を表示する ||<|2> skk-show-annotation? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 編集領域内にも注釈を表示する ||<|2> skk-show-annotation-in-preedit? || #t ||<|2> #f ||
-|| #f ||
-||<|2> vi協調モードを有効にする ||<|2> skk-use-with-vi? || #t ||<|2> #f ||
-|| #f ||
-||<|2> Enterキーを単に確定のために使う (egg風の操作) ||<|2> skk-egg-like-newline? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 改行をネイティブキーイベントの代わりにASCII文字列として確定する ||<|2> skk-commit-newline-explicitly? || #t ||<|2> #f ||
-|| #f ||
+|| 候補の注釈を表示する || skk-show-annotation? || #t #f || #t ||
+|| 編集領域内にも注釈を表示する || skk-show-annotation-in-preedit? || #t #f || #f ||
+|| vi協調モードを有効にする || skk-use-with-vi? || #t #f || #f ||
+|| Enterキーを単に確定のために使う (egg風の操作) || skk-egg-like-newline? || #t #f || #f ||
+|| 改行をネイティブキーイベントの代わりにASCII文字列として確定する || skk-commit-newline-explicitly? || #t #f || #f ||
 
 ==== SKKの変数の依存関係 ====
 
@@ -233,4 +209,3 @@ SKKSERVER
 || バックスペース || skk-backspace-key? ||
 || 左に移動 || skk-go-left-key? ||
 || 右に移動 || skk-go-right-key? ||
-
