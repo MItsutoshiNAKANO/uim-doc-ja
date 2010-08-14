@@ -56,8 +56,8 @@ uimの[http://sourceforge.jp/projects/shinji/ Mana]モジュール。 連文節�
 || 文節を伸ばす || Shift+→、Ctrl+o ||
 || 次の変換候補へ移動 || Space、↓、Ctrl+n ||
 || 前の変換候補へ移動 || ↑、Ctrl+p ||
-|| 次の変換候補ページへ移動 || PgDn[c=edit;p=PgDn|?] ||
-|| 前の変換候補ページへ移動 || PgUp[c=edit;p=PgUp|?] ||
+|| 次の変換候補ページへ移動 || PgDn ||
+|| 前の変換候補ページへ移動 || PgUp ||
 || 次の文節へ移動 || →、Ctrl+f ||
 || 前の文節へ移動 || ←、Ctrl+b ||
 || 変換確定 || Return、Ctrl+m、Ctrl+j ||
