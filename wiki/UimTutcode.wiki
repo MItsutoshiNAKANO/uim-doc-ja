@@ -98,7 +98,7 @@ Dvorak配列のキーボード用にコード表を補正します。
 || Dvorakキーボードを使用する || tutcode-use-dvorak? || #t #f || #f ||
 || 候補ウィンドウを使用する || tutcode-use-candidate-window? || #t #f || #t ||
 || 表形式の候補ウィンドウを使用する || tutcode-use-table-style-candidate-window? || #t #f || #f ||
-|| 表形式の候補ウィンドウのキー配列 || tutcode-candidate-window-table-layout || 'qwerty-jis 'qwerty-us 'dvorak || 'qwerty-jis ||
+|| 表形式の候補ウィンドウのキー配列 || tutcode-candidate-window-table-layout || 'qwerty-jis<br> 'qwerty-us<br> 'dvorak || 'qwerty-jis ||
 || 見出し表示のキーで候補を確定する || tutcode-commit-candidate-by-label-key? || #t #f || #t ||
 || 候補ウィンドウを表示するために変換キーを押す回数 || tutcode-candidate-op-count || 数字 || 5 ||
 || 候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max || 数字 || 10 ||
