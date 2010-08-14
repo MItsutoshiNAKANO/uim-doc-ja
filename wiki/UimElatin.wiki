@@ -34,80 +34,8 @@ Emacsスタイルのラテン文字入力方式。
 === Elatinの変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-||<|72> ラテン文字のキーボード配列 ||<|72> elatin-rules || 'elatin-rules-latin-prefix ||<|72> 'elatin-rules-latin-prefix ||
-|| 'elatin-rules-british ||
-|| 'elatin-rules-catalan-prefix ||
-|| 'elatin-rules-danish-postfix ||
-|| 'elatin-rules-danish-alt-postfix ||
-|| 'elatin-rules-danish-keyboard ||
-|| 'elatin-rules-dutch ||
-|| 'elatin-rules-english-dvorak ||
-|| 'elatin-rules-esperanto-prefix ||
-|| 'elatin-rules-esperanto-postfix ||
-|| 'elatin-rules-esperanto-alt-postfix ||
-|| 'elatin-rules-finnish-postfix ||
-|| 'elatin-rules-finnish-alt-postfix ||
-|| 'elatin-rules-finnish-keyboard ||
-|| 'elatin-rules-french-prefix ||
-|| 'elatin-rules-french-postfix ||
-|| 'elatin-rules-french-alt-postfix ||
-|| 'elatin-rules-french-keyboard ||
-|| 'elatin-rules-french-azerty ||
-|| 'elatin-rules-german-prefix ||
-|| 'elatin-rules-german-postfix ||
-|| 'elatin-rules-german-alt-postfix ||
-|| 'elatin-rules-german ||
-|| 'elatin-rules-icelandic-postfix ||
-|| 'elatin-rules-icelandic-alt-postfix ||
-|| 'elatin-rules-icelandic-keyboard ||
-|| 'elatin-rules-irish-prefix ||
-|| 'elatin-rules-italian-postfix ||
-|| 'elatin-rules-italian-alt-postfix ||
-|| 'elatin-rules-italian-keyboard ||
-|| 'elatin-rules-latin-prefix ||
-|| 'elatin-rules-latin-postfix ||
-|| 'elatin-rules-latin-alt-postfix ||
-|| 'elatin-rules-latin-1-prefix ||
-|| 'elatin-rules-latin-1-postfix ||
-|| 'elatin-rules-latin-1-alt-postfix ||
-|| 'elatin-rules-latin-2-prefix ||
-|| 'elatin-rules-latin-2-postfix ||
-|| 'elatin-rules-latin-2-alt-postfix ||
-|| 'elatin-rules-latin-3-prefix ||
-|| 'elatin-rules-latin-3-postfix ||
-|| 'elatin-rules-latin-3-alt-postfix ||
-|| 'elatin-rules-latin-4-postfix ||
-|| 'elatin-rules-latin-4-alt-postfix ||
-|| 'elatin-rules-latin-5-postfix ||
-|| 'elatin-rules-latin-5-alt-postfix ||
-|| 'elatin-rules-latin-8-prefix ||
-|| 'elatin-rules-latin-9-prefix ||
-|| 'elatin-rules-latvian-keyboard ||
-|| 'elatin-rules-lithuanian-keyboard ||
-|| 'elatin-rules-lithuanian-numeric ||
-|| 'elatin-rules-norwegian-postfix ||
-|| 'elatin-rules-norwegian-alt-postfix ||
-|| 'elatin-rules-norwegian-keyboard ||
-|| 'elatin-rules-polish-slash ||
-|| 'elatin-rules-portuguese-prefix ||
-|| 'elatin-rules-romanian-prefix ||
-|| 'elatin-rules-romanian-alt-prefix ||
-|| 'elatin-rules-scandinavian-postfix ||
-|| 'elatin-rules-scandinavian-alt-postfix ||
-|| 'elatin-rules-slovenian ||
-|| 'elatin-rules-spanish-prefix ||
-|| 'elatin-rules-spanish-postfix ||
-|| 'elatin-rules-spanish-alt-postfix ||
-|| 'elatin-rules-spanish-keyboard ||
-|| 'elatin-rules-swedish-postfix ||
-|| 'elatin-rules-swedish-alt-postfix ||
-|| 'elatin-rules-swedish-keyboard ||
-|| 'elatin-rules-turkish-postfix ||
-|| 'elatin-rules-turkish-alt-postfix ||
-|| 'elatin-rules-turkish-latin-3-postfix ||
-|| 'elatin-rules-turkish-latin-3-alt-postfix ||
-||<|2> ESCキーでラテン文字入力モードをオフにする (viユーザ向け) ||<|2> elatin-esc-turns-off? || #t ||<|2> #f ||
-|| #f ||
+|| ラテン文字のキーボード配列 || elatin-rules || 'elatin-rules-latin-prefix<br> 'elatin-rules-british<br> 'elatin-rules-catalan-prefix<br> 'elatin-rules-danish-postfix<br> 'elatin-rules-danish-alt-postfix<br> 'elatin-rules-danish-keyboard<br> 'elatin-rules-dutch<br> 'elatin-rules-english-dvorak<br> 'elatin-rules-esperanto-prefix<br> 'elatin-rules-esperanto-postfix<br> 'elatin-rules-esperanto-alt-postfix<br> 'elatin-rules-finnish-postfix<br> 'elatin-rules-finnish-alt-postfix<br> 'elatin-rules-finnish-keyboard<br> 'elatin-rules-french-prefix<br> 'elatin-rules-french-postfix<br> 'elatin-rules-french-alt-postfix<br> 'elatin-rules-french-keyboard<br> 'elatin-rules-french-azerty<br> 'elatin-rules-german-prefix<br> 'elatin-rules-german-postfix<br> 'elatin-rules-german-alt-postfix<br> 'elatin-rules-german<br> 'elatin-rules-icelandic-postfix<br> 'elatin-rules-icelandic-alt-postfix<br> 'elatin-rules-icelandic-keyboard<br> 'elatin-rules-irish-prefix<br> 'elatin-rules-italian-postfix<br> 'elatin-rules-italian-alt-postfix<br> 'elatin-rules-italian-keyboard<br> 'elatin-rules-latin-prefix<br> 'elatin-rules-latin-postfix<br> 'elatin-rules-latin-alt-postfix<br> 'elatin-rules-latin-1-prefix<br> 'elatin-rules-latin-1-postfix<br> 'elatin-rules-latin-1-alt-postfix<br> 'elatin-rules-latin-2-prefix<br> 'elatin-rules-latin-2-postfix<br> 'elatin-rules-latin-2-alt-postfix<br> 'elatin-rules-latin-3-prefix<br> 'elatin-rules-latin-3-postfix<br> 'elatin-rules-latin-3-alt-postfix<br> 'elatin-rules-latin-4-postfix<br> 'elatin-rules-latin-4-alt-postfix<br> 'elatin-rules-latin-5-postfix<br> 'elatin-rules-latin-5-alt-postfix<br> 'elatin-rules-latin-8-prefix<br> 'elatin-rules-latin-9-prefix<br> 'elatin-rules-latvian-keyboard<br> 'elatin-rules-lithuanian-keyboard<br> 'elatin-rules-lithuanian-numeric<br> 'elatin-rules-norwegian-postfix<br> 'elatin-rules-norwegian-alt-postfix<br> 'elatin-rules-norwegian-keyboard<br> 'elatin-rules-polish-slash<br> 'elatin-rules-portuguese-prefix<br> 'elatin-rules-romanian-prefix<br> 'elatin-rules-romanian-alt-prefix<br> 'elatin-rules-scandinavian-postfix<br> 'elatin-rules-scandinavian-alt-postfix<br> 'elatin-rules-slovenian<br> 'elatin-rules-spanish-prefix<br> 'elatin-rules-spanish-postfix<br> 'elatin-rules-spanish-alt-postfix<br> 'elatin-rules-spanish-keyboard<br> 'elatin-rules-swedish-postfix<br> 'elatin-rules-swedish-alt-postfix<br> 'elatin-rules-swedish-keyboard<br> 'elatin-rules-turkish-postfix<br> 'elatin-rules-turkish-alt-postfix<br> 'elatin-rules-turkish-latin-3-postfix<br> 'elatin-rules-turkish-latin-3-alt-postfix || 'elatin-rules-latin-prefix ||
+|| ESCキーでラテン文字入力モードをオフにする (viユーザ向け) || elatin-esc-turns-off? || #t #f || #f ||
 
 === ELatinキー設定の変数 ===
 
@@ -115,4 +43,3 @@ Emacsスタイルのラテン文字入力方式。
 || オン || elatin-on-key? ||
 || オフ || elatin-off-key? ||
 || バックスペース || elatin-backspace-key? ||
-
