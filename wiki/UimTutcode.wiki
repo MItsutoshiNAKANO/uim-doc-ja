@@ -2,7 +2,7 @@
 
 == これは何？ ==
 
-[http://plone.crew.sfc.keio.ac.jp/groups/tut-code/ TUT-Code]入力方式のuim版。
+[http://www.crew.sfc.keio.ac.jp/~chk/index-old.html TUT-Code]入力方式のuim版。
 
 == 使い方 ==
 
@@ -50,6 +50,8 @@
 
 [UimPref UimPref]で「TUT-Code」→「コード表ファイル」に/usr/local/share/uim/tcode.scm（T-Code）や/usr/local/share/uim/trycode.scm（Try-Code）を指定してください。
 
+「TUT-Code キー設定1」→「ひらがな/カタカナ入力モードを反転」を空にしてください。
+
 === vi協調モード ===
 
 vi（クローン）でコマンドモードに戻る時、uimを直接入力モードに戻すことができます。
@@ -78,21 +80,16 @@ Dvorak配列のキーボード用にコード表を補正します。
 === TUT-Codeの変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-|| 交ぜ書き変換辞書ファイル || tutcode-dic-filename ||<|3> "文字列" || "/usr/local/share/tc/mazegaki.dic" ||
-|| 交ぜ書き変換個人用辞書ファイル || tutcode-personal-dic-filename || "$HOME/.mazegaki.dic" ||
-|| コード表ファイル || tutcode-rule-filename || "/usr/local/share/uim/tutcode-rule.scm" ||
-||<|2> 交ぜ書き変換の学習を有効にする ||<|2> tutcode-enable-mazegaki-learning? || #t ||<|2> #t ||
-|| #f ||
-||<|2> vi協調モードを有効にする ||<|2> tutcode-use-with-vi? || #t ||<|2> #f ||
-|| #f ||
-||<|2> Dvorakキーボードを使用する ||<|2> tutcode-use-dvorak? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 候補ウィンドウを使用する ||<|2> tutcode-use-candidate-window? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 見出し表示のキーで候補を確定する ||<|2> tutcode-commit-candidate-by-label-key? || #t ||<|2> #t ||
-|| #f ||
-|| 候補ウィンドウを表示するために変換キーを押す回数 || tutcode-candidate-op-count ||<|2> 数字 || 5 ||
-|| 候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max || 10 ||
+|| 交ぜ書き変換辞書ファイル || tutcode-dic-filename || "文字列" || "/usr/local/share/tc/mazegaki.dic" ||
+|| 交ぜ書き変換個人用辞書ファイル || tutcode-personal-dic-filename || "文字列" || "$HOME/.mazegaki.dic" ||
+|| コード表ファイル || tutcode-rule-filename || "文字列" || "/usr/local/share/uim/tutcode-rule.scm" ||
+|| 交ぜ書き変換の学習を有効にする || tutcode-enable-mazegaki-learning? || #t #f || #t ||
+|| vi協調モードを有効にする || tutcode-use-with-vi? || #t #f || #f ||
+|| Dvorakキーボードを使用する || tutcode-use-dvorak? || #t #f || #f ||
+|| 候補ウィンドウを使用する || tutcode-use-candidate-window? || #t #f || #t ||
+|| 見出し表示のキーで候補を確定する || tutcode-commit-candidate-by-label-key? || #t #f || #t ||
+|| 候補ウィンドウを表示するために変換キーを押す回数 || tutcode-candidate-op-count || 数字 || 5 ||
+|| 候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max || 数字 || 10 ||
 
 ==== TUT-Codeの変数の依存関係 ====
 
