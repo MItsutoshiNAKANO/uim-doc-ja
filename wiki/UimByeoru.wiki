@@ -63,27 +63,14 @@ uimのByeoruモジュール。 ハングル入力スイートByeoruで入力/変
 === Byeoruの変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-||<|8> ハングルキーボードのレイアウト ||<|8> byeoru-layout || 'byeoru-layout-hangul2 ||<|8> 'byeoru-layout-hangul2 ||
-|| 'byeoru-layout-hangul2hanterm ||
-|| 'byeoru-layout-strict3final ||
-|| 'byeoru-layout-generous3final ||
-|| 'byeoru-layout-strict390 ||
-|| 'byeoru-layout-generous390 ||
-|| 'byeoru-layout-no-shift ||
-|| 'byeoru-layout-romaja ||
-||<|3> 字母入力 ||<|3> byeoru-jamo-orderedness || 'ordered ||<|3> 'ordered ||
-|| 'orderless ||
-|| 'more-orderless ||
-||<|2> ESCキーでハングルモードをオフにする (viユーザ向け) ||<|2> byeoru-esc-turns-off? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 標準の確定単位を単語にする ||<|2> byeoru-commit-by-word? || #t ||<|2> #f ||
-|| #f ||
-||<|2> シフト+ローマ字母音で単母音を入力する ||<|2> byeoru-shifted-romaja-isolates-vowel? || #t ||<|2> #f ||
-|| #f ||
-|| 候補ウィンドウのサイズ || byeoru-nr-candidate-max ||<|2> 数字 || 10 ||
-|| 記号のキャッシュサイズ || define byeoru-symbol-cache-size || 5 ||
-||<|2> 互換字母を使用して構成中の音節を表す ||<|2> byeoru-compatibility-jamos-for-incomplete-syllables? || #t ||<|2> #t ||
-|| #f ||
+|| ハングルキーボードのレイアウト || byeoru-layout || 'byeoru-layout-hangul2<br> 'byeoru-layout-hangul2hanterm<br> 'byeoru-layout-strict3final<br> 'byeoru-layout-generous3final<br> 'byeoru-layout-strict390<br> 'byeoru-layout-generous390<br> 'byeoru-layout-no-shift<br> 'byeoru-layout-romaja || 'byeoru-layout-hangul2 ||
+|| 字母入力 || byeoru-jamo-orderedness || 'ordered<br> 'orderless<br> 'more-orderless || 'ordered ||
+|| ESCキーでハングルモードをオフにする (viユーザ向け) || byeoru-esc-turns-off? || #t #f || #t ||
+|| 標準の確定単位を単語にする || byeoru-commit-by-word? || #t #f || #f ||
+|| シフト+ローマ字母音で単母音を入力する || byeoru-shifted-romaja-isolates-vowel? || #t #f || #f ||
+|| 候補ウィンドウのサイズ || byeoru-nr-candidate-max || 数字 || 10 ||
+|| 記号のキャッシュサイズ || define byeoru-symbol-cache-size || 数字 || 5 ||
+|| 互換字母を使用して構成中の音節を表す || byeoru-compatibility-jamos-for-incomplete-syllables? || #t #f || #t ||
 
 ==== Byeoruの変数の依存関係 ====
 
