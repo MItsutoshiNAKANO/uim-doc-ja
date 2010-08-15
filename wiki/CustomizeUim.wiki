@@ -294,77 +294,23 @@ http://pc10.2ch.net/test/read.cgi/linux/1135968795/581
 }}}
 
 || 動作 || 変数名 || 指定できる値 ||
-||<|5> モードマーク ||<|5> skk-preedit-attr-mode-mark || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-||<|5> ▽モードの見出し語 ||<|5> skk-preedit-attr-head || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-||<|5> 再帰学習モードの送り仮名 ||<|5> skk-preedit-attr-okuri || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-||<|5> ▽モードのローマ字プレフィックス ||<|5> skk-preedit-attr-pending-rk || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-||<|5> ▼モードの見出し語 ||<|5> skk-preedit-attr-conv-body || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-||<|5> ▼モードの送り仮名 ||<|5> skk-preedit-attr-conv-okuri || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-||<|5>  ||<|5> skk-preedit-attr-conv-appendix || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-||<|5> ローマ字プレフィックス ||<|5> skk-preedit-attr-direct-pending-rk || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-||<|5> 再帰学習エリアの先頭 ||<|5> skk-preedit-attr-child-beginning-mark || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-||<|5> 再帰学習エリアの終わり ||<|5> skk-preedit-attr-child-end-mark || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-||<|5> 再帰学習エリア ||<|5> skk-preedit-attr-child-committed || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-||<|5> 単語削除エリア ||<|5> skk-preedit-attr-child-dialog || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-||<|5> 動的補完エリア ||<|5> skk-preedit-attr-dcomp || preedit-none ||
-|| preedit-reverse ||
-|| preedit-underline ||
-|| preedit-cursor ||
-|| preedit-separator ||
-|| 再帰学習エリアの先頭を示す文字 || skk-child-context-beginning-mark ||<|2> "文字" ||
-|| 再帰学習エリアの終わりを示す文字 || skk-child-context-end-mark ||
-||<|2> ▽モードで文字を入力している時にカーソルを表示するか ||<|2> skk-show-cursor-on-preedit? || #t ||
-|| #f ||
-||<|2> 候補選択ウィンドウ中に表示される候補に送り仮名を付加するか ||<|2> skk-show-candidates-with-okuri? || #t ||
-|| #f ||
+|| モードマーク || skk-preedit-attr-mode-mark || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+|| ▽モードの見出し語 || skk-preedit-attr-head || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+|| 再帰学習モードの送り仮名 || skk-preedit-attr-okuri || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+|| ▽モードのローマ字プレフィックス || skk-preedit-attr-pending-rk || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+|| ▼モードの見出し語 || skk-preedit-attr-conv-body || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+|| ▼モードの送り仮名 || skk-preedit-attr-conv-okuri || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+||  || skk-preedit-attr-conv-appendix || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+|| ローマ字プレフィックス || skk-preedit-attr-direct-pending-rk || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+|| 再帰学習エリアの先頭 || skk-preedit-attr-child-beginning-mark || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+|| 再帰学習エリアの終わり || skk-preedit-attr-child-end-mark || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+|| 再帰学習エリア || skk-preedit-attr-child-committed || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+|| 単語削除エリア || skk-preedit-attr-child-dialog || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+|| 動的補完エリア || skk-preedit-attr-dcomp || preedit-none<br> preedit-reverse<br> preedit-underline<br> preedit-cursor<br> preedit-separator ||
+|| 再帰学習エリアの先頭を示す文字 || skk-child-context-beginning-mark || "文字" ||
+|| 再帰学習エリアの終わりを示す文字 || skk-child-context-end-mark || "文字" ||
+|| ▽モードで文字を入力している時にカーソルを表示するか || skk-show-cursor-on-preedit? || #t #f ||
+|| 候補選択ウィンドウ中に表示される候補に送り仮名を付加するか || skk-show-candidates-with-okuri? || #t #f ||
 
 ==== 変換候補の見出しキーを変更する ====
 
@@ -872,12 +818,12 @@ http://d.hatena.ne.jp/higepon/20061002/1159797987
 }}}
 
 || 動作 || 変数名 || 指定できる値 ||
-||  || reversed-preedit-foreground ||<|6> "色名" ||
-||  || reversed-preedit-background ||
-||  || separator-foreground ||
-||  || separator-background ||
-||  || reversed-separator-foreground ||
-||  || reversed-separator-background ||
+||  || reversed-preedit-foreground || "色名" ||
+||  || reversed-preedit-background || "色名" ||
+||  || separator-foreground || "色名" ||
+||  || separator-background || "色名" ||
+||  || reversed-separator-foreground || "色名" ||
+||  || reversed-separator-background || "色名" ||
 
 ==== IMそれぞれにIM切り換えキーを割り当てる ====
 
@@ -1148,8 +1094,8 @@ ja-direct-rule))
             ((("@" "\\"). ())("＼" "＼" "\\"))
             ((("@" ","). ())("，" "，" ","))
             ((("@" "."). ())("．" "．" "."))
-            ((("@" "~"). ())("〜" "〜" "~"))
-            ((("@" "|" "|"). ())("‖" "‖" ""))
+            ((("@" "~"). ())("?" "?" "~"))
+            ((("@" "|" "|"). ())("?" "?" ""))
             ((("@" "|"). ())("｜" "｜" "|"))
             ((("@" "3"). ())("…" "…" ""))
             ((("@" "2"). ())("‥" "‥" ""))
@@ -1240,7 +1186,7 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
             ((("z" "\""). ())("“" "“" ""))
             ((("z" "#"). ())("▲" "▲" ""))
             ((("z" "$"). ())("■" "■" ""))
-            ((("z" "&"). ())("£" "£" ""))
+            ((("z" "&"). ())("￡" "￡" ""))
             ((("z" "'"). ())("‘" "‘" ""))
             ((("z" "("). ())("【" "【" ""))
             ((("z" ")"). ())("】" "】" ""))
@@ -1248,7 +1194,7 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
             ((("z" "="). ())("≠" "≠" ""))
             ((("z" "^"). ())("★" "★" ""))
             ((("z" "\\"). ())("＼" "＼" ""))
-            ((("z" "|"). ())("‖" "‖" ""))
+            ((("z" "|"). ())("?" "?" ""))
             ((("z" "`"). ())("´" "´" ""))
             ((("z" "@"). ())("▼" "▼" ""))
             ((("z" "{"). ())("〔" "〔" ""))
@@ -1268,7 +1214,7 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
             ((("z" "5"). ())("◇" "◇" ""))
             ((("z" "6"). ())("☆" "☆" ""))
             ((("z" "7"). ())("◎" "◎" ""))
-            ((("z" "8"). ())("¢" "¢" ""))
+            ((("z" "8"). ())("￠" "￠" ""))
             ((("z" "9"). ())("♂" "♂" ""))
             ((("z" "0"). ())("♀" "♀" ""))
             ((("z" "b"). ())("°" "°" ""))
@@ -1352,4 +1298,3 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
 (require "tcode.scm")
 (set! ja-rk-rule tcode-rule)
 }}}
-
