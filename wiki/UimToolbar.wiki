@@ -58,23 +58,14 @@ wikiページを参照します。
 === ツールバーの変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-||<|2> 入力方式切り換えメニューを有効にする ||<|2> toolbar-show-action-based-switcher-button? || #t ||<|2> #t ||
-|| #f ||
-||<|3> 変更の適用範囲 ||<|3> imsw-coverage || 'focused-context ||<|3> 'system-global ||
-|| 'app-global ||
-|| 'system-global ||
-||<|2> フル機能の入力方式切り換えツール ||<|2> toolbar-show-switcher-button? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 設定 ||<|2> toolbar-show-pref-button? || #t ||<|2> #t ||
-|| #f ||
-||<|2> 日本語辞書ツール ||<|2> toolbar-show-dict-button? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 入力パッド ||<|2> toolbar-show-input-pad-button? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 手書き入力パッド ||<|2> toolbar-show-handwriting-input-pad-button? || #t ||<|2> #f ||
-|| #f ||
-||<|2> ヘルプ ||<|2> toolbar-show-help-button? || #t ||<|2> #f ||
-|| #f ||
+|| 入力方式切り換えメニューを有効にする || toolbar-show-action-based-switcher-button? || #t #f || #t ||
+|| 変更の適用範囲 || imsw-coverage || 'focused-context<br> 'app-global<br> 'system-global || 'system-global ||
+|| フル機能の入力方式切り換えツール || toolbar-show-switcher-button? || #t #f || #f ||
+|| 設定 || toolbar-show-pref-button? || #t #f || #t ||
+|| 日本語辞書ツール || toolbar-show-dict-button? || #t #f || #f ||
+|| 入力パッド || toolbar-show-input-pad-button? || #t #f || #f ||
+|| 手書き入力パッド || toolbar-show-handwriting-input-pad-button? || #t #f || #f ||
+|| ヘルプ || toolbar-show-help-button? || #t #f || #f ||
 
 ==== ツールバーの変数の依存関係 ====
 
