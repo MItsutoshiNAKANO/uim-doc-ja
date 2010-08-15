@@ -114,41 +114,25 @@ vi（クローン）でコマンドモードに戻る時、uimを直接入力モ
 === Yahoo-Jpの変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-||<|2> 文節区切りを表示 ||<|2> yahoo-jp-show-segment-separator? || #t ||<|2> #f ||
-|| #f ||
+|| 文節区切りを表示 || yahoo-jp-show-segment-separator? || #t #f || #f ||
 || 文節区切り || yahoo-jp-segment-separator || "文字列" || "|" ||
-||<|2> 候補ウィンドウを使用する ||<|2> yahoo-jp-use-candidate-window? || #t ||<|2> #t ||
-|| #f ||
-|| 候補ウィンドウを表示するために変換キーを押す回数 || yahoo-jp-candidate-op-count ||<|2> 数字 || 1 ||
-|| 候補ウィンドウに一度に表示する候補数 || yahoo-jp-nr-candidate-max || 10 ||
-||<|2> 数字キーで候補を選択する ||<|2> yahoo-jp-select-candidate-by-numeral-key? || #t ||<|2> #f ||
-|| #f ||
-||<|6> 標準の入力モード ||<|6> default-widget_yahoo-jp_input_mode || 'action_yahoo-jp_direct ||<|6> 'action_yahoo-jp_direct ||
-|| 'action_yahoo-jp_hiragana ||
-|| 'action_yahoo-jp_katakana ||
-|| 'action_yahoo-jp_halfkana ||
-|| 'action_yahoo-jp_halfwidth_alnum ||
-|| 'action_yahoo-jp_fullwidth_alnum ||
-||<|3> 標準のかな入力方式 ||<|3> default-widget_yahoo-jp_kana_input_method || 'action_yahoo-jp_roma ||<|3> 'action_yahoo-jp_roma ||
-|| 'action_yahoo-jp_kana ||
-|| 'action_yahoo-jp_azik ||
-|| Yahoo-Jp server address || yahoo-jp-server ||<|3> "文字列" || "jlp.yahooapis.jp" ||
-|| Yahoo-Jp service path || yahoo-jp-path || "/JIMService/V1/" ||
-|| Yahoo-Jpのapiキー || yahoo-jp-appid || "" ||
-||<|2> Use SSL ||<|2> yahoo-jp-use-ssl? || #t ||<|2> #f ||
-|| #f ||
-||<|2> vi協調モードを有効にする ||<|2> yahoo-jp-use-with-vi? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 直接入力モード(off状態)時も入力モード切り換えキーを有効にする ||<|2> yahoo-jp-use-mode-transition-keys-in-off-mode? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 予測入力を有効にする ||<|2> yahoo-jp-use-prediction? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 数字キーで予測候補を選択する ||<|2> yahoo-jp-select-prediction-by-numeral-key? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 編集領域内に選んだ予測候補を表示する ||<|2> yahoo-jp-use-implicit-commit-prediction? || #t ||<|2> #t ||
-|| #f ||
-|| Number of cache of prediction candidates || yahoo-jp-prediction-cache-words ||<|2> 数字 || 256 ||
-|| Character count to start input prediction || yahoo-jp-prediction-start-char-count || 2 ||
+|| 候補ウィンドウを使用する || yahoo-jp-use-candidate-window? || #t #f || #t ||
+|| 候補ウィンドウを表示するために変換キーを押す回数 || yahoo-jp-candidate-op-count || 数字 || 1 ||
+|| 候補ウィンドウに一度に表示する候補数 || yahoo-jp-nr-candidate-max || 数字 || 10 ||
+|| 数字キーで候補を選択する || yahoo-jp-select-candidate-by-numeral-key? || #t #f || #f ||
+|| 標準の入力モード || default-widget_yahoo-jp_input_mode || 'action_yahoo-jp_direct<br> 'action_yahoo-jp_hiragana<br> 'action_yahoo-jp_katakana<br> 'action_yahoo-jp_halfkana<br> 'action_yahoo-jp_halfwidth_alnum<br> 'action_yahoo-jp_fullwidth_alnum || 'action_yahoo-jp_direct ||
+|| 標準のかな入力方式 || default-widget_yahoo-jp_kana_input_method || 'action_yahoo-jp_roma<br> 'action_yahoo-jp_kana<br> 'action_yahoo-jp_azik || 'action_yahoo-jp_roma ||
+|| Yahoo-Jp server address || yahoo-jp-server || "文字列" || "jlp.yahooapis.jp" ||
+|| Yahoo-Jp service path || yahoo-jp-path || "文字列" || "/JIMService/V1/" ||
+|| Yahoo-Jpのapiキー || yahoo-jp-appid || "文字列" || "" ||
+|| Use SSL || yahoo-jp-use-ssl? || #t #f || #f ||
+|| vi協調モードを有効にする || yahoo-jp-use-with-vi? || #t #f || #f ||
+|| 直接入力モード(off状態)時も入力モード切り換えキーを有効にする || yahoo-jp-use-mode-transition-keys-in-off-mode? || #t #f || #f ||
+|| 予測入力を有効にする || yahoo-jp-use-prediction? || #t #f || #f ||
+|| 数字キーで予測候補を選択する || yahoo-jp-select-prediction-by-numeral-key? || #t #f || #f ||
+|| 編集領域内に選んだ予測候補を表示する || yahoo-jp-use-implicit-commit-prediction? || #t #f || #t ||
+|| Number of cache of prediction candidates || yahoo-jp-prediction-cache-words || 数字 || 256 ||
+|| Character count to start input prediction || yahoo-jp-prediction-start-char-count || 数字 || 2 ||
 
 ==== Yahoo-Jpの変数の依存関係 ====
 
@@ -207,4 +191,3 @@ vi（クローン）でコマンドモードに戻る時、uimを直接入力モ
 || かな/英数入力モードを反転 || yahoo-jp-alkana-toggle-key? ||
 || Next prediction candidate || yahoo-jp-next-prediction-key? ||
 || Previous prediction candidate || yahoo-jp-prev-prediction-key? ||
-
