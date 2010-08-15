@@ -98,32 +98,19 @@ vi（クローン）でコマンドモードに戻る時、uimを直接入力モ
 === Wnnの変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-||<|2> 文節区切りを表示 ||<|2> wnn-show-segment-separator? || #t ||<|2> #f ||
-|| #f ||
+|| 文節区切りを表示 || wnn-show-segment-separator? || #t #f || #f ||
 || 文節区切り || wnn-segment-separator || "文字列" || "|" ||
-||<|2> 候補ウィンドウを使用する ||<|2> wnn-use-candidate-window? || #t ||<|2> #t ||
-|| #f ||
-|| 候補ウィンドウを表示するために変換キーを押す回数 || wnn-candidate-op-count ||<|2> 数字 || 1 ||
-|| 候補ウィンドウに一度に表示する候補数 || wnn-nr-candidate-max || 10 ||
-||<|2> 数字キーで候補を選択する ||<|2> wnn-select-candidate-by-numeral-key? || #t ||<|2> #f ||
-|| #f ||
-||<|6> 標準の入力モード ||<|6> default-widget_wnn_input_mode || 'action_wnn_direct ||<|6> 'action_wnn_direct ||
-|| 'action_wnn_hiragana ||
-|| 'action_wnn_katakana ||
-|| 'action_wnn_halfkana ||
-|| 'action_wnn_halfwidth_alnum ||
-|| 'action_wnn_fullwidth_alnum ||
-||<|3> 標準のかな入力方式 ||<|3> default-widget_wnn_kana_input_method || 'action_wnn_roma ||<|3> 'action_wnn_roma ||
-|| 'action_wnn_kana ||
-|| 'action_wnn_azik ||
-||<|2> ローカルマシン以外のWnnサーバに接続する ||<|2> wnn-use-remote-server? || #t ||<|2> #f ||
-|| #f ||
-|| Wnnサーバ名 || wnn-server-name ||<|2> "文字列" || "localhost" ||
-|| Wnn設定ファイル || wnn-rcfile || "" ||
-||<|2> vi協調モードを有効にする ||<|2> wnn-use-with-vi? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 直接入力モード(off状態)時も入力モード切り換えキーを有効にする ||<|2> wnn-use-mode-transition-keys-in-off-mode? || #t ||<|2> #f ||
-|| #f ||
+|| 候補ウィンドウを使用する || wnn-use-candidate-window? || #t #f || #t ||
+|| 候補ウィンドウを表示するために変換キーを押す回数 || wnn-candidate-op-count || 数字 || 1 ||
+|| 候補ウィンドウに一度に表示する候補数 || wnn-nr-candidate-max || 数字 || 10 ||
+|| 数字キーで候補を選択する || wnn-select-candidate-by-numeral-key? || #t #f || #f ||
+|| 標準の入力モード || default-widget_wnn_input_mode || 'action_wnn_direct<br> 'action_wnn_hiragana<br> 'action_wnn_katakana<br> 'action_wnn_halfkana<br> 'action_wnn_halfwidth_alnum<br> 'action_wnn_fullwidth_alnum || 'action_wnn_direct ||
+|| 標準のかな入力方式 || default-widget_wnn_kana_input_method || 'action_wnn_roma<br> 'action_wnn_kana<br> 'action_wnn_azik || 'action_wnn_roma ||
+|| ローカルマシン以外のWnnサーバに接続する || wnn-use-remote-server? || #t #f || #f ||
+|| Wnnサーバ名 || wnn-server-name || "文字列" || "localhost" ||
+|| Wnn設定ファイル || wnn-rcfile || "文字列" || "" ||
+|| vi協調モードを有効にする || wnn-use-with-vi? || #t #f || #f ||
+|| 直接入力モード(off状態)時も入力モード切り換えキーを有効にする || wnn-use-mode-transition-keys-in-off-mode? || #t #f || #f ||
 
 ==== Wnnの変数の依存関係 ====
 
@@ -176,4 +163,3 @@ vi（クローン）でコマンドモードに戻る時、uimを直接入力モ
 || 全角英数入力モード || wnn-fullwidth-alnum-key? ||
 || ひらがな/カタカナ入力モードを反転 || wnn-kana-toggle-key? ||
 || かな/英数入力モードを反転 || wnn-alkana-toggle-key? ||
-
