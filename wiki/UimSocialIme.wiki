@@ -112,40 +112,25 @@ vi（クローン）でコマンドモードに戻る時、uimを直接入力モ
 === Social-IMEの変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-||<|2> 文節区切りを表示 ||<|2> social-ime-show-segment-separator? || #t ||<|2> #f ||
-|| #f ||
+|| 文節区切りを表示 || social-ime-show-segment-separator? || #t #f || #f ||
 || 文節区切り || social-ime-segment-separator || "文字列" || "|" ||
-||<|2> 候補ウィンドウを使用する ||<|2> social-ime-use-candidate-window? || #t ||<|2> #t ||
-|| #f ||
-|| 候補ウィンドウを表示するために変換キーを押す回数 || social-ime-candidate-op-count ||<|2> 数字 || 1 ||
-|| 候補ウィンドウに一度に表示する候補数 || social-ime-nr-candidate-max || 10 ||
-||<|2> 数字キーで候補を選択する ||<|2> social-ime-select-candidate-by-numeral-key? || #t ||<|2> #f ||
-|| #f ||
-||<|6> 標準の入力モード ||<|6> default-widget_social-ime_input_mode || 'action_social-ime_direct ||<|6> 'action_social-ime_direct ||
-|| 'action_social-ime_hiragana ||
-|| 'action_social-ime_katakana ||
-|| 'action_social-ime_halfkana ||
-|| 'action_social-ime_halfwidth_alnum ||
-|| 'action_social-ime_fullwidth_alnum ||
-||<|3> 標準のかな入力方式 ||<|3> default-widget_social-ime_kana_input_method || 'action_social-ime_roma ||<|3> 'action_social-ime_roma ||
-|| 'action_social-ime_kana ||
-|| 'action_social-ime_azik ||
-|| Social-IME server address || social-ime-server ||<|4> "文字列" || "www.social-ime.com" ||
-|| Social-IME server path || social-ime-path || "/api/" ||
-|| Social-IME server prediction API path || social-ime-prediction-api-path || "/api2/predict.php" ||
-|| Social-IMEユーザ名 || social-ime-user || "user-name" ||
-||<|2> vi協調モードを有効にする ||<|2> social-ime-use-with-vi? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 直接入力モード(off状態)時も入力モード切り換えキーを有効にする ||<|2> social-ime-use-mode-transition-keys-in-off-mode? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 予測入力を有効にする ||<|2> social-ime-use-prediction? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 数字キーで予測候補を選択する ||<|2> social-ime-select-prediction-by-numeral-key? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 編集領域内に選んだ予測候補を表示する ||<|2> social-ime-use-implicit-commit-prediction? || #t ||<|2> #t ||
-|| #f ||
-|| Number of cache of prediction candidates || social-ime-prediction-cache-words ||<|2> 数字 || 256 ||
-|| Character count to start input prediction || social-ime-prediction-start-char-count || 2 ||
+|| 候補ウィンドウを使用する || social-ime-use-candidate-window? || #t #f || #t ||
+|| 候補ウィンドウを表示するために変換キーを押す回数 || social-ime-candidate-op-count || 数字 || 1 ||
+|| 候補ウィンドウに一度に表示する候補数 || social-ime-nr-candidate-max || 数字 || 10 ||
+|| 数字キーで候補を選択する || social-ime-select-candidate-by-numeral-key? || #t #f || #f ||
+|| 標準の入力モード || default-widget_social-ime_input_mode || 'action_social-ime_direct<br> 'action_social-ime_hiragana<br> 'action_social-ime_katakana<br> 'action_social-ime_halfkana<br> 'action_social-ime_halfwidth_alnum<br> 'action_social-ime_fullwidth_alnum || 'action_social-ime_direct ||
+|| 標準のかな入力方式 || default-widget_social-ime_kana_input_method || 'action_social-ime_roma<br> 'action_social-ime_kana<br> 'action_social-ime_azik || 'action_social-ime_roma ||
+|| Social-IME server address || social-ime-server || "文字列" || "www.social-ime.com" ||
+|| Social-IME server path || social-ime-path || "文字列" || "/api/" ||
+|| Social-IME server prediction API path || social-ime-prediction-api-path || "文字列" || "/api2/predict.php" ||
+|| Social-IMEユーザ名 || social-ime-user || "文字列" || "user-name" ||
+|| vi協調モードを有効にする || social-ime-use-with-vi? || #t #f || #f ||
+|| 直接入力モード(off状態)時も入力モード切り換えキーを有効にする || social-ime-use-mode-transition-keys-in-off-mode? || #t #f || #f ||
+|| 予測入力を有効にする || social-ime-use-prediction? || #t #f || #f ||
+|| 数字キーで予測候補を選択する || social-ime-select-prediction-by-numeral-key? || #t #f || #f ||
+|| 編集領域内に選んだ予測候補を表示する || social-ime-use-implicit-commit-prediction? || #t #f || #t ||
+|| Number of cache of prediction candidates || social-ime-prediction-cache-words || 数字 || 256 ||
+|| Character count to start input prediction || social-ime-prediction-start-char-count || 数字 || 2 ||
 
 ==== Social-IMEの変数の依存関係 ====
 
@@ -204,4 +189,3 @@ vi（クローン）でコマンドモードに戻る時、uimを直接入力モ
 || かな/英数入力モードを反転 || social-ime-alkana-toggle-key? ||
 || Next prediction candidate || social-ime-next-prediction-key? ||
 || Previous prediction candidate || social-ime-prev-prediction-key? ||
-
