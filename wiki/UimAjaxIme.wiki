@@ -97,30 +97,17 @@ vi（クローン）でコマンドモードに戻る時、uimを直接入力モ
 === Ajax-IMEの変数 ===
 
 || 動作 || 変数名 || 指定できる値 || 標準値 ||
-||<|2> 文節区切りを表示 ||<|2> ajax-ime-show-segment-separator? || #t ||<|2> #f ||
-|| #f ||
+|| 文節区切りを表示 || ajax-ime-show-segment-separator? || #t #f || #f ||
 || 文節区切り || ajax-ime-segment-separator || "文字列" || "|" ||
-||<|2> 候補ウィンドウを使用する ||<|2> ajax-ime-use-candidate-window? || #t ||<|2> #t ||
-|| #f ||
-|| 候補ウィンドウを表示するために変換キーを押す回数 || ajax-ime-candidate-op-count ||<|2> 数字 || 1 ||
-|| 候補ウィンドウに一度に表示する候補数 || ajax-ime-nr-candidate-max || 10 ||
-||<|2> 数字キーで候補を選択する ||<|2> ajax-ime-select-candidate-by-numeral-key? || #t ||<|2> #f ||
-|| #f ||
-||<|6> 標準の入力モード ||<|6> default-widget_ajax-ime_input_mode || 'action_ajax-ime_direct ||<|6> 'action_ajax-ime_direct ||
-|| 'action_ajax-ime_hiragana ||
-|| 'action_ajax-ime_katakana ||
-|| 'action_ajax-ime_halfkana ||
-|| 'action_ajax-ime_halfwidth_alnum ||
-|| 'action_ajax-ime_fullwidth_alnum ||
-||<|3> 標準のかな入力方式 ||<|3> default-widget_ajax-ime_kana_input_method || 'action_ajax-ime_roma ||<|3> 'action_ajax-ime_roma ||
-|| 'action_ajax-ime_kana ||
-|| 'action_ajax-ime_azik ||
-||<|2> Ajax IMEサーバを指定する ||<|2> ajax-ime-url || 'ajax-ime ||<|2> 'ajax-ime ||
-|| 'cha-ime ||
-||<|2> vi協調モードを有効にする ||<|2> ajax-ime-use-with-vi? || #t ||<|2> #f ||
-|| #f ||
-||<|2> 直接入力モード(off状態)時も入力モード切り換えキーを有効にする ||<|2> ajax-ime-use-mode-transition-keys-in-off-mode? || #t ||<|2> #f ||
-|| #f ||
+|| 候補ウィンドウを使用する || ajax-ime-use-candidate-window? || #t #f || #t ||
+|| 候補ウィンドウを表示するために変換キーを押す回数 || ajax-ime-candidate-op-count || 数字 || 1 ||
+|| 候補ウィンドウに一度に表示する候補数 || ajax-ime-nr-candidate-max || 数字 || 10 ||
+|| 数字キーで候補を選択する || ajax-ime-select-candidate-by-numeral-key? || #t #f || #f ||
+|| 標準の入力モード || default-widget_ajax-ime_input_mode || 'action_ajax-ime_direct<br> 'action_ajax-ime_hiragana<br> 'action_ajax-ime_katakana<br> 'action_ajax-ime_halfkana<br> 'action_ajax-ime_halfwidth_alnum<br> 'action_ajax-ime_fullwidth_alnum || 'action_ajax-ime_direct ||
+|| 標準のかな入力方式 || default-widget_ajax-ime_kana_input_method || 'action_ajax-ime_roma<br> 'action_ajax-ime_kana<br> 'action_ajax-ime_azik || 'action_ajax-ime_roma ||
+|| Ajax IMEサーバを指定する || ajax-ime-url || 'ajax-ime<br> 'cha-ime || 'ajax-ime ||
+|| vi協調モードを有効にする || ajax-ime-use-with-vi? || #t #f || #f ||
+|| 直接入力モード(off状態)時も入力モード切り換えキーを有効にする || ajax-ime-use-mode-transition-keys-in-off-mode? || #t #f || #f ||
 
 ==== Ajax-IMEの変数の依存関係 ====
 
@@ -174,4 +161,3 @@ vi（クローン）でコマンドモードに戻る時、uimを直接入力モ
 == 注意 ==
 
 学習機能と文節の伸縮機能はありません。
-
