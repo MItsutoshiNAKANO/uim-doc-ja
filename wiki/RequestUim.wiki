@@ -329,12 +329,6 @@ http://bugzilla.mozilla.gr.jp/show_bug.cgi?id=5724
 
 }}}
 
-=== uim-anthyのF10がアプリに取られて半角英数変換できない ===
-
-http://vagus.seesaa.net/article/108510198.html
-
-http://lists.sourceforge.jp/mailman/archives/anthy-dev/2006-January/002805.html
-
 === uim-ximでuim-candwin-*が見つからないときは自動的に候補ウィンドウ機能を無効に ===
 
 \*-use-candidate-windowとか*-candidate-op-countを上書き? 変換候補が見えなくならないように。

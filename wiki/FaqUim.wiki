@@ -273,3 +273,11 @@ diff -r b78008b446f1 -r 84cf8763794e src/getchar.c
 == [UimQt UimQt]を使うとQt4アプリが起動できなくなる ==
 
 uim（>= 1.5.3）を使ってください。
+
+
+== uim-anthyのF10がGTKアプリに取られて半角英数変換できない ==
+
+http://vagus.seesaa.net/article/108510198.html
+
+ * gconf-editor の apps -> metacity -> window_keybindings -> activate_window_menu を F10 から disabled などに変更する
+
