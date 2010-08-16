@@ -2,11 +2,11 @@
 
 ユーザ文書一覧
 
-  * [InstallUim InstallUim]
-  * [UsageUim UsageUim]
-  * [CustomizeUim CustomizeUim]
-  * [GlossaryUim GlossaryUim]
-  * [FaqUim FaqUim]
+  * [InstallUim インストール]
+  * [CustomizeUim カスタマイズ]
+  * [GlossaryUim 用語]
+  * [FaqUim FAQ]
+  * [UsageUim 利用ドキュメント一覧]
 
   * [http://code.google.com/p/uim/wiki/OfficialUserDocument Official user document]
   * [http://en.wikibooks.org/wiki/Uim Uim - Wikibooks]
