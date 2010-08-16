@@ -4,9 +4,9 @@
 
 == ある入力方式が使えない ==
 
-予め使いたい変換エンジンをインストールしてから、uimをコンパイルしましたか？ 例えばuimでAnthyを変換エンジンとして使うには、[UimAnthy]モジュールが必要となります。 このモジュールはAnthyを先にインストールしておかなければコンパイルされません。
+予め使いたい変換エンジンをインストールしてから、uimをコンパイルしましたか？ 例えばuimでAnthyを変換エンジンとして使うには、[UimAnthy uim-anthy]モジュールが必要となります。 このモジュールはAnthyを先にインストールしておかなければコンパイルされません。
 
-入力方式のリストに希望の入力方式は表示されていますか？ [UimPref]の「使用可能にする入力方式」を見てください。 もしくは[UimSh]を次のように実行して確認してみてください。
+入力方式のリストに希望の入力方式は表示されていますか？ [UimPref uim-pref]の「使用可能にする入力方式」を見てください。 もしくは[UimSh uim-sh]を次のように実行して確認してみてください。
 
 {{{
 インストール済みの入力方式のリストを表示
@@ -15,7 +15,7 @@ $ uim-sh -e installed-im-list
 $ uim-sh -e enabled-im-list
 }}}
 
-[UimCanna]であればcannaserver、[UimSj3]であればsj3server、[UimWnn UimWnn]であればjserverは動いてますか？
+[UimCanna uim-canna]であればcannaserver、[UimSj3 uim-sj3]であればsj3server、[UimWnn uim-wnn]であればjserverは動いてますか？
 
 {{{
 $ ps aux | grep cannaserver
@@ -23,7 +23,7 @@ $ ps aux | grep cannaserver
 
 == あるアプリで入力できない ==
 
-[UimFep]、[UimXim]、[UimEl]、[UimGtk]、[UimQt]といった、各ブリッジはインストールされてますか？ 少なくともコンソールでは[UimFep]、Xでは[UimXim]が必要です。
+[UimFep uim-fep]、[UimXim uim-xim]、[UimEl uim-el]、[UimGtk uim-gtk]、[UimQt uim-qt]といった、各ブリッジはインストールされてますか？ 少なくともコンソールでは[UimFep uim-fep]、Xでは[UimXim uim-xim]が必要です。
 
 {{{
 $ ps aux | grep uim-xim
@@ -40,7 +40,7 @@ $ echo $QT_IM_MODULE
 uim
 }}}
 
-期待しているものとは違う入力方式になっていませんか？ [UimImSwitcher]や[UimToolbar]などを起動して、現在の入力方式を確認してみてください。
+期待しているものとは違う入力方式になっていませんか？ [UimImSwitcher uim-im-switcher]や[UimToolbar uim-toolbar]などを起動して、現在の入力方式を確認してみてください。
 
 {{{
 $ uim-toolbar-gtk
@@ -48,9 +48,9 @@ $ uim-toolbar-gtk
 
 == uimにキーを奪われる ==
 
-[UimImSwitcher]、[UimToolbar]もしくは「入力方式の正副一時切り換え」の「副入力方式」に「直接入力」を指定。 必要に応じて「直接入力」に切り換える。
+[UimImSwitcher uim-im-switcher]、[UimToolbar uim-toolbar]もしくは「入力方式の正副一時切り換え」の「副入力方式」に「直接入力」を指定。 必要に応じて「直接入力」に切り換える。
 
-入力方式の正副一時切り換えをするためのホットキーは、標準ではMeta+Spaceに割り当てられていますが、[UimPref]で好きなキーに変更できます。
+入力方式の正副一時切り換えをするためのホットキーは、標準ではMeta+Spaceに割り当てられていますが、[UimPref uim-pref]で好きなキーに変更できます。
 
 uim 1.4では「副入力方式」に「直接入力」を選択できないので、替わりに「ラテン入力」で代用してください。
 
@@ -189,7 +189,7 @@ $ uim-xim --list
 
 == Emacsでuimにキーを奪われる ==
 
-XIMを無効にして、入力を[UimEl]ブリッジ経由で行なう。
+XIMを無効にして、入力を[UimEl uim-el]ブリッジ経由で行なう。
 
 {{{
 $ XMODIFIERS="@im=none" emacs
@@ -254,13 +254,13 @@ diff -r b78008b446f1 -r 84cf8763794e src/getchar.c
      }
 }}}
 
-== たまに[UimXim]が暴走する ==
+== たまに[UimXim uim-xim]が暴走する ==
 
 --asyncオプションを試してみて。
 
 == Flash上での入力問題色々 ==
 
-  * Flash Player（<< 9.0.115）では入力に[UimXim]が必要です。
+  * Flash Player（<< 9.0.115）では入力に[UimXim uim-xim]が必要です。
   * Flash Player（>= 9.0.64）とuim（<< 1.3.0）の組み合わせでは、以下のような不具合が発生します。
     1. 編集領域が表示されない
     1. 候補ウィンドウがおかしな位置に出る
@@ -270,6 +270,6 @@ diff -r b78008b446f1 -r 84cf8763794e src/getchar.c
     1. 特定のロケールで変換確定すると違う文字が入力される
   * windowlessモードで入力できないのはブラウザやFlash Player側の問題です。
 
-== [UimQt]を使うとQt4アプリが起動できなくなる ==
+== [UimQt UimQt]を使うとQt4アプリが起動できなくなる ==
 
 uim（>= 1.5.3）を使ってください。

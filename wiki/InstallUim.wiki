@@ -2,11 +2,12 @@
 
 <wiki:toc max_depth="3" />
 
-== uimの入手 ==
+== uimの入手 (ソースコードを利用) ==
 
 === リリース版 ===
 
-ソースコードをhttp://code.google.com/p/uim/downloads/listからダウンロードしてきます。 これにはコアライブラリ、各種モジュール、ブリッジ、ツール群、アイコンやドキュメントなど一式が同梱されています。
+ソースコードをhttp://code.google.com/p/uim/downloads/list
+からダウンロードしてきます。 これにはコアライブラリ、各種モジュール、ブリッジ、ツール群、アイコンやドキュメントなど一式が同梱されています。
 
 ソースコードをダウンロードしてきたら展開しましょう。
 
@@ -39,7 +40,7 @@ $ ./configure
   * --with-qt4（各種Qt4.x版ツールのビルド）
   * --with-qt4-immodule（Qt 4.x版[UimQt UimQt]のビルド）
   * --with-eb（電子辞書を利用した注釈表示）
-  * --with-curl (CUrlプラグインのビルド)
+  * --with-curl (cURLプラグインのビルド)
   * --with-expat (expatプラグインのビルド, uim-yahoo-jp に必要)
   * --with-sqlite3 (SQLite3プラグインのビルド)
   * --with-ffi (libffiプラグインのビルド)
@@ -226,7 +227,7 @@ $ uim-pref-gtk（もしくはuim-pref-{qt,qt4}）
 
 標準の入力方式を指定していない場合、システムのロケールに従った入力方式を選択されます。 例えば日本語ロケール（ja_JP）であれば、日本語関係の入力方式が自動で選択されます。
 
-== OS別のインストール例 ==
+== OS別のインストール例 (パッケージを利用) ==
 
 === Arch ===
 
