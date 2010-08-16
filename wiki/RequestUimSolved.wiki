@@ -381,6 +381,23 @@ http://lists.sourceforge.jp/mailman/archives/anthy-dev/2004-October/001258.html
 
 [https://bugs.freedesktop.org/show_bug.cgi?id=1732 Bug 1732]
 
+=== 黒背景だとツールバーのアイコンの文字が見えない ===
+
+http://pc11.2ch.net/test/read.cgi/linux/1135968795/898
+
+{{{
+
+システムトレイに格納して利用してますが
+入力モードの文字色を変更することができませんでしようか？
+現在 Gnome 上でテーマの色を黒にしているので
+テーマ色と同化して全く見えなくなってしまいます。
+
+}}}
+
+----
+「ツールバー」設定の「濃色背景向けアイコンを使用する」を有効にしてください。
+
+
 == その他 ==
 
 === uim-skk: Shift-space と C-j の区別 ===

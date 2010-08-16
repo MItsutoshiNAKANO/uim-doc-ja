@@ -258,19 +258,6 @@ http://lists.sourceforge.jp/mailman/archives/anthy-dev/2005-November/002627.html
 
 個人辞書をddskkと同じように"okuri-ari entries."、"okuri-nasi entries."等でソートしてから書き出してほしいです。
 
-=== 黒背景だとツールバーのアイコンの文字が見えない ===
-
-http://pc11.2ch.net/test/read.cgi/linux/1135968795/898
-
-{{{
-
-システムトレイに格納して利用してますが
-入力モードの文字色を変更することができませんでしようか？
-現在 Gnome 上でテーマの色を黒にしているので
-テーマ色と同化して全く見えなくなってしまいます。
-
-}}}
-
 === 異なるブリッジ間でuim-skk個人辞書を即座に同期 ===
 
 http://pc11.2ch.net/test/read.cgi/linux/1200850880/45
