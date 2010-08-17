@@ -23,7 +23,7 @@ $ ps aux | grep cannaserver
 
 == あるアプリで入力できない ==
 
-[UimFep uim-fep]、[UimXim uim-xim]、[UimEl uim-el]、[UimGtk uim-gtk]、[UimQt uim-qt]といった、各ブリッジはインストールされてますか？ 少なくともコンソールでは[UimFep uim-fep]、Xでは[UimXim uim-xim]が必要です。
+[UimFep uim-fep]、[UimXim uim-xim]、[UimEl uim.el]、[UimGtk uim-gtk]、[UimQt uim-qt]といった、各ブリッジはインストールされてますか？ 少なくともコンソールでは[UimFep uim-fep]、Xでは[UimXim uim-xim]が必要です。
 
 {{{
 $ ps aux | grep uim-xim
@@ -189,7 +189,7 @@ $ uim-xim --list
 
 == Emacsでuimにキーを奪われる ==
 
-XIMを無効にして、入力を[UimEl uim-el]ブリッジ経由で行なう。
+XIMを無効にして、入力を[UimEl uim.el]ブリッジ経由で行なう。
 
 {{{
 $ XMODIFIERS="@im=none" emacs
