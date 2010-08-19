@@ -1,4 +1,4 @@
-﻿= UimAnthy =
+﻿= [UimAnthy uim-anthy] =
 
 
 == これは何？ ==

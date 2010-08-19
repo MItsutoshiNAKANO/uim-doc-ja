@@ -2,7 +2,7 @@
 
 [http://uim.googlecode.com/svn/trunk/doc/HELPER-PROTOCOL uim:doc/HELPER-PROTOCOL]より転載
 
-<wiki:toc max_depth="1" />
+<wiki:toc max_depth="3" />
 
 To communicate between uim-related processes such as GUI applications and toolbar applets, uim uses the helper system. This file describes the helper protocol within uim.
 

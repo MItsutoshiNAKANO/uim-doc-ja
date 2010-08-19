@@ -1,4 +1,4 @@
-= UsageUim =
+﻿= [UsageUim 機能別利用文書] =
 
 == コア ==
 

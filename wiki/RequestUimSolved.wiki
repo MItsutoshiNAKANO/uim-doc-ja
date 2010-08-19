@@ -1,4 +1,4 @@
-﻿= RequestUimSolved =
+﻿= [RequestUimSolved 解決済みの要望] =
 
 <wiki:toc max_depth="3" />
 

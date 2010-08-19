@@ -1,4 +1,4 @@
-﻿= GlossaryUim =
+﻿= [GlossaryUim 用語] =
 
 uimで使われる用語
 

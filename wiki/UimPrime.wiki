@@ -1,4 +1,4 @@
-= UimPrime =
+﻿= [UimPrime uim-prime] =
 
 == これは何？ ==
 

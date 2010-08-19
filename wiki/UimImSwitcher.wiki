@@ -1,4 +1,4 @@
-﻿= UimImSwitcher =
+﻿= [UimImSwitcher uim-im-switcher] =
 
 == これは何？ ==
 
@@ -14,4 +14,4 @@
 $ uim-im-switcher-gtk &
 }}}
 
-また[UimToolbar UimToolbar]から起動する事もできます。
+また[UimToolbar uim-toolbar]から起動する事もできます。

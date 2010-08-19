@@ -1,4 +1,4 @@
-﻿= CustomizeUim =
+﻿= [CustomizeUim カスタマイズ] =
 
 <wiki:toc max_depth="3" />
 

@@ -1,4 +1,4 @@
-﻿= UimSocialIme =
+﻿= [UimSocialIme uim-social-ime] =
 
 == これは何？ ==
 

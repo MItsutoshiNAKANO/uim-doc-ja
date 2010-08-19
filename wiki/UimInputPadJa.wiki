@@ -1,4 +1,4 @@
-= UimInputPadJa =
+﻿= [UimInputPadJa uim-input-pad-ja] =
 
 == これは何？ ==
 
@@ -12,5 +12,5 @@
 $ uim-input-pad-ja &
 }}}
 
-また[UimToolbar UimToolbar]から起動する事もできます。
+また[UimToolbar uim-toolbar]から起動する事もできます。
 

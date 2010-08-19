@@ -1,4 +1,4 @@
-﻿= UimSkk =
+﻿= [UimSkk uim-skk] =
 
 == これは何？ ==
 

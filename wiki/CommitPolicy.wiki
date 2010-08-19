@@ -1,4 +1,4 @@
-﻿= CommitPolicy =
+﻿= [CommitPolicy コミットポリシー] =
 
 http://lists.sourceforge.jp/mailman/archives/anthy-dev/2005-September/002377.html
 

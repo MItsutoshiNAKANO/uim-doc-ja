@@ -1,4 +1,4 @@
-﻿= UimYahooJp =
+﻿= [UimYahooJp uim-yahoo-jp] =
 
 == これは何？ ==
 

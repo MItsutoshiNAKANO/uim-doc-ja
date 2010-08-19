@@ -1,4 +1,4 @@
-﻿= UimToolbar =
+﻿= [UimToolbar uim-toolbar] =
 
 == これは何？ ==
 

@@ -1,4 +1,4 @@
-﻿= UimCanna =
+﻿= [UimCanna uim-canna] =
 
 == これは何？ ==
 

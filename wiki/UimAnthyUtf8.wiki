@@ -1,4 +1,4 @@
-= UimAnthyUtf8 =
+﻿= [UimAnthyUtf8 uim-anthy-utf8] =
 
 [UimAnthy]を参照ください。
 

@@ -1,4 +1,4 @@
-﻿= RequestUim =
+﻿= [RequestUim 要望] =
 
 
 欲しい機能をどんどんと書いていくページ。要望が多い機能は優先的に実装されるかも([RequestUimSolved 解決済みの要望])。

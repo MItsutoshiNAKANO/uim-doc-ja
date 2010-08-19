@@ -1,4 +1,4 @@
-﻿= UimTutcode =
+﻿= [UimTutcode uim-tutcode] =
 
 == これは何？ ==
 

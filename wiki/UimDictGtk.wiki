@@ -1,4 +1,4 @@
-﻿= UimDictGtk =
+﻿= [UimDictGtk uim-dict-gtk] =
 
 == これは何？ ==
 

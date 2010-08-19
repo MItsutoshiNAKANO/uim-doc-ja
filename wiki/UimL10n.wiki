@@ -1,4 +1,4 @@
-﻿= UimL10n =
+﻿= [UimL10n 翻訳] =
 
 [http://uim.googlecode.com/svn/trunk/po/ja.po uim:po/ja.po]より転載
 
