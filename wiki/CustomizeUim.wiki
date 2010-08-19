@@ -354,7 +354,7 @@ $prefix/share/uim/skk.scmに2箇所ある
 || 全角スペース || prime-space-key? ||
 || 半角スペース || prime-altspace-key? ||
 
-=== [UimFep|UimFep] ===
+=== [UimFep UimFep] ===
 
 ==== 全角/半角キーでオン/オフ ====
 
