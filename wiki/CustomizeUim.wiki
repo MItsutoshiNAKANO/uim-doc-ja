@@ -198,7 +198,7 @@ uim> installed-im-module-list
 || "Private1" ||
 || "Private30" ||
 
-=== UimAnthy ===
+=== UimAnthy uim-anthy ===
 
 基本的な書式
 
@@ -245,7 +245,7 @@ http://pc10.2ch.net/test/read.cgi/linux/1135968795/581
 
 で、修飾キー+SPC。
 
-=== UimSkk ===
+=== UimSkk uim-skk ===
 
 基本的な書式
 
@@ -339,7 +339,7 @@ $prefix/share/uim/skk.scmに2箇所ある
 
 のコメントを外してください。
 
-=== UimPrime ===
+=== UimPrime uim-prim ===
 
 基本的な書式
 
@@ -354,7 +354,7 @@ $prefix/share/uim/skk.scmに2箇所ある
 || 全角スペース || prime-space-key? ||
 || 半角スペース || prime-altspace-key? ||
 
-=== UimFep ===
+=== UimFep uim-fep ===
 
 ==== 全角/半角キーでオン/オフ ====
 
@@ -768,7 +768,7 @@ LIBUIM_USER_SCM_FILE=~/.uim-vim exec uim-fep -e /usr/local/bin/vim "$@"
 
 この起動スクリプトをvimという名前にする場合は最後の行の-eの後のvimを本物の vimのフルパスにしてください。
 
-=== UimEl ===
+=== UimEl uim.el ===
 
 ==== IMのON/OFFでカーソルの色を変化させる ====
 
