@@ -1,4 +1,4 @@
-﻿= [UimImSwitcher uim-im-switcher] =
+﻿= uim-im-switcher =
 
 == これは何？ ==
 

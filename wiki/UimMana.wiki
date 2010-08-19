@@ -1,4 +1,4 @@
-﻿= [UimMana uim-mana] =
+﻿= uim-mana =
 
 == これは何？ ==
 

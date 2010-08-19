@@ -1,4 +1,4 @@
-﻿= [CodingStyle コーディングスタイル] =
+﻿= コーディングスタイル =
 
 [http://lists.sourceforge.jp/pipermail/anthy-dev/2005-October/002506.html A coding style proposal for uim (was Re: コミットポリシーに関して)]より転載
 

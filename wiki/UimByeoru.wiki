@@ -1,4 +1,6 @@
-﻿= [UimByeoru uim-byeoru] =
+﻿= uim-byeoru =
+
+<wiki:toc max_depth="3" />
 
 == これは何？ ==
 

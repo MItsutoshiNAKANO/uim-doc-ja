@@ -1,4 +1,6 @@
-﻿= [UimPrime uim-prime] =
+﻿= uim-prime =
+
+<wiki:toc max_depth="3" />
 
 == これは何？ ==
 

@@ -1,4 +1,4 @@
-﻿= [HistoryUim 歴史] =
+﻿= 歴史 =
 
 <wiki:toc max_depth="3" />
 

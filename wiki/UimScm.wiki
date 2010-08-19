@@ -1,4 +1,4 @@
-﻿= [UimScm uim-scm] =
+﻿= uim-scm =
 
 [http://uim.googlecode.com/svn/trunk/doc/UIM-SCM uim:doc/UIM-SCM]より転載
 

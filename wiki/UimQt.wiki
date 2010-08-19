@@ -1,4 +1,4 @@
-﻿= [UimQt uim-qt] =
+﻿= uim-qt =
 
 == これは何？ ==
 

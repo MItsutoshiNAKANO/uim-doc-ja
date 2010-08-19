@@ -1,4 +1,6 @@
-﻿= [UimSkk uim-skk] =
+﻿= uim-skk =
+
+<wiki:toc max_depth="3" />
 
 == これは何？ ==
 

@@ -1,4 +1,4 @@
-﻿= [UimModuleManager uim-module-manager] =
+﻿= uim-module-manager =
 
 == これは何？ ==
 

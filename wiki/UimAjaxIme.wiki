@@ -1,4 +1,4 @@
-﻿= [UimAjaxIme uim-ajax-ime] =
+﻿= uim-ajax-ime =
 
 <wiki:toc max_depth="3" />
 

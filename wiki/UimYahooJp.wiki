@@ -1,4 +1,6 @@
-﻿= [UimYahooJp uim-yahoo-jp] =
+﻿= uim-yahoo-jp =
+
+<wiki:toc max_depth="3" />
 
 == これは何？ ==
 

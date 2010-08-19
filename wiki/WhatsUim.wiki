@@ -1,4 +1,4 @@
-﻿= [WhatsUim uim について] =
+﻿= uim について =
 
 == uimとは ==
 

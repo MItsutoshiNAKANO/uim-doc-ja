@@ -1,4 +1,6 @@
-﻿= [UimTutcode uim-tutcode] =
+﻿= uim-tutcode =
+
+<wiki:toc max_depth="3" />
 
 == これは何？ ==
 

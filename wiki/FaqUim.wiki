@@ -1,4 +1,4 @@
-﻿= [FaqUim FAQ] =
+﻿= FAQ =
 
 <wiki:toc max_depth="2" />
 

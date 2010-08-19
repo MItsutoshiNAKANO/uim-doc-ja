@@ -1,4 +1,4 @@
-﻿= [UimXim uim-xim] =
+﻿= uim-xim =
 
 == これは何？ ==
 

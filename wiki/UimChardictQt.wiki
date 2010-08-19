@@ -1,4 +1,4 @@
-﻿= [UimChardictQt uim-chardict-qt] =
+﻿= uim-chardict-qt =
 
 == これは何？ ==
 

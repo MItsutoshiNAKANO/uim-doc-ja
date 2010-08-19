@@ -1,4 +1,4 @@
-﻿= [UimSh uim-sh] =
+﻿= uim-sh =
 
 == これは何？ ==
 

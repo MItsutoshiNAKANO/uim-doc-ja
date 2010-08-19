@@ -1,4 +1,4 @@
-﻿= [ComposerFramework コンポーザフレームワーク] =
+﻿= コンポーザフレームワーク =
 
 [http://lists.sourceforge.jp/pipermail/anthy-dev/2005-July/002138.html What's going on: the composer framework (和訳版)]より転載。
 

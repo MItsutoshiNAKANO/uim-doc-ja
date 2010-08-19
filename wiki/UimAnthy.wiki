@@ -1,5 +1,6 @@
-﻿= [UimAnthy uim-anthy] =
+﻿= uim-anthy =
 
+<wiki:toc max_depth="3" />
 
 == これは何？ ==
 

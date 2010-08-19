@@ -1,4 +1,4 @@
-﻿= UimGtk [uim-gtk] =
+﻿= uim-gtk =
 
 <wiki:toc max_depth="3" />
 

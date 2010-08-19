@@ -1,4 +1,4 @@
-﻿= [XimServer XIM サーバ] =
+﻿= XIM サーバ =
 
 [http://uim.googlecode.com/svn/trunk/xim/README uim:xim/README]より転載
 

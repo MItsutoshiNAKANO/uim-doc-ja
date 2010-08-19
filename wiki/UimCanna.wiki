@@ -1,4 +1,6 @@
-﻿= [UimCanna uim-canna] =
+﻿= uim-canna =
+
+<wiki:toc max_depth="3" />
 
 == これは何？ ==
 

@@ -1,4 +1,4 @@
-﻿= [UimPref uim-pref] =
+﻿= uim-pref =
 
 == これは何？ ==
 

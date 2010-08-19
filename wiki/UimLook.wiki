@@ -1,4 +1,4 @@
-﻿= [UimLook uim-look] =
+﻿= uim-look =
 
 == これは何？ ==
 

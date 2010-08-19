@@ -1,4 +1,4 @@
-﻿= [UimInputPadJa uim-input-pad-ja] =
+﻿= uim-input-pad-ja =
 
 == これは何？ ==
 

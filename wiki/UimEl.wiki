@@ -1,4 +1,6 @@
-﻿= UimEl [uim.el] =
+﻿= uim.el =
+
+<wiki:toc max_depth="3" />
 
 == これは何？ ==
 

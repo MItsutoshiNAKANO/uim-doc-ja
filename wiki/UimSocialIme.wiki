@@ -1,4 +1,6 @@
-﻿= [UimSocialIme uim-social-ime] =
+﻿= uim-social-ime =
+
+<wiki:toc max_depth="3" />
 
 == これは何？ ==
 

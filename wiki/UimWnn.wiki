@@ -1,4 +1,6 @@
-﻿= [UimWnn uim-wnn] =
+﻿= uim-wnn =
+
+<wiki:toc max_depth="3" />
 
 == これは何？ ==
 

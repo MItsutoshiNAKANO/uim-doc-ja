@@ -1,4 +1,4 @@
-﻿= [LibUim libuim] =
+﻿= libuim =
 
 <wiki:toc max_depth="3" />
 
