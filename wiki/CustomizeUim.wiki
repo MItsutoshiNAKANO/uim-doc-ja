@@ -913,6 +913,14 @@ ja-rk-rule-basic))
 (ja-rk-rule-update)
 }}}
 
+[UimSkk uim-skk]では、ja-rk-ruleではなくskk-ja-rk-ruleが使用されるため、
+上記の設定をした後に、
+{{{
+(define skk-ja-rk-rule (append ja-rk-rule-basic ja-rk-rule-additional)
+}}}
+を設定。
+
+
 スペースには''ja-space''と''ja-alnum-space''という専用の変数が用意されている。
 
 {{{
