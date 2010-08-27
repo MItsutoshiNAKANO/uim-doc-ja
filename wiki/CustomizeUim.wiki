@@ -1304,5 +1304,9 @@ ftp://ftp.linet.gr.jp/pub/Plamo/Plamo-4.2/contrib/FEP/
 {{{
 (require "japanese.scm")
 (require "tcode.scm")
+;; ja-rk-rule-update を無効に
+(define ja-rk-rule-update
+  (lambda ()
+    '()))
 (set! ja-rk-rule tcode-rule)
 }}}
