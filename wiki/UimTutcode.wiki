@@ -175,3 +175,23 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblKigou1.png
 http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblKigou2.png
 
 表形式の候補ウィンドウ(記号入力モードの2ページ目)。
+
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCompletion.png
+
+補完候補表示。
+
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodePrediction.png
+
+予測入力候補表示(交ぜ書き変換の読み入力中)。
+
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeBushuPrediction.png
+
+部首合成変換時の予測入力候補表示。
+
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeInteractiveBushu.png
+
+対話的な部首合成変換時の候補ウィンドウ。
+
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeKi.png
+
+2ストローク記号入力モード時の仮想鍵盤。
