@@ -11,7 +11,7 @@
   1. あらかじめ[http://openlab.ring.gr.jp/tcode/soft.html tc2などに含まれている交ぜ書き辞書]などを入手しておいてください。交ぜ書き変換に必要ですが、これはuimに含まれていません。
   1. [UimPref UimPref]を起動してください。
     * [UimToolbar UimToolbar]の設定アイコンをクリック
-    * ターミナルエミュレータなどでuim-pref-gtk（もしくはuim-pref-qt）を実行
+    * ターミナルエミュレータなどでuim-pref-gtk(もしくはuim-pref-qt4かuim-pref-qt)を実行
   1. 「TUT-Code」→「TUT-Code 辞書」→「交ぜ書き変換辞書ファイル」の「選択...」ボタンを押して、辞書ファイルを指定します。
   1. [UimImSwitcher UimImSwitcher]や[UimToolbar UimToolbar]からTUT-Codeに切り換えてください。
     1. TUT-Codeが見つからない場合は[UimPref UimPref]を起動してください。
@@ -28,6 +28,7 @@
   * ひらがなモード
   * カタカナモード
   * 記号入力モード
+  * 2ストローク記号入力モード
 
 === 標準で指定されているキー設定 ===
 
@@ -39,6 +40,7 @@
 || 部首合成変換 || ala ||
 || 英字変換(SKK abbrev) || al/ ||
 || 仮想鍵盤ウィンドウの表示を反転 || Ctrl+/ ||
+|| 補完開始 || Ctrl+. ||
 || 変換開始 || Space ||
 || 次の変換候補へ移動 || Space、↓、Ctrl+n ||
 || 前の変換候補へ移動 || ↑、Ctrl+p ||
@@ -99,6 +101,10 @@ Dvorak配列のキーボード用にコード表を補正します。
 || 再帰学習を有効にする || tutcode-use-recursive-learning? || #t #f || #t ||
 || vi協調モードを有効にする || tutcode-use-with-vi? || #t #f || #f ||
 || Dvorakキーボードを使用する || tutcode-use-dvorak? || #t #f || #f ||
+|| 2ストローク記号入力モードを使用する || tutcode-use-kigou2-mode? || #t #f || #f ||
+|| 対話的な部首合成変換を有効にする || tutcode-use-interactive-bushu-conversion? || #t #f || #f ||
+|| bushu.index2 file || tutcode-bushu-index2-filename || "文字列" || "/usr/local/share/tc/bushu.index2" ||
+|| bushu.expand file || tutcode-bushu-expand-filename || "文字列" || "/usr/local/share/tc/bushu.expand" ||
 || 候補ウィンドウを使用する || tutcode-use-candidate-window? || #t #f || #t ||
 || 表形式の候補ウィンドウを使用する || tutcode-use-table-style-candidate-window? || #t #f || #f ||
 || 表形式の候補ウィンドウのキー配列 || tutcode-candidate-window-table-layout || 'qwerty-jis<br> 'qwerty-us<br> 'dvorak || 'qwerty-jis ||
@@ -109,6 +115,13 @@ Dvorak配列のキーボード用にコード表を補正します。
 || 仮想鍵盤ウィンドウを使用する || tutcode-use-stroke-help-window? || #t #f || #f ||
 || 自動ヘルプウィンドウを使用する || tutcode-use-auto-help-window? || #t #f || #f ||
 || 自動ヘルプウィンドウにキーストロークを表示する || tutcode-auto-help-with-real-keys? || #t #f || #f ||
+|| 補完を有効にする || tutcode-use-completion? || #t #f || #f ||
+|| 補完の際に考慮する文字数の最小値 || tutcode-completion-chars-min || 数字 || 2 ||
+|| 補完の際に考慮する文字数の最大値 || tutcode-completion-chars-max || 数字 || 5 ||
+|| 交ぜ書き変換中の予測入力を有効にする || tutcode-use-prediction? || #t #f || #f ||
+|| 予測入力が有効になる文字数 || tutcode-prediction-start-char-count || 数字 || 2 ||
+|| 熟語ガイドを有効にする || tutcode-use-kanji-combination-guide? || #t #f || #f ||
+|| 部首合成変換中の予測入力を有効にする || tutcode-use-bushu-prediction? || #t #f || #f ||
 
 ==== TUT-Codeの変数の依存関係 ====
 
@@ -123,6 +136,10 @@ Dvorak配列のキーボード用にコード表を補正します。
   * tutcode-use-table-style-candidate-window?
     * tutcode-candidate-window-table-layout
 
+  * tutcode-use-interactive-bushu-conversion?
+    * tutcode-bushu-index2-filename
+    * tutcode-bushu-expand-filename
+
 === TUT-Codeキー設定の変数 ===
 
 || 動作 || キー変数名 ||
@@ -130,10 +147,16 @@ Dvorak配列のキーボード用にコード表を補正します。
 || オフ || tutcode-off-key? ||
 || ひらがな/カタカナ入力モードを反転 || tutcode-kana-toggle-key? ||
 || 記号入力モードを反転 || tutcode-kigou-toggle-key? ||
-|| 交ぜ書き変換モード || tutcode-mazegaki-start-sequence? ||
-|| 部首合成変換モード || tutcode-bushu-start-sequence? ||
-|| 英字変換(SKK abbrev)モード || tutcode-latin-conv-start-sequence? ||
+|| 2ストローク記号入力モードを反転 || tutcode-kigou2-toggle-key? ||
+|| 交ぜ書き変換モード || tutcode-mazegaki-start-sequence ||
+|| 部首合成変換モード || tutcode-bushu-start-sequence ||
+|| 対話的な部首合成変換モード || tutcode-interactive-bushu-start-sequence ||
+|| 英字変換(SKK abbrev)モード || tutcode-latin-conv-start-sequence ||
+|| 後置型部首合成変換 || tutcode-postfix-bushu-start-sequence ||
+|| 直近の自動ヘルプを表示 || tutcode-auto-help-redisplay-sequence ||
+|| 交ぜ書き変換の読みをカタカナとして確定する || tutcode-katakana-commit-key? ||
 || 仮想鍵盤ウィンドウの表示を反転 || tutcode-stroke-help-toggle-key? ||
+|| 補完開始 || tutcode-begin-completion-key? ||
 || 変換開始 || tutcode-begin-conv-key? ||
 || 確定 || tutcode-commit-key? ||
 || キャンセル || tutcode-cancel-key? ||
