@@ -33,6 +33,15 @@ $ uim-toolbar-gtk &
 $ uim-toolbar-gtk +20+20 &
 }}}
 
+{{{
+$ uim-toolbar-qt -geometry +20+20 &
+}}}
+
+Qt4版 (uim-toolbar-qt4) はuim 1.7.0から指定できるようになりました。
+{{{
+$ uim-toolbar-qt4 -geometry +20+20 &
+}}}
+
 システムトレイタイプはシステムトレイが存在する状態でuim-toolbar-gtk-systrayを起動します。
 
 {{{
