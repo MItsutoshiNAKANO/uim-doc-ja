@@ -51,6 +51,8 @@
 || カーソルの左の一字を削除 || BS、Ctrl+h ||
 || 交ぜ書き変換個人辞書への単語登録 || | ||
 || 交ぜ書き変換個人辞書からの単語削除 || ! ||
+|| 交ぜ書き変換で読みを伸ばす || < ||
+|| 交ぜ書き変換で読みを縮める || > ||
 
 === T-CodeやTry-Codeとして使う ===
 
@@ -252,9 +254,14 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
 || vi協調モードを有効にする || tutcode-use-with-vi? || #t #f || #f ||
 || Dvorakキーボードを使用する || tutcode-use-dvorak? || #t #f || #f ||
 || 2ストローク記号入力モードを使用する || tutcode-use-kigou2-mode? || #t #f || #f ||
+|| surrounding text APIの代替方法を有効にする || tutcode-enable-fallback-surrounding-text? || #t #f || #f ||
+|| 確定文字列の履歴サイズ || tutcode-history-size || 数字 || 0 ||
+|| 後置型交ぜ書き変換の読みの最大文字数 || tutcode-mazegaki-yomi-max || 数字 || 10 ||
+|| 交ぜ書き変換での活用する語の変換を有効にする || tutcode-mazegaki-enable-inflection? || #t #f || #f ||
+|| 交ぜ書き変換での読みの中の活用語尾の最大文字数 || tutcode-mazegaki-suffix-max || 数字 || 4 ||
 || 対話的な部首合成変換を有効にする || tutcode-use-interactive-bushu-conversion? || #t #f || #f ||
-|| bushu.index2 file || tutcode-bushu-index2-filename || "文字列" || "/usr/local/share/tc/bushu.index2" ||
-|| bushu.expand file || tutcode-bushu-expand-filename || "文字列" || "/usr/local/share/tc/bushu.expand" ||
+|| bushu.index2ファイル || tutcode-bushu-index2-filename || "文字列" || "/usr/local/share/tc/bushu.index2" ||
+|| bushu.expandファイル || tutcode-bushu-expand-filename || "文字列" || "/usr/local/share/tc/bushu.expand" ||
 || 候補ウィンドウを使用する || tutcode-use-candidate-window? || #t #f || #t ||
 || 表形式の候補ウィンドウを使用する || tutcode-use-table-style-candidate-window? || #t #f || #f ||
 || 表形式の候補ウィンドウのキー配列 || tutcode-candidate-window-table-layout || 'qwerty-jis<br> 'qwerty-us<br> 'dvorak || 'qwerty-jis ||
@@ -262,6 +269,7 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
 || 候補ウィンドウを表示するために変換キーを押す回数 || tutcode-candidate-op-count || 数字 || 5 ||
 || 候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max || 数字 || 10 ||
 || 記号モードにおいて候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max-for-kigou-mode || 数字 || 10 ||
+|| ヒストリ入力において候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max-for-history || 数字 || 10 ||
 || 仮想鍵盤ウィンドウを使用する || tutcode-use-stroke-help-window? || #t #f || #f ||
 || 自動ヘルプウィンドウを使用する || tutcode-use-auto-help-window? || #t #f || #f ||
 || 自動ヘルプウィンドウにキーストロークを表示する || tutcode-auto-help-with-real-keys? || #t #f || #f ||
@@ -303,6 +311,28 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
 || 対話的な部首合成変換モード || tutcode-interactive-bushu-start-sequence ||
 || 英字変換(SKK abbrev)モード || tutcode-latin-conv-start-sequence ||
 || 後置型部首合成変換 || tutcode-postfix-bushu-start-sequence ||
+|| 後置型交ぜ書き変換開始 (活用しない語) || tutcode-postfix-mazegaki-start-sequence ||
+|| 後置型交ぜ書き変換開始 (読み1文字) || tutcode-postfix-mazegaki-1-start-sequence ||
+|| 後置型交ぜ書き変換開始 (読み2文字) || tutcode-postfix-mazegaki-2-start-sequence ||
+|| 後置型交ぜ書き変換開始 (読み3文字) || tutcode-postfix-mazegaki-3-start-sequence ||
+|| 後置型交ぜ書き変換開始 (読み4文字) || tutcode-postfix-mazegaki-4-start-sequence ||
+|| 後置型交ぜ書き変換開始 (読み5文字) || tutcode-postfix-mazegaki-5-start-sequence ||
+|| 後置型交ぜ書き変換開始 (読み6文字) || tutcode-postfix-mazegaki-6-start-sequence ||
+|| 後置型交ぜ書き変換開始 (読み7文字) || tutcode-postfix-mazegaki-7-start-sequence ||
+|| 後置型交ぜ書き変換開始 (読み8文字) || tutcode-postfix-mazegaki-8-start-sequence ||
+|| 後置型交ぜ書き変換開始 (読み9文字) || tutcode-postfix-mazegaki-9-start-sequence ||
+|| 後置型交ぜ書き変換開始 (活用する語) || tutcode-postfix-mazegaki-inflection-start-sequence ||
+|| 後置型交ぜ書き変換開始 (活用する語,読み1文字) || tutcode-postfix-mazegaki-inflection-1-start-sequence ||
+|| 後置型交ぜ書き変換開始 (活用する語,読み2文字) || tutcode-postfix-mazegaki-inflection-2-start-sequence ||
+|| 後置型交ぜ書き変換開始 (活用する語,読み3文字) || tutcode-postfix-mazegaki-inflection-3-start-sequence ||
+|| 後置型交ぜ書き変換開始 (活用する語,読み4文字) || tutcode-postfix-mazegaki-inflection-4-start-sequence ||
+|| 後置型交ぜ書き変換開始 (活用する語,読み5文字) || tutcode-postfix-mazegaki-inflection-5-start-sequence ||
+|| 後置型交ぜ書き変換開始 (活用する語,読み6文字) || tutcode-postfix-mazegaki-inflection-6-start-sequence ||
+|| 後置型交ぜ書き変換開始 (活用する語,読み7文字) || tutcode-postfix-mazegaki-inflection-7-start-sequence ||
+|| 後置型交ぜ書き変換開始 (活用する語,読み8文字) || tutcode-postfix-mazegaki-inflection-8-start-sequence ||
+|| 後置型交ぜ書き変換開始 (活用する語,読み9文字) || tutcode-postfix-mazegaki-inflection-9-start-sequence ||
+|| 漢字コード入力モード || tutcode-kanji-code-input-start-sequence ||
+|| ヒストリ入力モード || tutcode-history-start-sequence ||
 || 直近の自動ヘルプを表示 || tutcode-auto-help-redisplay-sequence ||
 || 交ぜ書き変換の読みをカタカナとして確定する || tutcode-katakana-commit-key? ||
 || 仮想鍵盤ウィンドウの表示を反転 || tutcode-stroke-help-toggle-key? ||
@@ -319,6 +349,8 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
 || vi協調モードでESCとして扱うキー || tutcode-vi-escape-key? ||
 || 交ぜ書き変換個人辞書への単語登録 || tutcode-register-candidate-key? ||
 || 交ぜ書き変換個人辞書からの単語削除 || tutcode-purge-candidate-key? ||
+|| 交ぜ書き変換で読みを伸ばす || tutcode-mazegaki-relimit-left-key? ||
+|| 交ぜ書き変換で読みを縮める || tutcode-mazegaki-relimit-right-key? ||
 
 == ファイル ==
 
