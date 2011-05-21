@@ -83,93 +83,6 @@ Dvorak配列のキーボード用にコード表を補正します。
 
 「表形式の候補ウィンドウのキー配列」として「dvorak」を選んでください。
 
-=== ファイル ===
-
- * ~/.uim.d/customs/custom-tutcode.scm:: [UimPref UimPref]の「TUT-Code」ファイル。
- * ~/.uim.d/customs/custom-tutcode-keys{1,2}.scm:: [UimPref UimPref]の「TUT-Code キー設定{1,2}」ファイル。
- * ~/.mazegaki.dic:: 交ぜ書き変換個人用辞書ファイル。
-
-== カスタマイズ可能な項目 ==
-
-=== TUT-Codeの変数 ===
-
-|| 動作 || 変数名 || 指定できる値 || 標準値 ||
-|| 交ぜ書き変換辞書ファイル || tutcode-dic-filename || "文字列" || "/usr/local/share/tc/mazegaki.dic" ||
-|| 交ぜ書き変換個人用辞書ファイル || tutcode-personal-dic-filename || "文字列" || "$HOME/.mazegaki.dic" ||
-|| コード表ファイル || tutcode-rule-filename || "文字列" || "/usr/local/share/uim/tutcode-rule.scm" ||
-|| 交ぜ書き変換の学習を有効にする || tutcode-enable-mazegaki-learning? || #t #f || #t ||
-|| 再帰学習を有効にする || tutcode-use-recursive-learning? || #t #f || #t ||
-|| vi協調モードを有効にする || tutcode-use-with-vi? || #t #f || #f ||
-|| Dvorakキーボードを使用する || tutcode-use-dvorak? || #t #f || #f ||
-|| 2ストローク記号入力モードを使用する || tutcode-use-kigou2-mode? || #t #f || #f ||
-|| 対話的な部首合成変換を有効にする || tutcode-use-interactive-bushu-conversion? || #t #f || #f ||
-|| bushu.index2 file || tutcode-bushu-index2-filename || "文字列" || "/usr/local/share/tc/bushu.index2" ||
-|| bushu.expand file || tutcode-bushu-expand-filename || "文字列" || "/usr/local/share/tc/bushu.expand" ||
-|| 候補ウィンドウを使用する || tutcode-use-candidate-window? || #t #f || #t ||
-|| 表形式の候補ウィンドウを使用する || tutcode-use-table-style-candidate-window? || #t #f || #f ||
-|| 表形式の候補ウィンドウのキー配列 || tutcode-candidate-window-table-layout || 'qwerty-jis<br> 'qwerty-us<br> 'dvorak || 'qwerty-jis ||
-|| 見出し表示のキーで候補を確定する || tutcode-commit-candidate-by-label-key? || #t #f || #t ||
-|| 候補ウィンドウを表示するために変換キーを押す回数 || tutcode-candidate-op-count || 数字 || 5 ||
-|| 候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max || 数字 || 10 ||
-|| 記号モードにおいて候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max-for-kigou-mode || 数字 || 10 ||
-|| 仮想鍵盤ウィンドウを使用する || tutcode-use-stroke-help-window? || #t #f || #f ||
-|| 自動ヘルプウィンドウを使用する || tutcode-use-auto-help-window? || #t #f || #f ||
-|| 自動ヘルプウィンドウにキーストロークを表示する || tutcode-auto-help-with-real-keys? || #t #f || #f ||
-|| 補完を有効にする || tutcode-use-completion? || #t #f || #f ||
-|| 補完の際に考慮する文字数の最小値 || tutcode-completion-chars-min || 数字 || 2 ||
-|| 補完の際に考慮する文字数の最大値 || tutcode-completion-chars-max || 数字 || 5 ||
-|| 交ぜ書き変換中の予測入力を有効にする || tutcode-use-prediction? || #t #f || #f ||
-|| 予測入力が有効になる文字数 || tutcode-prediction-start-char-count || 数字 || 2 ||
-|| 熟語ガイドを有効にする || tutcode-use-kanji-combination-guide? || #t #f || #f ||
-|| 部首合成変換中の予測入力を有効にする || tutcode-use-bushu-prediction? || #t #f || #f ||
-
-==== TUT-Codeの変数の依存関係 ====
-
-  * tutcode-use-candidate-window? #f
-    * tutcode-candidate-op-count
-    * tutcode-nr-candidate-max
-    * tutcode-nr-candidate-max-for-kigou-mode
-
-  * tutcode-use-auto-help-window? #f
-    * tutcode-auto-help-with-real-keys?
-
-  * tutcode-use-table-style-candidate-window?
-    * tutcode-candidate-window-table-layout
-
-  * tutcode-use-interactive-bushu-conversion?
-    * tutcode-bushu-index2-filename
-    * tutcode-bushu-expand-filename
-
-=== TUT-Codeキー設定の変数 ===
-
-|| 動作 || キー変数名 ||
-|| オン || tutcode-on-key? ||
-|| オフ || tutcode-off-key? ||
-|| ひらがな/カタカナ入力モードを反転 || tutcode-kana-toggle-key? ||
-|| 記号入力モードを反転 || tutcode-kigou-toggle-key? ||
-|| 2ストローク記号入力モードを反転 || tutcode-kigou2-toggle-key? ||
-|| 交ぜ書き変換モード || tutcode-mazegaki-start-sequence ||
-|| 部首合成変換モード || tutcode-bushu-start-sequence ||
-|| 対話的な部首合成変換モード || tutcode-interactive-bushu-start-sequence ||
-|| 英字変換(SKK abbrev)モード || tutcode-latin-conv-start-sequence ||
-|| 後置型部首合成変換 || tutcode-postfix-bushu-start-sequence ||
-|| 直近の自動ヘルプを表示 || tutcode-auto-help-redisplay-sequence ||
-|| 交ぜ書き変換の読みをカタカナとして確定する || tutcode-katakana-commit-key? ||
-|| 仮想鍵盤ウィンドウの表示を反転 || tutcode-stroke-help-toggle-key? ||
-|| 補完開始 || tutcode-begin-completion-key? ||
-|| 変換開始 || tutcode-begin-conv-key? ||
-|| 確定 || tutcode-commit-key? ||
-|| キャンセル || tutcode-cancel-key? ||
-|| 次候補 || tutcode-next-candidate-key? ||
-|| 前候補 || tutcode-prev-candidate-key? ||
-|| 候補ウィンドウの次ページ || tutcode-next-page-key? ||
-|| 候補ウィンドウの前ページ || tutcode-prev-page-key? ||
-|| バックスペース || tutcode-backspace-key? ||
-|| リターン || tutcode-return-key? ||
-|| vi協調モードでESCとして扱うキー || tutcode-vi-escape-key? ||
-|| 交ぜ書き変換個人辞書への単語登録 || tutcode-register-candidate-key? ||
-|| 交ぜ書き変換個人辞書からの単語削除 || tutcode-purge-candidate-key? ||
-
 == 部首合成変換 ==
 
 前置型のみ実装しています。
@@ -304,7 +217,17 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblKigou2.png
 
 http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeKi.png
 
-== 設定例 ==
+== スクリーンショット ==
+
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwin.png
+
+候補ウィンドウ。
+
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
+
+表形式の候補ウィンドウ。
+
+== コード表の一部を変更する場合の設定例 ==
 
 コード表の一部を変更したい場合は、例えば~/.uimで以下のように記述する。
 {{{
@@ -316,15 +239,94 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeKi.png
        ((("d" "l" "d" "u"))("っ" "ッ"))))
 }}}
 
-== スクリーンショット ==
+== カスタマイズ可能な項目 ==
 
-http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwin.png
+=== TUT-Codeの変数 ===
 
-候補ウィンドウ。
+|| 動作 || 変数名 || 指定できる値 || 標準値 ||
+|| 交ぜ書き変換辞書ファイル || tutcode-dic-filename || "文字列" || "/usr/local/share/tc/mazegaki.dic" ||
+|| 交ぜ書き変換個人用辞書ファイル || tutcode-personal-dic-filename || "文字列" || "$HOME/.mazegaki.dic" ||
+|| コード表ファイル || tutcode-rule-filename || "文字列" || "/usr/local/share/uim/tutcode-rule.scm" ||
+|| 交ぜ書き変換の学習を有効にする || tutcode-enable-mazegaki-learning? || #t #f || #t ||
+|| 再帰学習を有効にする || tutcode-use-recursive-learning? || #t #f || #t ||
+|| vi協調モードを有効にする || tutcode-use-with-vi? || #t #f || #f ||
+|| Dvorakキーボードを使用する || tutcode-use-dvorak? || #t #f || #f ||
+|| 2ストローク記号入力モードを使用する || tutcode-use-kigou2-mode? || #t #f || #f ||
+|| 対話的な部首合成変換を有効にする || tutcode-use-interactive-bushu-conversion? || #t #f || #f ||
+|| bushu.index2 file || tutcode-bushu-index2-filename || "文字列" || "/usr/local/share/tc/bushu.index2" ||
+|| bushu.expand file || tutcode-bushu-expand-filename || "文字列" || "/usr/local/share/tc/bushu.expand" ||
+|| 候補ウィンドウを使用する || tutcode-use-candidate-window? || #t #f || #t ||
+|| 表形式の候補ウィンドウを使用する || tutcode-use-table-style-candidate-window? || #t #f || #f ||
+|| 表形式の候補ウィンドウのキー配列 || tutcode-candidate-window-table-layout || 'qwerty-jis<br> 'qwerty-us<br> 'dvorak || 'qwerty-jis ||
+|| 見出し表示のキーで候補を確定する || tutcode-commit-candidate-by-label-key? || #t #f || #t ||
+|| 候補ウィンドウを表示するために変換キーを押す回数 || tutcode-candidate-op-count || 数字 || 5 ||
+|| 候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max || 数字 || 10 ||
+|| 記号モードにおいて候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max-for-kigou-mode || 数字 || 10 ||
+|| 仮想鍵盤ウィンドウを使用する || tutcode-use-stroke-help-window? || #t #f || #f ||
+|| 自動ヘルプウィンドウを使用する || tutcode-use-auto-help-window? || #t #f || #f ||
+|| 自動ヘルプウィンドウにキーストロークを表示する || tutcode-auto-help-with-real-keys? || #t #f || #f ||
+|| 補完を有効にする || tutcode-use-completion? || #t #f || #f ||
+|| 補完の際に考慮する文字数の最小値 || tutcode-completion-chars-min || 数字 || 2 ||
+|| 補完の際に考慮する文字数の最大値 || tutcode-completion-chars-max || 数字 || 5 ||
+|| 交ぜ書き変換中の予測入力を有効にする || tutcode-use-prediction? || #t #f || #f ||
+|| 予測入力が有効になる文字数 || tutcode-prediction-start-char-count || 数字 || 2 ||
+|| 熟語ガイドを有効にする || tutcode-use-kanji-combination-guide? || #t #f || #f ||
+|| 部首合成変換中の予測入力を有効にする || tutcode-use-bushu-prediction? || #t #f || #f ||
 
-http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
+==== TUT-Codeの変数の依存関係 ====
 
-表形式の候補ウィンドウ。
+  * tutcode-use-candidate-window? #f
+    * tutcode-candidate-op-count
+    * tutcode-nr-candidate-max
+    * tutcode-nr-candidate-max-for-kigou-mode
+
+  * tutcode-use-auto-help-window? #f
+    * tutcode-auto-help-with-real-keys?
+
+  * tutcode-use-table-style-candidate-window?
+    * tutcode-candidate-window-table-layout
+
+  * tutcode-use-interactive-bushu-conversion?
+    * tutcode-bushu-index2-filename
+    * tutcode-bushu-expand-filename
+
+=== TUT-Codeキー設定の変数 ===
+
+|| 動作 || キー変数名 ||
+|| オン || tutcode-on-key? ||
+|| オフ || tutcode-off-key? ||
+|| ひらがな/カタカナ入力モードを反転 || tutcode-kana-toggle-key? ||
+|| 記号入力モードを反転 || tutcode-kigou-toggle-key? ||
+|| 2ストローク記号入力モードを反転 || tutcode-kigou2-toggle-key? ||
+|| 交ぜ書き変換モード || tutcode-mazegaki-start-sequence ||
+|| 部首合成変換モード || tutcode-bushu-start-sequence ||
+|| 対話的な部首合成変換モード || tutcode-interactive-bushu-start-sequence ||
+|| 英字変換(SKK abbrev)モード || tutcode-latin-conv-start-sequence ||
+|| 後置型部首合成変換 || tutcode-postfix-bushu-start-sequence ||
+|| 直近の自動ヘルプを表示 || tutcode-auto-help-redisplay-sequence ||
+|| 交ぜ書き変換の読みをカタカナとして確定する || tutcode-katakana-commit-key? ||
+|| 仮想鍵盤ウィンドウの表示を反転 || tutcode-stroke-help-toggle-key? ||
+|| 補完開始 || tutcode-begin-completion-key? ||
+|| 変換開始 || tutcode-begin-conv-key? ||
+|| 確定 || tutcode-commit-key? ||
+|| キャンセル || tutcode-cancel-key? ||
+|| 次候補 || tutcode-next-candidate-key? ||
+|| 前候補 || tutcode-prev-candidate-key? ||
+|| 候補ウィンドウの次ページ || tutcode-next-page-key? ||
+|| 候補ウィンドウの前ページ || tutcode-prev-page-key? ||
+|| バックスペース || tutcode-backspace-key? ||
+|| リターン || tutcode-return-key? ||
+|| vi協調モードでESCとして扱うキー || tutcode-vi-escape-key? ||
+|| 交ぜ書き変換個人辞書への単語登録 || tutcode-register-candidate-key? ||
+|| 交ぜ書き変換個人辞書からの単語削除 || tutcode-purge-candidate-key? ||
+
+== ファイル ==
+
+ * UimPrefが更新するファイル
+  * ~/.uim.d/customs/custom-tutcode.scm:: [UimPref UimPref]の「TUT-Code」ファイル。
+  * ~/.uim.d/customs/custom-tutcode-keys{1,2}.scm:: [UimPref UimPref]の「TUT-Code キー設定{1,2}」ファイル。
+ * UimTutcodeが更新するファイル
+  * ~/.mazegaki.dic:: 交ぜ書き変換個人用辞書ファイル。
 
 == trycode-rule生成用スクリプト ==
 
