@@ -39,8 +39,8 @@ LIBUIM_SCM_FILES:: Schemeファイルを置くディレクトリをコロンで�
 
 LIBUIM_USER_SCM_FILE:: ユーザーの設定ファイルを指定します。標準では~/.uimです。
 
-LIBUIM_PLUGIN_LIB_DIR:: プラグインファイルを置くディレクトリを指定します。
-標準では$prefix/lib/plugin です。
+LIBUIM_PLUGIN_LIB_DIR:: ダイナミックライブラリファイルを置くディレクトリを指定します。
+読込みパスの優先順序は、LIBUIM_PLUGIN_LIB_DIR, ~/.uim.d/plugin, $pkglibdir/uim/plugin の順番になります。
 
 UIM_IM_ENGINE:: 入力方式名を指定します。この環境変数を利用するにはuimを'''--enable-debug'''でビルドする必要があります。
 
