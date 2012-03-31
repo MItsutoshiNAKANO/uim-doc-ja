@@ -47,6 +47,7 @@
 || 半角カタカナ入力モードからひらがな入力モードへ移行 || q ||
 || ひらがな/カタカナ/半角カタカナ入力モードから全角英数字入力モードへ移行 || L ||
 || ひらがな/カタカナ/半角カタカナ入力モードから漢字入力モードへ移行 || Q ||
+|| 漢字コード入力 || \ ||
 || カーソルを右へ移動 || →、Ctrl+f ||
 || カーソルを左へ移動 || ←、Ctrl+b ||
 || カーソルの左の一字を削除 || BS、Ctrl+h ||
@@ -104,6 +105,15 @@ vi（クローン）でコマンドモードに戻る時、uimを直接入力モ
 
 詳しくは[http://lists.sourceforge.jp/mailman/archives/anthy-dev/2004-March/000690.html|Anthy-dev 691]を。
 
+=== 漢字コード入力 ===
+
+漢字コード入力後確定キーを押すと、対応する文字が確定されます。
+以下の3種類の形式での入力が可能(DDSKK 14.2と同様)。
+
+ * Unicode(UCS): U+の後に16進数。U+のかわりにuでもOK(例:U+4E85またはu4e85)。(ただし、uim-skkの内部コードはEUC-JP(EUC-JIS-2004)なので、JIS X 0213に無い文字(例:はしご高U+9AD9)は入力不可)
+ * 区点番号(JIS X 0213): -で区切った、面-区-点番号(面区点それぞれ10進数)。1面の場合、面-は省略可能。(例:1-48-13または48-13)
+ * JISコード(ISO-2022-JP): 4桁の16進数。(例:502d)
+
 === ファイル ===
 
 ~/.uim.d/customs/custom-skk.scm:: [UimPref|UimPref]の「SKK」ファイル。~/.uim.d/customs/custom-skk-dict.scm:: [UimPref|UimPref]の「SKK 辞書」ファイル。~/.uim.d/customs/custom-skk-advanced.scm:: [UimPref|UimPref]の「SKK (高度)」ファイル。~/.uim.d/customs/custom-skk-keys{1,2,3}.scm:: [UimPref|UimPref]の「SKK キー設定{1,2,3}」ファイル。~/.skk-uim-jisyo:: 個人辞書(uim専用)ファイル。~/.skk-uim-jisyo.lock:: 個人辞書(uim専用)のロックファイル。
@@ -126,6 +136,8 @@ SKKSERVER
 || 標準の入力モード || default-widget_skk_input_mode || 'action_skk_latin<br> 'action_skk_hiragana<br> 'action_skk_katakana<br> 'action_skk_hankana<br> 'action_skk_wide_latin || 'action_skk_latin ||
 || 標準のかな入力方式 || default-widget_skk_kana_input_method || 'action_skk_roma<br> 'action_skk_azik || 'action_skk_roma ||
 || 辞書ファイルの代わりにSKKサーバを使用 || skk-use-skkserv? || #t #f || #f ||
+|| skkserv補完を有効にする || skk-skkserv-enable-completion? || #t #f || #f ||
+|| skkserv補完のタイムアウト時間 (msec) || skk-skkserv-completion-timeout || 数字 || 2000 ||
 || 環境変数SKKSERVERを使用 || skk-skkserv-use-env? || #t #f || #t ||
 || SKKサーバのホスト名 || skk-skkserv-hostname || "文字列" || "localhost" ||
 || SKKサーバのポート番号 || skk-skkserv-portnum || 数字 || 1178 ||
@@ -165,6 +177,10 @@ SKKSERVER
     * skk-skkserv-use-env?
     * skk-skkserv-portnum
     * skk-skkserv-address-family
+    * skk-skkserv-enable-completion?
+
+  * skk-skkserv-enable-completion? #f
+    * skk-skkserv-completion-timeout
 
   * skk-use-skkserv? #t
     * skk-dic-file-name
@@ -184,6 +200,7 @@ SKKSERVER
 || オン || skk-on-key? ||
 || 半角英数入力モード || skk-latin-key? ||
 || 全角英数入力モード || skk-wide-latin-key? ||
+|| 漢字コード入力モード || skk-kcode-input-key? ||
 || 漢字入力モード || skk-kanji-mode-key? ||
 || 半角カタカナ入力モード || skk-hankaku-kana-key? ||
 || ひらがな/カタカナ入力モードを反転 || skk-kana-toggle-key? ||
