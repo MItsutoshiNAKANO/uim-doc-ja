@@ -53,6 +53,7 @@
 || 交ぜ書き変換個人辞書からの単語削除 || ! ||
 || 交ぜ書き変換で読みを伸ばす || < ||
 || 交ぜ書き変換で読みを縮める || > ||
+|| 入力途中のキーストロークを挿入 || Space ||
 
 === T-CodeやTry-Codeとして使う ===
 
@@ -88,11 +89,14 @@ Dvorak配列のキーボード用にコード表を補正します。
 == 部首合成変換 ==
 
 再帰的な部首合成変換も可能です。
-部首合成のアルゴリズムはtc-2.1のものです。
+部首合成のアルゴリズムは以下の3つから選択可能です。
+  * tc-2.1+[tcode-ml:1925]
+  * 漢直Win YAMANOBE
+  * tc-2.3.1-22.6 (対話的な部首合成変換と同じ処理を使用するので、bushu.index2とbushu.expandファイルの設定が必要)
 
 === 対話的な部首合成変換 ===
 
-tc-2.3.1のtc-bushu.elの移植です(ただしsortは未対応です)。
+tc-2.3.1のtc-bushu.elの移植です(ただしsortでの打ちやすさの考慮は未対応)。
 
 「対話的な部首合成変換を有効にする」
 「bushu.index2ファイル」「bushu.expandファイル」を設定し、
@@ -114,7 +118,7 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeInteractiveBushu.png
 libuim-skk.soの機能を使っています。
 そのため、学習機能もSKKと同様の動作になります:
 
- * 確定した候補は次回の変換から先頭に来ます。
+ * 確定した候補は次回の変換から先頭に来ます。tc2と同様に、先頭数個の候補順を変えたくない場合は、「交ぜ書き変換の学習から除外する候補数」にその個数を設定してください。
  * 確定した候補は個人辞書(~/.mazegaki.dic)に保存されます。
 
 これらの学習機能をオフにするには、
@@ -151,9 +155,9 @@ libuim-skk.soの機能を使っています。
 
 == 後置型変換 ==
 
-uimのsurrounding text関係のAPIを使って、
+uimのtext acquisition API(surrounding text API)を使って、
 カーソル前の文字列の取得・削除を行います。
-そのため、uimのsurrounding text APIをサポートしているブリッジ
+そのため、uimのtext acquisition APIをサポートしているブリッジ
 (uim-gtk, uim-qt3, uim-qt4)でのみ後置型変換が可能です。
 
 これら以外のブリッジでも後置型変換を使いたい場合、
@@ -201,6 +205,73 @@ surrounding text APIが使用できない場合に、
 
 例(「あおい」に対して3文字指定):「あおい―」>「あお―」>「あ―」
 
+=== 後置型カタカナ変換 ===
+
+後置型カタカナ変換は、以下の開始キーを設定すると使用可能になります。
+
+|| 後置型カタカナ変換 ||
+|| 後置型カタカナ変換 (1文字) ||
+|| ... ||
+|| 後置型カタカナ変換 (9文字) ||
+
+=== 後置型漢字→入力シーケンス変換 ===
+
+TUT-Codeオン・オフのモード切り替えなしで英単語を入力して、
+後から英字化するための機能です。
+「漢字に対応しないキーシーケンスを残す」を設定した上で、
+英単語入力後に、tutcode-verbose-stroke-key(デフォルトはスペースキー)を
+打鍵することでシーケンスを終端した後に、以下の開始キーを入力して下さい。
+(変換後に、最後のtutcode-verbose-stroke-keyは自動削除します)
+
+例:"undo "と打鍵すると"趣・"と表示され、以下の開始キーで、"undo"に変換。
+
+|| 後置型漢字→シーケンス変換 ||
+|| 後置型漢字→シーケンス変換 (1文字) ||
+|| ... ||
+|| 後置型漢字→シーケンス変換 (9文字) ||
+
+文字数を指定しない場合、<と>キーにより、字数の伸縮が可能です。
+文字数を指定しない場合、英単語入力前にスペースを入力しておくと、
+スペースより後の文字を英字に変換します。
+このとき、英単語の区切りのために入力したスペースを自動削除するには、
+「後置型漢字→シーケンス変換時に直前の区切り文字を削除する」を設定してください。
+
+例:" code "と打鍵すると" 演各 "と表示され、開始キーで、"code"に変換。
+
+注:英単語中に前置型交ぜ書き変換開始などの機能に対するシーケンスが
+含まれていると、該当する機能が実行されてしまいます。
+現状では、それらの機能に対するシーケンスを、
+英単語中では出現しないシーケンスに変更することで回避してください。
+
+例:"/local/"と打つと"授阪"の後に"al/"により前置型英字変換モードが開始
+(なお、"local/"の場合は"薬児適"なので問題なし)
+
+=== 後置型漢字→入力シーケンス変換 ===
+
+TUT-Codeオンにし忘れてTUT-Codeを入力した場合に後から漢字に変換するための
+機能です。
+
+|| 後置型シーケンス→漢字変換 ||
+|| 後置型シーケンス→漢字変換 (1文字) ||
+|| ... ||
+|| 後置型シーケンス→漢字変換 (9文字) ||
+
+前置型交ぜ書き変換の読み入力など、確定されていない入力は消えます。
+
+例:"aljekri"を変換→""。"ekri"だけ変換→"かい"。
+"aljekri \n"のように確定されている場合→"下位"
+
+== selectionに対する変換 ==
+
+uimのtext acquisition API(surrounding text API)を使って、
+selection文字列の取得・削除を行います。
+
+|| セレクションを交ぜ書き変換 ||
+|| セレクションを交ぜ書き変換 (活用する語) ||
+|| セレクションをカタカナ変換 ||
+|| セレクションを漢字→シーケンス変換 ||
+|| セレクションをシーケンス→漢字変換 ||
+
 == ヘルプ機能 ==
 
 === 仮想鍵盤表示 ===
@@ -233,6 +304,11 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeAutoHelp.png
 
 キー設定で「直近の自動ヘルプを表示」を設定すると使用可能になります。
 
+==== 文字ヘルプ表示機能 ====
+
+カーソル位置直前の文字のヘルプ(打ち方)を表示します。
+(uimのtext acquisition APIを使ってカーソル位置直前の文字を取得)
+
 == 補完/予測入力・熟語ガイド ==
 
  * 「補完」:確定済文字列に対して、続く文字列の候補を表示します。
@@ -258,13 +334,9 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeAutoHelp.png
   * 通常は仮想鍵盤非表示の場合でも、+付き文字に対応するキーを入力した場合、一時的に仮想鍵盤を表示するには、「熟語ガイドに従って入力する際に一時的に仮想鍵盤を表示する」の値を「仮想鍵盤」(+付き以外の文字も表示)か「熟語ガイドのみ」(+付きの文字のみ表示)に設定してください。
   * 例:「火蓋」を入力しようとして「火」の入力後「蓋」の打ち方をど忘れした場合、Ctrl+.キーで補完。熟語ガイドで+付きの「蓋」の表示に従って1,2,3打鍵を入力。
 
-(理想的には、次の打鍵がしばらく無い場合に補完/予測入力候補を表示したいの
-ですが、現状のuimにはタイマが無いので、打鍵直後に表示されます。
-1文字入力するごとに表示されると邪魔なことが多いので、
-デフォルトでは2文字入力時に表示する設定にしています:
-tutcode-completion-chars-min, tutcode-prediction-start-char-count。
-この場合でも、1文字入力後にCtrl+.キー(tutcode-begin-completion-key)
-により補完/予測入力候補の表示が可能です。)
+ * 次の打鍵がしばらく無い場合に補完/予測入力候補を表示するには、候補ウィンドウが遅延表示に対応していれば、以下の設定で可能です。
+  * 「候補ウィンドウの遅延表示を使用する」
+  * 「補完候補ウィンドウ表示遅延時間`[s]`」や「予測入力候補ウィンドウ表示遅延時間`[s]`」の値を1[秒]以上に設定。
 
 補完候補表示:
 
@@ -342,6 +414,32 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeKi.png
 漢字コード入力で確定した文字列を再入力するモード。
 「確定文字列の履歴サイズ」を1以上に設定すると有効になります。
 
+== 確定取り消し ==
+
+直前の確定を取り消します。
+以下の変換では、変換後に確定される文字列を確認する機会無しに
+確定を行うので、意図しない漢字に確定されることがあります。
+この場合に、最初からの入力し直しを不要するための機能です。
+(確定済文字列を削除するため、uimのtext acquisition APIを使います)
+
+ * 部首合成変換: 2文字目の部首入力により変換・確定開始(特に再帰的な場合)
+ * 漢字コード入力
+ * 交ぜ書き変換: 候補数が1個の時の自動確定
+ * 読み入力時のカタカナ確定、漢字→入力シーケンス確定
+
+== クリップボード ==
+
+クリップボード内の文字列に対する以下の機能を追加しました。
+(クリップボードからの文字列取得のため、uimのtext acquisition APIを使用)
+
+ * クリップボード内の文字列に対してヘルプ(打ち方)を表示
+ * クリップボード内の文字列を以下のpreeditに貼り付け
+  * 辞書登録時
+  * 交ぜ書き変換の読み入力時
+  * 部首合成変換時("言▲▲西一早"のような部首合成シーケンスにも対応)
+  * 対話的な部首合成変換時
+  * 漢字コード入力時
+
 == スクリーンショット ==
 
 http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwin.png
@@ -373,30 +471,42 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
 || 交ぜ書き変換個人用辞書ファイル || tutcode-personal-dic-filename || "文字列" || "$HOME/.mazegaki.dic" ||
 || コード表ファイル || tutcode-rule-filename || "文字列" || "/usr/local/share/uim/tutcode-rule.scm" ||
 || 交ぜ書き変換の学習を有効にする || tutcode-enable-mazegaki-learning? || #t #f || #t ||
+|| 交ぜ書き変換の学習から除外する候補数 || tutcode-mazegaki-fixed-priority-count || 数字 || 0 ||
 || 再帰学習を有効にする || tutcode-use-recursive-learning? || #t #f || #t ||
 || vi協調モードを有効にする || tutcode-use-with-vi? || #t #f || #f ||
 || Dvorakキーボードを使用する || tutcode-use-dvorak? || #t #f || #f ||
 || 2ストローク記号入力モードを使用する || tutcode-use-kigou2-mode? || #t #f || #f ||
 || surrounding text APIの代替方法を有効にする || tutcode-enable-fallback-surrounding-text? || #t #f || #f ||
+|| 漢字に対応しないキーシーケンスを残す || tutcode-keep-illegal-sequence? || #t #f || #f ||
+|| 後置型漢字→シーケンス変換時に直前の区切り文字を削除する || tutcode-delete-leading-delimiter-on-postfix-kanji2seq? || #t #f || #f ||
 || 確定文字列の履歴サイズ || tutcode-history-size || 数字 || 0 ||
 || 後置型交ぜ書き変換の読みの最大文字数 || tutcode-mazegaki-yomi-max || 数字 || 10 ||
 || 交ぜ書き変換での活用する語の変換を有効にする || tutcode-mazegaki-enable-inflection? || #t #f || #f ||
 || 交ぜ書き変換での読みの中の活用語尾の最大文字数 || tutcode-mazegaki-suffix-max || 数字 || 4 ||
+|| 部首合成変換アルゴリズム || tutcode-bushu-conversion-algorithm || 'tc-2.1+ml1925<br> 'kw-yamanobe<br> 'tc-2.3.1-22.6 || 'tc-2.1+ml1925 ||
 || 対話的な部首合成変換を有効にする || tutcode-use-interactive-bushu-conversion? || #t #f || #f ||
 || bushu.index2ファイル || tutcode-bushu-index2-filename || "文字列" || "/usr/local/share/tc/bushu.index2" ||
 || bushu.expandファイル || tutcode-bushu-expand-filename || "文字列" || "/usr/local/share/tc/bushu.expand" ||
 || bushu.helpファイル || tutcode-bushu-help-filename || "文字列" || "" ||
 || 候補ウィンドウを使用する || tutcode-use-candidate-window? || #t #f || #t ||
-|| 表形式の候補ウィンドウを使用する || tutcode-use-table-style-candidate-window? || #t #f || #f ||
 || 表形式の候補ウィンドウのキー配列 || tutcode-candidate-window-table-layout || 'qwerty-jis<br> 'qwerty-us<br> 'dvorak || 'qwerty-jis ||
-|| 見出し表示のキーで候補を確定する || tutcode-commit-candidate-by-label-key? || #t #f || #t ||
+|| 見出し表示のキーで候補を確定する || tutcode-commit-candidate-by-label-key || 'always<br> 'havecand<br> 'candwin<br> 'never || 'always ||
 || 候補ウィンドウを表示するために変換キーを押す回数 || tutcode-candidate-op-count || 数字 || 5 ||
 || 候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max || 数字 || 10 ||
 || 記号モードにおいて候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max-for-kigou-mode || 数字 || 10 ||
 || ヒストリ入力において候補ウィンドウに一度に表示する候補数 || tutcode-nr-candidate-max-for-history || 数字 || 10 ||
 || 仮想鍵盤ウィンドウを使用する || tutcode-use-stroke-help-window? || #t #f || #f ||
+|| 何も入力していない時に仮想鍵盤ウィンドウを表示する || tutcode-show-stroke-help-window-on-no-input? || #t #f || #t ||
 || 自動ヘルプウィンドウを使用する || tutcode-use-auto-help-window? || #t #f || #f ||
 || 自動ヘルプウィンドウにキーストロークを表示する || tutcode-auto-help-with-real-keys? || #t #f || #f ||
+|| 候補ウィンドウの遅延表示を使用する || tutcode-candidate-window-use-delay? || #t #f || #f ||
+|| 交ぜ書き変換候補ウィンドウ表示遅延時間`[s]` || tutcode-candidate-window-activate-delay-for-mazegaki || 数字 || 0 ||
+|| 仮想鍵盤ウィンドウ表示遅延時間`[s]` || tutcode-candidate-window-activate-delay-for-stroke-help || 数字 || 2 ||
+|| 自動ヘルプウィンドウ表示遅延時間`[s]` || tutcode-candidate-window-activate-delay-for-auto-help || 数字 || 1 ||
+|| 補完候補ウィンドウ表示遅延時間`[s]` || tutcode-candidate-window-activate-delay-for-completion || 数字 || 2 ||
+|| 予測入力候補ウィンドウ表示遅延時間`[s]` || tutcode-candidate-window-activate-delay-for-prediction || 数字 || 2 ||
+|| 部首合成変換中の予測入力候補ウィンドウ表示遅延時間`[s]` || tutcode-candidate-window-activate-delay-for-bushu-prediction || 数字 || 2 ||
+|| 対話的な部首合成変換候補ウィンドウ表示遅延時間`[s]` || tutcode-candidate-window-activate-delay-for-interactive-bushu || 数字 || 1 ||
 || 補完を有効にする || tutcode-use-completion? || #t #f || #f ||
 || 補完の際に考慮する文字数の最小値 || tutcode-completion-chars-min || 数字 || 2 ||
 || 補完の際に考慮する文字数の最大値 || tutcode-completion-chars-max || 数字 || 5 ||
@@ -408,18 +518,23 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
 
 ==== TUT-Codeの変数の依存関係 ====
 
+  * tutcode-enable-mazegaki-learning? #f
+    * tutcode-mazegaki-fixed-priority-count
+
   * tutcode-use-candidate-window? #f
     * tutcode-candidate-op-count
     * tutcode-nr-candidate-max
     * tutcode-nr-candidate-max-for-kigou-mode
+    * tutcode-nr-candidate-max-for-history
 
   * tutcode-use-auto-help-window? #f
     * tutcode-auto-help-with-real-keys?
 
-  * tutcode-use-table-style-candidate-window?
+  * candidate-window-style 'table
     * tutcode-candidate-window-table-layout
 
-  * tutcode-use-interactive-bushu-conversion?
+  * tutcode-use-interactive-bushu-conversion? #f
+  * tutcode-bushu-conversion-algorithm 'tc-2.3.1-22.6
     * tutcode-bushu-index2-filename
     * tutcode-bushu-expand-filename
 
@@ -435,6 +550,37 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
 || 部首合成変換モード || tutcode-bushu-start-sequence ||
 || 対話的な部首合成変換モード || tutcode-interactive-bushu-start-sequence ||
 || 英字変換(SKK abbrev)モード || tutcode-latin-conv-start-sequence ||
+|| 漢字コード入力モード || tutcode-kanji-code-input-start-sequence ||
+|| ヒストリ入力モード || tutcode-history-start-sequence ||
+|| 直近の自動ヘルプを表示 || tutcode-auto-help-redisplay-sequence ||
+|| 交ぜ書き変換の読みをカタカナとして確定する || tutcode-katakana-commit-key? ||
+|| 仮想鍵盤ウィンドウの表示を反転 || tutcode-stroke-help-toggle-key? ||
+|| 補完開始 || tutcode-begin-completion-key? ||
+|| 変換開始 || tutcode-begin-conv-key? ||
+|| 確定 || tutcode-commit-key? ||
+|| キャンセル || tutcode-cancel-key? ||
+|| 次候補 || tutcode-next-candidate-key? ||
+|| 前候補 || tutcode-prev-candidate-key? ||
+|| 確定取り消し || tutcode-undo-sequence ||
+|| 現在位置の文字のヘルプを表示 || tutcode-help-sequence ||
+|| クリップボード内文字列のヘルプを表示 || tutcode-help-clipboard-sequence ||
+|| クリップボードから貼り付け || tutcode-paste-key? ||
+|| クリップボード内文字列をシーケンス→漢字変換 || tutcode-clipboard-seq2kanji-start-sequence ||
+|| セレクションを交ぜ書き変換 || tutcode-selection-mazegaki-start-sequence ||
+|| セレクションを交ぜ書き変換 (活用する語) || tutcode-selection-mazegaki-inflection-start-sequence ||
+|| セレクションをカタカナ変換 || tutcode-selection-katakana-start-sequence ||
+|| セレクションを漢字→シーケンス変換 || tutcode-selection-kanji2seq-start-sequence ||
+|| セレクションをシーケンス→漢字変換 || tutcode-selection-seq2kanji-start-sequence ||
+|| 候補ウィンドウの次ページ || tutcode-next-page-key? ||
+|| 候補ウィンドウの前ページ || tutcode-prev-page-key? ||
+|| バックスペース || tutcode-backspace-key? ||
+|| リターン || tutcode-return-key? ||
+|| vi協調モードでESCとして扱うキー || tutcode-vi-escape-key? ||
+|| 交ぜ書き変換個人辞書への単語登録 || tutcode-register-candidate-key? ||
+|| 交ぜ書き変換個人辞書からの単語削除 || tutcode-purge-candidate-key? ||
+|| 交ぜ書き変換で読みを伸ばす || tutcode-mazegaki-relimit-left-key? ||
+|| 交ぜ書き変換で読みを縮める || tutcode-mazegaki-relimit-right-key? ||
+|| 入力途中のキーストロークを挿入 || tutcode-verbose-stroke-key? ||
 || 後置型部首合成変換 || tutcode-postfix-bushu-start-sequence ||
 || 後置型交ぜ書き変換開始 (活用しない語) || tutcode-postfix-mazegaki-start-sequence ||
 || 後置型交ぜ書き変換開始 (読み1文字) || tutcode-postfix-mazegaki-1-start-sequence ||
@@ -456,26 +602,36 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
 || 後置型交ぜ書き変換開始 (活用する語,読み7文字) || tutcode-postfix-mazegaki-inflection-7-start-sequence ||
 || 後置型交ぜ書き変換開始 (活用する語,読み8文字) || tutcode-postfix-mazegaki-inflection-8-start-sequence ||
 || 後置型交ぜ書き変換開始 (活用する語,読み9文字) || tutcode-postfix-mazegaki-inflection-9-start-sequence ||
-|| 漢字コード入力モード || tutcode-kanji-code-input-start-sequence ||
-|| ヒストリ入力モード || tutcode-history-start-sequence ||
-|| 直近の自動ヘルプを表示 || tutcode-auto-help-redisplay-sequence ||
-|| 交ぜ書き変換の読みをカタカナとして確定する || tutcode-katakana-commit-key? ||
-|| 仮想鍵盤ウィンドウの表示を反転 || tutcode-stroke-help-toggle-key? ||
-|| 補完開始 || tutcode-begin-completion-key? ||
-|| 変換開始 || tutcode-begin-conv-key? ||
-|| 確定 || tutcode-commit-key? ||
-|| キャンセル || tutcode-cancel-key? ||
-|| 次候補 || tutcode-next-candidate-key? ||
-|| 前候補 || tutcode-prev-candidate-key? ||
-|| 候補ウィンドウの次ページ || tutcode-next-page-key? ||
-|| 候補ウィンドウの前ページ || tutcode-prev-page-key? ||
-|| バックスペース || tutcode-backspace-key? ||
-|| リターン || tutcode-return-key? ||
-|| vi協調モードでESCとして扱うキー || tutcode-vi-escape-key? ||
-|| 交ぜ書き変換個人辞書への単語登録 || tutcode-register-candidate-key? ||
-|| 交ぜ書き変換個人辞書からの単語削除 || tutcode-purge-candidate-key? ||
-|| 交ぜ書き変換で読みを伸ばす || tutcode-mazegaki-relimit-left-key? ||
-|| 交ぜ書き変換で読みを縮める || tutcode-mazegaki-relimit-right-key? ||
+|| 後置型カタカナ変換 || tutcode-postfix-katakana-start-sequence ||
+|| 後置型カタカナ変換 (1文字) || tutcode-postfix-katakana-1-start-sequence ||
+|| 後置型カタカナ変換 (2文字) || tutcode-postfix-katakana-2-start-sequence ||
+|| 後置型カタカナ変換 (3文字) || tutcode-postfix-katakana-3-start-sequence ||
+|| 後置型カタカナ変換 (4文字) || tutcode-postfix-katakana-4-start-sequence ||
+|| 後置型カタカナ変換 (5文字) || tutcode-postfix-katakana-5-start-sequence ||
+|| 後置型カタカナ変換 (6文字) || tutcode-postfix-katakana-6-start-sequence ||
+|| 後置型カタカナ変換 (7文字) || tutcode-postfix-katakana-7-start-sequence ||
+|| 後置型カタカナ変換 (8文字) || tutcode-postfix-katakana-8-start-sequence ||
+|| 後置型カタカナ変換 (9文字) || tutcode-postfix-katakana-9-start-sequence ||
+|| 後置型漢字→シーケンス変換 || tutcode-postfix-kanji2seq-start-sequence ||
+|| 後置型漢字→シーケンス変換 (1文字) || tutcode-postfix-kanji2seq-1-start-sequence ||
+|| 後置型漢字→シーケンス変換 (2文字) || tutcode-postfix-kanji2seq-2-start-sequence ||
+|| 後置型漢字→シーケンス変換 (3文字) || tutcode-postfix-kanji2seq-3-start-sequence ||
+|| 後置型漢字→シーケンス変換 (4文字) || tutcode-postfix-kanji2seq-4-start-sequence ||
+|| 後置型漢字→シーケンス変換 (5文字) || tutcode-postfix-kanji2seq-5-start-sequence ||
+|| 後置型漢字→シーケンス変換 (6文字) || tutcode-postfix-kanji2seq-6-start-sequence ||
+|| 後置型漢字→シーケンス変換 (7文字) || tutcode-postfix-kanji2seq-7-start-sequence ||
+|| 後置型漢字→シーケンス変換 (8文字) || tutcode-postfix-kanji2seq-8-start-sequence ||
+|| 後置型漢字→シーケンス変換 (9文字) || tutcode-postfix-kanji2seq-9-start-sequence ||
+|| 後置型シーケンス→漢字変換 || tutcode-postfix-seq2kanji-start-sequence ||
+|| 後置型シーケンス→漢字変換 (1文字) || tutcode-postfix-seq2kanji-1-start-sequence ||
+|| 後置型シーケンス→漢字変換 (2文字) || tutcode-postfix-seq2kanji-2-start-sequence ||
+|| 後置型シーケンス→漢字変換 (3文字) || tutcode-postfix-seq2kanji-3-start-sequence ||
+|| 後置型シーケンス→漢字変換 (4文字) || tutcode-postfix-seq2kanji-4-start-sequence ||
+|| 後置型シーケンス→漢字変換 (5文字) || tutcode-postfix-seq2kanji-5-start-sequence ||
+|| 後置型シーケンス→漢字変換 (6文字) || tutcode-postfix-seq2kanji-6-start-sequence ||
+|| 後置型シーケンス→漢字変換 (7文字) || tutcode-postfix-seq2kanji-7-start-sequence ||
+|| 後置型シーケンス→漢字変換 (8文字) || tutcode-postfix-seq2kanji-8-start-sequence ||
+|| 後置型シーケンス→漢字変換 (9文字) || tutcode-postfix-seq2kanji-9-start-sequence ||
 
 == ファイル ==
 
