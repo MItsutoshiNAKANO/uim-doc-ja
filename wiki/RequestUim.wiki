@@ -283,19 +283,6 @@ uim-dict-gtkはsj3辞書には対応するのかな。
 
 }}}
 
-=== ツールバーをIMオン/オフで表示/非表示 ===
-
-http://pc11.2ch.net/test/read.cgi/linux/1200850880/101
-
-{{{
-
-uim-toolbar-(gtk|qt)を
-日本語入力ON→表示
-日本語入力OFF→非表示
-することってできませんか?
-
-}}}
-
 === Firefoxの強制確定処理がうまく機能せずダブって表示される ===
 
 http://bugzilla.mozilla.gr.jp/show_bug.cgi?id=5724
@@ -335,5 +322,3 @@ ualarmはまずいです。タイマが必要ならなんらかの形で実装�
 ----
 
 [ComposerFramework ComposerFramework]で対応予定。
-
-
