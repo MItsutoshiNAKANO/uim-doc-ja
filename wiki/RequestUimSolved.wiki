@@ -398,6 +398,21 @@ http://pc11.2ch.net/test/read.cgi/linux/1135968795/898
 「ツールバー」設定の「濃色背景向けアイコンを使用する」を有効にしてください。
 
 
+=== ツールバーをIMオン/オフで表示/非表示 ===
+
+http://pc11.2ch.net/test/read.cgi/linux/1200850880/101
+
+{{{
+
+uim-toolbar-(gtk|qt)を
+日本語入力ON→表示
+日本語入力OFF→非表示
+することってできませんか?
+
+}}}
+
+uim 1.8.0で対応しました。
+
 == その他 ==
 
 === uim-skk: Shift-space と C-j の区別 ===
