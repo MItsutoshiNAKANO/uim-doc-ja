@@ -450,7 +450,9 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
 
 表形式の候補ウィンドウ。
 
-== コード表の一部を変更する場合の設定例 ==
+== 設定例 ==
+
+=== コード表の一部を変更 ===
 
 コード表の一部を変更したい場合は、例えば~/.uimで以下のように記述する。
 {{{
@@ -460,6 +462,43 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
        ((("a" "l" "i"))("捗"))            ; 追加
        ((("d" "l" "u"))("づ" "ヅ"))       ; カタカナを含む場合
        ((("d" "l" "d" "u"))("っ" "ッ"))))
+}}}
+
+=== 入力シーケンスにユーザ定義関数を割り当てる ===
+
+selectionに対して指定した処理を適用した結果に置換する例。
+
+{{{
+;;; 外部フィルタ
+;;; https://github.com/deton/uim-external-filter
+(require "external-filter.scm")
+(define (tutcode-filter-fmt-quote state pc)
+  (tutcode-selection-filter pc
+    (lambda (str)
+      ;; 文書整形後、引用マークを行頭に付ける (nkf -e: uim-tutcodeはEUC-JP)
+      (external-filter-launch-command "nkf -e -f | sed -e 's/^/> /'" str))))
+;;; テキスト整形
+;;; https://github.com/deton/uim-fmt-ja
+(require "fmt-ja.scm")
+(define (tutcode-filter-fmt-ja state pc)
+  (tutcode-selection-filter pc
+    (lambda (str)
+      (apply string-append (fmt-ja-str str)))))
+;;; 半角カタカナを全角に、全角英数をASCIIに
+;;; https://github.com/deton/uim-japan-util
+(require "japan-util.scm")
+(define (tutcode-filter-ascii-fullkana state pc)
+  (tutcode-selection-filter pc
+    (lambda (str)
+      (string-list-concat
+        (japan-util-ascii-convert
+          (japan-util-halfkana-to-fullkana-convert
+            (string-to-list str)))))))
+;;; コード表に関数を登録
+(tutcode-rule-set-sequences!
+  `(((("a" "v" "q")) (,tutcode-filter-fmt-quote))
+    ((("a" "v" "f")) (,tutcode-filter-fmt-ja))
+    ((("a" "v" "a")) (,tutcode-filter-ascii-fullkana))))
 }}}
 
 == カスタマイズ可能な項目 ==
