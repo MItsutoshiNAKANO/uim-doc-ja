@@ -285,7 +285,7 @@ Ctrl+/で一時的に表示・非表示の切り替えも可能です。
  * 「+」前付き文字:該当キーが、該当文字の中間打鍵であることを表します。(熟語ガイドの中間打鍵)
  * 「+」後付き文字:熟語ガイドの最終打鍵であることを表します。
 
-ホームポジションで左手人差し指打鍵時の表示される仮想鍵盤:
+ホームポジションで左手人差し指打鍵時に表示される仮想鍵盤:
 
 http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeVirtualKeyboardHelp.png
 
@@ -303,6 +303,20 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeAutoHelp.png
 ==== 直近に表示した自動ヘルプの再表示 ====
 
 キー設定で「直近の自動ヘルプを表示」を設定すると使用可能になります。
+
+==== 直近に表示した自動ヘルプ内容の確定 ====
+
+キー設定で「直近の自動ヘルプ内容の確定」を設定すると使用可能になります。
+候補ウィンドウに表示したヘルプ内容を以下のような文字列にしてcommitします。
+(部首合成シーケンス(例:"林缶")をコピーして、後でクリップボードから
+前置型部首合成変換のpreeditへペーストして変換したい場合向け)
+
+{{{
+       |  |  |  |  ||            |  |  |     |  ||
+       |  |  |  | b||            |  |  |  f  |  ||
+       | 3|  |  |  ||            |  |  |1(憂)|  ||
+       |  | d|  | e||2a(鬱▲林缶)|  |  |     |  ||
+}}}
 
 ==== 文字ヘルプ表示機能 ====
 
@@ -450,6 +464,10 @@ http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodeCandwinTblMaze.png
 
 表形式の候補ウィンドウ。
 
+http://uim-doc-ja.googlecode.com/svn/wiki/UimTutcodePseudoTblHelp.png
+
+擬似表形式での自動へルプ表示(uim-el)。
+
 == 設定例 ==
 
 === コード表の一部を変更 ===
@@ -513,6 +531,7 @@ selectionに対して指定した処理を適用した結果に置換する例�
 || 交ぜ書き変換の学習から除外する候補数 || tutcode-mazegaki-fixed-priority-count || 数字 || 0 ||
 || 再帰学習を有効にする || tutcode-use-recursive-learning? || #t #f || #t ||
 || vi協調モードを有効にする || tutcode-use-with-vi? || #t #f || #f ||
+|| 入力途中のキーシーケンスを表示する || tutcode-show-pending-rk? || #t #f || #f ||
 || Dvorakキーボードを使用する || tutcode-use-dvorak? || #t #f || #f ||
 || 2ストローク記号入力モードを使用する || tutcode-use-kigou2-mode? || #t #f || #f ||
 || surrounding text APIの代替方法を有効にする || tutcode-enable-fallback-surrounding-text? || #t #f || #f ||
@@ -528,6 +547,7 @@ selectionに対して指定した処理を適用した結果に置換する例�
 || bushu.expandファイル || tutcode-bushu-expand-filename || "文字列" || "/usr/local/share/tc/bushu.expand" ||
 || bushu.helpファイル || tutcode-bushu-help-filename || "文字列" || "" ||
 || 候補ウィンドウを使用する || tutcode-use-candidate-window? || #t #f || #t ||
+|| 擬似表形式を使用する || tutcode-use-pseudo-table-style? || #t #f || #f ||
 || 表形式の候補ウィンドウのキー配列 || tutcode-candidate-window-table-layout || 'qwerty-jis<br> 'qwerty-us<br> 'dvorak || 'qwerty-jis ||
 || 見出し表示のキーで候補を確定する || tutcode-commit-candidate-by-label-key || 'always<br> 'havecand<br> 'candwin<br> 'never || 'always ||
 || 候補ウィンドウを表示するために変換キーを押す回数 || tutcode-candidate-op-count || 数字 || 5 ||
@@ -583,6 +603,8 @@ selectionに対して指定した処理を適用した結果に置換する例�
 || オン || tutcode-on-key? ||
 || オフ || tutcode-off-key? ||
 || ひらがな/カタカナ入力モードを反転 || tutcode-kana-toggle-key? ||
+|| カタカナ入力モード || tutcode-katakana-sequence ||
+|| ひらがな入力モード || tutcode-hiragana-sequence ||
 || 記号入力モードを反転 || tutcode-kigou-toggle-key? ||
 || 2ストローク記号入力モードを反転 || tutcode-kigou2-toggle-key? ||
 || 交ぜ書き変換モード || tutcode-mazegaki-start-sequence ||
@@ -592,6 +614,7 @@ selectionに対して指定した処理を適用した結果に置換する例�
 || 漢字コード入力モード || tutcode-kanji-code-input-start-sequence ||
 || ヒストリ入力モード || tutcode-history-start-sequence ||
 || 直近の自動ヘルプを表示 || tutcode-auto-help-redisplay-sequence ||
+|| 直近の自動ヘルプ内容を確定 || tutcode-auto-help-dump-sequence ||
 || 交ぜ書き変換の読みをカタカナとして確定する || tutcode-katakana-commit-key? ||
 || 仮想鍵盤ウィンドウの表示を反転 || tutcode-stroke-help-toggle-key? ||
 || 補完開始 || tutcode-begin-completion-key? ||
@@ -672,6 +695,14 @@ selectionに対して指定した処理を適用した結果に置換する例�
 || 後置型シーケンス→漢字変換 (8文字) || tutcode-postfix-seq2kanji-8-start-sequence ||
 || 後置型シーケンス→漢字変換 (9文字) || tutcode-postfix-seq2kanji-9-start-sequence ||
 
+=== tutcode-ruleの変数 ===
+
+|| 動作 || 変数名 || 指定できる値 || 標準値 ||
+|| 新常用漢字に対応したTUT+コードを使用する || tutcode-rule-use-tutplus? || #t #f || #f ||
+|| 大文字でひらがな/カタカナ反転入力する || tutcode-rule-uppercase-as-opposite-kana? || #t #f || #f ||
+|| 大文字でカタカナ入力するルールを含めない || tutcode-rule-exclude-uppercase-for-katakana? || #t #f || #f ||
+|| 大文字でカタカナ入力するルールに記号を含めない || tutcode-rule-exclude-uppercase-for-kigou-in-katakana? || #t #f || #f ||
+
 == ファイル ==
 
  * UimPrefが更新するファイル
@@ -679,7 +710,3 @@ selectionに対して指定した処理を適用した結果に置換する例�
   * ~/.uim.d/customs/custom-tutcode-keys{1,2}.scm:: [UimPref UimPref]の「TUT-Code キー設定{1,2}」ファイル。
  * UimTutcodeが更新するファイル
   * ~/.mazegaki.dic:: 交ぜ書き変換個人用辞書ファイル。
-
-== trycode-rule生成用スクリプト ==
-
-  * http://groups.google.com/group/uim-ja/t/e9568f3e06c3f482
