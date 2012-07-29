@@ -419,6 +419,12 @@ uim 1.8.0で対応しました。
 
 uim 1.8.0で対応しました。
 
+=== sticky shiftを使いたい ===
+
+[http://homepage1.nifty.com/blankspace/emacs/sticky.html sticky^shift]
+
+uim 1.8.2で対応しました。
+
 == その他 ==
 
 === uim-skk: Shift-space と C-j の区別 ===
