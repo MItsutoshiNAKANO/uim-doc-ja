@@ -106,10 +106,6 @@ uim+azik で二重母音がシフト入力された場合、後の母音を 送�
   * [http://usir.kobe-c.ac.jp/boiled-egg/ boiled-egg]
   * [http://www.ceres.dti.ne.jp/~knak/yc.html YC]
 
-=== sticky shiftを使いたい ===
-
-[http://homepage1.nifty.com/blankspace/emacs/sticky.html sticky^shift]
-
 === uim-anthyで逐次変換したい ===
 
 既にscim-anthyでは実装されているのですが、便利なので欲しいです。 他にも連文節変換と単文節変換が選べる機能もあります。
