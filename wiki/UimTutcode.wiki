@@ -92,7 +92,7 @@ Dvorak配列のキーボード用にコード表を補正します。
 部首合成のアルゴリズムは以下の3つから選択可能です。
   * tc-2.1+[tcode-ml:1925]
   * 漢直Win YAMANOBE
-  * tc-2.3.1-22.6 (対話的な部首合成変換と同じ処理を使用するので、bushu.index2とbushu.expandファイルの設定が必要)
+  * tc-2.3.1-22.6 (対話的な部首合成変換と同じ処理を使用するので、[http://www1.interq.or.jp/~deton/tutcode/#bushudic bushu.index2とbushu.expandファイル]の設定が必要)
 
 === 対話的な部首合成変換 ===
 
@@ -101,7 +101,7 @@ tc-2.3.1のtc-bushu.elの移植です(ただしsortでの打ちやすさの考�
 「対話的な部首合成変換を有効にする」
 「bushu.index2ファイル」「bushu.expandファイル」を設定し、
 キー設定で「対話的な部首合成変換モード」を設定すると使用可能になります。
-bushu.index2とbushu.expandファイルは、
+[http://www1.interq.or.jp/~deton/tutcode/#bushudic bushu.index2とbushu.expandファイル]は、
 tc-2.3.1のインストール時に生成・インストールされるファイルです。
 
 対話的な部首合成変換時の候補ウィンドウ:
