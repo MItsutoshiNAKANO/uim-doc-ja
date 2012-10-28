@@ -120,11 +120,10 @@ configureスクリプトを正常に実行できたら、makeでコンパイル�
 $ make
 }}}
 
-makeが終わったら、suコマンドでrootになってからmake installしましょう。
+makeが終わったら、make installしましょう。
 
 {{{
-$ su
-# make install
+$ sudo make install
 }}}
 
 標準では/usr/local以下にインストールされますが、このディレクトリにあるライブラリは標準では検索されません。 /etc/ld.so.confに''/usr/local/lib''という行を追加して、ldconfigを実行する必要があります。
@@ -143,16 +142,16 @@ $ export GTK_IM_MODULE_FILE=$(DESTDIR)$(sysconfdir)/gtk-2.0/gtk.immodules
 
 リリース版では生ぬるい、もっと新しいuimが使いたい、というチャレンジャー な方は、開発途中版のuimを入手できます。 たまにコンパイルが通らなかったりすることがあるかもしれませんけれど。
 
-[http://subversion.tigris.org/ Subversion]がインストールされているなら
+[http://git-scm.com/ Git]がインストールされているなら
 
 {{{
-$ svn co http://uim.googlecode.com/svn/trunk uim-trunk
+$ git clone https://github.com/uim/uim.git
 }}}
 
 で完了です。 同期させるなら、uimのソースツリーのトップレベルディレクトリで
 
 {{{
-$ svn up
+$ git pull
 }}}
 
 とするだけでOKです。
@@ -160,7 +159,7 @@ $ svn up
 uimのソースツリーを取得したら、ソースツリーのトップレベルディレクトリに移動して、make-wc.shスクリプトを実行してください。
 
 {{{
-$ cd uim-trunk
+$ cd uim
 $ LC_MESSAGES=C ./make-wc.sh
 }}}
 
