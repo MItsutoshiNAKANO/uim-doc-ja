@@ -23,7 +23,7 @@ BTSからの自動生成メッセージを流します。
 
 == [http://groups.google.com/group/uim-commit uim-commit] ==
 
-svn commitのメッセージを流します。
+git pushのメッセージを流します。
 通知のみで投稿はできません。
 
   * [http://www.mail-archive.com/uim-commit@googlegroups.com/ 過去ログ]
