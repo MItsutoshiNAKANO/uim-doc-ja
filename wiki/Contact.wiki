@@ -1,7 +1,7 @@
 = バグを見付けた =
 
-[https://bugs.freedesktop.org/ Bugzilla]、[MailingList メーリングリスト]、どちらに報告していただいても結構です。
-どちらも面倒だと言う場合は[Request_uim 要望]のページでも構いませんが、Bugzillaやメーリングリストの方が発見、対応は早い物と思われます。
+[https://github.com/uim/uim/issues?state=open GitHub issue]、[MailingList メーリングリスト]、どちらに報告していただいても結構です。
+どちらも面倒だと言う場合は[Request_uim 要望]のページでも構いませんが、GitHub issueやメーリングリストの方が発見、対応は早い物と思われます。
 
 = 要望がある =
 
