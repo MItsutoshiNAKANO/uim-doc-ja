@@ -207,12 +207,31 @@ surrounding text APIが使用できない場合に、
 
 === 後置型カタカナ変換 ===
 
+後置型カタカナ変換は、以下の4種類があります。
+
+ * 対象の文字数を指定: カタカナに変換する文字数を指定します。
+ * 対象伸縮モード開始: カタカナ変換対象の文字列を選択するモードを開始します(<と>キーにより、字数の伸縮が可能です。後置型交ぜ書き変換同様)。
+ * ひらがなが続く間: ひらがなや「ー」が続く間、カタカナ変換対象にします。
+ * ひらがなとして残す文字数を指定: ひらがなや「ー」が続く間カタカナ変換対象にしますが、指定された文字数はカタカナに変換しないでひらがなとして残します。カタカナに変換する文字列が長くて文字数を数えるのが面倒な場合向けです。
+  * 例:「例えばあぷりけーしょん」→(2文字を残して変換)→「例えばアプリケーション」
+
+また、後置型のカタカナ変換を行った直後であれば、カタカナ文字列を縮めることも可能です。
+繰り返し実行可能です。
+ * 例:「例えばあぷりけーしょん」→(ひらがなが続く間変換)→「例エバアプリケーション」→(1文字縮める)→「例えバアプリケーション」→(1文字縮める)→「例エバアプリケーション」
+
 後置型カタカナ変換は、以下の開始キーを設定すると使用可能になります。
 
-|| 後置型カタカナ変換 ||
-|| 後置型カタカナ変換 (1文字) ||
-|| ... ||
-|| 後置型カタカナ変換 (9文字) ||
+|| 後置型カタカナ変換 (対象伸縮モード) || カタカナ変換対象の文字列を選択するモードを開始(後置型交ぜ書き変換同様) ||
+|| 後置型カタカナ変換 (ひらがなが続く間) || ひらがなや「ー」が続く間対象文字列として、カタカナに置換 ||
+|| 後置型カタカナ変換 (1文字) || 指定文字列をカタカナに置換 ||
+|| ... || 指定文字列をカタカナに置換 ||
+|| 後置型カタカナ変換 (9文字) || 指定文字列をカタカナに置換 ||
+|| 後置型カタカナ変換 (1文字除く) || 指定文字列をひらがなとして残してカタカナに置換 ||
+|| ... || 指定文字列をひらがなとして残してカタカナに置換 ||
+|| 後置型カタカナ変換 (6文字除く) || 指定文字列をひらがなとして残してカタカナに置換 ||
+|| 後置型カタカナ変換 (1文字縮め) || 直前の後置型カタカナ変換を指定文字数縮める ||
+|| ... || 直前の後置型カタカナ変換を指定文字数縮める ||
+|| 後置型カタカナ変換 (6文字縮め) || 直前の後置型カタカナ変換を指定文字数縮める ||
 
 === 後置型漢字→入力シーケンス変換 ===
 
@@ -225,7 +244,7 @@ TUT-Codeオン・オフのモード切り替えなしで英単語を入力して
 
 例:"undo "と打鍵すると"趣・"と表示され、以下の開始キーで、"undo"に変換。
 
-|| 後置型漢字→シーケンス変換 ||
+|| 後置型漢字→シーケンス変換開始 ||
 || 後置型漢字→シーケンス変換 (1文字) ||
 || ... ||
 || 後置型漢字→シーケンス変換 (9文字) ||
@@ -251,7 +270,7 @@ TUT-Codeオン・オフのモード切り替えなしで英単語を入力して
 TUT-Codeオンにし忘れてTUT-Codeを入力した場合に後から漢字に変換するための
 機能です。
 
-|| 後置型シーケンス→漢字変換 ||
+|| 後置型シーケンス→漢字変換開始 ||
 || 後置型シーケンス→漢字変換 (1文字) ||
 || ... ||
 || 後置型シーケンス→漢字変換 (9文字) ||
@@ -664,7 +683,8 @@ selectionに対して指定した処理を適用した結果に置換する例�
 || 後置型交ぜ書き変換開始 (活用する語,読み7文字) || tutcode-postfix-mazegaki-inflection-7-start-sequence ||
 || 後置型交ぜ書き変換開始 (活用する語,読み8文字) || tutcode-postfix-mazegaki-inflection-8-start-sequence ||
 || 後置型交ぜ書き変換開始 (活用する語,読み9文字) || tutcode-postfix-mazegaki-inflection-9-start-sequence ||
-|| 後置型カタカナ変換 || tutcode-postfix-katakana-start-sequence ||
+|| 後置型カタカナ変換開始 || tutcode-postfix-katakana-start-sequence ||
+|| 後置型カタカナ変換 (ひらがなが続く間) || tutcode-postfix-katakana-0-start-sequence ||
 || 後置型カタカナ変換 (1文字) || tutcode-postfix-katakana-1-start-sequence ||
 || 後置型カタカナ変換 (2文字) || tutcode-postfix-katakana-2-start-sequence ||
 || 後置型カタカナ変換 (3文字) || tutcode-postfix-katakana-3-start-sequence ||
@@ -674,7 +694,19 @@ selectionに対して指定した処理を適用した結果に置換する例�
 || 後置型カタカナ変換 (7文字) || tutcode-postfix-katakana-7-start-sequence ||
 || 後置型カタカナ変換 (8文字) || tutcode-postfix-katakana-8-start-sequence ||
 || 後置型カタカナ変換 (9文字) || tutcode-postfix-katakana-9-start-sequence ||
-|| 後置型漢字→シーケンス変換 || tutcode-postfix-kanji2seq-start-sequence ||
+|| 後置型カタカナ変換 (1文字除く) || tutcode-postfix-katakana-exclude-1-sequence ||
+|| 後置型カタカナ変換 (2文字除く) || tutcode-postfix-katakana-exclude-2-sequence ||
+|| 後置型カタカナ変換 (3文字除く) || tutcode-postfix-katakana-exclude-3-sequence ||
+|| 後置型カタカナ変換 (4文字除く) || tutcode-postfix-katakana-exclude-4-sequence ||
+|| 後置型カタカナ変換 (5文字除く) || tutcode-postfix-katakana-exclude-5-sequence ||
+|| 後置型カタカナ変換 (6文字除く) || tutcode-postfix-katakana-exclude-6-sequence ||
+|| 後置型カタカナ変換 (1文字縮め) || tutcode-postfix-katakana-shrink-1-sequence ||
+|| 後置型カタカナ変換 (2文字縮め) || tutcode-postfix-katakana-shrink-2-sequence ||
+|| 後置型カタカナ変換 (3文字縮め) || tutcode-postfix-katakana-shrink-3-sequence ||
+|| 後置型カタカナ変換 (4文字縮め) || tutcode-postfix-katakana-shrink-4-sequence ||
+|| 後置型カタカナ変換 (5文字縮め) || tutcode-postfix-katakana-shrink-5-sequence ||
+|| 後置型カタカナ変換 (6文字縮め) || tutcode-postfix-katakana-shrink-6-sequence ||
+|| 後置型漢字→シーケンス変換開始 || tutcode-postfix-kanji2seq-start-sequence ||
 || 後置型漢字→シーケンス変換 (1文字) || tutcode-postfix-kanji2seq-1-start-sequence ||
 || 後置型漢字→シーケンス変換 (2文字) || tutcode-postfix-kanji2seq-2-start-sequence ||
 || 後置型漢字→シーケンス変換 (3文字) || tutcode-postfix-kanji2seq-3-start-sequence ||
@@ -684,7 +716,7 @@ selectionに対して指定した処理を適用した結果に置換する例�
 || 後置型漢字→シーケンス変換 (7文字) || tutcode-postfix-kanji2seq-7-start-sequence ||
 || 後置型漢字→シーケンス変換 (8文字) || tutcode-postfix-kanji2seq-8-start-sequence ||
 || 後置型漢字→シーケンス変換 (9文字) || tutcode-postfix-kanji2seq-9-start-sequence ||
-|| 後置型シーケンス→漢字変換 || tutcode-postfix-seq2kanji-start-sequence ||
+|| 後置型シーケンス→漢字変換開始 || tutcode-postfix-seq2kanji-start-sequence ||
 || 後置型シーケンス→漢字変換 (1文字) || tutcode-postfix-seq2kanji-1-start-sequence ||
 || 後置型シーケンス→漢字変換 (2文字) || tutcode-postfix-seq2kanji-2-start-sequence ||
 || 後置型シーケンス→漢字変換 (3文字) || tutcode-postfix-seq2kanji-3-start-sequence ||
